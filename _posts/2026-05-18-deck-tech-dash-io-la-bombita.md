@@ -4,7 +4,7 @@ category_label: "Deck Tech"
 categories:
   - decks
 summary: "BIOS Update, granadas e pressão constante na Liga CC de Cianorte."
-image: "/assets/img/banners/post-default.jpg"
+image: "<div class="tcg-card-grid">{% include tcg-card.html game="fab" name="Dash I/O" %}</div>"
 author: "Neto"
 date: 2026-05-18
 tags:
