@@ -39,7 +39,6 @@ Então resolvi inscrever essa lista na **Liga Classic Constructed de Flesh and B
 ## Cartas-chave da lista
 
 <div class="tcg-card-grid">
-  {% include tcg-card.html game="fab" name="Dash I/O" %}
   {% include tcg-card.html game="fab" name="Bios Update" pitch="red" %}
   {% include tcg-card.html game="fab" name="Boom Grenade" pitch="red" %}
   {% include tcg-card.html game="fab" name="Teklo Pounder" pitch="blue" %}
@@ -47,6 +46,7 @@ Então resolvi inscrever essa lista na **Liga Classic Constructed de Flesh and B
   {% include tcg-card.html game="fab" name="Plasma Mainline" pitch="red" %}
   {% include tcg-card.html game="fab" name="Convection Amplifier" pitch="red" %}
   {% include tcg-card.html game="fab" name="Hyper Scrapper" pitch="blue" %}
+  {% include tcg-card.html game="fab" name="Prismatic Lens" pitch="yellow" %}
 </div>
 
 ## O que mudou em relação à lista original
@@ -56,8 +56,6 @@ A minha lista tem poucas alterações em relação à versão BIOS do Sam. A pri
 Hoje, depois da liga, eu faria uma alteração importante: tiraria **Throttle vermelho** para colocar **Scramble Pulse vermelho**. A chance de passar granada seria maior, principalmente contra equipamentos com **temper** ou **battleworn**, que atrapalham muito o plano de **dominate**.
 
 <div class="tcg-card-grid">
-  {% include tcg-card.html game="fab" name="Maximum Velocity" %}
-  {% include tcg-card.html game="fab" name="Balance of Justice" %}
   {% include tcg-card.html game="fab" name="Throttle" pitch="red" %}
   {% include tcg-card.html game="fab" name="Scramble Pulse" pitch="red" %}
 </div>
@@ -129,7 +127,7 @@ Arrisquei não bloquear um ataque e deu certo. Ganhei novamente, mas nessa eu se
 
 <div class="tcg-card-grid">
   {% include tcg-card.html game="fab" name="Fai" %}
-  {% include tcg-card.html game="fab" name="Achilles Accelerator" %}
+  {% include tcg-card.html game="fab" name="Crow of Providence" %}
   {% include tcg-card.html game="fab" name="Adaptive Plating" %}
   {% include tcg-card.html game="fab" name="Cogwerx Tinker Rings" %}
 </div>
@@ -187,9 +185,6 @@ Não lembro se fui fadigado ou se ele conseguiu recuperar a partida de outra for
 
 <div class="tcg-card-grid">
   {% include tcg-card.html game="fab" name="Mocking Blow" %}
-  {% include tcg-card.html game="fab" name="Hyper Scrapper" pitch="blue" %}
-  {% include tcg-card.html game="fab" name="Plasma Mainline" pitch="red" %}
-  {% include tcg-card.html game="fab" name="Teklo Core" pitch="blue" %}
 </div>
 
 ### Lucas — Gravy Bones
@@ -223,9 +218,6 @@ Foi suado, porque ele começou a dar umas porradas chatas com clash.
 
 <div class="tcg-card-grid">
   {% include tcg-card.html game="fab" name="Pleiades" %}
-  {% include tcg-card.html game="fab" name="Convection Amplifier" pitch="red" %}
-  {% include tcg-card.html game="fab" name="Spark of Genius" pitch="yellow" %}
-  {% include tcg-card.html game="fab" name="Boom Grenade" pitch="yellow" %}
 </div>
 
 ### Marcelo — Rhinar
@@ -263,9 +255,7 @@ Eu tinha em mente que não podia ficar abaixo de 18 de vida, porque em um jogo a
 
 <div class="tcg-card-grid">
   {% include tcg-card.html game="fab" name="Verdance" %}
-  {% include tcg-card.html game="fab" name="Crown of Providence" %}
   {% include tcg-card.html game="fab" name="Viziertronic Model i" %}
-  {% include tcg-card.html game="fab" name="Cerebellum Processor" pitch="blue" %}
 </div>
 
 ## Plano de sideboard e observações gerais
@@ -299,7 +289,7 @@ Eu não vou dizer que não queria estar passando 11 de dominate com bomba de Bio
 E mesmo assim a galera ainda bloqueia.
 
 <div class="tcg-card-grid">
-  {% include tcg-card.html game="fab" name="Out Pace" pitch="red" %}
+  {% include tcg-card.html game="fab" name="Shelter from the Storm " %}
   {% include tcg-card.html game="fab" name="Unmovable" %}
   {% include tcg-card.html game="fab" name="Sink Below" %}
   {% include tcg-card.html game="fab" name="Fate Foreseen" %}
@@ -321,7 +311,6 @@ Também cogitei testar **Lay Waste**.
 
 <div class="tcg-card-grid">
   {% include tcg-card.html game="fab" name="Teklo Trebuchet 2000" pitch="blue" %}
-  {% include tcg-card.html game="fab" name="Zipper Hit" pitch="yellow" %}
   {% include tcg-card.html game="fab" name="Scramble Pulse" pitch="red" %}
   {% include tcg-card.html game="fab" name="Lay Waste" %}
 </div>
