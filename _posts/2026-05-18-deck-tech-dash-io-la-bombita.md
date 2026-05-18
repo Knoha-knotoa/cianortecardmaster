@@ -4,7 +4,6 @@ category_label: "Deck Tech"
 categories:
   - decks
 summary: "BIOS Update, granadas e pressão constante na Liga CC de Cianorte."
-image: "<div class="tcg-card-grid">{% include tcg-card.html game="fab" name="Dash I/O" %}</div>"
 author: "Neto"
 date: 2026-05-18
 tags:
@@ -14,7 +13,14 @@ tags:
   - Classic Constructed
   - Deck Tech
   - Cianorte Card Masters
+hero_card: "Dash I/O"
 ---
+
+<div class="tcg-card-grid">
+  {% include tcg-card.html game="fab" name=page.hero_card %}
+</div>
+
+# Deck Tech: Dash I/O La Bombita
 
 Olá! Meu nome é Neto e eu sou jogador de **Mechanologist**. Até o momento, é a única classe com a qual eu realmente me identifiquei em Flesh and Blood. Eu gosto de pressionar, montar mesa, criar ameaças e obrigar o oponente a tomar decisões ruins.
 
