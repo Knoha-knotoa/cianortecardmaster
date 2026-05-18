@@ -1,0 +1,35 @@
+name: Atualizar spikes JustTCG
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 8 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update-spikes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Atualizar arquivo de spikes
+        env:
+          JUSTTCG_API_KEY: ${{ secrets.JUSTTCG_API_KEY }}
+        run: node scripts/update-spikes.mjs
+
+      - name: Salvar alterações
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add assets/data/spikes.json
+          git commit -m "Atualiza spikes JustTCG" || echo "Sem alterações"
+          git push
