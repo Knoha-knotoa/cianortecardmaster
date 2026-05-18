@@ -3,7 +3,7 @@ name: Atualizar spikes JustTCG
 on:
   workflow_dispatch:
   schedule:
-    - cron: "30 8 * * *"
+    - cron: "0 12 * * *"
 
 permissions:
   contents: write
