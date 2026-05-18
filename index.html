@@ -3,10 +3,10 @@ layout: default
 title: "Início"
 ---
 
-{% assign recent_posts = site.posts | sort: "date" | reverse %}
-{% assign guias = site.posts | where_exp: "post", "post.categories contains 'guias'" %}
-{% assign blog_posts = site.posts | where_exp: "post", "post.categories contains 'blog'" %}
-{% assign comunidade_posts = site.posts | where_exp: "post", "post.categories contains 'comunidade'" %}
+{% assign all_content = site.guias | concat: site.decks | concat: site.blog | concat: site.comunidade | sort: "date" | reverse %}
+{% assign guias = site.guias %}
+{% assign blog_posts = site.blog %}
+{% assign comunidade_posts = site.comunidade %}
 
 <section class="hero">
   <div class="hero-bg" style="--hero-image: url('{{ site.data.images.hero_background | relative_url }}');"></div>
@@ -40,7 +40,7 @@ title: "Início"
     {% include section-title.html kicker="Novidades" title="Últimas postagens" text="Os três conteúdos mais recentes do site, independente do assunto." link="/posts/" link_text="Ver mais" %}
 
     <div class="card-grid grid-3">
-      {% for post in recent_posts limit:3 %}
+      {% for post in all_content limit:3 %}
         {% include post-card.html post=post %}
       {% endfor %}
     </div>

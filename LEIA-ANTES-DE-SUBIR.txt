@@ -19,3 +19,15 @@ baseurl: ""
 Mas para o repositório atual, mantenha:
 
 baseurl: "/cianortecardmaster"
+
+ORGANIZAÇÃO NOVA DOS CONTEÚDOS
+
+As áreas atualizáveis agora usam pastas separadas:
+
+_guias
+_decks
+_blog
+_comunidade
+
+Para publicar conteúdo, coloque o arquivo .md na pasta correta.
+Não precisa mais usar categories no front matter.

@@ -5,16 +5,46 @@ url: ""
 timezone: America/Sao_Paulo
 lang: pt-BR
 
-permalink: /:categories/:year/:month/:day/:title/
-
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
 
+collections:
+  guias:
+    output: true
+    permalink: /guias/:name/
+  decks:
+    output: true
+    permalink: /decks/:name/
+  blog:
+    output: true
+    permalink: /blog/:name/
+  comunidade:
+    output: true
+    permalink: /comunidade/:name/
+
 defaults:
   - scope:
       path: ""
-      type: "posts"
+      type: "guias"
+    values:
+      layout: post
+      author: "Cianorte Card Masters"
+  - scope:
+      path: ""
+      type: "decks"
+    values:
+      layout: post
+      author: "Cianorte Card Masters"
+  - scope:
+      path: ""
+      type: "blog"
+    values:
+      layout: post
+      author: "Cianorte Card Masters"
+  - scope:
+      path: ""
+      type: "comunidade"
     values:
       layout: post
       author: "Cianorte Card Masters"

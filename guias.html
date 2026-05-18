@@ -15,9 +15,11 @@ permalink: /guias/
 <section class="listing">
   <div class="container">
     <div class="card-grid grid-3">
-      {% assign posts_list = site.posts | where_exp: "post", "post.categories contains 'guias'" | sort: "date" | reverse %}
+      {% assign posts_list = site.guias | sort: "date" | reverse %}
       {% for post in posts_list %}
         {% include post-card.html post=post %}
+      {% else %}
+        <p>Nenhum guia publicado ainda.</p>
       {% endfor %}
     </div>
   </div>

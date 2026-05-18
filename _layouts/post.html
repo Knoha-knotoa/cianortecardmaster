@@ -6,7 +6,18 @@ layout: default
   <header class="post-hero">
     <div class="container post-hero-grid">
       <div>
-        <p class="eyebrow">{{ page.category_label | default: page.categories[0] | default: "Post" }}</p>
+        {% assign item_label = page.category_label %}
+        {% unless item_label %}
+          {% case page.collection %}
+            {% when "guias" %}{% assign item_label = "Guia" %}
+            {% when "decks" %}{% assign item_label = "Deck" %}
+            {% when "blog" %}{% assign item_label = "Blog" %}
+            {% when "comunidade" %}{% assign item_label = "Comunidade" %}
+            {% else %}{% assign item_label = "Post" %}
+          {% endcase %}
+        {% endunless %}
+        <p class="eyebrow">{{ item_label }}</p>
+
         <h1>{{ page.title }}</h1>
 
         {% if page.summary %}
@@ -15,7 +26,7 @@ layout: default
 
         <div class="post-meta">
           {% if page.author %}<span>Por {{ page.author }}</span>{% endif %}
-          <span>{{ page.date | date: "%d/%m/%Y" }}</span>
+          {% if page.date %}<span>{{ page.date | date: "%d/%m/%Y" }}</span>{% endif %}
         </div>
 
         {% if page.tags %}

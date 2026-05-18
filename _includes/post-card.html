@@ -5,7 +5,18 @@
   </a>
 
   <div class="post-card-content">
-    <p class="eyebrow">{{ include.post.category_label | default: include.post.categories[0] | default: "Post" }}</p>
+    {% assign item_label = include.post.category_label %}
+    {% unless item_label %}
+      {% case include.post.collection %}
+        {% when "guias" %}{% assign item_label = "Guia" %}
+        {% when "decks" %}{% assign item_label = "Deck" %}
+        {% when "blog" %}{% assign item_label = "Blog" %}
+        {% when "comunidade" %}{% assign item_label = "Comunidade" %}
+        {% else %}{% assign item_label = "Post" %}
+      {% endcase %}
+    {% endunless %}
+    <p class="eyebrow">{{ item_label }}</p>
+
     <h3><a href="{{ include.post.url | relative_url }}">{{ include.post.title }}</a></h3>
 
     {% if include.post.summary %}
@@ -16,7 +27,7 @@
 
     <div class="post-card-meta">
       {% if include.post.author %}<span>{{ include.post.author }}</span>{% endif %}
-      <span>{{ include.post.date | date: "%d/%m/%Y" }}</span>
+      {% if include.post.date %}<span>{{ include.post.date | date: "%d/%m/%Y" }}</span>{% endif %}
     </div>
   </div>
 </article>

@@ -15,7 +15,7 @@ Abra `_config.yml` e ajuste:
 baseurl: "/nome-do-repositorio"
 ```
 
-Exemplo:
+Exemplo para este projeto:
 
 ```yml
 baseurl: "/cianortecardmaster"
@@ -41,67 +41,94 @@ Ali ficam:
 - imagem do banner hero
 - imagem padrão dos posts
 
-## Como criar post de Guia
+## Organização dos conteúdos
 
-Crie arquivo em `_posts`, exemplo:
+Agora cada área atualizável tem sua própria pasta/coleção:
 
 ```txt
-2026-05-20-nome-do-guia.md
+_guias/
+_decks/
+_blog/
+_comunidade/
 ```
 
-Com topo:
+Para publicar, coloque o arquivo `.md` dentro da pasta certa. Não precisa mais colocar `categories` no topo do arquivo.
+
+## Como criar um Guia
+
+Crie o arquivo em `_guias`, exemplo:
+
+```txt
+meu-guia-de-flesh-and-blood.md
+```
+
+Topo recomendado:
 
 ```yml
 ---
 title: "Nome do guia"
-category_label: "Guia"
-categories:
-  - guias
 summary: "Resumo curto."
 image: "/assets/img/posts/sua-imagem.jpg"
 author: "Seu nome"
 date: 2026-05-20
+tags:
+  - Guia
+  - Flesh and Blood
 ---
 ```
 
-## Como criar post de Deck
+## Como criar um Deck
+
+Crie o arquivo em `_decks`, exemplo:
+
+```txt
+deck-tech-dash-io.md
+```
 
 ```yml
 ---
 title: "Deck Tech: Nome do deck"
-category_label: "Deck Tech"
-categories:
-  - decks
 summary: "Resumo curto."
 image: "/assets/img/posts/sua-imagem.jpg"
 author: "Seu nome"
 date: 2026-05-20
+tags:
+  - Deck Tech
+  - Flesh and Blood
 ---
 ```
 
-## Como criar post de Blog
+## Como criar um post de Blog
+
+Crie o arquivo em `_blog`, exemplo:
+
+```txt
+comentario-sobre-nova-colecao.md
+```
 
 ```yml
 ---
 title: "Título do post"
-category_label: "Blog"
-categories:
-  - blog
 summary: "Resumo curto."
 image: "/assets/img/posts/sua-imagem.jpg"
 author: "Seu nome"
 date: 2026-05-20
+tags:
+  - Blog
 ---
 ```
 
-## Como criar post de Comunidade com galeria
+## Como criar um post de Comunidade com galeria
+
+Crie o arquivo em `_comunidade`, exemplo:
+
+```txt
+encontro-da-comunidade.md
+```
 
 ```yml
 ---
 title: "Encontro da comunidade"
-category_label: "Comunidade"
-categories:
-  - comunidade
 summary: "Resumo curto."
 image: "/assets/img/comunidade/foto-principal.jpg"
 gallery:
@@ -109,6 +136,9 @@ gallery:
   - "/assets/img/comunidade/foto-2.jpg"
 author: "Cianorte Card Masters"
 date: 2026-05-20
+tags:
+  - Comunidade
+  - Encontro
 ---
 ```
 
