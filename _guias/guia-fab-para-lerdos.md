@@ -1060,7 +1060,6 @@ tags:
       <div class="kicker">Guia não oficial para sobreviver em Rathe</div>
       <h1>Flesh and Blood<br>para Lerdos</h1>
       <p class="subtitle">Como jogar FAB sem saber inglês, sem ler textão e sem inventar regra baseada na arte da carta.</p>
-      <div class="seal">Versão HTML editável</div>
     </section>
 
     <section class="page" id="aviso">
