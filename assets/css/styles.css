@@ -1090,6 +1090,13 @@ h3 {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================
+   Imagens de posts vindas da API GoAgain
+   Permite usar no Markdown:
+   image: "goagain:Dash I/O"
+========================================== */
+
 .post-card-image .tcg-card-image {
   width: 100%;
   height: 100%;
@@ -1098,6 +1105,9 @@ h3 {
   border: 0;
   border-radius: 0;
   box-shadow: none;
+  background:
+    radial-gradient(circle at top, rgba(212,175,55,.18), transparent 44%),
+    linear-gradient(180deg, rgba(16,27,19,.96), rgba(8,13,9,.98));
 }
 
 .post-card-image .tcg-card-image img {
@@ -1106,4 +1116,60 @@ h3 {
   object-fit: cover;
   object-position: top center;
   border-radius: 0;
+  transition: transform .25s ease;
+}
+
+.post-card:hover .post-card-image .tcg-card-image img {
+  transform: scale(1.04);
+}
+
+.post-main-card-image {
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background:
+    radial-gradient(circle at top, rgba(212,175,55,.16), transparent 45%),
+    radial-gradient(circle at bottom left, rgba(31,184,92,.12), transparent 45%),
+    linear-gradient(180deg, rgba(16,27,19,.96), rgba(8,13,9,.98));
+  overflow: hidden;
+}
+
+.post-main-card-image .tcg-card-image {
+  width: min(100%, 360px);
+  min-height: 0;
+  margin: 0;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.post-main-card-image .tcg-card-image img {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  border-radius: 18px;
+}
+
+.post-main-card-image .tcg-card-loading {
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .post-main-card-image {
+    min-height: 420px;
+  }
+}
+
+@media (max-width: 520px) {
+  .post-main-card-image {
+    min-height: 360px;
+    padding: .85rem;
+  }
+
+  .post-main-card-image .tcg-card-image img {
+    max-height: 340px;
+  }
 }

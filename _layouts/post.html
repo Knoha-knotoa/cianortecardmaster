@@ -39,7 +39,14 @@ layout: default
       </div>
 
       {% if page.image %}
-        <img class="post-main-image" src="{{ page.image | relative_url }}" alt="{{ page.title }}">
+        {% if page.image contains "goagain:" %}
+          {% assign hero_card_name = page.image | remove: "goagain:" | strip %}
+          <div class="post-main-image post-main-card-image" aria-label="Carta {{ hero_card_name | escape }}">
+            {% include tcg-card.html game="fab" name=hero_card_name cover=true %}
+          </div>
+        {% else %}
+          <img class="post-main-image" src="{{ page.image | relative_url }}" alt="{{ page.title | escape }}">
+        {% endif %}
       {% endif %}
     </div>
   </header>
