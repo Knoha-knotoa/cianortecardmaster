@@ -121,3 +121,71 @@ _data/events.yml
 ```
 
 Os cards da página Onde jogar e da home são puxados desse arquivo.
+
+
+## APIs globais instaladas no site
+
+O site já vem preparado para buscar imagens de cartas automaticamente em quatro APIs públicas:
+
+- **Flesh and Blood** → GoAgain
+- **Magic: The Gathering** → Scryfall
+- **Pokémon TCG** → Pokémon TCG API
+- **Yu-Gi-Oh!** → YGOPRODeck
+
+O JavaScript global fica em:
+
+```txt
+assets/js/card-apis-global.js
+```
+
+Você não precisa chamar a API manualmente. Em qualquer post ou página, use o include:
+
+```liquid
+{% include tcg-card.html game="fab" name="Bios Update" pitch="red" %}
+{% include tcg-card.html game="mtg" name="Lightning Bolt" %}
+{% include tcg-card.html game="pokemon" name="Pikachu" %}
+{% include tcg-card.html game="yugioh" name="Blue-Eyes White Dragon" %}
+```
+
+### Exemplos por jogo
+
+#### Flesh and Blood (GoAgain)
+```liquid
+{% include tcg-card.html game="fab" name="Dash I/O" %}
+{% include tcg-card.html game="fab" name="Bios Update" pitch="red" %}
+```
+
+#### Magic (Scryfall)
+```liquid
+{% include tcg-card.html game="mtg" name="Black Lotus" %}
+{% include tcg-card.html game="mtg" name="Lightning Bolt" %}
+```
+
+#### Pokémon
+```liquid
+{% include tcg-card.html game="pokemon" name="Pikachu" %}
+{% include tcg-card.html game="pokemon" name="Charizard" %}
+```
+
+Você também pode informar set ou número para ajudar:
+```liquid
+{% include tcg-card.html game="pokemon" name="Pikachu" set="Base" %}
+```
+
+#### Yu-Gi-Oh!
+```liquid
+{% include tcg-card.html game="yugioh" name="Dark Magician" %}
+{% include tcg-card.html game="yugioh" name="Blue-Eyes White Dragon" %}
+```
+
+### Grade de cartas
+Se quiser várias cartas em grade:
+
+```html
+<div class="tcg-card-grid">
+  {% include tcg-card.html game="fab" name="Dash I/O" %}
+  {% include tcg-card.html game="mtg" name="Black Lotus" %}
+  {% include tcg-card.html game="pokemon" name="Pikachu" %}
+  {% include tcg-card.html game="yugioh" name="Dark Magician" %}
+</div>
+```
