@@ -1173,3 +1173,48 @@ h3 {
     max-height: 340px;
   }
 }
+/* ==========================================
+   Limites gerais de altura e espaçamento
+========================================== */
+
+.section {
+  padding-block: clamp(3rem, 6vw, 4.8rem);
+}
+
+.page-hero {
+  padding-block: clamp(3.5rem, 7vw, 5rem) clamp(1.8rem, 4vw, 2.8rem);
+}
+
+.listing {
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+
+.post-hero {
+  padding-block: clamp(3.5rem, 7vw, 5rem) clamp(2rem, 4vw, 3rem);
+}
+
+.post-content {
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+
+/* Evita que o banner fique gigante em telas muito largas ou com zoom baixo */
+@media (min-width: 1400px) {
+  .hero {
+    min-height: 720px;
+  }
+}
+
+/* Ajuste para celular */
+@media (max-width: 520px) {
+  .hero {
+    min-height: auto;
+  }
+
+  .hero-inner {
+    padding: 3.5rem 0 3rem;
+  }
+
+  .section {
+    padding-block: 3rem;
+  }
+}
