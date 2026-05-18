@@ -189,3 +189,62 @@ Se quiser várias cartas em grade:
   {% include tcg-card.html game="yugioh" name="Dark Magician" %}
 </div>
 ```
+
+
+## Spikes com JustTCG
+
+A página `spikes.html` usa o arquivo:
+
+```txt
+assets/data/spikes.json
+```
+
+Esse arquivo é atualizado automaticamente por GitHub Actions usando:
+
+```txt
+.github/workflows/update-spikes.yml
+scripts/update-spikes.mjs
+```
+
+### Por que não chamar a JustTCG direto no navegador?
+
+A JustTCG exige chave de API no header `x-api-key`. Como o GitHub Pages é estático, colocar essa chave no JavaScript público exporia sua chave. Por isso o projeto usa GitHub Actions com Secret.
+
+### Como configurar
+
+1. No GitHub, entre no repositório.
+2. Vá em `Settings > Secrets and variables > Actions`.
+3. Clique em `New repository secret`.
+4. Nome do secret:
+
+```txt
+JUSTTCG_API_KEY
+```
+
+5. Valor: sua chave da JustTCG.
+6. Salve.
+7. Vá em `Actions > Atualizar spikes JustTCG > Run workflow`.
+
+Depois disso, o arquivo `assets/data/spikes.json` será atualizado.
+
+### Como trocar atualização diária para semanal
+
+Abra:
+
+```txt
+.github/workflows/update-spikes.yml
+```
+
+Troque:
+
+```yml
+- cron: "30 8 * * *"
+```
+
+por:
+
+```yml
+- cron: "30 8 * * 1"
+```
+
+Isso roda toda segunda-feira às 08:30 UTC.

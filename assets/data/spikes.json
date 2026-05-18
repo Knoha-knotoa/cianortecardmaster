@@ -1,0 +1,230 @@
+{
+  "updatedAt": "2026-05-18T12:00:00.000Z",
+  "source": "JustTCG",
+  "window": "7d",
+  "note": "Dados de demonstração. Configure o GitHub Secret JUSTTCG_API_KEY para atualizar automaticamente.",
+  "games": [
+    {
+      "id": "flesh-and-blood-tcg",
+      "code": "fab",
+      "label": "Flesh and Blood",
+      "items": [
+        {
+          "name": "Command and Conquer",
+          "set": "Arcane Rising",
+          "number": "N/A",
+          "rarity": "Majestic",
+          "price": 89.99,
+          "change7d": 18.4,
+          "change30d": 31.2,
+          "variant": "Near Mint",
+          "history": [
+            {
+              "t": 1715400000,
+              "p": 68.0
+            },
+            {
+              "t": 1715486400,
+              "p": 70.0
+            },
+            {
+              "t": 1715572800,
+              "p": 72.0
+            },
+            {
+              "t": 1715659200,
+              "p": 76.0
+            },
+            {
+              "t": 1715745600,
+              "p": 80.0
+            },
+            {
+              "t": 1715832000,
+              "p": 84.0
+            },
+            {
+              "t": 1715918400,
+              "p": 89.99
+            }
+          ]
+        },
+        {
+          "name": "Fyendal's Spring Tunic",
+          "set": "Welcome to Rathe",
+          "number": "N/A",
+          "rarity": "Legendary",
+          "price": 154.5,
+          "change7d": 12.6,
+          "change30d": 22.0,
+          "variant": "Near Mint",
+          "history": [
+            {
+              "t": 1715400000,
+              "p": 132.0
+            },
+            {
+              "t": 1715486400,
+              "p": 137.0
+            },
+            {
+              "t": 1715572800,
+              "p": 140.0
+            },
+            {
+              "t": 1715659200,
+              "p": 145.0
+            },
+            {
+              "t": 1715745600,
+              "p": 149.0
+            },
+            {
+              "t": 1715832000,
+              "p": 151.0
+            },
+            {
+              "t": 1715918400,
+              "p": 154.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "magic-the-gathering",
+      "code": "mtg",
+      "label": "Magic: The Gathering",
+      "items": [
+        {
+          "name": "Lightning Bolt",
+          "set": "Magic",
+          "price": 3.4,
+          "change7d": 9.1,
+          "change30d": 15.2,
+          "variant": "Near Mint",
+          "history": [
+            {
+              "t": 1715400000,
+              "p": 2.9
+            },
+            {
+              "t": 1715486400,
+              "p": 3.0
+            },
+            {
+              "t": 1715572800,
+              "p": 3.15
+            },
+            {
+              "t": 1715659200,
+              "p": 3.2
+            },
+            {
+              "t": 1715745600,
+              "p": 3.25
+            },
+            {
+              "t": 1715832000,
+              "p": 3.33
+            },
+            {
+              "t": 1715918400,
+              "p": 3.4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pokemon",
+      "code": "pokemon",
+      "label": "Pokémon TCG",
+      "items": [
+        {
+          "name": "Pikachu",
+          "set": "Pokémon",
+          "price": 5.2,
+          "change7d": 11.8,
+          "change30d": 20.1,
+          "variant": "Near Mint",
+          "history": [
+            {
+              "t": 1715400000,
+              "p": 4.1
+            },
+            {
+              "t": 1715486400,
+              "p": 4.3
+            },
+            {
+              "t": 1715572800,
+              "p": 4.4
+            },
+            {
+              "t": 1715659200,
+              "p": 4.6
+            },
+            {
+              "t": 1715745600,
+              "p": 4.9
+            },
+            {
+              "t": 1715832000,
+              "p": 5.0
+            },
+            {
+              "t": 1715918400,
+              "p": 5.2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "yu-gi-oh",
+      "code": "yugioh",
+      "label": "Yu-Gi-Oh!",
+      "items": [
+        {
+          "name": "Dark Magician",
+          "set": "Yu-Gi-Oh!",
+          "price": 12.0,
+          "change7d": 8.5,
+          "change30d": 18.5,
+          "variant": "Near Mint",
+          "history": [
+            {
+              "t": 1715400000,
+              "p": 10.2
+            },
+            {
+              "t": 1715486400,
+              "p": 10.5
+            },
+            {
+              "t": 1715572800,
+              "p": 10.8
+            },
+            {
+              "t": 1715659200,
+              "p": 11.0
+            },
+            {
+              "t": 1715745600,
+              "p": 11.4
+            },
+            {
+              "t": 1715832000,
+              "p": 11.7
+            },
+            {
+              "t": 1715918400,
+              "p": 12.0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

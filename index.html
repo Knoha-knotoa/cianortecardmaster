@@ -25,9 +25,12 @@ title: "Início"
       </div>
     </div>
 
-    <aside class="hero-card">
-      <img src="{{ site.data.images.hero_card_logo | relative_url }}" alt="Cianorte Card Masters">
-      <p>Decks, guias, torneios, RPG e encontros da comunidade.</p>
+    <aside class="hero-card hero-spike-panel">
+      <p class="eyebrow">Spike da semana</p>
+      <div id="hero-spike-card" class="spike-card spike-card-hero" data-game-filter="fab">
+        <span class="spike-loading">Carregando spike de Flesh and Blood...</span>
+      </div>
+      <a class="section-link hero-spike-link" href="{{ '/spikes/' | relative_url }}">Ver todos os spikes</a>
     </aside>
   </div>
 </section>
