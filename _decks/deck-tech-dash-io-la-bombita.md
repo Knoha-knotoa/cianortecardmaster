@@ -2,7 +2,7 @@
 title: "Deck Tech: Dash I/O La Bombita"
 category_label: "Deck Tech"
 summary: "BIOS Update, granadas e pressão constante na Liga CC de Cianorte."
-image: "/assets/img/posts/dash-la-bombita.jpg"
+image: "goagain:Dash I/O"
 author: "Neto"
 date: 2026-05-18
 tags:
