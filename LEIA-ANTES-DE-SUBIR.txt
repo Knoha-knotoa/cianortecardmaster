@@ -1,0 +1,21 @@
+CONFIGURAÇÃO CORRIGIDA PARA GITHUB PAGES
+
+O repositório informado é:
+
+cianortecardmaster
+
+Por isso o arquivo _config.yml já foi corrigido para:
+
+baseurl: "/cianortecardmaster"
+
+Isso faz os links, CSS, JS e imagens funcionarem corretamente em:
+
+https://SEU-USUARIO.github.io/cianortecardmaster/
+
+Se no futuro você criar um repositório chamado SEU-USUARIO.github.io, aí o baseurl deve voltar para:
+
+baseurl: ""
+
+Mas para o repositório atual, mantenha:
+
+baseurl: "/cianortecardmaster"
