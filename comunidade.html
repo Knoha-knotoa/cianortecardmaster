@@ -1,0 +1,24 @@
+---
+layout: default
+title: "Comunidade"
+permalink: /comunidade/
+---
+
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Nossa galera</p>
+    <h1>Comunidade</h1>
+    <p>Fotos, vídeos, fanservice, encontros e assuntos relacionados à comunidade.</p>
+  </div>
+</section>
+
+<section class="listing">
+  <div class="container">
+    <div class="card-grid grid-3">
+      {% assign posts_list = site.posts | where_exp: "post", "post.categories contains 'comunidade'" | sort: "date" | reverse %}
+      {% for post in posts_list %}
+        {% include post-card.html post=post %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,24 @@
+---
+layout: default
+title: "Todas as postagens"
+permalink: /posts/
+---
+
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Arquivo</p>
+    <h1>Todas as postagens</h1>
+    <p>Todos os conteúdos do site em ordem de publicação.</p>
+  </div>
+</section>
+
+<section class="listing">
+  <div class="container">
+    <div class="card-grid grid-3">
+      {% assign posts_list = site.posts | sort: "date" | reverse %}
+      {% for post in posts_list %}
+        {% include post-card.html post=post %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

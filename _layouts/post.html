@@ -1,0 +1,39 @@
+---
+layout: default
+---
+
+<article class="post-page">
+  <header class="post-hero">
+    <div class="container post-hero-grid">
+      <div>
+        <p class="eyebrow">{{ page.category_label | default: page.categories[0] | default: "Post" }}</p>
+        <h1>{{ page.title }}</h1>
+
+        {% if page.summary %}
+          <p class="post-summary">{{ page.summary }}</p>
+        {% endif %}
+
+        <div class="post-meta">
+          {% if page.author %}<span>Por {{ page.author }}</span>{% endif %}
+          <span>{{ page.date | date: "%d/%m/%Y" }}</span>
+        </div>
+
+        {% if page.tags %}
+          <div class="tag-list">
+            {% for tag in page.tags %}
+              <span>{{ tag }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      {% if page.image %}
+        <img class="post-main-image" src="{{ page.image | relative_url }}" alt="{{ page.title }}">
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="container post-content">
+    {{ content }}
+  </div>
+</article>

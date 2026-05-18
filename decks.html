@@ -1,0 +1,24 @@
+---
+layout: default
+title: "Decks"
+permalink: /decks/
+---
+
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Listas e estratégias</p>
+    <h1>Decks</h1>
+    <p>Deck lists, deck techs, relatos de torneio e análises de listas da comunidade.</p>
+  </div>
+</section>
+
+<section class="listing">
+  <div class="container">
+    <div class="card-grid grid-3">
+      {% assign posts_list = site.posts | where_exp: "post", "post.categories contains 'decks'" | sort: "date" | reverse %}
+      {% for post in posts_list %}
+        {% include post-card.html post=post %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

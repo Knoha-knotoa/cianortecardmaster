@@ -1,0 +1,24 @@
+---
+layout: default
+title: "Guias"
+permalink: /guias/
+---
+
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Aprenda a jogar</p>
+    <h1>Guias</h1>
+    <p>Guias de jogos, regras, conceitos e materiais para aprender e evoluir.</p>
+  </div>
+</section>
+
+<section class="listing">
+  <div class="container">
+    <div class="card-grid grid-3">
+      {% assign posts_list = site.posts | where_exp: "post", "post.categories contains 'guias'" | sort: "date" | reverse %}
+      {% for post in posts_list %}
+        {% include post-card.html post=post %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

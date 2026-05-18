@@ -1,0 +1,46 @@
+---
+layout: default
+title: "Onde jogar"
+permalink: /onde-jogar/
+---
+
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Encontros e calendário</p>
+    <h1>Onde jogar</h1>
+    <p>
+      Aqui ficam os horários, endereços e eventos da comunidade. A ideia é facilitar para quem quer aparecer,
+      aprender a jogar ou participar dos torneios.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="events-grid">
+      {% for event in site.data.events %}
+        <article class="event-card">
+          <p class="eyebrow">{{ event.day }} • {{ event.time }}</p>
+          <h3>{{ event.title }}</h3>
+          <p><strong>Jogos:</strong> {{ event.game }}</p>
+          <p><strong>Local:</strong> {{ event.location }}</p>
+          <p><strong>Endereço:</strong> {{ event.address }}</p>
+          <p>{{ event.note }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="cta-box">
+      <p class="eyebrow">Novos jogadores são bem-vindos</p>
+      <h2>Não tem deck? Pode aparecer mesmo assim.</h2>
+      <p>
+        A comunidade ajuda a ensinar, emprestar decks quando possível e apresentar os jogos.
+        O mais importante é chegar com vontade de conhecer a galera.
+      </p>
+    </div>
+  </div>
+</section>

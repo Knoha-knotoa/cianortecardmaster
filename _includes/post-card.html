@@ -1,0 +1,22 @@
+<article class="post-card">
+  <a class="post-card-image" href="{{ include.post.url | relative_url }}">
+    {% assign card_image = include.post.image | default: site.data.images.post_default %}
+    <img src="{{ card_image | relative_url }}" alt="{{ include.post.title }}" loading="lazy">
+  </a>
+
+  <div class="post-card-content">
+    <p class="eyebrow">{{ include.post.category_label | default: include.post.categories[0] | default: "Post" }}</p>
+    <h3><a href="{{ include.post.url | relative_url }}">{{ include.post.title }}</a></h3>
+
+    {% if include.post.summary %}
+      <p>{{ include.post.summary }}</p>
+    {% else %}
+      <p>{{ include.post.excerpt | strip_html | truncate: 130 }}</p>
+    {% endif %}
+
+    <div class="post-card-meta">
+      {% if include.post.author %}<span>{{ include.post.author }}</span>{% endif %}
+      <span>{{ include.post.date | date: "%d/%m/%Y" }}</span>
+    </div>
+  </div>
+</article>

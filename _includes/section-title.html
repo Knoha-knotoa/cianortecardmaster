@@ -1,0 +1,10 @@
+<div class="section-title">
+  <p class="eyebrow">{{ include.kicker }}</p>
+  <div>
+    <h2>{{ include.title }}</h2>
+    {% if include.text %}<p>{{ include.text }}</p>{% endif %}
+  </div>
+  {% if include.link and include.link_text %}
+    <a class="section-link" href="{{ include.link | relative_url }}">{{ include.link_text }}</a>
+  {% endif %}
+</div>

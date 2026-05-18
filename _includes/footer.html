@@ -1,0 +1,27 @@
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <h2>Cianorte Card Masters</h2>
+      <p>Comunidade de card games, RPG e jogos de tabuleiro em Cianorte.</p>
+    </div>
+
+    <div>
+      <h3>Seções</h3>
+      <a href="{{ '/guias/' | relative_url }}">Guias</a>
+      <a href="{{ '/decks/' | relative_url }}">Decks</a>
+      <a href="{{ '/blog/' | relative_url }}">Blog</a>
+      <a href="{{ '/comunidade/' | relative_url }}">Comunidade</a>
+      <a href="{{ '/onde-jogar/' | relative_url }}">Onde jogar</a>
+    </div>
+
+    <div>
+      <h3>Participe</h3>
+      <p>Quer aprender a jogar ou conhecer a galera? Apareça em um dos encontros da comunidade.</p>
+      <a class="footer-link" href="{{ '/onde-jogar/' | relative_url }}">Ver encontros</a>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>© {{ site.time | date: "%Y" }} Cianorte Card Masters. Feito pela comunidade.</p>
+  </div>
+</footer>

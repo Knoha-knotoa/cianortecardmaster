@@ -1,0 +1,10 @@
+<div
+  class="tcg-card-image{% if include.cover %} tcg-card-cover{% endif %}{% if include.inline %} tcg-card-inline{% endif %}"
+  data-game="{{ include.game | escape }}"
+  data-name="{{ include.name | escape }}"
+  {% if include.pitch %}data-pitch="{{ include.pitch | escape }}"{% endif %}
+  {% if include.set %}data-set="{{ include.set | escape }}"{% endif %}
+  {% if include.number %}data-number="{{ include.number | escape }}"{% endif %}
+>
+  <span class="tcg-card-loading">Carregando {{ include.name }}...</span>
+</div>

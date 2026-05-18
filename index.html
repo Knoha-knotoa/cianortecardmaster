@@ -1,0 +1,153 @@
+---
+layout: default
+title: "Início"
+---
+
+{% assign recent_posts = site.posts | sort: "date" | reverse %}
+{% assign guias = site.posts | where_exp: "post", "post.categories contains 'guias'" %}
+{% assign blog_posts = site.posts | where_exp: "post", "post.categories contains 'blog'" %}
+{% assign comunidade_posts = site.posts | where_exp: "post", "post.categories contains 'comunidade'" %}
+
+<section class="hero">
+  <div class="hero-bg" style="--hero-image: url('{{ site.data.images.hero_background | relative_url }}');"></div>
+
+  <div class="container hero-inner">
+    <div>
+      <p class="eyebrow">Comunidade / Card games / RPG</p>
+      <h1>Cianorte Card Masters</h1>
+      <p class="lead">
+        Conteúdo para jogadores de Flesh and Blood, Pokémon, Magic: The Gathering, jogos de tabuleiro e RPG em Cianorte.
+        Guias, deck techs, blog, comunidade e encontros para quem joga ou quer começar.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="{{ '/onde-jogar/' | relative_url }}">Quero jogar</a>
+        <a class="btn btn-secondary" href="{{ '/guias/' | relative_url }}">Ler guias</a>
+      </div>
+    </div>
+
+    <aside class="hero-card">
+      <img src="{{ site.data.images.hero_card_logo | relative_url }}" alt="Cianorte Card Masters">
+      <p>Decks, guias, torneios, RPG e encontros da comunidade.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    {% include section-title.html kicker="Novidades" title="Últimas postagens" text="Os três conteúdos mais recentes do site, independente do assunto." link="/posts/" link_text="Ver mais" %}
+
+    <div class="card-grid grid-3">
+      {% for post in recent_posts limit:3 %}
+        {% include post-card.html post=post %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section cta">
+  <div class="container">
+    <div class="cta-box">
+      <p class="eyebrow">Vem conhecer a galera</p>
+      <h2>Quer jogar, aprender ou só trocar ideia sobre jogos?</h2>
+      <p>
+        Jogamos Flesh and Blood, Pokémon, Magic: The Gathering, jogos de tabuleiro e RPG.
+        Não precisa ter deck pronto para aparecer. A comunidade ajuda quem está começando.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="{{ '/onde-jogar/' | relative_url }}">Ver onde jogar</a>
+        <a class="btn btn-secondary" href="{{ '/comunidade/' | relative_url }}">Conhecer a comunidade</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    {% include section-title.html kicker="Aprenda" title="Guias para começar e evoluir" text="Conteúdos para aprender regras, entender jogos e melhorar aos poucos." link="/guias/" link_text="Ver todos os guias" %}
+
+    <div class="card-grid grid-3">
+      {% assign guias_sorted = guias | sort: "date" | reverse %}
+      {% for post in guias_sorted limit:3 %}
+        {% include post-card.html post=post %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container project-grid">
+    <div class="project-highlight">
+      <strong>Ensinamos a jogar</strong>
+    </div>
+
+    <div class="info-panel">
+      <p class="eyebrow">Projeto na cidade</p>
+      <h2>Domingos no Centro Cultural</h2>
+      <p>
+        A comunidade se encontra aos domingos no Centro Cultural de Cianorte.
+        É um espaço para aprender, testar decks, jogar casualmente e participar de torneios.
+      </p>
+      <p>
+        Mesmo sem deck, você pode aparecer. A ideia é aproximar novos jogadores e criar um ambiente
+        acolhedor para quem quer conhecer card games, RPG e jogos de mesa.
+      </p>
+      <a class="btn btn-primary" href="{{ '/onde-jogar/' | relative_url }}">Ver horários e endereços</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    {% include section-title.html kicker="Blog" title="Comentários, novidades e opinião" text="Lançamentos, edições, comentários sobre cartas, jogos, vídeos e assuntos gerais." link="/blog/" link_text="Ver blog" %}
+
+    <div class="card-grid grid-4">
+      {% assign blog_sorted = blog_posts | sort: "date" | reverse %}
+      {% for post in blog_sorted limit:4 %}
+        {% include post-card.html post=post %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    {% include section-title.html kicker="Comunidade" title="Últimas imagens da comunidade" text="Fotos e momentos publicados nos posts da comunidade." link="/comunidade/" link_text="Ver comunidade" %}
+
+    <div class="gallery-grid">
+      {% assign comunidade_sorted = comunidade_posts | sort: "date" | reverse %}
+      {% for post in comunidade_sorted limit:6 %}
+        {% if post.image %}
+          <a class="gallery-item" href="{{ post.url | relative_url }}">
+            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy">
+          </a>
+        {% endif %}
+        {% if post.gallery %}
+          {% for foto in post.gallery limit:2 %}
+            <a class="gallery-item" href="{{ post.url | relative_url }}">
+              <img src="{{ foto | relative_url }}" alt="{{ post.title }}" loading="lazy">
+            </a>
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    {% include section-title.html kicker="Agenda" title="Onde jogar" text="Endereços, horários e encontros da comunidade." link="/onde-jogar/" link_text="Ver agenda completa" %}
+
+    <div class="events-grid">
+      {% for event in site.data.events limit:2 %}
+        <article class="event-card">
+          <p class="eyebrow">{{ event.day }} • {{ event.time }}</p>
+          <h3>{{ event.title }}</h3>
+          <p><strong>Jogos:</strong> {{ event.game }}</p>
+          <p><strong>Local:</strong> {{ event.location }}</p>
+          <p><strong>Endereço:</strong> {{ event.address }}</p>
+          <p>{{ event.note }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

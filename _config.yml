@@ -1,0 +1,20 @@
+title: "Cianorte Card Masters"
+description: "Conteúdo para jogadores de card games, RPG e jogos de tabuleiro em Cianorte."
+baseurl: ""
+url: ""
+timezone: America/Sao_Paulo
+lang: pt-BR
+
+permalink: /:categories/:year/:month/:day/:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post
+      author: "Cianorte Card Masters"

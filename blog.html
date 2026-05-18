@@ -1,0 +1,24 @@
+---
+layout: default
+title: "Blog"
+permalink: /blog/
+---
+
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Opinião e novidades</p>
+    <h1>Blog</h1>
+    <p>Postagens gerais: lançamentos, comentários sobre cartas, jogos, vídeos e novidades.</p>
+  </div>
+</section>
+
+<section class="listing">
+  <div class="container">
+    <div class="card-grid grid-3">
+      {% assign posts_list = site.posts | where_exp: "post", "post.categories contains 'blog'" | sort: "date" | reverse %}
+      {% for post in posts_list %}
+        {% include post-card.html post=post %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

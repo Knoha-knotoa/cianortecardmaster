@@ -1,0 +1,21 @@
+<header class="site-header" id="topo">
+  <div class="container header-inner">
+    <a class="brand" href="{{ '/' | relative_url }}" aria-label="Cianorte Card Masters">
+      <img class="brand-logo" src="{{ site.data.images.logo_menu | relative_url }}" alt="Cianorte Card Masters">
+    </a>
+
+    <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="main-nav" aria-label="Menu principal">
+      <a href="{{ '/guias/' | relative_url }}">Guia</a>
+      <a href="{{ '/decks/' | relative_url }}">Decks</a>
+      <a href="{{ '/blog/' | relative_url }}">Blog</a>
+      <a href="{{ '/comunidade/' | relative_url }}">Comunidade</a>
+      <a href="{{ '/onde-jogar/' | relative_url }}">Onde jogar</a>
+    </nav>
+  </div>
+</header>
