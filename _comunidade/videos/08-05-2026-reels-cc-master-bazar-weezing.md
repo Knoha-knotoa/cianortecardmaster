@@ -1,7 +1,7 @@
 ---
 title: "Vídeo da comunidade: Armory na comunidade"
 category_label: "Comunidade"
-post_type: "video"
+post_type: "videos"
 video_platform: "instagram"
 summary: "Registro em vídeo de um dos encontros da comunidade Cianorte Card Masters."
 author: "Neto"
