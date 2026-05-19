@@ -1,54 +1,36 @@
-ALTERAÇÕES REALIZADAS NESTA VERSÃO
+ALTERAÇÕES DESTA VERSÃO
 
-1. Menu reorganizado:
-Home
-Guias
-Deck
-Blog
-Spikes
-Comunidade
-Agenda
-Sobre
+1. Blog
+- Agora o Blog é um feed único em ordem de postagem.
+- As subpastas servem para organizar, filtrar e aplicar estilo visual por categoria.
+- Se o post não tiver imagem, o site usa uma capa automática da categoria.
 
-2. Nova página Agenda criada em:
-agenda.html
+2. Spikes
+- Página alterada para Top Spikes:
+  por dia, semana, mês e cartas mais caras do dia.
+- Continua usando assets/data/spikes.json.
+- Para dados reais, configure JUSTTCG_API_KEY nos Secrets do GitHub.
 
-3. Nova página Sobre criada em:
-sobre.html
+3. Comunidade
+- Topo fixo com último resultado de Armory.
+- Gráficos em pizza de vitórias do mês por jogador e por herói.
+- Feed de fotos, vídeos, música, meme e fanservice com 10 posts por página e opção de 20.
+- Torneios e ligas ficam em blocos separados abaixo.
+- Estatísticas de Armory ficam no final da página.
 
-4. A página antiga Onde jogar continua existindo, mas agora serve apenas como atalho para Agenda.
+4. Agenda
+- Centro Cultural com endereço correto:
+  Av. América, 4000 - Zona 6, Cianorte - PR, 87200-000.
+- Adicionado Bazar do Weezing:
+  Rua Corumbá, 158 - Cianorte - PR.
+- Cards com imagem no topo e botão "Como chegar no Google Maps".
 
-5. A coleção Blog agora aceita subpastas:
-_blog/Flesh-and-Blood
-_blog/Pokemon
-_blog/Magic
-_blog/TCG
-_blog/RPG
-_blog/Cianorte-card-master
+IMPORTANTE
 
-6. A coleção Comunidade agora aceita subpastas:
-_comunidade/Fanservice
-_comunidade/Fotos
-_comunidade/Videos
-_comunidade/Musica
-_comunidade/Meme
-_comunidade/Torneio
-_comunidade/Liga
-_comunidade/Armory
+As imagens do Centro Cultural e do Bazar do Weezing são ilustrações locais em SVG.
+Para usar fotos reais, substitua:
 
-7. As páginas Blog e Comunidade foram alteradas para separar os posts por essas subpastas automaticamente.
+assets/img/agenda/centro-cultural.svg
+assets/img/agenda/bazar-do-weezing.svg
 
-8. Cada subpasta recebe rótulo e estilo visual próprio nos cards.
-
-COMO PUBLICAR
-
-Para publicar no Blog, crie o arquivo .md dentro da subpasta correta.
-Exemplo:
-_blog/Flesh-and-Blood/meu-post.md
-
-Para publicar na Comunidade, crie o arquivo .md dentro da subpasta correta.
-Exemplo:
-_comunidade/Fotos/encontro-da-galera.md
-
-Não precisa colocar categories no topo do Markdown.
-Use apenas title, summary, image, author, date e tags se quiser.
+Leia README-INSTRUCOES.md para ver modelos de postagem e resultado de Armory.

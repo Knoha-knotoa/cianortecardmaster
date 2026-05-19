@@ -10,6 +10,13 @@ const targets = [
   { code: "yugioh", label: "Yu-Gi-Oh!", match: /yu-?gi-?oh/i }
 ];
 
+const windows = [
+  { key: "daily", orderBy: "1d", label: "1 dia", changeField: "change1d" },
+  { key: "weekly", orderBy: "7d", label: "7 dias", changeField: "change7d" },
+  { key: "monthly", orderBy: "30d", label: "30 dias", changeField: "change30d" },
+  { key: "expensive", orderBy: "price", label: "mais caras", changeField: "price" }
+];
+
 if (!API_KEY) {
   console.log("JUSTTCG_API_KEY não configurada. Mantendo dados de demonstração.");
   process.exit(0);
@@ -31,15 +38,23 @@ async function justtcg(path) {
   return response.json();
 }
 
-function bestVariant(card) {
+function numberOrNull(value) {
+  const n = Number(value);
+  return Number.isFinite(n) ? n : null;
+}
+
+function bestVariant(card, windowKey = "weekly") {
   const variants = Array.isArray(card.variants) ? card.variants : [];
   if (!variants.length) return null;
 
   return variants
     .slice()
     .sort((a, b) => {
-      const ca = Number(a.priceChange7d ?? a.priceChange30d ?? 0);
-      const cb = Number(b.priceChange7d ?? b.priceChange30d ?? 0);
+      if (windowKey === "expensive") return Number(b.price ?? 0) - Number(a.price ?? 0);
+      const field = windowKey === "daily" ? "priceChange1d" : windowKey === "monthly" ? "priceChange30d" : "priceChange7d";
+      const fallback = windowKey === "daily" ? "priceChange24h" : "priceChange30d";
+      const ca = Number(a[field] ?? a[fallback] ?? a.priceChange7d ?? a.priceChange30d ?? 0);
+      const cb = Number(b[field] ?? b[fallback] ?? b.priceChange7d ?? b.priceChange30d ?? 0);
       if (cb !== ca) return cb - ca;
       return Number(b.price ?? 0) - Number(a.price ?? 0);
     })[0];
@@ -57,15 +72,19 @@ function normalizeHistory(variant) {
     .filter(point => point.t && point.p > 0);
 }
 
-function cardToSpike(card) {
-  const variant = bestVariant(card);
+function cardToSpike(card, windowKey = "weekly") {
+  const variant = bestVariant(card, windowKey);
   if (!variant) return null;
 
-  const change7d = Number(variant.priceChange7d ?? 0);
-  const change30d = Number(variant.priceChange30d ?? 0);
-  const change = change7d || change30d;
+  const price = numberOrNull(variant.price) ?? 0;
+  const change1d = numberOrNull(variant.priceChange1d ?? variant.priceChange24h ?? variant.change1d ?? variant.change24h);
+  const change7d = numberOrNull(variant.priceChange7d ?? variant.change7d);
+  const change30d = numberOrNull(variant.priceChange30d ?? variant.change30d);
 
-  if (!Number.isFinite(change) || change <= 0) return null;
+  if (windowKey !== "expensive") {
+    const selectedChange = windowKey === "daily" ? change1d : windowKey === "monthly" ? change30d : change7d;
+    if (!Number.isFinite(selectedChange) || selectedChange <= 0) return null;
+  }
 
   return {
     id: card.id || "",
@@ -73,9 +92,10 @@ function cardToSpike(card) {
     set: card.set_name || card.set || "",
     number: card.number || "",
     rarity: card.rarity || "",
-    price: Number(variant.price ?? 0),
-    change7d: Number.isFinite(change7d) ? change7d : null,
-    change30d: Number.isFinite(change30d) ? change30d : null,
+    price,
+    change1d,
+    change7d,
+    change30d,
     variant: [variant.printing, variant.condition].filter(Boolean).join(" / "),
     history: normalizeHistory(variant)
   };
@@ -86,33 +106,57 @@ function resolveGameId(games, target) {
   return found?.id || null;
 }
 
-async function getSpikesForGame(gameId, target) {
+async function getCardsForWindow(gameId, windowKey) {
+  const windowConfig = windows.find(window => window.key === windowKey) || windows[1];
   const params = new URLSearchParams({
     game: gameId,
-    orderBy: "7d",
+    orderBy: windowConfig.orderBy,
     order: "desc",
-    limit: "16",
-    min_price: "1",
+    limit: "24",
+    min_price: windowKey === "expensive" ? "0" : "1",
     include_price_history: "true",
-    include_statistics: "7d,30d",
+    include_statistics: "1d,7d,30d",
     priceHistoryDuration: "30d"
   });
 
   const payload = await justtcg(`/cards?${params.toString()}`);
   const cards = Array.isArray(payload.data) ? payload.data : [];
 
-  const items = cards
-    .map(cardToSpike)
+  return cards
+    .map(card => cardToSpike(card, windowKey))
     .filter(Boolean)
-    .sort((a, b) => Number(b.change7d ?? b.change30d ?? 0) - Number(a.change7d ?? a.change30d ?? 0))
+    .sort((a, b) => {
+      if (windowKey === "expensive") return Number(b.price ?? 0) - Number(a.price ?? 0);
+      const getChange = item => windowKey === "daily" ? item.change1d : windowKey === "monthly" ? item.change30d : item.change7d;
+      return Number(getChange(b) ?? 0) - Number(getChange(a) ?? 0);
+    })
     .slice(0, 4);
+}
 
-  return {
+async function getSpikesForGame(gameId, target) {
+  const result = {
     id: gameId,
     code: target.code,
     label: target.label,
-    items
+    windows: {
+      daily: [],
+      weekly: [],
+      monthly: [],
+      expensive: []
+    }
   };
+
+  for (const windowConfig of windows) {
+    try {
+      result.windows[windowConfig.key] = await getCardsForWindow(gameId, windowConfig.key);
+    } catch (error) {
+      console.error(`Erro em ${target.label} / ${windowConfig.key}:`, error.message);
+      result.windows[windowConfig.key] = [];
+    }
+  }
+
+  result.items = result.windows.weekly;
+  return result;
 }
 
 async function main() {
@@ -122,7 +166,7 @@ async function main() {
   const output = {
     updatedAt: new Date().toISOString(),
     source: "JustTCG",
-    window: "7d",
+    windows: ["daily", "weekly", "monthly", "expensive"],
     games: []
   };
 
@@ -131,16 +175,16 @@ async function main() {
       const gameId = resolveGameId(games, target);
       if (!gameId) {
         console.log(`Jogo não encontrado na JustTCG: ${target.label}`);
-        output.games.push({ id: "", code: target.code, label: target.label, items: [] });
+        output.games.push({ id: "", code: target.code, label: target.label, windows: { daily: [], weekly: [], monthly: [], expensive: [] }, items: [] });
         continue;
       }
 
       const result = await getSpikesForGame(gameId, target);
       output.games.push(result);
-      console.log(`Atualizado: ${target.label} (${result.items.length} cards)`);
+      console.log(`Atualizado: ${target.label}`);
     } catch (error) {
       console.error(`Erro em ${target.label}:`, error.message);
-      output.games.push({ id: "", code: target.code, label: target.label, items: [] });
+      output.games.push({ id: "", code: target.code, label: target.label, windows: { daily: [], weekly: [], monthly: [], expensive: [] }, items: [] });
     }
   }
 

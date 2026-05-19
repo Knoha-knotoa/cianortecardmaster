@@ -1,41 +1,49 @@
 {% assign item_label = nil %}
 {% if include.post.collection == "blog" %}
-  {% if include.post.path contains "_blog/Flesh-and-Blood/" %}{% assign item_label = "Flesh and Blood" %}
-  {% elsif include.post.path contains "_blog/Pokemon/" %}{% assign item_label = "Pokémon" %}
-  {% elsif include.post.path contains "_blog/Magic/" %}{% assign item_label = "Magic" %}
-  {% elsif include.post.path contains "_blog/TCG/" %}{% assign item_label = "TCG" %}
-  {% elsif include.post.path contains "_blog/RPG/" %}{% assign item_label = "RPG" %}
-  {% elsif include.post.path contains "_blog/Cianorte-card-master/" %}{% assign item_label = "Cianorte Card Master" %}
+  {% if include.post.path contains "_blog/Flesh-and-Blood/" %}{% assign item_label = "Flesh and Blood" %}{% assign inferred_style = "flesh-and-blood" %}
+  {% elsif include.post.path contains "_blog/Pokemon/" %}{% assign item_label = "Pokémon" %}{% assign inferred_style = "pokemon" %}
+  {% elsif include.post.path contains "_blog/Magic/" %}{% assign item_label = "Magic" %}{% assign inferred_style = "magic" %}
+  {% elsif include.post.path contains "_blog/TCG/" %}{% assign item_label = "TCG" %}{% assign inferred_style = "tcg" %}
+  {% elsif include.post.path contains "_blog/RPG/" %}{% assign item_label = "RPG" %}{% assign inferred_style = "rpg" %}
+  {% elsif include.post.path contains "_blog/Cianorte-card-master/" %}{% assign item_label = "Cianorte Card Master" %}{% assign inferred_style = "cianorte-card-master" %}
   {% endif %}
 {% elsif include.post.collection == "comunidade" %}
-  {% if include.post.path contains "_comunidade/Fanservice/" %}{% assign item_label = "Fanservice" %}
-  {% elsif include.post.path contains "_comunidade/Fotos/" %}{% assign item_label = "Fotos" %}
-  {% elsif include.post.path contains "_comunidade/Videos/" %}{% assign item_label = "Vídeos" %}
-  {% elsif include.post.path contains "_comunidade/Musica/" %}{% assign item_label = "Música" %}
-  {% elsif include.post.path contains "_comunidade/Meme/" %}{% assign item_label = "Meme" %}
-  {% elsif include.post.path contains "_comunidade/Torneio/" %}{% assign item_label = "Torneio" %}
-  {% elsif include.post.path contains "_comunidade/Liga/" %}{% assign item_label = "Liga" %}
-  {% elsif include.post.path contains "_comunidade/Armory/" %}{% assign item_label = "Armory" %}
+  {% if include.post.path contains "_comunidade/Fanservice/" %}{% assign item_label = "Fanservice" %}{% assign inferred_style = "fanservice" %}
+  {% elsif include.post.path contains "_comunidade/Fotos/" %}{% assign item_label = "Fotos" %}{% assign inferred_style = "fotos" %}
+  {% elsif include.post.path contains "_comunidade/Videos/" %}{% assign item_label = "Vídeos" %}{% assign inferred_style = "videos" %}
+  {% elsif include.post.path contains "_comunidade/Musica/" %}{% assign item_label = "Música" %}{% assign inferred_style = "musica" %}
+  {% elsif include.post.path contains "_comunidade/Meme/" %}{% assign item_label = "Meme" %}{% assign inferred_style = "meme" %}
+  {% elsif include.post.path contains "_comunidade/Torneio/" %}{% assign item_label = "Torneio" %}{% assign inferred_style = "torneio" %}
+  {% elsif include.post.path contains "_comunidade/Liga/" %}{% assign item_label = "Liga" %}{% assign inferred_style = "liga" %}
+  {% elsif include.post.path contains "_comunidade/Armory/" %}{% assign item_label = "Armory" %}{% assign inferred_style = "armory" %}
   {% endif %}
 {% endif %}
 {% unless item_label %}
   {% assign item_label = include.post.category_label %}
 {% endunless %}
+{% unless inferred_style %}
+  {% assign inferred_style = item_label | slugify %}
+{% endunless %}
 {% unless item_label %}
   {% case include.post.collection %}
-    {% when "guias" %}{% assign item_label = "Guia" %}
-    {% when "decks" %}{% assign item_label = "Deck" %}
-    {% when "blog" %}{% assign item_label = "Blog" %}
-    {% when "comunidade" %}{% assign item_label = "Comunidade" %}
-    {% else %}{% assign item_label = "Post" %}
+    {% when "guias" %}{% assign item_label = "Guia" %}{% assign inferred_style = "guia" %}
+    {% when "decks" %}{% assign item_label = "Deck" %}{% assign inferred_style = "deck" %}
+    {% when "blog" %}{% assign item_label = "Blog" %}{% assign inferred_style = "blog" %}
+    {% when "comunidade" %}{% assign item_label = "Comunidade" %}{% assign inferred_style = "comunidade" %}
+    {% else %}{% assign item_label = "Post" %}{% assign inferred_style = "post" %}
   {% endcase %}
 {% endunless %}
 
-{% assign card_style = include.post.content_style | default: item_label | slugify %}
+{% assign card_style = include.post.content_style | default: inferred_style | slugify %}
+{% assign default_category_image = "/assets/img/category/" | append: card_style | append: ".svg" %}
+{% assign card_image = include.post.image | default: default_category_image %}
+{% unless include.post.image %}
+  {% if include.post.collection != "blog" and include.post.collection != "comunidade" %}
+    {% assign card_image = site.data.images.post_default %}
+  {% endif %}
+{% endunless %}
 
 <article class="post-card post-card-{{ include.post.collection }} post-style-{{ card_style }}">
-  {% assign card_image = include.post.image | default: site.data.images.post_default %}
-
   <a class="post-card-image" href="{{ include.post.url | relative_url }}" aria-label="Abrir post: {{ include.post.title | escape }}">
     {% if card_image contains "goagain:" %}
       {% assign card_name = card_image | remove: "goagain:" | strip %}

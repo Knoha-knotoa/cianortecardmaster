@@ -7,9 +7,9 @@ permalink: /spikes/
 <section class="page-hero spikes-page-hero">
   <div class="container">
     <p class="eyebrow">Mercado / JustTCG</p>
-    <h1>Spikes de cartas</h1>
+    <h1>Top spikes</h1>
     <p>
-      Cartas que mais subiram recentemente, separadas por TCG. Os dados são gerados em arquivo estático para não expor a chave da JustTCG no navegador.
+      Maiores altas por dia, semana e mês de cada jogo, além das cartas mais caras do dia. Os dados ficam em arquivo estático para não expor a chave da JustTCG no navegador.
     </p>
   </div>
 </section>
@@ -19,10 +19,17 @@ permalink: /spikes/
     <div class="spikes-toolbar">
       <div>
         <p class="eyebrow">Atualização automática</p>
-        <h2>Top spikes por jogo</h2>
+        <h2>Spikes por jogo</h2>
       </div>
       <p id="spikes-updated-at" class="spikes-updated-at">Carregando atualização...</p>
     </div>
+
+    <nav class="spikes-window-tabs" aria-label="Filtros de spikes">
+      <button class="is-active" type="button" data-spike-window="daily">Por dia</button>
+      <button type="button" data-spike-window="weekly">Semana</button>
+      <button type="button" data-spike-window="monthly">Mês</button>
+      <button type="button" data-spike-window="expensive">Mais caras do dia</button>
+    </nav>
 
     <div id="spikes-sections" class="spikes-sections">
       <p class="spike-loading">Carregando spikes...</p>

@@ -4,28 +4,51 @@ title: "Agenda"
 permalink: /agenda/
 ---
 
-<section class="page-hero">
+<section class="page-hero agenda-page-hero">
   <div class="container">
     <p class="eyebrow">Encontros e calendário</p>
     <h1>Agenda</h1>
     <p>
-      Aqui ficam os horários, endereços e eventos da comunidade. A ideia é facilitar para quem quer aparecer,
-      aprender a jogar ou participar dos torneios.
+      Horários, locais e rotas para quem quer jogar, aprender ou participar dos torneios do Cianorte Card Masters.
     </p>
   </div>
 </section>
 
-<section class="section">
+<section class="section agenda-section">
   <div class="container">
-    <div class="events-grid">
+    <div class="events-grid agenda-events-grid">
       {% for event in site.data.events %}
-        <article class="event-card">
-          <p class="eyebrow">{{ event.day }} • {{ event.time }}</p>
-          <h3>{{ event.title }}</h3>
-          <p><strong>Jogos:</strong> {{ event.game }}</p>
-          <p><strong>Local:</strong> {{ event.location }}</p>
-          <p><strong>Endereço:</strong> {{ event.address }}</p>
-          <p>{{ event.note }}</p>
+        <article class="event-card agenda-card">
+          {% if event.image %}
+            <img class="agenda-card-image" src="{{ event.image | relative_url }}" alt="{{ event.location | escape }}">
+          {% endif %}
+          <div class="agenda-card-body">
+            <p class="eyebrow">{{ event.day }} • {{ event.time }}</p>
+            <h3>{{ event.title }}</h3>
+            <p><strong>Jogos:</strong> {{ event.game }}</p>
+            <p><strong>Local:</strong> {{ event.location }}</p>
+            <p><strong>Endereço:</strong> {{ event.address }}</p>
+            {% if event.note %}<p>{{ event.note }}</p>{% endif %}
+            {% if event.schedule %}
+              <div class="agenda-schedule-list">
+                {% for item in event.schedule %}
+                  <div class="agenda-schedule-item">
+                    <strong>{{ item.day }}</strong>
+                    <span>{{ item.event }}{% if item.game %} — {{ item.game }}{% endif %}</span>
+                    <em>{{ item.time }}</em>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+            <div class="btn-row">
+              {% if event.maps_url %}
+                <a class="btn btn-primary" href="{{ event.maps_url }}" target="_blank" rel="noopener">Como chegar no Google Maps</a>
+              {% endif %}
+              {% if event.calendar_note %}
+                <span class="agenda-note-pill">{{ event.calendar_note }}</span>
+              {% endif %}
+            </div>
+          </div>
         </article>
       {% endfor %}
     </div>

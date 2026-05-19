@@ -5,6 +5,15 @@
 (() => {
   const baseurl = window.CCM_BASEURL || "";
   const dataUrl = `${baseurl}/assets/data/spikes.json`;
+  let spikesData = null;
+  let activeWindow = "daily";
+
+  const windowLabels = {
+    daily: "por dia",
+    weekly: "da semana",
+    monthly: "do mês",
+    expensive: "mais caras do dia"
+  };
 
   function money(value) {
     if (value === null || value === undefined || Number.isNaN(Number(value))) return "—";
@@ -73,7 +82,40 @@
     `;
   }
 
-  function cardTemplate(item, game) {
+  function escapeHtml(value) {
+    return String(value || "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function itemChange(item, windowKey) {
+    if (windowKey === "daily") return item.change1d ?? item.change24h ?? item.change7d ?? item.change30d;
+    if (windowKey === "weekly") return item.change7d ?? item.change30d;
+    if (windowKey === "monthly") return item.change30d ?? item.change7d;
+    return item.change1d ?? item.change7d ?? item.change30d;
+  }
+
+  function metricTemplate(item, windowKey) {
+    if (windowKey === "expensive") {
+      return `
+        <div class="spike-price-row">
+          <strong>${money(item.price)}</strong>
+          <span class="spike-rank">Preço do dia</span>
+        </div>
+      `;
+    }
+    return `
+      <div class="spike-price-row">
+        <strong>${money(item.price)}</strong>
+        <span class="spike-up">${percent(itemChange(item, windowKey))}</span>
+      </div>
+    `;
+  }
+
+  function cardTemplate(item, game, windowKey = activeWindow) {
     const apiGame = gameToImageApi(game.code);
     const history = item.history || [];
     return `
@@ -86,10 +128,7 @@
             <p class="eyebrow">${escapeHtml(game.label)}</p>
             <h3>${escapeHtml(item.name)}</h3>
             <p>${escapeHtml(item.set || "Set não informado")}</p>
-            <div class="spike-price-row">
-              <strong>${money(item.price)}</strong>
-              <span class="spike-up">${percent(item.change7d ?? item.change30d)}</span>
-            </div>
+            ${metricTemplate(item, windowKey)}
           </div>
         </div>
         ${makeChart(history)}
@@ -97,36 +136,43 @@
     `;
   }
 
-  function sectionTemplate(game) {
-    const items = Array.isArray(game.items) ? game.items.slice(0, 4) : [];
+  function getItemsForWindow(game, windowKey) {
+    if (game.windows && Array.isArray(game.windows[windowKey])) {
+      return game.windows[windowKey].slice(0, 4);
+    }
+
+    if (windowKey === "expensive" && Array.isArray(game.expensive)) {
+      return game.expensive.slice(0, 4);
+    }
+
+    if (Array.isArray(game.items)) {
+      return game.items.slice(0, 4);
+    }
+
+    return [];
+  }
+
+  function sectionTemplate(game, windowKey) {
+    const items = getItemsForWindow(game, windowKey);
     if (!items.length) return "";
 
     return `
       <section class="spike-game-section">
         <div class="spike-section-title">
           <div>
-            <p class="eyebrow">Top spikes</p>
+            <p class="eyebrow">Top spikes ${escapeHtml(windowLabels[windowKey] || "")}</p>
             <h2>${escapeHtml(game.label)}</h2>
           </div>
           <span>Até 4 cartas</span>
         </div>
         <div class="spike-row">
-          ${items.map(item => cardTemplate(item, game)).join("")}
+          ${items.map(item => cardTemplate(item, game, windowKey)).join("")}
         </div>
       </section>
     `;
   }
 
-  function escapeHtml(value) {
-    return String(value || "")
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
-
-  function openModal(item, game) {
+  function openModal(item, game, windowKey) {
     const existing = document.querySelector(".spike-modal");
     if (existing) existing.remove();
 
@@ -136,11 +182,12 @@
       <div class="spike-modal-backdrop" data-close-modal></div>
       <div class="spike-modal-card" role="dialog" aria-modal="true">
         <button class="spike-modal-close" type="button" data-close-modal>×</button>
-        <p class="eyebrow">${escapeHtml(game.label)}</p>
+        <p class="eyebrow">${escapeHtml(game.label)} • ${escapeHtml(windowLabels[windowKey] || "")}</p>
         <h2>${escapeHtml(item.name)}</h2>
         <p>${escapeHtml(item.set || "Set não informado")} ${item.variant ? "• " + escapeHtml(item.variant) : ""}</p>
         <div class="spike-modal-metrics">
           <span><strong>Preço atual</strong>${money(item.price)}</span>
+          <span><strong>1 dia</strong>${percent(item.change1d ?? item.change24h)}</span>
           <span><strong>7 dias</strong>${percent(item.change7d)}</span>
           <span><strong>30 dias</strong>${percent(item.change30d)}</span>
         </div>
@@ -154,22 +201,48 @@
     });
   }
 
-  function bindCards(container, data) {
+  function bindCards(container, data, windowKey) {
     const allCards = [];
     data.games.forEach(game => {
-      (game.items || []).forEach(item => allCards.push({ item, game }));
+      getItemsForWindow(game, windowKey).forEach(item => allCards.push({ item, game }));
     });
 
     container.querySelectorAll("[data-spike-card]").forEach((el, index) => {
       const payload = allCards[index];
       if (!payload) return;
 
-      el.addEventListener("click", () => openModal(payload.item, payload.game));
+      el.addEventListener("click", () => openModal(payload.item, payload.game, windowKey));
       el.addEventListener("keydown", event => {
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
-          openModal(payload.item, payload.game);
+          openModal(payload.item, payload.game, windowKey);
         }
+      });
+    });
+  }
+
+  function renderSpikes(windowKey = activeWindow) {
+    if (!spikesData) return;
+    activeWindow = windowKey;
+
+    const container = document.querySelector("#spikes-sections");
+    if (!container) return;
+
+    const html = (spikesData.games || []).map(game => sectionTemplate(game, windowKey)).join("");
+    container.innerHTML = html || `<p class="spike-loading">Nenhum dado disponível para este filtro.</p>`;
+
+    bindCards(container, spikesData, windowKey);
+
+    if (window.CCMCardApis) {
+      window.CCMCardApis.init();
+    }
+  }
+
+  function bindTabs() {
+    document.querySelectorAll("[data-spike-window]").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-spike-window]").forEach(item => item.classList.toggle("is-active", item === button));
+        renderSpikes(button.dataset.spikeWindow || "daily");
       });
     });
   }
@@ -179,18 +252,18 @@
     if (!hero) return;
 
     const fab = (data.games || []).find(game => game.code === "fab") || data.games?.[0];
-    const items = fab?.items || [];
+    const items = getItemsForWindow(fab || {}, "weekly");
     if (!items.length) {
       hero.innerHTML = `<span class="spike-loading">Nenhum spike encontrado.</span>`;
       return;
     }
 
     const item = items[Math.floor(Math.random() * items.length)];
-    hero.innerHTML = cardTemplate(item, fab);
+    hero.innerHTML = cardTemplate(item, fab, "weekly");
 
     const card = hero.querySelector("[data-spike-card]");
     if (card) {
-      card.addEventListener("click", () => openModal(item, fab));
+      card.addEventListener("click", () => openModal(item, fab, "weekly"));
     }
 
     if (window.CCMCardApis) {
@@ -209,23 +282,16 @@
       return;
     }
 
+    spikesData = data;
     renderHeroSpike(data);
+    bindTabs();
 
     const updated = document.querySelector("#spikes-updated-at");
     if (updated) {
       updated.textContent = `Atualizado em ${dateBR(data.updatedAt)} • Fonte: ${data.source || "JustTCG"}`;
     }
 
-    const container = document.querySelector("#spikes-sections");
-    if (!container) return;
-
-    container.innerHTML = (data.games || []).map(sectionTemplate).join("");
-
-    bindCards(container, data);
-
-    if (window.CCMCardApis) {
-      window.CCMCardApis.init();
-    }
+    renderSpikes(activeWindow);
   }
 
   if (document.readyState === "loading") {

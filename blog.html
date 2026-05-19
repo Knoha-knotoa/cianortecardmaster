@@ -6,49 +6,55 @@ permalink: /blog/
 
 {% assign posts_list = site.blog | sort: "date" | reverse %}
 
-<section class="page-hero">
+<section class="page-hero blog-page-hero">
   <div class="container">
-    <p class="eyebrow">Opinião e novidades</p>
+    <p class="eyebrow">Opinião, notícias e bastidores</p>
     <h1>Blog</h1>
-    <p>Postagens separadas por tema. Para publicar, crie o arquivo Markdown dentro da subpasta correta em <code>_blog</code>.</p>
+    <p>
+      Feed único em ordem de postagem. As subpastas servem para organizar o arquivo Markdown e aplicar identidade visual por tema.
+    </p>
   </div>
 </section>
 
-<section class="listing listing-with-sections">
+<section class="listing blog-feed-section">
   <div class="container">
-    <nav class="section-index" aria-label="Categorias do Blog">
+    <div class="feed-toolbar">
+      <div>
+        <p class="eyebrow">Buscar por tema</p>
+        <h2>Últimas postagens</h2>
+      </div>
+      <nav class="section-index" aria-label="Categorias do Blog">
+        <a class="section-chip is-active" href="#todos" data-blog-filter="all">Todos</a>
+        {% for section in site.data.content_sections.blog %}
+          <a class="section-chip post-style-{{ section.folder | slugify }}" href="#{{ section.folder | slugify }}" data-blog-filter="{{ section.folder | slugify }}">{{ section.label }}</a>
+        {% endfor %}
+      </nav>
+    </div>
+
+    <div class="blog-category-guide">
       {% for section in site.data.content_sections.blog %}
-        <a class="section-chip post-style-{{ section.folder | slugify }}" href="#{{ section.folder | slugify }}">{{ section.label }}</a>
-      {% endfor %}
-    </nav>
-
-    {% for section in site.data.content_sections.blog %}
-      {% assign section_path = "_blog/" | append: section.folder | append: "/" %}
-      {% assign has_posts = false %}
-
-      <section class="content-section-block post-style-{{ section.folder | slugify }}" id="{{ section.folder | slugify }}">
-        <div class="content-section-head">
+        {% assign section_slug = section.folder | slugify %}
+        <article class="category-guide-card post-style-{{ section_slug }}">
+          <img src="{{ '/assets/img/category/' | append: section_slug | append: '.svg' | relative_url }}" alt="{{ section.label | escape }}">
           <div>
-            <p class="eyebrow">Blog</p>
-            <h2>{{ section.label }}</h2>
+            <p class="eyebrow">{{ section.label }}</p>
             <p>{{ section.description }}</p>
           </div>
-          <span class="section-folder">_blog/{{ section.folder }}/</span>
-        </div>
+        </article>
+      {% endfor %}
+    </div>
 
-        <div class="card-grid grid-3">
-          {% for post in posts_list %}
-            {% if post.path contains section_path %}
-              {% assign has_posts = true %}
-              {% include post-card.html post=post %}
-            {% endif %}
-          {% endfor %}
+    <div class="card-grid grid-3 blog-feed" id="todos">
+      {% for post in posts_list %}
+        {% assign style_slug = post.content_style | default: post.category_label | slugify %}
+        <div data-blog-feed-item data-blog-category="{{ style_slug }}">
+          {% include post-card.html post=post %}
         </div>
+      {% endfor %}
+    </div>
 
-        {% unless has_posts %}
-          <p class="empty-section">{{ section.empty }}</p>
-        {% endunless %}
-      </section>
-    {% endfor %}
+    {% if posts_list.size == 0 %}
+      <p class="empty-section">Nenhum post publicado no Blog ainda.</p>
+    {% endif %}
   </div>
 </section>
