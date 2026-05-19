@@ -35,7 +35,9 @@ cards:
 
 > **Resumo de mesa:** equipamento com defesa 0 pode defender. Equipamento sem valor de defesa não pode. Blade Break, Battleworn, Temper e Guardwell normalmente só fazem algo quando a combat chain fecha. Já efeitos como “when this defends” acontecem quando o equipamento realmente vira carta defensora.
 
-![Crown of Providence](goagain:Crown of Providence)
+<div class="tcg-card-grid">
+  {% include tcg-card.html game="fab" name="Crown of Providence" %}
+</div>
 
 ## Por que este guia existe?
 
@@ -82,9 +84,11 @@ Exemplos:
 | Nullrune Gloves | 0 | Sim |
 | Compass of Sunken Depths | sem valor de defesa | Não |
 
-![Snapdragon Scalers](goagain:Snapdragon Scalers)
-![Nullrune Gloves](goagain:Nullrune Gloves)
-![Compass of Sunken Depths](goagain:Compass of Sunken Depths)
+<div class="tcg-card-grid">
+  {% include tcg-card.html game="fab" name="Snapdragon Scalers" %}
+  {% include tcg-card.html game="fab" name="Nullrune Gloves" %}
+  {% include tcg-card.html game="fab" name="Compass of Sunken Depths" %}
+</div>
 
 Essa diferença é decisiva contra cartas que obrigam a defender com equipamento, como **T-Bone** e **Meganetic Shockwave**.
 
@@ -123,7 +127,9 @@ Esses efeitos disparam quando o equipamento se torna uma carta defensora. Eles n
 
 ### Crown of Providence
 
-![Crown of Providence](goagain:Crown of Providence)
+<div class="tcg-card-grid">
+  {% include tcg-card.html game="fab" name="Crown of Providence" %}
+</div>
 
 **Crown of Providence** diz:
 
@@ -166,7 +172,9 @@ Exemplos:
 - Plate of Tough Love
 - Ironrot Gauntlet
 
-![Plate of Tough Love](goagain:Plate of Tough Love)
+<div class="tcg-card-grid">
+  {% include tcg-card.html game="fab" name="Plate of Tough Love" %}
+</div>
 
 ### Battleworn
 
@@ -182,7 +190,9 @@ Exemplo com **Tectonic Plating**:
 
 Mesmo com defesa 0, o equipamento continua em campo. Battleworn não destrói sozinho.
 
-![Tectonic Plating](goagain:Tectonic Plating)
+<div class="tcg-card-grid">
+  {% include tcg-card.html game="fab" name="Tectonic Plating" %}
+</div>
 
 ### Temper
 
@@ -197,7 +207,9 @@ Exemplo com **Flamescale Furnace**:
 | Primeira defesa | 2 | Quando a chain fecha, ganha um contador e fica com 1. |
 | Segunda defesa | 1 | Quando a chain fecha, ganha outro contador, fica com 0 e é destruída. |
 
-![Flamescale Furnace](goagain:Flamescale Furnace)
+<div class="tcg-card-grid">
+  {% include tcg-card.html game="fab" name="Flamescale Furnace" %}
+</div>
 
 ### Guardwell
 
@@ -210,7 +222,9 @@ Exemplo com **Tiara of Suspense**:
 | Tiara sem contador defende | 2 | Quando a chain fecha, recebe 2 contadores -1. |
 | Depois disso | 0 | Continua em campo, a menos que outro efeito destrua. |
 
-![Tiara of Suspense](goagain:Tiara of Suspense)
+<div class="tcg-card-grid">
+  {% include tcg-card.html game="fab" name="Tiara of Suspense" %}
+</div>
 
 Guardwell não diz “destrua”. Ele coloca contadores.
 
@@ -253,7 +267,9 @@ Aqui entram duas regras importantes:
 
 ### T-Bone
 
-![T-Bone](goagain:T-Bone)
+<div class="tcg-card-grid">
+  {% include tcg-card.html game="fab" name="T-Bone" pitch="red" %}
+</div>
 
 **T-Bone** obriga o defensor a defender com um equipamento que controla, se possível, desde que você controle uma carta boosted na combat chain.
 
@@ -271,7 +287,9 @@ O defensor pode escolher Snapdragon Scalers, mesmo defendendo 0, para cumprir a 
 
 ### Meganetic Shockwave
 
-![Meganetic Shockwave](goagain:Meganetic Shockwave)
+<div class="tcg-card-grid">
+  {% include tcg-card.html game="fab" name="Meganetic Shockwave" pitch="blue" %}
+</div>
 
 **Meganetic Shockwave** obriga o defensor a defender com X equipamentos, onde X é o número de vezes que você boostou naquela combat chain.
 
@@ -292,7 +310,9 @@ Nesse caso, se possível, ele precisará defender com Crown, Tunic e Nullrune. C
 
 ### Meganetic Protocol
 
-![Meganetic Protocol](goagain:Meganetic Protocol)
+<div class="tcg-card-grid">
+  {% include tcg-card.html game="fab" name="Meganetic Protocol" pitch="blue" %}
+</div>
 
 **Meganetic Protocol** é mais específico: ele obriga o defensor a defender com equipamentos que tenham contadores -1 de defesa, conforme o número de Evos que o atacante tem equipado.
 
@@ -313,7 +333,9 @@ Mesmo um equipamento com defesa atual 0 pode ser usado, desde que ainda tenha a 
 
 ### Palantir Aeronought
 
-![Palantir Aeronought](goagain:Palantir Aeronought)
+<div class="tcg-card-grid">
+  {% include tcg-card.html game="fab" name="Palantir Aeronought" pitch="red" %}
+</div>
 
 **Palantir Aeronought** também obriga o herói defensor a defender com um equipamento, se puder. Além disso, pode virar Cogs para ganhar poder e, na terceira ativação da habilidade no turno, destruir uma carta defendendo.
 
@@ -334,9 +356,11 @@ Exemplos:
 | Steelbraid Buckler | Guardian Equipment - Off-Hand | 2 |
 | Seasoned Saviour | Guardian Equipment - Off-Hand | 3 |
 
-![Rampart of the Ram's Head](goagain:Rampart of the Ram's Head)
-![Stalagmite, Bastion of Isenloft](goagain:Stalagmite, Bastion of Isenloft)
-![Seasoned Saviour](goagain:Seasoned Saviour)
+<div class="tcg-card-grid">
+  {% include tcg-card.html game="fab" name="Rampart of the Ram's Head" %}
+  {% include tcg-card.html game="fab" name="Stalagmite, Bastion of Isenloft" %}
+  {% include tcg-card.html game="fab" name="Seasoned Saviour" %}
+</div>
 
 Off-Hand ocupa uma zona de arma. Por isso, normalmente você usa escudo com arma 1H, não com arma 2H.
 
@@ -466,7 +490,9 @@ Então, às vezes, usar equipamento para “salvar vida” pode aumentar o dano 
 
 ## 10. Evos, Teklovossen e a defesa com equipamento
 
-![Teklovossen](goagain:Teklovossen)
+<div class="tcg-card-grid">
+  {% include tcg-card.html game="fab" name="Teklovossen" %}
+</div>
 
 Evos são um caso especial porque são equipamentos que podem estar no deck e podem ser jogados durante a partida.
 
@@ -491,7 +517,9 @@ Resumo:
 
 ## 11. Pleiades, Toughness e Plate of Tough Love
 
-![Plate of Tough Love](goagain:Plate of Tough Love)
+<div class="tcg-card-grid">
+  {% include tcg-card.html game="fab" name="Plate of Tough Love" %}
+</div>
 
 Algumas cartas não mudam equipamento diretamente, mas criam situações em que a defesa do equipamento muda.
 
