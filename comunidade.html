@@ -5,10 +5,6 @@ permalink: /comunidade/
 ---
 
 {% assign comunidade_posts = site.comunidade | sort: "date" | reverse %}
-{% assign armory_posts = site.comunidade | where_exp: "post", "post.path contains '_comunidade/Armory/'" | sort: "date" | reverse %}
-{% assign social_posts = site.comunidade | where_exp: "post", "post.path contains '_comunidade/Fanservice/' or post.path contains '_comunidade/Fotos/' or post.path contains '_comunidade/Videos/' or post.path contains '_comunidade/Musica/' or post.path contains '_comunidade/Meme/'" | sort: "date" | reverse %}
-{% assign torneio_posts = site.comunidade | where_exp: "post", "post.path contains '_comunidade/Torneio/'" | sort: "date" | reverse %}
-{% assign liga_posts = site.comunidade | where_exp: "post", "post.path contains '_comunidade/Liga/'" | sort: "date" | reverse %}
 
 <section class="page-hero community-page-hero">
   <div class="container">
@@ -22,14 +18,21 @@ permalink: /comunidade/
 
 <script type="application/json" id="armory-data">
 [
-{% for post in armory_posts %}
-  {
-    "title": {{ post.title | jsonify }},
-    "url": {{ post.url | relative_url | jsonify }},
-    "date": {{ post.date | date_to_xmlschema | jsonify }},
-    "summary": {{ post.summary | default: post.excerpt | strip_html | strip | jsonify }},
-    "results": {% if post.results %}{{ post.results | jsonify }}{% else %}[]{% endif %}
-  }{% unless forloop.last %},{% endunless %}
+{% assign first_armory = true %}
+{% for post in comunidade_posts %}
+  {% assign post_path = post.path | downcase %}
+  {% assign style_slug = post.content_style | default: post.category_label | default: '' | slugify %}
+  {% if post_path contains '/armory/' or post_path contains '_comunidade/armory/' or style_slug == 'armory' %}
+    {% unless first_armory %},{% endunless %}
+    {
+      "title": {{ post.title | jsonify }},
+      "url": {{ post.url | relative_url | jsonify }},
+      "date": {{ post.date | date_to_xmlschema | jsonify }},
+      "summary": {{ post.summary | default: post.excerpt | strip_html | strip | jsonify }},
+      "results": {% if post.results %}{{ post.results | jsonify }}{% else %}[]{% endif %}
+    }
+    {% assign first_armory = false %}
+  {% endif %}
 {% endfor %}
 ]
 </script>
@@ -40,7 +43,7 @@ permalink: /comunidade/
       <div>
         <p class="eyebrow">Armory do mês</p>
         <h2>Último resultado e gráficos</h2>
-        <p>Os gráficos somam automaticamente os resultados dos posts cadastrados na pasta <code>_comunidade/Armory</code> dentro do mês vigente.</p>
+        <p>Os gráficos somam automaticamente os resultados dos posts cadastrados em <code>_comunidade/Armory</code> dentro do mês vigente.</p>
       </div>
     </div>
 
@@ -108,15 +111,28 @@ permalink: /comunidade/
     </nav>
 
     <div class="card-grid grid-3 community-feed" id="postagens">
-      {% for post in social_posts %}
-        {% assign style_slug = post.content_style | default: post.category_label | slugify %}
-        <div data-community-feed-item data-community-category="{{ style_slug }}">
-          {% include post-card.html post=post %}
-        </div>
+      {% assign social_count = 0 %}
+      {% for post in comunidade_posts %}
+        {% assign post_path = post.path | downcase %}
+        {% assign style_slug = post.content_style | default: post.category_label | default: '' | slugify %}
+        {% if post_path contains '/fanservice/' or post_path contains '/fotos/' or post_path contains '/videos/' or post_path contains '/musica/' or post_path contains '/meme/' or post_path contains '_comunidade/fanservice/' or post_path contains '_comunidade/fotos/' or post_path contains '_comunidade/videos/' or post_path contains '_comunidade/musica/' or post_path contains '_comunidade/meme/' or style_slug == 'fanservice' or style_slug == 'fotos' or style_slug == 'videos' or style_slug == 'musica' or style_slug == 'meme' %}
+          {% if style_slug == '' %}
+            {% if post_path contains '/fanservice/' or post_path contains '_comunidade/fanservice/' %}{% assign style_slug = 'fanservice' %}
+            {% elsif post_path contains '/fotos/' or post_path contains '_comunidade/fotos/' %}{% assign style_slug = 'fotos' %}
+            {% elsif post_path contains '/videos/' or post_path contains '_comunidade/videos/' %}{% assign style_slug = 'videos' %}
+            {% elsif post_path contains '/musica/' or post_path contains '_comunidade/musica/' %}{% assign style_slug = 'musica' %}
+            {% elsif post_path contains '/meme/' or post_path contains '_comunidade/meme/' %}{% assign style_slug = 'meme' %}
+            {% endif %}
+          {% endif %}
+          <div data-community-feed-item data-community-category="{{ style_slug }}">
+            {% include post-card.html post=post %}
+          </div>
+          {% assign social_count = social_count | plus: 1 %}
+        {% endif %}
       {% endfor %}
     </div>
 
-    {% if social_posts.size == 0 %}
+    {% if social_count == 0 %}
       <p class="empty-section">Nenhuma postagem social publicada ainda.</p>
     {% endif %}
 
@@ -148,11 +164,17 @@ permalink: /comunidade/
           <span class="section-folder">_comunidade/Torneio/</span>
         </div>
         <div class="card-grid grid-3">
-          {% for post in torneio_posts limit: 6 %}
-            {% include post-card.html post=post %}
+          {% assign torneio_count = 0 %}
+          {% for post in comunidade_posts %}
+            {% assign post_path = post.path | downcase %}
+            {% assign style_slug = post.content_style | default: post.category_label | default: '' | slugify %}
+            {% if post_path contains '/torneio/' or post_path contains '_comunidade/torneio/' or style_slug == 'torneio' %}
+              {% if torneio_count < 6 %}{% include post-card.html post=post %}{% endif %}
+              {% assign torneio_count = torneio_count | plus: 1 %}
+            {% endif %}
           {% endfor %}
         </div>
-        {% if torneio_posts.size == 0 %}<p class="empty-section">Nenhum torneio publicado ainda.</p>{% endif %}
+        {% if torneio_count == 0 %}<p class="empty-section">Nenhum torneio publicado ainda.</p>{% endif %}
       </section>
 
       <section class="content-section-block post-style-liga">
@@ -164,11 +186,17 @@ permalink: /comunidade/
           <span class="section-folder">_comunidade/Liga/</span>
         </div>
         <div class="card-grid grid-3">
-          {% for post in liga_posts limit: 6 %}
-            {% include post-card.html post=post %}
+          {% assign liga_count = 0 %}
+          {% for post in comunidade_posts %}
+            {% assign post_path = post.path | downcase %}
+            {% assign style_slug = post.content_style | default: post.category_label | default: '' | slugify %}
+            {% if post_path contains '/liga/' or post_path contains '_comunidade/liga/' or style_slug == 'liga' %}
+              {% if liga_count < 6 %}{% include post-card.html post=post %}{% endif %}
+              {% assign liga_count = liga_count | plus: 1 %}
+            {% endif %}
           {% endfor %}
         </div>
-        {% if liga_posts.size == 0 %}<p class="empty-section">Nenhuma liga publicada ainda.</p>{% endif %}
+        {% if liga_count == 0 %}<p class="empty-section">Nenhuma liga publicada ainda.</p>{% endif %}
       </section>
     </div>
   </div>

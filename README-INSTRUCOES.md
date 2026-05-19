@@ -40,6 +40,8 @@ tags:
   - Pokémon
   - TCG
 ---
+
+Texto do post aqui.
 ```
 
 Se você não colocar `image`, o site usa automaticamente uma imagem de capa fixa da categoria, com cores e estilo visual próprios.
@@ -77,7 +79,7 @@ Copie esse arquivo, renomeie e remova a linha:
 published: false
 ```
 
-Depois preencha os resultados:
+Preencha os resultados dentro do bloco `results:`. O campo `date:` deve ser a data do Armory, não necessariamente a data em que você publicou o arquivo.
 
 ```yaml
 ---
@@ -96,6 +98,8 @@ results:
     record: "2-1"
     wins: 2
 ---
+
+Texto opcional do post.
 ```
 
 A página Comunidade soma automaticamente, dentro do mês vigente:
@@ -105,6 +109,8 @@ A página Comunidade soma automaticamente, dentro do mês vigente:
 - quantidade de Armory cadastrados;
 - jogadores únicos;
 - heróis usados.
+
+Se você esquecer o campo `wins`, o site tenta calcular as vitórias a partir de `record`, por exemplo `3-0`.
 
 ## Agenda
 
@@ -158,7 +164,7 @@ O workflow está em:
 .github/workflows/update-spikes.yml
 ```
 
-Se não houver chave configurada, o site mantém os dados de demonstração.
+A página não consulta a JustTCG direto no navegador, para não expor sua chave. O GitHub Actions atualiza o arquivo `spikes.json`, e o site apenas lê esse arquivo.
 
 ## Imagem de carta pela API GoAgain
 

@@ -1904,3 +1904,44 @@ h3 {
     grid-template-columns: 1fr;
   }
 }
+
+/* Resultado de Armory dentro do post */
+.armory-result-table-wrap {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid rgba(212,175,55,.22);
+  border-radius: 22px;
+  background: rgba(255,255,255,.035);
+}
+
+.armory-result-table-wrap h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.armory-result-table-scroll {
+  overflow-x: auto;
+}
+
+.armory-result-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+}
+
+.armory-result-table th,
+.armory-result-table td {
+  padding: .75rem .85rem;
+  border-bottom: 1px solid rgba(212,175,55,.16);
+  text-align: left;
+}
+
+.armory-result-table th {
+  color: #fff2b8;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: .9rem;
+}
+
+.armory-result-table td:first-child {
+  color: #fff2b8;
+  font-family: "Fugaz One", system-ui, sans-serif;
+}

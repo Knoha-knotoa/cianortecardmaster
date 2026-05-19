@@ -46,7 +46,17 @@ permalink: /blog/
 
     <div class="card-grid grid-3 blog-feed" id="todos">
       {% for post in posts_list %}
-        {% assign style_slug = post.content_style | default: post.category_label | slugify %}
+        {% assign post_path = post.path | downcase %}
+        {% assign style_slug = post.content_style | default: post.category_label | default: '' | slugify %}
+        {% if style_slug == '' or style_slug == 'blog' %}
+          {% if post_path contains '/flesh-and-blood/' or post_path contains '_blog/flesh-and-blood/' %}{% assign style_slug = 'flesh-and-blood' %}
+          {% elsif post_path contains '/pokemon/' or post_path contains '_blog/pokemon/' %}{% assign style_slug = 'pokemon' %}
+          {% elsif post_path contains '/magic/' or post_path contains '_blog/magic/' %}{% assign style_slug = 'magic' %}
+          {% elsif post_path contains '/tcg/' or post_path contains '_blog/tcg/' %}{% assign style_slug = 'tcg' %}
+          {% elsif post_path contains '/rpg/' or post_path contains '_blog/rpg/' %}{% assign style_slug = 'rpg' %}
+          {% elsif post_path contains '/cianorte-card-master/' or post_path contains '_blog/cianorte-card-master/' %}{% assign style_slug = 'cianorte-card-master' %}
+          {% endif %}
+        {% endif %}
         <div data-blog-feed-item data-blog-category="{{ style_slug }}">
           {% include post-card.html post=post %}
         </div>

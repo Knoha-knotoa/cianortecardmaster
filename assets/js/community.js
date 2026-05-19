@@ -14,7 +14,11 @@
     if (!script) return [];
     try {
       const data = JSON.parse(script.textContent || "[]");
-      return Array.isArray(data) ? data : [];
+      return Array.isArray(data)
+        ? data
+            .filter(item => item && item.date)
+            .sort((a, b) => new Date(b.date) - new Date(a.date))
+        : [];
     } catch (error) {
       console.warn("Erro ao ler dados de Armory:", error);
       return [];
@@ -49,15 +53,31 @@
     });
   }
 
+  function winsFromRecord(record) {
+    const text = String(record || "").trim();
+    const match = text.match(/^(\d+)\s*[-–xX]\s*\d+/);
+    return match ? Number(match[1]) : 0;
+  }
+
   function resultPoints(result) {
-    const wins = Number(result.wins ?? result.vitorias ?? result.points ?? 0);
-    return Number.isFinite(wins) && wins > 0 ? wins : 0;
+    const explicit = Number(result.wins ?? result.vitorias ?? result.vitórias ?? result.points ?? result.pontos);
+    if (Number.isFinite(explicit) && explicit > 0) return explicit;
+    const parsed = winsFromRecord(result.record ?? result.campanha ?? result.score);
+    return Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
+  }
+
+  function getPlayer(result) {
+    return result.player || result.jogador || result.name || result.nome || "";
+  }
+
+  function getHero(result) {
+    return result.hero || result.heroi || result.herói || result.hero_name || result.deck || result.deque || "";
   }
 
   function sumBy(results, key) {
     const map = new Map();
     results.forEach(result => {
-      const name = result[key] || result[key === "player" ? "jogador" : "heroi"] || result[key === "hero" ? "hero_name" : ""];
+      const name = key === "player" ? getPlayer(result) : getHero(result);
       if (!name) return;
       const points = resultPoints(result);
       if (!points) return;
@@ -73,6 +93,7 @@
     if (!data.length) {
       container.className = "pie-chart-empty";
       container.innerHTML = "Sem dados";
+      container.style.background = "";
       legend.innerHTML = "";
       return;
     }
@@ -107,13 +128,18 @@
     if (!latest) return;
 
     const results = Array.isArray(latest.results) ? latest.results : [];
-    const podium = results.slice(0, 4).map((result, index) => `
-      <li>
-        <span>${index + 1}º</span>
-        <strong>${escapeHtml(result.player || result.jogador || "Jogador")}</strong>
-        <em>${escapeHtml(result.hero || result.heroi || "Herói não informado")} • ${escapeHtml(result.record || result.campanha || "")}</em>
-      </li>
-    `).join("");
+    const podium = results.slice(0, 8).map((result, index) => {
+      const player = getPlayer(result) || "Jogador";
+      const hero = getHero(result) || "Herói não informado";
+      const record = result.record || result.campanha || "";
+      return `
+        <li>
+          <span>${index + 1}º</span>
+          <strong>${escapeHtml(player)}</strong>
+          <em>${escapeHtml(hero)}${record ? " • " + escapeHtml(record) : ""}</em>
+        </li>
+      `;
+    }).join("");
 
     target.innerHTML = `
       <p class="eyebrow">Último Armory</p>
@@ -126,6 +152,11 @@
 
   function renderArmoryStats() {
     const allArmories = parseArmoryData();
+
+    document.querySelectorAll("#armory-player-month, #armory-hero-month").forEach(el => {
+      el.textContent = monthLabel();
+    });
+
     if (!allArmories.length) return;
 
     renderLatestArmory(allArmories);
@@ -134,10 +165,6 @@
     const monthResults = flattenResults(monthItems);
     const byPlayer = sumBy(monthResults, "player");
     const byHero = sumBy(monthResults, "hero");
-
-    document.querySelectorAll("#armory-player-month, #armory-hero-month").forEach(el => {
-      el.textContent = monthLabel();
-    });
 
     makePie(
       document.querySelector("#armory-player-chart"),
@@ -153,8 +180,8 @@
 
     const summary = document.querySelector("#armory-month-summary");
     if (summary) {
-      const totalPlayers = new Set(monthResults.map(r => r.player || r.jogador).filter(Boolean)).size;
-      const totalHeroes = new Set(monthResults.map(r => r.hero || r.heroi).filter(Boolean)).size;
+      const totalPlayers = new Set(monthResults.map(getPlayer).filter(Boolean)).size;
+      const totalHeroes = new Set(monthResults.map(getHero).filter(Boolean)).size;
       const totalWins = monthResults.reduce((sum, result) => sum + resultPoints(result), 0);
       summary.innerHTML = monthResults.length ? `
         <div><strong>${monthItems.length}</strong><span>Armory no mês</span></div>
@@ -166,7 +193,7 @@
 
     const history = document.querySelector("#armory-history-list");
     if (history) {
-      history.innerHTML = allArmories.slice(0, 8).map(item => `
+      history.innerHTML = allArmories.slice(0, 12).map(item => `
         <a href="${item.url || "#"}">
           <strong>${escapeHtml(item.title || "Armory")}</strong>
           <span>${dateLabel(item.date)}</span>

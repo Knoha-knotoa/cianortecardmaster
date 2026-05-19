@@ -11,7 +11,7 @@ const targets = [
 ];
 
 const windows = [
-  { key: "daily", orderBy: "1d", label: "1 dia", changeField: "change1d" },
+  { key: "daily", orderBy: "24h", label: "24 horas", changeField: "change1d" },
   { key: "weekly", orderBy: "7d", label: "7 dias", changeField: "change7d" },
   { key: "monthly", orderBy: "30d", label: "30 dias", changeField: "change30d" },
   { key: "expensive", orderBy: "price", label: "mais caras", changeField: "price" }
@@ -51,10 +51,20 @@ function bestVariant(card, windowKey = "weekly") {
     .slice()
     .sort((a, b) => {
       if (windowKey === "expensive") return Number(b.price ?? 0) - Number(a.price ?? 0);
-      const field = windowKey === "daily" ? "priceChange1d" : windowKey === "monthly" ? "priceChange30d" : "priceChange7d";
-      const fallback = windowKey === "daily" ? "priceChange24h" : "priceChange30d";
-      const ca = Number(a[field] ?? a[fallback] ?? a.priceChange7d ?? a.priceChange30d ?? 0);
-      const cb = Number(b[field] ?? b[fallback] ?? b.priceChange7d ?? b.priceChange30d ?? 0);
+      const fields = windowKey === "daily"
+        ? ["priceChange24hr", "priceChange24h", "priceChange1d"]
+        : windowKey === "monthly"
+          ? ["priceChange30d", "change30d"]
+          : ["priceChange7d", "change7d"];
+      const changeFor = variant => {
+        for (const field of fields) {
+          const value = Number(variant[field]);
+          if (Number.isFinite(value)) return value;
+        }
+        return 0;
+      };
+      const ca = changeFor(a);
+      const cb = changeFor(b);
       if (cb !== ca) return cb - ca;
       return Number(b.price ?? 0) - Number(a.price ?? 0);
     })[0];
@@ -77,7 +87,7 @@ function cardToSpike(card, windowKey = "weekly") {
   if (!variant) return null;
 
   const price = numberOrNull(variant.price) ?? 0;
-  const change1d = numberOrNull(variant.priceChange1d ?? variant.priceChange24h ?? variant.change1d ?? variant.change24h);
+  const change1d = numberOrNull(variant.priceChange24hr ?? variant.priceChange24h ?? variant.priceChange1d ?? variant.change24hr ?? variant.change24h ?? variant.change1d);
   const change7d = numberOrNull(variant.priceChange7d ?? variant.change7d);
   const change30d = numberOrNull(variant.priceChange30d ?? variant.change30d);
 
@@ -115,7 +125,7 @@ async function getCardsForWindow(gameId, windowKey) {
     limit: "24",
     min_price: windowKey === "expensive" ? "0" : "1",
     include_price_history: "true",
-    include_statistics: "1d,7d,30d",
+    include_statistics: "7d,30d",
     priceHistoryDuration: "30d"
   });
 

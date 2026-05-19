@@ -1,0 +1,28 @@
+RELATÓRIO DE CORREÇÃO
+
+Problemas encontrados no ZIP enviado:
+
+1. Havia arquivos duplicados fora das subpastas novas:
+   _blog/como-comecar-fab-sem-deck.md
+   _comunidade/resumo-encontro-commoner.md
+
+   Eles poderiam aparecer com estilo incorreto ou não entrar nos filtros esperados.
+   Foram removidos da raiz porque já existiam dentro das subpastas corretas.
+
+2. Várias pastas pedidas estavam vazias.
+   O GitHub não mantém pastas vazias, então elas poderiam não aparecer no repositório.
+   Foi adicionado .gitkeep em todas as pastas de Blog e Comunidade.
+
+3. A página Comunidade dependia demais do caminho exato do arquivo.
+   Agora ela identifica Armory, Torneio, Liga, Fotos, Vídeos, Música, Meme e Fanservice de forma mais tolerante.
+
+4. O resultado do Armory agora aparece também dentro da página individual do post, em tabela.
+
+5. O cálculo do Armory ficou mais resistente.
+   Se wins não for informado, o JavaScript tenta calcular a vitória a partir de record, por exemplo 3-0.
+
+6. O arquivo de atualização da JustTCG foi ajustado para usar orderBy=24h, 7d, 30d e price.
+   Antes o diário usava 1d, que não é o valor esperado pela API atual.
+
+7. O resultado Armory-13-05-2026.md estava com date: 2026-05-19.
+   Foi corrigido para date: 2026-05-13, para refletir a data real do Armory.

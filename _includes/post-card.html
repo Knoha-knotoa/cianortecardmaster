@@ -1,21 +1,22 @@
 {% assign item_label = nil %}
+{% assign include_post_path = include.post.path | downcase %}
 {% if include.post.collection == "blog" %}
-  {% if include.post.path contains "_blog/Flesh-and-Blood/" %}{% assign item_label = "Flesh and Blood" %}{% assign inferred_style = "flesh-and-blood" %}
-  {% elsif include.post.path contains "_blog/Pokemon/" %}{% assign item_label = "Pokémon" %}{% assign inferred_style = "pokemon" %}
-  {% elsif include.post.path contains "_blog/Magic/" %}{% assign item_label = "Magic" %}{% assign inferred_style = "magic" %}
-  {% elsif include.post.path contains "_blog/TCG/" %}{% assign item_label = "TCG" %}{% assign inferred_style = "tcg" %}
-  {% elsif include.post.path contains "_blog/RPG/" %}{% assign item_label = "RPG" %}{% assign inferred_style = "rpg" %}
-  {% elsif include.post.path contains "_blog/Cianorte-card-master/" %}{% assign item_label = "Cianorte Card Master" %}{% assign inferred_style = "cianorte-card-master" %}
+  {% if include_post_path contains "_blog/flesh-and-blood/" %}{% assign item_label = "Flesh and Blood" %}{% assign inferred_style = "flesh-and-blood" %}
+  {% elsif include_post_path contains "_blog/pokemon/" %}{% assign item_label = "Pokémon" %}{% assign inferred_style = "pokemon" %}
+  {% elsif include_post_path contains "_blog/magic/" %}{% assign item_label = "Magic" %}{% assign inferred_style = "magic" %}
+  {% elsif include_post_path contains "_blog/tcg/" %}{% assign item_label = "TCG" %}{% assign inferred_style = "tcg" %}
+  {% elsif include_post_path contains "_blog/rpg/" %}{% assign item_label = "RPG" %}{% assign inferred_style = "rpg" %}
+  {% elsif include_post_path contains "_blog/cianorte-card-master/" %}{% assign item_label = "Cianorte Card Master" %}{% assign inferred_style = "cianorte-card-master" %}
   {% endif %}
 {% elsif include.post.collection == "comunidade" %}
-  {% if include.post.path contains "_comunidade/Fanservice/" %}{% assign item_label = "Fanservice" %}{% assign inferred_style = "fanservice" %}
-  {% elsif include.post.path contains "_comunidade/Fotos/" %}{% assign item_label = "Fotos" %}{% assign inferred_style = "fotos" %}
-  {% elsif include.post.path contains "_comunidade/Videos/" %}{% assign item_label = "Vídeos" %}{% assign inferred_style = "videos" %}
-  {% elsif include.post.path contains "_comunidade/Musica/" %}{% assign item_label = "Música" %}{% assign inferred_style = "musica" %}
-  {% elsif include.post.path contains "_comunidade/Meme/" %}{% assign item_label = "Meme" %}{% assign inferred_style = "meme" %}
-  {% elsif include.post.path contains "_comunidade/Torneio/" %}{% assign item_label = "Torneio" %}{% assign inferred_style = "torneio" %}
-  {% elsif include.post.path contains "_comunidade/Liga/" %}{% assign item_label = "Liga" %}{% assign inferred_style = "liga" %}
-  {% elsif include.post.path contains "_comunidade/Armory/" %}{% assign item_label = "Armory" %}{% assign inferred_style = "armory" %}
+  {% if include_post_path contains "_comunidade/fanservice/" %}{% assign item_label = "Fanservice" %}{% assign inferred_style = "fanservice" %}
+  {% elsif include_post_path contains "_comunidade/fotos/" %}{% assign item_label = "Fotos" %}{% assign inferred_style = "fotos" %}
+  {% elsif include_post_path contains "_comunidade/videos/" %}{% assign item_label = "Vídeos" %}{% assign inferred_style = "videos" %}
+  {% elsif include_post_path contains "_comunidade/musica/" %}{% assign item_label = "Música" %}{% assign inferred_style = "musica" %}
+  {% elsif include_post_path contains "_comunidade/meme/" %}{% assign item_label = "Meme" %}{% assign inferred_style = "meme" %}
+  {% elsif include_post_path contains "_comunidade/torneio/" %}{% assign item_label = "Torneio" %}{% assign inferred_style = "torneio" %}
+  {% elsif include_post_path contains "_comunidade/liga/" %}{% assign item_label = "Liga" %}{% assign inferred_style = "liga" %}
+  {% elsif include_post_path contains "_comunidade/armory/" %}{% assign item_label = "Armory" %}{% assign inferred_style = "armory" %}
   {% endif %}
 {% endif %}
 {% unless item_label %}
