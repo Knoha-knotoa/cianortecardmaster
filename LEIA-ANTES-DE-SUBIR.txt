@@ -1,33 +1,54 @@
-CONFIGURAÇÃO CORRIGIDA PARA GITHUB PAGES
+ALTERAÇÕES REALIZADAS NESTA VERSÃO
 
-O repositório informado é:
+1. Menu reorganizado:
+Home
+Guias
+Deck
+Blog
+Spikes
+Comunidade
+Agenda
+Sobre
 
-cianortecardmaster
+2. Nova página Agenda criada em:
+agenda.html
 
-Por isso o arquivo _config.yml já foi corrigido para:
+3. Nova página Sobre criada em:
+sobre.html
 
-baseurl: "/cianortecardmaster"
+4. A página antiga Onde jogar continua existindo, mas agora serve apenas como atalho para Agenda.
 
-Isso faz os links, CSS, JS e imagens funcionarem corretamente em:
+5. A coleção Blog agora aceita subpastas:
+_blog/Flesh-and-Blood
+_blog/Pokemon
+_blog/Magic
+_blog/TCG
+_blog/RPG
+_blog/Cianorte-card-master
 
-https://SEU-USUARIO.github.io/cianortecardmaster/
+6. A coleção Comunidade agora aceita subpastas:
+_comunidade/Fanservice
+_comunidade/Fotos
+_comunidade/Videos
+_comunidade/Musica
+_comunidade/Meme
+_comunidade/Torneio
+_comunidade/Liga
+_comunidade/Armory
 
-Se no futuro você criar um repositório chamado SEU-USUARIO.github.io, aí o baseurl deve voltar para:
+7. As páginas Blog e Comunidade foram alteradas para separar os posts por essas subpastas automaticamente.
 
-baseurl: ""
+8. Cada subpasta recebe rótulo e estilo visual próprio nos cards.
 
-Mas para o repositório atual, mantenha:
+COMO PUBLICAR
 
-baseurl: "/cianortecardmaster"
+Para publicar no Blog, crie o arquivo .md dentro da subpasta correta.
+Exemplo:
+_blog/Flesh-and-Blood/meu-post.md
 
-ORGANIZAÇÃO NOVA DOS CONTEÚDOS
+Para publicar na Comunidade, crie o arquivo .md dentro da subpasta correta.
+Exemplo:
+_comunidade/Fotos/encontro-da-galera.md
 
-As áreas atualizáveis agora usam pastas separadas:
-
-_guias
-_decks
-_blog
-_comunidade
-
-Para publicar conteúdo, coloque o arquivo .md na pasta correta.
-Não precisa mais usar categories no front matter.
+Não precisa colocar categories no topo do Markdown.
+Use apenas title, summary, image, author, date e tags se quiser.

@@ -18,10 +18,10 @@ collections:
     permalink: /decks/:name/
   blog:
     output: true
-    permalink: /blog/:name/
+    permalink: /blog/:path/
   comunidade:
     output: true
-    permalink: /comunidade/:name/
+    permalink: /comunidade/:path/
 
 defaults:
   - scope:
@@ -30,21 +30,113 @@ defaults:
     values:
       layout: post
       author: "Cianorte Card Masters"
+      category_label: "Guia"
   - scope:
       path: ""
       type: "decks"
     values:
       layout: post
       author: "Cianorte Card Masters"
+      category_label: "Deck"
   - scope:
       path: ""
       type: "blog"
     values:
       layout: post
       author: "Cianorte Card Masters"
+      category_label: "Blog"
   - scope:
       path: ""
       type: "comunidade"
     values:
       layout: post
       author: "Cianorte Card Masters"
+      category_label: "Comunidade"
+
+  # Blog: subpastas com rótulo automático
+  - scope:
+      path: "_blog/Flesh-and-Blood"
+      type: "blog"
+    values:
+      category_label: "Flesh and Blood"
+      content_style: "flesh-and-blood"
+  - scope:
+      path: "_blog/Pokemon"
+      type: "blog"
+    values:
+      category_label: "Pokémon"
+      content_style: "pokemon"
+  - scope:
+      path: "_blog/Magic"
+      type: "blog"
+    values:
+      category_label: "Magic"
+      content_style: "magic"
+  - scope:
+      path: "_blog/TCG"
+      type: "blog"
+    values:
+      category_label: "TCG"
+      content_style: "tcg"
+  - scope:
+      path: "_blog/RPG"
+      type: "blog"
+    values:
+      category_label: "RPG"
+      content_style: "rpg"
+  - scope:
+      path: "_blog/Cianorte-card-master"
+      type: "blog"
+    values:
+      category_label: "Cianorte Card Master"
+      content_style: "cianorte-card-master"
+
+  # Comunidade: subpastas com rótulo automático
+  - scope:
+      path: "_comunidade/Fanservice"
+      type: "comunidade"
+    values:
+      category_label: "Fanservice"
+      content_style: "fanservice"
+  - scope:
+      path: "_comunidade/Fotos"
+      type: "comunidade"
+    values:
+      category_label: "Fotos"
+      content_style: "fotos"
+  - scope:
+      path: "_comunidade/Videos"
+      type: "comunidade"
+    values:
+      category_label: "Vídeos"
+      content_style: "videos"
+  - scope:
+      path: "_comunidade/Musica"
+      type: "comunidade"
+    values:
+      category_label: "Música"
+      content_style: "musica"
+  - scope:
+      path: "_comunidade/Meme"
+      type: "comunidade"
+    values:
+      category_label: "Meme"
+      content_style: "meme"
+  - scope:
+      path: "_comunidade/Torneio"
+      type: "comunidade"
+    values:
+      category_label: "Torneio"
+      content_style: "torneio"
+  - scope:
+      path: "_comunidade/Liga"
+      type: "comunidade"
+    values:
+      category_label: "Liga"
+      content_style: "liga"
+  - scope:
+      path: "_comunidade/Armory"
+      type: "comunidade"
+    values:
+      category_label: "Armory"
+      content_style: "armory"

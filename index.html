@@ -20,7 +20,7 @@ title: "Início"
         Guias, deck techs, blog, comunidade e encontros para quem joga ou quer começar.
       </p>
       <div class="btn-row">
-        <a class="btn btn-primary" href="{{ '/onde-jogar/' | relative_url }}">Quero jogar</a>
+        <a class="btn btn-primary" href="{{ '/agenda/' | relative_url }}">Ver agenda</a>
         <a class="btn btn-secondary" href="{{ '/guias/' | relative_url }}">Ler guias</a>
       </div>
     </div>
@@ -57,7 +57,7 @@ title: "Início"
         Não precisa ter deck pronto para aparecer. A comunidade ajuda quem está começando.
       </p>
       <div class="btn-row">
-        <a class="btn btn-primary" href="{{ '/onde-jogar/' | relative_url }}">Ver onde jogar</a>
+        <a class="btn btn-primary" href="{{ '/agenda/' | relative_url }}">Ver agenda</a>
         <a class="btn btn-secondary" href="{{ '/comunidade/' | relative_url }}">Conhecer a comunidade</a>
       </div>
     </div>
@@ -94,7 +94,7 @@ title: "Início"
         Mesmo sem deck, você pode aparecer. A ideia é aproximar novos jogadores e criar um ambiente
         acolhedor para quem quer conhecer card games, RPG e jogos de mesa.
       </p>
-      <a class="btn btn-primary" href="{{ '/onde-jogar/' | relative_url }}">Ver horários e endereços</a>
+      <a class="btn btn-primary" href="{{ '/agenda/' | relative_url }}">Ver horários e endereços</a>
     </div>
   </div>
 </section>
@@ -138,7 +138,7 @@ title: "Início"
 
 <section class="section section-alt">
   <div class="container">
-    {% include section-title.html kicker="Agenda" title="Onde jogar" text="Endereços, horários e encontros da comunidade." link="/onde-jogar/" link_text="Ver agenda completa" %}
+    {% include section-title.html kicker="Agenda" title="Agenda" text="Endereços, horários e encontros da comunidade." link="/agenda/" link_text="Ver agenda completa" %}
 
     <div class="events-grid">
       {% for event in site.data.events limit:2 %}

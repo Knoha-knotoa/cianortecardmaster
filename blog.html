@@ -4,23 +4,51 @@ title: "Blog"
 permalink: /blog/
 ---
 
+{% assign posts_list = site.blog | sort: "date" | reverse %}
+
 <section class="page-hero">
   <div class="container">
     <p class="eyebrow">Opinião e novidades</p>
     <h1>Blog</h1>
-    <p>Postagens gerais: lançamentos, comentários sobre cartas, jogos, vídeos e novidades.</p>
+    <p>Postagens separadas por tema. Para publicar, crie o arquivo Markdown dentro da subpasta correta em <code>_blog</code>.</p>
   </div>
 </section>
 
-<section class="listing">
+<section class="listing listing-with-sections">
   <div class="container">
-    <div class="card-grid grid-3">
-      {% assign posts_list = site.blog | sort: "date" | reverse %}
-      {% for post in posts_list %}
-        {% include post-card.html post=post %}
-      {% else %}
-        <p>Nenhum post publicado ainda.</p>
+    <nav class="section-index" aria-label="Categorias do Blog">
+      {% for section in site.data.content_sections.blog %}
+        <a class="section-chip post-style-{{ section.folder | slugify }}" href="#{{ section.folder | slugify }}">{{ section.label }}</a>
       {% endfor %}
-    </div>
+    </nav>
+
+    {% for section in site.data.content_sections.blog %}
+      {% assign section_path = "_blog/" | append: section.folder | append: "/" %}
+      {% assign has_posts = false %}
+
+      <section class="content-section-block post-style-{{ section.folder | slugify }}" id="{{ section.folder | slugify }}">
+        <div class="content-section-head">
+          <div>
+            <p class="eyebrow">Blog</p>
+            <h2>{{ section.label }}</h2>
+            <p>{{ section.description }}</p>
+          </div>
+          <span class="section-folder">_blog/{{ section.folder }}/</span>
+        </div>
+
+        <div class="card-grid grid-3">
+          {% for post in posts_list %}
+            {% if post.path contains section_path %}
+              {% assign has_posts = true %}
+              {% include post-card.html post=post %}
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        {% unless has_posts %}
+          <p class="empty-section">{{ section.empty }}</p>
+        {% endunless %}
+      </section>
+    {% endfor %}
   </div>
 </section>

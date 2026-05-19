@@ -2,20 +2,45 @@
 layout: default
 ---
 
-<article class="post-page">
+{% assign item_label = nil %}
+{% if page.collection == "blog" %}
+  {% if page.path contains "_blog/Flesh-and-Blood/" %}{% assign item_label = "Flesh and Blood" %}
+  {% elsif page.path contains "_blog/Pokemon/" %}{% assign item_label = "Pokémon" %}
+  {% elsif page.path contains "_blog/Magic/" %}{% assign item_label = "Magic" %}
+  {% elsif page.path contains "_blog/TCG/" %}{% assign item_label = "TCG" %}
+  {% elsif page.path contains "_blog/RPG/" %}{% assign item_label = "RPG" %}
+  {% elsif page.path contains "_blog/Cianorte-card-master/" %}{% assign item_label = "Cianorte Card Master" %}
+  {% endif %}
+{% elsif page.collection == "comunidade" %}
+  {% if page.path contains "_comunidade/Fanservice/" %}{% assign item_label = "Fanservice" %}
+  {% elsif page.path contains "_comunidade/Fotos/" %}{% assign item_label = "Fotos" %}
+  {% elsif page.path contains "_comunidade/Videos/" %}{% assign item_label = "Vídeos" %}
+  {% elsif page.path contains "_comunidade/Musica/" %}{% assign item_label = "Música" %}
+  {% elsif page.path contains "_comunidade/Meme/" %}{% assign item_label = "Meme" %}
+  {% elsif page.path contains "_comunidade/Torneio/" %}{% assign item_label = "Torneio" %}
+  {% elsif page.path contains "_comunidade/Liga/" %}{% assign item_label = "Liga" %}
+  {% elsif page.path contains "_comunidade/Armory/" %}{% assign item_label = "Armory" %}
+  {% endif %}
+{% endif %}
+{% unless item_label %}
+  {% assign item_label = page.category_label %}
+{% endunless %}
+{% unless item_label %}
+  {% case page.collection %}
+    {% when "guias" %}{% assign item_label = "Guia" %}
+    {% when "decks" %}{% assign item_label = "Deck" %}
+    {% when "blog" %}{% assign item_label = "Blog" %}
+    {% when "comunidade" %}{% assign item_label = "Comunidade" %}
+    {% else %}{% assign item_label = "Post" %}
+  {% endcase %}
+{% endunless %}
+
+{% assign post_style = page.content_style | default: item_label | slugify %}
+
+<article class="post-page post-style-{{ post_style }}">
   <header class="post-hero">
     <div class="container post-hero-grid">
       <div>
-        {% assign item_label = page.category_label %}
-        {% unless item_label %}
-          {% case page.collection %}
-            {% when "guias" %}{% assign item_label = "Guia" %}
-            {% when "decks" %}{% assign item_label = "Deck" %}
-            {% when "blog" %}{% assign item_label = "Blog" %}
-            {% when "comunidade" %}{% assign item_label = "Comunidade" %}
-            {% else %}{% assign item_label = "Post" %}
-          {% endcase %}
-        {% endunless %}
         <p class="eyebrow">{{ item_label }}</p>
 
         <h1>{{ page.title }}</h1>

@@ -1218,3 +1218,200 @@ h3 {
     padding-block: 3rem;
   }
 }
+
+/* ==========================================
+   Blog e Comunidade por subpastas
+========================================== */
+
+.page-hero code,
+.section-folder {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .86rem;
+  color: #ffe9a3;
+  background: rgba(212, 175, 55, .1);
+  border: 1px solid rgba(212, 175, 55, .18);
+  border-radius: 999px;
+  padding: .12rem .45rem;
+}
+
+.listing-with-sections {
+  padding-top: 1.5rem;
+}
+
+.section-index {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  margin-bottom: 2rem;
+}
+
+.section-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: .45rem .72rem;
+  border-radius: 999px;
+  border: 1px solid var(--category-line, rgba(212, 175, 55, .28));
+  background: var(--category-soft, rgba(212, 175, 55, .08));
+  color: #fff2b8;
+  text-decoration: none;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: .82rem;
+}
+
+.section-chip:hover {
+  transform: translateY(-1px);
+  border-color: var(--category-accent, var(--gold));
+}
+
+.content-section-block {
+  scroll-margin-top: 96px;
+  padding: 1.3rem;
+  margin: 0 0 1.3rem;
+  border: 1px solid var(--category-line, rgba(212, 175, 55, .16));
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at top right, var(--category-soft, rgba(212, 175, 55, .08)), transparent 34%),
+    linear-gradient(180deg, rgba(16,27,19,.72), rgba(8,13,9,.92));
+}
+
+.content-section-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: start;
+  margin-bottom: 1rem;
+}
+
+.content-section-head h2 {
+  margin-bottom: .35rem;
+}
+
+.content-section-head p {
+  color: var(--muted);
+  margin: 0;
+  max-width: 760px;
+}
+
+.empty-section {
+  margin: .8rem 0 0;
+  color: var(--muted);
+  border: 1px dashed rgba(212, 175, 55, .22);
+  border-radius: 16px;
+  padding: .9rem 1rem;
+  background: rgba(255,255,255,.03);
+}
+
+.post-card {
+  border-color: var(--category-line, rgba(212, 175, 55, .18));
+}
+
+.post-card .eyebrow,
+.post-page .eyebrow,
+.content-section-block .eyebrow {
+  color: var(--category-accent, var(--gold));
+}
+
+.post-card::before {
+  content: "";
+  display: block;
+  height: 4px;
+  background: linear-gradient(90deg, var(--category-accent, var(--gold)), transparent);
+}
+
+.post-style-flesh-and-blood,
+.post-style-fab {
+  --category-accent: #d4af37;
+  --category-soft: rgba(212, 175, 55, .14);
+  --category-line: rgba(212, 175, 55, .32);
+}
+
+.post-style-pokemon {
+  --category-accent: #f4d35e;
+  --category-soft: rgba(244, 211, 94, .13);
+  --category-line: rgba(244, 211, 94, .3);
+}
+
+.post-style-magic {
+  --category-accent: #8ecae6;
+  --category-soft: rgba(142, 202, 230, .12);
+  --category-line: rgba(142, 202, 230, .28);
+}
+
+.post-style-tcg {
+  --category-accent: #1fb85c;
+  --category-soft: rgba(31, 184, 92, .13);
+  --category-line: rgba(31, 184, 92, .3);
+}
+
+.post-style-rpg {
+  --category-accent: #c77dff;
+  --category-soft: rgba(199, 125, 255, .12);
+  --category-line: rgba(199, 125, 255, .28);
+}
+
+.post-style-cianorte-card-master,
+.post-style-cianorte-card-masters {
+  --category-accent: #ffffff;
+  --category-soft: rgba(255, 255, 255, .08);
+  --category-line: rgba(255, 255, 255, .2);
+}
+
+.post-style-fanservice {
+  --category-accent: #ffafcc;
+  --category-soft: rgba(255, 175, 204, .12);
+  --category-line: rgba(255, 175, 204, .28);
+}
+
+.post-style-fotos {
+  --category-accent: #90e0ef;
+  --category-soft: rgba(144, 224, 239, .12);
+  --category-line: rgba(144, 224, 239, .28);
+}
+
+.post-style-videos,
+.post-style-video {
+  --category-accent: #ff595e;
+  --category-soft: rgba(255, 89, 94, .12);
+  --category-line: rgba(255, 89, 94, .28);
+}
+
+.post-style-musica {
+  --category-accent: #b8f2e6;
+  --category-soft: rgba(184, 242, 230, .1);
+  --category-line: rgba(184, 242, 230, .26);
+}
+
+.post-style-meme {
+  --category-accent: #ffca3a;
+  --category-soft: rgba(255, 202, 58, .13);
+  --category-line: rgba(255, 202, 58, .3);
+}
+
+.post-style-torneio {
+  --category-accent: #f77f00;
+  --category-soft: rgba(247, 127, 0, .13);
+  --category-line: rgba(247, 127, 0, .3);
+}
+
+.post-style-liga {
+  --category-accent: #70e000;
+  --category-soft: rgba(112, 224, 0, .12);
+  --category-line: rgba(112, 224, 0, .28);
+}
+
+.post-style-armory {
+  --category-accent: #d4af37;
+  --category-soft: rgba(212, 175, 55, .16);
+  --category-line: rgba(212, 175, 55, .36);
+}
+
+@media (max-width: 900px) {
+  .content-section-head {
+    grid-template-columns: 1fr;
+  }
+
+  .section-folder {
+    width: fit-content;
+  }
+}

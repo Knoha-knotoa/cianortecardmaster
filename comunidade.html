@@ -4,23 +4,51 @@ title: "Comunidade"
 permalink: /comunidade/
 ---
 
+{% assign posts_list = site.comunidade | sort: "date" | reverse %}
+
 <section class="page-hero">
   <div class="container">
     <p class="eyebrow">Nossa galera</p>
     <h1>Comunidade</h1>
-    <p>Fotos, vídeos, fanservice, encontros e assuntos relacionados à comunidade.</p>
+    <p>Fotos, vídeos, fanservice, memes, resultados e conteúdos da comunidade separados por tipo. Para publicar, crie o Markdown dentro da subpasta correta em <code>_comunidade</code>.</p>
   </div>
 </section>
 
-<section class="listing">
+<section class="listing listing-with-sections">
   <div class="container">
-    <div class="card-grid grid-3">
-      {% assign posts_list = site.comunidade | sort: "date" | reverse %}
-      {% for post in posts_list %}
-        {% include post-card.html post=post %}
-      {% else %}
-        <p>Nenhuma postagem da comunidade publicada ainda.</p>
+    <nav class="section-index" aria-label="Categorias da Comunidade">
+      {% for section in site.data.content_sections.comunidade %}
+        <a class="section-chip post-style-{{ section.folder | slugify }}" href="#{{ section.folder | slugify }}">{{ section.label }}</a>
       {% endfor %}
-    </div>
+    </nav>
+
+    {% for section in site.data.content_sections.comunidade %}
+      {% assign section_path = "_comunidade/" | append: section.folder | append: "/" %}
+      {% assign has_posts = false %}
+
+      <section class="content-section-block post-style-{{ section.folder | slugify }}" id="{{ section.folder | slugify }}">
+        <div class="content-section-head">
+          <div>
+            <p class="eyebrow">Comunidade</p>
+            <h2>{{ section.label }}</h2>
+            <p>{{ section.description }}</p>
+          </div>
+          <span class="section-folder">_comunidade/{{ section.folder }}/</span>
+        </div>
+
+        <div class="card-grid grid-3">
+          {% for post in posts_list %}
+            {% if post.path contains section_path %}
+              {% assign has_posts = true %}
+              {% include post-card.html post=post %}
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        {% unless has_posts %}
+          <p class="empty-section">{{ section.empty }}</p>
+        {% endunless %}
+      </section>
+    {% endfor %}
   </div>
 </section>
