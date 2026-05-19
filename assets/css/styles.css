@@ -1945,3 +1945,70 @@ h3 {
   color: #fff2b8;
   font-family: "Fugaz One", system-ui, sans-serif;
 }
+
+/* ==========================================
+   Correção Spikes: listas independentes por janela
+========================================== */
+
+.spike-window-stack {
+  display: grid;
+  gap: 1.35rem;
+}
+
+.spike-window-section {
+  scroll-margin-top: 110px;
+  padding: 1rem;
+  border: 1px solid rgba(212, 175, 55, .16);
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at top right, rgba(31, 184, 92, .08), transparent 34%),
+    rgba(255, 255, 255, .025);
+}
+
+.spike-window-section-empty {
+  opacity: .72;
+}
+
+.spike-window-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem;
+  margin-bottom: .9rem;
+}
+
+.spike-window-head h3 {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.8vw, 2.35rem);
+}
+
+.spike-window-head p:not(.eyebrow) {
+  color: var(--muted);
+  margin: .25rem 0 0;
+}
+
+.spike-window-head span {
+  color: #fff2b8;
+  border: 1px solid rgba(212, 175, 55, .28);
+  background: rgba(212, 175, 55, .08);
+  border-radius: 999px;
+  padding: .25rem .65rem;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: .78rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 620px) {
+  .spike-window-section {
+    padding: .85rem;
+  }
+
+  .spike-window-head {
+    display: block;
+  }
+
+  .spike-window-head span {
+    display: inline-block;
+    margin-top: .55rem;
+  }
+}

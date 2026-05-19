@@ -182,3 +182,22 @@ E no corpo do post:
   {% include tcg-card.html game="fab" name="Boom Grenade" pitch="red" %}
 </div>
 ```
+
+## Spikes: novo formato de dados
+
+A página `/spikes/` agora usa quatro listas por jogo dentro de `assets/data/spikes.json`:
+
+```json
+"windows": {
+  "daily": [],
+  "weekly": [],
+  "monthly": [],
+  "expensive": []
+}
+```
+
+Depois de subir esses arquivos, rode manualmente o workflow:
+
+`Actions > Atualizar spikes JustTCG > Run workflow`
+
+Isso gera as listas separadas de 24h, 7d, 30d e preço atual. Se o JSON antigo ainda estiver no repositório, o site vai mostrar apenas a seção Semana para não repetir as mesmas cartas em todas as categorias.

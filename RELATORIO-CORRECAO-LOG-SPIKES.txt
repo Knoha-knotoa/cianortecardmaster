@@ -1,0 +1,42 @@
+Correção feita após analisar o log logs_69754919029.zip
+
+Problema encontrado no GitHub Actions:
+
+1. A JustTCG recusou as buscas com erro 400:
+   "Limit must be between 1 and 20 for your plan."
+
+   Causa:
+   o script estava usando limit=40 em cada busca.
+
+   Correção:
+   o script agora usa limit=20, que é o máximo aceito pelo plano atual.
+
+2. Depois de algumas tentativas, a JustTCG começou a retornar erro 429:
+   "Rate limit exceeded. Please slow down your requests."
+
+   Causa:
+   o script fazia muitas buscas em sequência:
+   4 jogos x 4 listas = 16 chamadas, além da chamada para listar jogos.
+
+   Correção:
+   o script agora espera 8 segundos entre chamadas e tenta novamente quando recebe 429.
+   Esse tempo pode ser alterado no workflow usando a variável JUSTTCG_WAIT_MS, se necessário.
+
+3. O script antigo salvava assets/data/spikes.json mesmo quando as chamadas falhavam.
+
+   Causa:
+   quando dava erro, ele escrevia listas vazias no JSON.
+
+   Correção:
+   se uma janela falhar, o script mantém os dados anteriores daquela janela.
+   Assim, o site não fica vazio por causa de falha temporária da API.
+
+4. O agendamento estava com cron 0 5 e timezone America/Sao_Paulo.
+
+   Correção:
+   removido timezone e ajustado para cron 0 8 * * *, que equivale a 05:00 no horário de Brasília.
+
+Depois de subir estes arquivos, rode manualmente:
+Actions > Atualizar spikes JustTCG > Run workflow
+
+O primeiro run deve levar mais tempo, porque agora há pausas entre as chamadas para evitar bloqueio da API.

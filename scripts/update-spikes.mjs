@@ -1,7 +1,15 @@
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 
 const API = "https://api.justtcg.com/v1";
 const API_KEY = process.env.JUSTTCG_API_KEY;
+const OUTPUT_PATH = "assets/data/spikes.json";
+
+// O log do GitHub mostrou que o plano atual da JustTCG aceita limit entre 1 e 20.
+const API_LIMIT = "20";
+
+// Evita 429 no plano gratuito/básico. Dá para diminuir pelo secret/env JUSTTCG_WAIT_MS se seu plano permitir.
+const REQUEST_WAIT_MS = Number(process.env.JUSTTCG_WAIT_MS || 8000);
+const MAX_RETRIES = Number(process.env.JUSTTCG_MAX_RETRIES || 3);
 
 const targets = [
   { code: "fab", label: "Flesh and Blood", match: /flesh\s*and\s*blood/i },
@@ -11,36 +19,109 @@ const targets = [
 ];
 
 const windows = [
-  { key: "daily", orderBy: "24h", label: "24 horas", changeField: "change1d" },
-  { key: "weekly", orderBy: "7d", label: "7 dias", changeField: "change7d" },
-  { key: "monthly", orderBy: "30d", label: "30 dias", changeField: "change30d" },
-  { key: "expensive", orderBy: "price", label: "mais caras", changeField: "price" }
+  { key: "daily", orderBy: "24h", label: "24 horas", historyDuration: "7d", minPrice: "0.25" },
+  { key: "weekly", orderBy: "7d", label: "7 dias", historyDuration: "30d", minPrice: "0.25" },
+  { key: "monthly", orderBy: "30d", label: "30 dias", historyDuration: "90d", minPrice: "0.25" },
+  { key: "expensive", orderBy: "price", label: "mais caras", historyDuration: "90d", minPrice: "0" }
 ];
 
 if (!API_KEY) {
-  console.log("JUSTTCG_API_KEY não configurada. Mantendo dados de demonstração.");
+  console.log("JUSTTCG_API_KEY não configurada. Mantendo assets/data/spikes.json atual.");
   process.exit(0);
 }
 
-async function justtcg(path) {
-  const response = await fetch(`${API}${path}`, {
-    headers: {
-      "x-api-key": API_KEY,
-      "accept": "application/json"
-    }
-  });
+let previousData = null;
+let lastRequestAt = 0;
 
-  if (!response.ok) {
+async function loadPreviousData() {
+  try {
+    const raw = await readFile(OUTPUT_PATH, "utf8");
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
+
+function previousGameByCode(code) {
+  return (previousData?.games || []).find(game => game.code === code) || null;
+}
+
+function previousWindow(code, windowKey) {
+  const game = previousGameByCode(code);
+  const items = game?.windows?.[windowKey];
+  if (Array.isArray(items)) return items;
+
+  // Compatibilidade com o primeiro formato, que só tinha game.items.
+  if (windowKey === "weekly" && Array.isArray(game?.items)) return game.items;
+  return [];
+}
+
+function previousGameId(code) {
+  const game = previousGameByCode(code);
+  return game?.id || "";
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function waitBeforeRequest() {
+  const elapsed = Date.now() - lastRequestAt;
+  if (lastRequestAt && elapsed < REQUEST_WAIT_MS) {
+    await sleep(REQUEST_WAIT_MS - elapsed);
+  }
+  lastRequestAt = Date.now();
+}
+
+async function justtcg(path, options = {}) {
+  const url = `${API}${path}`;
+  const shouldThrottle = options.throttle !== false;
+
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt += 1) {
+    if (shouldThrottle) await waitBeforeRequest();
+
+    const response = await fetch(url, {
+      headers: {
+        "x-api-key": API_KEY,
+        "accept": "application/json"
+      }
+    });
+
+    if (response.ok) return response.json();
+
     const text = await response.text().catch(() => "");
+    const retryAfter = Number(response.headers.get("retry-after"));
+
+    if (response.status === 429 && attempt < MAX_RETRIES) {
+      const waitMs = Number.isFinite(retryAfter) && retryAfter > 0
+        ? retryAfter * 1000
+        : REQUEST_WAIT_MS * attempt * 2;
+      console.warn(`JustTCG 429. Aguardando ${Math.round(waitMs / 1000)}s antes de tentar novamente...`);
+      await sleep(waitMs);
+      continue;
+    }
+
     throw new Error(`JustTCG ${response.status}: ${text}`);
   }
 
-  return response.json();
+  throw new Error("JustTCG: número máximo de tentativas excedido.");
 }
 
 function numberOrNull(value) {
-  const n = Number(value);
+  if (value === null || value === undefined || value === "") return null;
+  if (typeof value === "number") return Number.isFinite(value) ? value : null;
+  const normalized = String(value).replace(/[%$,]/g, "").trim();
+  const n = Number(normalized);
   return Number.isFinite(n) ? n : null;
+}
+
+function variantChange(variant, windowKey) {
+  if (!variant) return null;
+  if (windowKey === "daily") return numberOrNull(variant.priceChange24hr ?? variant.priceChange24h ?? variant.priceChange1d ?? variant.change24hr ?? variant.change24h ?? variant.change1d);
+  if (windowKey === "weekly") return numberOrNull(variant.priceChange7d ?? variant.change7d);
+  if (windowKey === "monthly") return numberOrNull(variant.priceChange30d ?? variant.change30d);
+  if (windowKey === "expensive") return numberOrNull(variant.price);
+  return null;
 }
 
 function bestVariant(card, windowKey = "weekly") {
@@ -50,28 +131,22 @@ function bestVariant(card, windowKey = "weekly") {
   return variants
     .slice()
     .sort((a, b) => {
-      if (windowKey === "expensive") return Number(b.price ?? 0) - Number(a.price ?? 0);
-      const fields = windowKey === "daily"
-        ? ["priceChange24hr", "priceChange24h", "priceChange1d"]
-        : windowKey === "monthly"
-          ? ["priceChange30d", "change30d"]
-          : ["priceChange7d", "change7d"];
-      const changeFor = variant => {
-        for (const field of fields) {
-          const value = Number(variant[field]);
-          if (Number.isFinite(value)) return value;
-        }
-        return 0;
-      };
-      const ca = changeFor(a);
-      const cb = changeFor(b);
+      const ca = variantChange(a, windowKey) ?? 0;
+      const cb = variantChange(b, windowKey) ?? 0;
       if (cb !== ca) return cb - ca;
       return Number(b.price ?? 0) - Number(a.price ?? 0);
     })[0];
 }
 
-function normalizeHistory(variant) {
-  const history = variant?.priceHistory || variant?.price_history || variant?.priceHistory30d || [];
+function normalizeHistory(variant, windowKey) {
+  const history =
+    (windowKey === "monthly" || windowKey === "expensive"
+      ? variant?.priceHistory30d || variant?.priceHistory90d || variant?.priceHistory
+      : variant?.priceHistory) ||
+    variant?.price_history ||
+    variant?.priceHistory30d ||
+    [];
+
   if (!Array.isArray(history)) return [];
 
   return history
@@ -87,9 +162,9 @@ function cardToSpike(card, windowKey = "weekly") {
   if (!variant) return null;
 
   const price = numberOrNull(variant.price) ?? 0;
-  const change1d = numberOrNull(variant.priceChange24hr ?? variant.priceChange24h ?? variant.priceChange1d ?? variant.change24hr ?? variant.change24h ?? variant.change1d);
-  const change7d = numberOrNull(variant.priceChange7d ?? variant.change7d);
-  const change30d = numberOrNull(variant.priceChange30d ?? variant.change30d);
+  const change1d = variantChange(variant, "daily");
+  const change7d = variantChange(variant, "weekly");
+  const change30d = variantChange(variant, "monthly");
 
   if (windowKey !== "expensive") {
     const selectedChange = windowKey === "daily" ? change1d : windowKey === "monthly" ? change30d : change7d;
@@ -99,7 +174,7 @@ function cardToSpike(card, windowKey = "weekly") {
   return {
     id: card.id || "",
     name: card.name || "Carta sem nome",
-    set: card.set_name || card.set || "",
+    set: card.set_name || card.set || card.setName || "",
     number: card.number || "",
     rarity: card.rarity || "",
     price,
@@ -107,40 +182,55 @@ function cardToSpike(card, windowKey = "weekly") {
     change7d,
     change30d,
     variant: [variant.printing, variant.condition].filter(Boolean).join(" / "),
-    history: normalizeHistory(variant)
+    history: normalizeHistory(variant, windowKey)
   };
 }
 
 function resolveGameId(games, target) {
   const found = games.find(game => target.match.test(game.name || "") || target.match.test(game.id || ""));
-  return found?.id || null;
+  return found?.id || previousGameId(target.code) || null;
 }
 
-async function getCardsForWindow(gameId, windowKey) {
-  const windowConfig = windows.find(window => window.key === windowKey) || windows[1];
+function sortWindowItems(items, windowKey) {
+  return items.slice().sort((a, b) => {
+    if (windowKey === "expensive") return Number(b.price ?? 0) - Number(a.price ?? 0);
+    const getChange = item => windowKey === "daily" ? item.change1d : windowKey === "monthly" ? item.change30d : item.change7d;
+    const diff = Number(getChange(b) ?? 0) - Number(getChange(a) ?? 0);
+    if (diff !== 0) return diff;
+    return Number(b.price ?? 0) - Number(a.price ?? 0);
+  });
+}
+
+async function getCardsForWindow(gameId, windowConfig) {
   const params = new URLSearchParams({
     game: gameId,
     orderBy: windowConfig.orderBy,
     order: "desc",
-    limit: "24",
-    min_price: windowKey === "expensive" ? "0" : "1",
+    limit: API_LIMIT,
+    min_price: windowConfig.minPrice,
     include_price_history: "true",
-    include_statistics: "7d,30d",
-    priceHistoryDuration: "30d"
+    include_statistics: "7d,30d,90d",
+    priceHistoryDuration: windowConfig.historyDuration
   });
 
   const payload = await justtcg(`/cards?${params.toString()}`);
   const cards = Array.isArray(payload.data) ? payload.data : [];
 
-  return cards
-    .map(card => cardToSpike(card, windowKey))
-    .filter(Boolean)
-    .sort((a, b) => {
-      if (windowKey === "expensive") return Number(b.price ?? 0) - Number(a.price ?? 0);
-      const getChange = item => windowKey === "daily" ? item.change1d : windowKey === "monthly" ? item.change30d : item.change7d;
-      return Number(getChange(b) ?? 0) - Number(getChange(a) ?? 0);
-    })
-    .slice(0, 4);
+  const seen = new Set();
+  const items = [];
+
+  for (const card of cards) {
+    const item = cardToSpike(card, windowConfig.key);
+    if (!item) continue;
+
+    const uniqueKey = `${item.id || item.name}-${item.variant || ""}`;
+    if (seen.has(uniqueKey)) continue;
+
+    seen.add(uniqueKey);
+    items.push(item);
+  }
+
+  return sortWindowItems(items, windowConfig.key).slice(0, 4);
 }
 
 async function getSpikesForGame(gameId, target) {
@@ -153,30 +243,47 @@ async function getSpikesForGame(gameId, target) {
       weekly: [],
       monthly: [],
       expensive: []
-    }
+    },
+    items: [],
+    warnings: []
   };
 
   for (const windowConfig of windows) {
     try {
-      result.windows[windowConfig.key] = await getCardsForWindow(gameId, windowConfig.key);
+      result.windows[windowConfig.key] = await getCardsForWindow(gameId, windowConfig);
+      console.log(`${target.label} / ${windowConfig.label}: ${result.windows[windowConfig.key].length} cartas`);
     } catch (error) {
+      const fallback = previousWindow(target.code, windowConfig.key);
+      result.windows[windowConfig.key] = fallback;
+      result.warnings.push(`${windowConfig.key}: ${error.message}`);
       console.error(`Erro em ${target.label} / ${windowConfig.key}:`, error.message);
-      result.windows[windowConfig.key] = [];
+      if (fallback.length) console.log(`Mantendo dados anteriores de ${target.label} / ${windowConfig.key}: ${fallback.length} cartas`);
     }
   }
 
+  // Compatibilidade com componentes antigos do site, como o card do banner hero.
   result.items = result.windows.weekly;
   return result;
 }
 
 async function main() {
-  const gamesPayload = await justtcg("/games");
-  const games = Array.isArray(gamesPayload.data) ? gamesPayload.data : [];
+  previousData = await loadPreviousData();
+
+  let games = [];
+  try {
+    const gamesPayload = await justtcg("/games", { throttle: false });
+    games = Array.isArray(gamesPayload.data) ? gamesPayload.data : [];
+  } catch (error) {
+    console.error("Erro ao buscar lista de jogos. Tentando usar ids do JSON anterior:", error.message);
+  }
 
   const output = {
     updatedAt: new Date().toISOString(),
     source: "JustTCG",
-    windows: ["daily", "weekly", "monthly", "expensive"],
+    schema: "spikes-multi-window-v3",
+    windows: windows.map(window => window.key),
+    requestLimit: Number(API_LIMIT),
+    requestWaitMs: REQUEST_WAIT_MS,
     games: []
   };
 
@@ -185,7 +292,8 @@ async function main() {
       const gameId = resolveGameId(games, target);
       if (!gameId) {
         console.log(`Jogo não encontrado na JustTCG: ${target.label}`);
-        output.games.push({ id: "", code: target.code, label: target.label, windows: { daily: [], weekly: [], monthly: [], expensive: [] }, items: [] });
+        const previous = previousGameByCode(target.code);
+        output.games.push(previous || { id: "", code: target.code, label: target.label, windows: { daily: [], weekly: [], monthly: [], expensive: [] }, items: [] });
         continue;
       }
 
@@ -194,12 +302,13 @@ async function main() {
       console.log(`Atualizado: ${target.label}`);
     } catch (error) {
       console.error(`Erro em ${target.label}:`, error.message);
-      output.games.push({ id: "", code: target.code, label: target.label, windows: { daily: [], weekly: [], monthly: [], expensive: [] }, items: [] });
+      const previous = previousGameByCode(target.code);
+      output.games.push(previous || { id: "", code: target.code, label: target.label, windows: { daily: [], weekly: [], monthly: [], expensive: [] }, items: [] });
     }
   }
 
-  await writeFile("assets/data/spikes.json", JSON.stringify(output, null, 2), "utf8");
-  console.log("assets/data/spikes.json atualizado.");
+  await writeFile(OUTPUT_PATH, JSON.stringify(output, null, 2), "utf8");
+  console.log(`${OUTPUT_PATH} atualizado.`);
 }
 
 main().catch(error => {

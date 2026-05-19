@@ -1,0 +1,33 @@
+Correção aplicada na página Spikes
+=================================
+
+Problema identificado:
+- O site estava usando o JSON antigo, no formato:
+  games[].items
+  window: "7d"
+- Por isso a página conseguia mostrar apenas uma lista de 4 cartas por jogo.
+- Quando foram colocados botões Dia/Semana/Mês/Mais caras, os botões acabavam reaproveitando a mesma lista antiga.
+
+Correção aplicada:
+- A página Spikes agora espera quatro listas independentes por jogo:
+  games[].windows.daily
+  games[].windows.weekly
+  games[].windows.monthly
+  games[].windows.expensive
+- A tela agora mostra as quatro seções no mesmo jogo:
+  1. Maiores altas das últimas 24h
+  2. Maiores altas dos últimos 7 dias
+  3. Maiores altas dos últimos 30 dias
+  4. Cartas mais caras
+- Os botões do topo agora são atalhos de rolagem, não filtros que escondem as outras listas.
+- O script scripts/update-spikes.mjs agora faz quatro consultas separadas na JustTCG:
+  orderBy=24h
+  orderBy=7d
+  orderBy=30d
+  orderBy=price
+- Mantive compatibilidade com o JSON antigo, mas ele aparece apenas na seção Semana para não repetir as mesmas cartas em todos os blocos.
+
+Importante depois de subir no GitHub:
+- Vá em Actions > Atualizar spikes JustTCG > Run workflow.
+- Esse primeiro run é necessário para gerar o novo assets/data/spikes.json completo, com Dia/Semana/Mês/Mais caras.
+- Enquanto o workflow novo não rodar, o site pode mostrar somente os dados antigos de Semana.
