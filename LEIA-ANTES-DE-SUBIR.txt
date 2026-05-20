@@ -1,36 +1,36 @@
 ALTERAÇÕES DESTA VERSÃO
 
-1. Blog
-- Agora o Blog é um feed único em ordem de postagem.
-- As subpastas servem para organizar, filtrar e aplicar estilo visual por categoria.
+1. Blog / Deck / Home
 - Se o post não tiver imagem, o site usa uma capa automática da categoria.
+- Foram incluídas capas padrão para Flesh and Blood, Magic, Pokémon, TCG, RPG e Cianorte Card Master.
+- Os cards e páginas internas agora aceitam imagem de carta por API usando:
+  image: "goagain:Dash I/O"
+  image: "scryfall:Krenko, Mob Boss"
+  image: "pokemon:Pikachu"
+  image: "yugioh:Blue-Eyes White Dragon"
 
 2. Spikes
-- Página alterada para Top Spikes:
-  por dia, semana, mês e cartas mais caras do dia.
+- Página configurada para mostrar apenas os spikes das últimas 24 horas.
+- O limite visual está preparado para até 9 cartas por jogo.
 - Continua usando assets/data/spikes.json.
-- Para dados reais, configure JUSTTCG_API_KEY nos Secrets do GitHub.
+- Para atualizar dados reais, configure JUSTTCG_API_KEY nos Secrets do GitHub e rode o workflow manualmente.
+- O workflow automático está agendado para 05:00 no horário de Brasília.
 
-3. Comunidade
-- Topo fixo com último resultado de Armory.
-- Gráficos em pizza de vitórias do mês por jogador e por herói.
-- Feed de fotos, vídeos, música, meme e fanservice com 10 posts por página e opção de 20.
-- Torneios e ligas ficam em blocos separados abaixo.
-- Estatísticas de Armory ficam no final da página.
+3. Comunidade / Home
+- A Home mantém o bloco "Últimas imagens da comunidade" como estava.
+- O bloco "Últimas postagens" agora tem altura mínima nos cards.
+- Posts de Instagram no bloco "Últimas postagens" ficam compactos para não quebrar o layout.
 
 4. Agenda
-- Centro Cultural com endereço correto:
-  Av. América, 4000 - Zona 6, Cianorte - PR, 87200-000.
-- Adicionado Bazar do Weezing:
-  Rua Corumbá, 158 - Cianorte - PR.
-- Cards com imagem no topo e botão "Como chegar no Google Maps".
+- Centro Cultural com foto real no card da agenda:
+  assets/img/agenda/fachada-centro-cultural.webp
+- Bazar do Weezing com foto da fachada no card da agenda:
+  assets/img/agenda/bazar-do-weezing-fachada.webp
 
 IMPORTANTE
 
-As imagens do Centro Cultural e do Bazar do Weezing são ilustrações locais em SVG.
-Para usar fotos reais, substitua:
+O arquivo assets/data/spikes.json só muda quando o workflow rodar com a chave da JustTCG configurada.
+Se ele ainda mostrar 4 cartas, rode:
+Actions > Atualizar spikes JustTCG > Run workflow
 
-assets/img/agenda/centro-cultural.svg
-assets/img/agenda/bazar-do-weezing.svg
-
-Leia README-INSTRUCOES.md para ver modelos de postagem e resultado de Armory.
+Leia README-INSTRUCOES.md para ver modelos de postagem, imagens por API e resultado de Armory.

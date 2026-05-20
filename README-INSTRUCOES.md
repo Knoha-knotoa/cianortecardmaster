@@ -134,20 +134,15 @@ Os botões “Como chegar no Google Maps” usam links do Google Maps com `api=1
 As imagens do topo dos cards estão em:
 
 ```text
-assets/img/agenda/centro-cultural.svg
-assets/img/agenda/bazar-do-weezing.svg
+assets/img/agenda/fachada-centro-cultural.webp
+assets/img/agenda/bazar-do-weezing-fachada.webp
 ```
 
-Você pode substituir por fotos reais mantendo o mesmo caminho e nome do arquivo, ou alterar o caminho no `_data/events.yml`.
+Você pode substituir por outras fotos mantendo o mesmo caminho e nome do arquivo, ou alterar o caminho no `_data/events.yml`.
 
 ## Spikes
 
-A página Spikes mostra:
-
-- Top spikes por dia;
-- Top spikes da semana;
-- Top spikes do mês;
-- Cartas mais caras do dia.
+A página Spikes mostra apenas as altas das últimas 24 horas, com até 9 cartas por jogo.
 
 Os dados são lidos de:
 
@@ -155,8 +150,7 @@ Os dados são lidos de:
 assets/data/spikes.json
 ```
 
-O arquivo pode ser atualizado automaticamente pelo GitHub Actions usando a API JustTCG.
-Para isso, adicione o segredo `JUSTTCG_API_KEY` no repositório do GitHub.
+O arquivo pode ser atualizado automaticamente pelo GitHub Actions usando a API JustTCG. Para isso, adicione o segredo `JUSTTCG_API_KEY` no repositório do GitHub.
 
 O workflow está em:
 
@@ -166,38 +160,46 @@ O workflow está em:
 
 A página não consulta a JustTCG direto no navegador, para não expor sua chave. O GitHub Actions atualiza o arquivo `spikes.json`, e o site apenas lê esse arquivo.
 
-## Imagem de carta pela API GoAgain
+Depois de subir os arquivos, rode manualmente o workflow:
 
-Em posts de Flesh and Blood, você pode usar:
+`Actions > Atualizar spikes JustTCG > Run workflow`
+
+O agendamento automático está configurado para 05:00 no horário de Brasília usando cron UTC (`0 8 * * *`).
+
+## Imagens de cartas por API
+
+Nos posts, você pode usar imagem de carta no card da Home, Blog, Deck e na página interna do post.
+
+Exemplos no front matter:
 
 ```yaml
 image: "goagain:Dash I/O"
+image: "scryfall:Krenko, Mob Boss"
+image: "pokemon:Pikachu"
+image: "yugioh:Blue-Eyes White Dragon"
 ```
 
-E no corpo do post:
+Também funciona assim:
+
+```yaml
+image_game: "pokemon"
+image_card: "Charizard"
+```
+
+Aliases aceitos:
+
+- FAB: `goagain:` ou `fab:`
+- Magic: `scryfall:`, `mtg:` ou `magic:`
+- Pokémon: `pokemon:` ou `pkm:`
+- Yu-Gi-Oh!: `yugioh:` ou `ygo:`
+
+No corpo do post, use:
 
 ```liquid
 <div class="tcg-card-grid">
   {% include tcg-card.html game="fab" name="Dash I/O" %}
-  {% include tcg-card.html game="fab" name="Boom Grenade" pitch="red" %}
+  {% include tcg-card.html game="mtg" name="Lightning Bolt" %}
+  {% include tcg-card.html game="pokemon" name="Pikachu" %}
+  {% include tcg-card.html game="yugioh" name="Blue-Eyes White Dragon" %}
 </div>
 ```
-
-## Spikes: novo formato de dados
-
-A página `/spikes/` agora usa quatro listas por jogo dentro de `assets/data/spikes.json`:
-
-```json
-"windows": {
-  "daily": [],
-  "weekly": [],
-  "monthly": [],
-  "expensive": []
-}
-```
-
-Depois de subir esses arquivos, rode manualmente o workflow:
-
-`Actions > Atualizar spikes JustTCG > Run workflow`
-
-Isso gera as listas separadas de 24h, 7d, 30d e preço atual. Se o JSON antigo ainda estiver no repositório, o site vai mostrar apenas a seção Semana para não repetir as mesmas cartas em todas as categorias.
