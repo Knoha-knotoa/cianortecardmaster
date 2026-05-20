@@ -151,6 +151,12 @@ title: "Início"
       {% for item in site.data.home_agenda %}
         <a class="home-agenda-row home-agenda-row-{{ forloop.index }}" href="{{ item.url | relative_url }}">
           <strong class="home-agenda-day">{{ item.day }}</strong>
+          {% if item.image %}
+            {% assign image_kind = item.image_kind | default: "photo" %}
+            <span class="home-agenda-media home-agenda-media-{{ image_kind }}">
+              <img src="{{ item.image | relative_url }}" alt="{{ item.image_alt | default: item.title }}" loading="lazy">
+            </span>
+          {% endif %}
           <span class="home-agenda-main">
             <span class="home-agenda-title">{{ item.title }}</span>
             {% if item.game %}<span class="home-agenda-game">{{ item.game }}</span>{% endif %}
