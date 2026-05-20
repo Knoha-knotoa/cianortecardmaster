@@ -26,9 +26,9 @@ title: "Início"
     </div>
 
     <aside class="hero-card hero-spike-panel">
-      <p class="eyebrow">Spike da semana</p>
+      <p class="eyebrow">Spike das 24h</p>
       <div id="hero-spike-card" class="spike-card spike-card-hero" data-game-filter="fab">
-        <span class="spike-loading">Carregando spike de Flesh and Blood...</span>
+        <span class="spike-loading">Carregando spike 24h de Flesh and Blood...</span>
       </div>
       <a class="section-link hero-spike-link" href="{{ '/spikes/' | relative_url }}">Ver todos os spikes</a>
     </aside>
@@ -39,9 +39,31 @@ title: "Início"
   <div class="container">
     {% include section-title.html kicker="Novidades" title="Últimas postagens" text="Os três conteúdos mais recentes do site, independente do assunto." link="/posts/" link_text="Ver mais" %}
 
-    <div class="card-grid grid-3">
+    <div class="card-grid grid-3 home-latest-posts">
       {% for post in all_content limit:3 %}
-        {% include post-card.html post=post %}
+        {% assign latest_post_path = post.path | downcase %}
+        {% assign latest_style_slug = post.content_style | default: post.social_platform | default: post.video_platform | default: post.category_label | default: '' | slugify %}
+        {% assign use_social_card = false %}
+        {% assign social_platform = latest_style_slug %}
+
+        {% if post.collection == "comunidade" %}
+          {% if latest_post_path contains '/instagram/' or latest_post_path contains '/youtube/' or latest_post_path contains '/tiktok/' or latest_post_path contains '/x/' or latest_post_path contains '/fanservice/' or latest_post_path contains '/fotos/' or latest_post_path contains '/videos/' or latest_post_path contains '/musica/' or latest_post_path contains '/meme/' or latest_style_slug == 'instagram' or latest_style_slug == 'youtube' or latest_style_slug == 'tiktok' or latest_style_slug == 'x' or latest_style_slug == 'twitter' or latest_style_slug == 'fanservice' or latest_style_slug == 'fotos' or latest_style_slug == 'videos' or latest_style_slug == 'musica' or latest_style_slug == 'meme' or post.social_embed_url or post.embed_url or post.youtube_id or post.social_embed_html %}
+            {% assign use_social_card = true %}
+            {% if latest_post_path contains '/instagram/' %}{% assign social_platform = 'instagram' %}
+            {% elsif latest_post_path contains '/youtube/' %}{% assign social_platform = 'youtube' %}
+            {% elsif latest_post_path contains '/tiktok/' %}{% assign social_platform = 'tiktok' %}
+            {% elsif latest_post_path contains '/x/' %}{% assign social_platform = 'x' %}
+            {% elsif social_platform == 'twitter' %}{% assign social_platform = 'x' %}
+            {% elsif social_platform != 'instagram' and social_platform != 'youtube' and social_platform != 'tiktok' and social_platform != 'x' %}{% assign social_platform = 'outros' %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+
+        {% if use_social_card %}
+          {% include social-post-card.html post=post platform=social_platform %}
+        {% else %}
+          {% include post-card.html post=post %}
+        {% endif %}
       {% endfor %}
     </div>
   </div>
