@@ -1,6 +1,6 @@
 ---
 title: "Atualização de Regras: entenda a Attack Queue em Flesh and Blood"
-category_label: "Regras"
+category_label: "flesh-and-blood"
 summary: "A nova atualização de regras da LSS organiza melhor os ataques criados por efeitos e explica como eles entram na corrente de combate."
 author: "Neto"
 date: 2026-05-19
