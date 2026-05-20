@@ -19,10 +19,8 @@ const targets = [
 ];
 
 const windows = [
-  { key: "daily", orderBy: "24h", label: "24 horas", historyDuration: "7d", minPrice: "0.25" },
-  { key: "weekly", orderBy: "7d", label: "7 dias", historyDuration: "30d", minPrice: "0.25" },
-  { key: "monthly", orderBy: "30d", label: "30 dias", historyDuration: "90d", minPrice: "0.25" },
-  { key: "expensive", orderBy: "price", label: "mais caras", historyDuration: "90d", minPrice: "0" }
+  // A página de Spikes mostra apenas altas das últimas 24h.
+  { key: "daily", orderBy: "24h", label: "24 horas", historyDuration: "7d", minPrice: "0.25" }
 ];
 
 if (!API_KEY) {
@@ -49,10 +47,10 @@ function previousGameByCode(code) {
 function previousWindow(code, windowKey) {
   const game = previousGameByCode(code);
   const items = game?.windows?.[windowKey];
-  if (Array.isArray(items)) return items;
+  if (Array.isArray(items)) return items.slice(0, 9);
 
   // Compatibilidade com o primeiro formato, que só tinha game.items.
-  if (windowKey === "weekly" && Array.isArray(game?.items)) return game.items;
+  if ((windowKey === "weekly" || windowKey === "daily") && Array.isArray(game?.items)) return game.items.slice(0, 9);
   return [];
 }
 
@@ -113,6 +111,63 @@ function numberOrNull(value) {
   const normalized = String(value).replace(/[%$,]/g, "").trim();
   const n = Number(normalized);
   return Number.isFinite(n) ? n : null;
+}
+
+function validImageUrl(value) {
+  if (typeof value !== "string") return "";
+  const trimmed = value.trim();
+  if (!/^https?:\/\//i.test(trimmed)) return "";
+  return trimmed;
+}
+
+function firstImageUrl(...values) {
+  for (const value of values) {
+    if (!value) continue;
+
+    if (typeof value === "string") {
+      const url = validImageUrl(value);
+      if (url) return url;
+    }
+
+    if (Array.isArray(value)) {
+      const url = firstImageUrl(...value);
+      if (url) return url;
+    }
+
+    if (typeof value === "object") {
+      const preferred = [
+        value.imageUrl, value.image_url, value.image, value.img, value.picture, value.photo,
+        value.thumbnailUrl, value.thumbnail_url, value.thumbnail,
+        value.small, value.normal, value.large, value.original, value.url, value.src,
+        value.front, value.back
+      ];
+      const preferredUrl = firstImageUrl(...preferred);
+      if (preferredUrl) return preferredUrl;
+    }
+  }
+
+  return "";
+}
+
+function extractImageUrl(card, variant) {
+  return firstImageUrl(
+    variant?.imageUrl,
+    variant?.image_url,
+    variant?.image,
+    variant?.images,
+    variant?.cardImage,
+    variant?.card_image,
+    card?.imageUrl,
+    card?.image_url,
+    card?.image,
+    card?.images,
+    card?.cardImage,
+    card?.card_image,
+    card?.card_images,
+    card?.thumbnail,
+    card?.thumbnailUrl,
+    card?.art
+  );
 }
 
 function variantChange(variant, windowKey) {
@@ -182,6 +237,7 @@ function cardToSpike(card, windowKey = "weekly") {
     change7d,
     change30d,
     variant: [variant.printing, variant.condition].filter(Boolean).join(" / "),
+    imageUrl: extractImageUrl(card, variant),
     history: normalizeHistory(variant, windowKey)
   };
 }
@@ -230,7 +286,7 @@ async function getCardsForWindow(gameId, windowConfig) {
     items.push(item);
   }
 
-  return sortWindowItems(items, windowConfig.key).slice(0, 4);
+  return sortWindowItems(items, windowConfig.key).slice(0, 9);
 }
 
 async function getSpikesForGame(gameId, target) {
@@ -239,10 +295,7 @@ async function getSpikesForGame(gameId, target) {
     code: target.code,
     label: target.label,
     windows: {
-      daily: [],
-      weekly: [],
-      monthly: [],
-      expensive: []
+      daily: []
     },
     items: [],
     warnings: []
@@ -262,7 +315,7 @@ async function getSpikesForGame(gameId, target) {
   }
 
   // Compatibilidade com componentes antigos do site, como o card do banner hero.
-  result.items = result.windows.weekly;
+  result.items = result.windows.daily;
   return result;
 }
 
@@ -280,7 +333,7 @@ async function main() {
   const output = {
     updatedAt: new Date().toISOString(),
     source: "JustTCG",
-    schema: "spikes-multi-window-v3",
+    schema: "spikes-daily-v4",
     windows: windows.map(window => window.key),
     requestLimit: Number(API_LIMIT),
     requestWaitMs: REQUEST_WAIT_MS,
@@ -293,7 +346,7 @@ async function main() {
       if (!gameId) {
         console.log(`Jogo não encontrado na JustTCG: ${target.label}`);
         const previous = previousGameByCode(target.code);
-        output.games.push(previous || { id: "", code: target.code, label: target.label, windows: { daily: [], weekly: [], monthly: [], expensive: [] }, items: [] });
+        output.games.push(previous || { id: "", code: target.code, label: target.label, windows: { daily: [] }, items: [] });
         continue;
       }
 
@@ -303,7 +356,7 @@ async function main() {
     } catch (error) {
       console.error(`Erro em ${target.label}:`, error.message);
       const previous = previousGameByCode(target.code);
-      output.games.push(previous || { id: "", code: target.code, label: target.label, windows: { daily: [], weekly: [], monthly: [], expensive: [] }, items: [] });
+      output.games.push(previous || { id: "", code: target.code, label: target.label, windows: { daily: [] }, items: [] });
     }
   }
 

@@ -2767,3 +2767,77 @@ h3 {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================
+   Ajustes 20/05/2026 - Home e Spikes 24h
+========================================== */
+
+.home-latest-posts .social-post-card,
+.home-latest-posts .post-card {
+  height: 100%;
+}
+
+.home-latest-posts .social-post-embed-instagram {
+  min-height: 460px;
+}
+
+.home-latest-posts .social-post-embed-tiktok {
+  min-height: 520px;
+}
+
+.spike-section-title span {
+  max-width: 32ch;
+  text-align: right;
+}
+
+.spike-row {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.spike-card-image-direct {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.spike-card-image-direct img {
+  width: 100%;
+  height: 100%;
+  max-height: 360px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.spike-card-image-direct .tcg-card-loading {
+  display: none;
+}
+
+.spike-card-image-direct[data-image-error="true"] .tcg-card-loading {
+  display: block;
+}
+
+@media (max-width: 1080px) {
+  .spike-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .home-latest-posts {
+    grid-template-columns: 1fr;
+  }
+
+  .home-latest-posts .social-post-embed-instagram,
+  .home-latest-posts .social-post-embed-tiktok {
+    min-height: 520px;
+  }
+
+  .spike-row {
+    grid-template-columns: 1fr;
+  }
+
+  .spike-section-title span {
+    text-align: left;
+  }
+}

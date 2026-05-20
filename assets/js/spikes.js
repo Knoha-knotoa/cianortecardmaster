@@ -12,7 +12,7 @@
       label: "Dia",
       eyebrow: "Top spikes do dia",
       title: "Maiores altas das últimas 24h",
-      description: "As cartas que mais subiram no dia."
+      description: "Até 9 cartas que mais subiram nas últimas 24 horas."
     },
     weekly: {
       label: "Semana",
@@ -34,7 +34,8 @@
     }
   };
 
-  const WINDOW_ORDER = ["daily", "weekly", "monthly", "expensive"];
+  // A página de Spikes agora mostra apenas altas das últimas 24h.
+  const WINDOW_ORDER = ["daily"];
   let pagePayloads = [];
 
   function money(value) {
@@ -181,17 +182,63 @@
     `;
   }
 
-  function cardTemplate(item, game, windowKey, payloads, compact = false) {
+  function fallbackCardName(item, game) {
+    let name = String(item.name || "").trim();
+
+    // A API de imagem costuma encontrar melhor a primeira face de cartas duplas de FAB.
+    if (game?.code === "fab") {
+      name = name.split("//")[0].trim();
+      name = name.replace(/\s*\((red|yellow|blue)\)\s*$/i, "").trim();
+    }
+
+    return name || String(item.name || "Carta sem nome");
+  }
+
+  function fallbackPitch(item, game) {
+    if (game?.code !== "fab") return "";
+    const match = String(item.name || item.variant || "").match(/\b(red|yellow|blue)\b/i);
+    return match ? match[1].toLowerCase() : "";
+  }
+
+  function directImageUrl(item) {
+    return item.imageUrl || item.image_url || item.image || item.imageSmall || item.imageLarge || "";
+  }
+
+  function cardImageTemplate(item, game, extraClass = "") {
     const apiGame = gameToImageApi(game.code);
+    const imageUrl = directImageUrl(item);
+    const className = `spike-card-image ${extraClass}`.trim();
+
+    if (imageUrl) {
+      return `
+        <div class="${className} spike-card-image-direct">
+          <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(item.name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.dataset.imageError='true'; this.remove();">
+          <span class="tcg-card-loading">Imagem indisponível</span>
+        </div>
+      `;
+    }
+
+    return `
+      <div
+        class="tcg-card-image ${className}"
+        data-game="${apiGame}"
+        data-name="${escapeHtml(fallbackCardName(item, game))}"
+        data-pitch="${escapeHtml(fallbackPitch(item, game))}"
+        data-set="${escapeHtml(item.set || "")}"
+        data-number="${escapeHtml(item.number || "")}">
+        <span class="tcg-card-loading">Imagem</span>
+      </div>
+    `;
+  }
+
+  function cardTemplate(item, game, windowKey, payloads, compact = false) {
     const history = item.history || [];
     const payloadIndex = payloads.push({ item, game, windowKey }) - 1;
 
     return `
       <article class="spike-card ${compact ? "spike-card-compact" : ""}" tabindex="0" role="button" data-spike-card data-spike-index="${payloadIndex}">
         <div class="spike-card-media">
-          <div class="tcg-card-image spike-card-image" data-game="${apiGame}" data-name="${escapeHtml(item.name)}">
-            <span class="tcg-card-loading">Imagem</span>
-          </div>
+          ${cardImageTemplate(item, game)}
         </div>
         <div class="spike-card-data">
           <p class="eyebrow">${escapeHtml(game.label)} • ${escapeHtml(WINDOW_CONFIG[windowKey]?.label || "Spikes")}</p>
@@ -208,11 +255,11 @@
 
   function getItemsForWindow(game, windowKey) {
     if (game.windows && Array.isArray(game.windows[windowKey])) {
-      return game.windows[windowKey].slice(0, 6);
+      return game.windows[windowKey].slice(0, 9);
     }
 
     if (windowKey === "weekly" && Array.isArray(game.items)) {
-      return game.items.slice(0, 6);
+      return game.items.slice(0, 9);
     }
 
     return [];
@@ -267,7 +314,7 @@
             <p class="eyebrow">Top spikes</p>
             <h2>${escapeHtml(game.label)}</h2>
           </div>
-          <span>Listas por janela de mercado</span>
+          <span>Até 9 cartas nas últimas 24h</span>
         </div>
         <div class="spike-window-stack">
           ${WINDOW_ORDER.map(windowKey => windowSectionTemplate(game, windowKey, payloads)).join("")}
@@ -280,7 +327,6 @@
     const existing = document.querySelector(".spike-modal");
     if (existing) existing.remove();
 
-    const apiGame = gameToImageApi(game.code);
     const modal = document.createElement("div");
     modal.className = "spike-modal";
     modal.innerHTML = `
@@ -288,9 +334,7 @@
       <div class="spike-modal-card" role="dialog" aria-modal="true">
         <button class="spike-modal-close" type="button" data-close-modal>×</button>
         <div class="spike-modal-grid">
-          <div class="tcg-card-image spike-modal-image" data-game="${apiGame}" data-name="${escapeHtml(item.name)}">
-            <span class="tcg-card-loading">Imagem</span>
-          </div>
+          ${cardImageTemplate(item, game, "spike-modal-image")}
           <div>
             <p class="eyebrow">${escapeHtml(game.label)} • ${escapeHtml(WINDOW_CONFIG[windowKey]?.label || "Spikes")}</p>
             <h2>${escapeHtml(item.name)}</h2>
@@ -372,7 +416,7 @@
     if (!hero) return;
 
     const fab = (data.games || []).find(game => game.code === "fab") || data.games?.[0];
-    const items = getItemsForWindow(fab || {}, "weekly").concat(getItemsForWindow(fab || {}, "daily"));
+    const items = getItemsForWindow(fab || {}, "daily");
     if (!items.length) {
       hero.innerHTML = `<span class="spike-loading">Nenhum spike encontrado.</span>`;
       return;
@@ -380,11 +424,11 @@
 
     const item = items[Math.floor(Math.random() * items.length)];
     const heroPayloads = [];
-    hero.innerHTML = cardTemplate(item, fab, "weekly", heroPayloads, true);
+    hero.innerHTML = cardTemplate(item, fab, "daily", heroPayloads, true);
 
     const card = hero.querySelector("[data-spike-card]");
     if (card) {
-      card.addEventListener("click", () => openModal(item, fab, "weekly"));
+      card.addEventListener("click", () => openModal(item, fab, "daily"));
     }
 
     if (window.CCMCardApis) {
