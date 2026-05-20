@@ -143,13 +143,13 @@ title: "Início"
       {% for post in comunidade_sorted limit:6 %}
         {% if post.image %}
           <a class="gallery-item" href="{{ post.url | relative_url }}">
-            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy">
+            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy" onerror="this.onerror=null;this.src='{{ site.data.images.post_default | relative_url }}';">
           </a>
         {% endif %}
         {% if post.gallery %}
           {% for foto in post.gallery limit:2 %}
             <a class="gallery-item" href="{{ post.url | relative_url }}">
-              <img src="{{ foto | relative_url }}" alt="{{ post.title }}" loading="lazy">
+              <img src="{{ foto | relative_url }}" alt="{{ post.title }}" loading="lazy" onerror="this.onerror=null;this.src='{{ site.data.images.post_default | relative_url }}';">
             </a>
           {% endfor %}
         {% endif %}
@@ -176,7 +176,7 @@ title: "Início"
           {% if item.image %}
             {% assign image_kind = item.image_kind | default: "photo" %}
             <span class="home-agenda-media home-agenda-media-{{ image_kind }}">
-              <img src="{{ item.image | relative_url }}" alt="{{ item.image_alt | default: item.title }}" loading="lazy">
+              <img src="{{ item.image | relative_url }}" alt="{{ item.image_alt | default: item.title }}" loading="lazy" onerror="this.onerror=null;this.src='{{ site.data.images.post_default | relative_url }}';">
             </span>
           {% endif %}
           <span class="home-agenda-main">
