@@ -9,7 +9,20 @@
 
 {% assign platform_label = include.post.category_label | default: social_platform | replace: 'youtube', 'YouTube' | replace: 'instagram', 'Instagram' | replace: 'tiktok', 'TikTok' | replace: 'x', 'X' %}
 
+{% assign fallback_image = site.data.images.post_defaults.comunidade | default: site.data.images.post_default %}
+{% if social_platform == 'instagram' or social_platform == 'fotos' %}
+  {% assign fallback_image = site.data.images.post_defaults.comunidade | default: site.data.images.post_default %}
+{% elsif social_platform == 'youtube' %}
+  {% assign fallback_image = site.data.images.post_defaults.tcg | default: site.data.images.post_default %}
+{% endif %}
+
 {% assign social_image = include.post.image | default: '' | strip %}
+{% if social_image contains '://' %}
+  {% assign social_image_src = social_image %}
+{% else %}
+  {% assign social_image_src = social_image | relative_url %}
+{% endif %}
+
 {% assign api_image_game = nil %}
 {% assign api_image_name = nil %}
 {% if include.post.image_game and include.post.image_card %}
@@ -19,7 +32,7 @@
   {% if api_image_game == 'scryfall' or api_image_game == 'magic' %}{% assign api_image_game = 'mtg' %}{% endif %}
   {% if api_image_game == 'pkm' %}{% assign api_image_game = 'pokemon' %}{% endif %}
   {% if api_image_game == 'ygo' %}{% assign api_image_game = 'yugioh' %}{% endif %}
-{% elsif social_image contains ':' %}
+{% elsif social_image != '' %}
   {% assign social_image_parts = social_image | split: ':' %}
   {% assign social_image_prefix = social_image_parts[0] | downcase | strip %}
   {% assign social_image_name = social_image_parts[1] | strip %}
@@ -74,13 +87,13 @@
     {% elsif include.post.gallery %}
       <div class="social-gallery-preview">
         {% for foto in include.post.gallery limit:4 %}
-          <img src="{{ foto | relative_url }}" alt="{{ include.post.title | escape }}" loading="lazy">
+          <img src="{{ foto | relative_url }}" alt="{{ include.post.title | escape }}" loading="lazy" onerror="this.onerror=null;this.src='{{ fallback_image | relative_url }}';">
         {% endfor %}
       </div>
     {% elsif api_image_game and api_image_name %}
-      {% include tcg-card.html game=api_image_game name=api_image_name cover=true %}
-    {% elsif include.post.image %}
-      <img src="{{ include.post.image | relative_url }}" alt="{{ include.post.title | escape }}" loading="lazy">
+      {% include tcg-card.html game=api_image_game name=api_image_name cover=true fallback=fallback_image fallback_alt=include.post.title %}
+    {% elsif social_image != '' %}
+      <img src="{{ social_image_src }}" alt="{{ include.post.title | escape }}" loading="lazy" onerror="this.onerror=null;this.src='{{ fallback_image | relative_url }}';">
     {% else %}
       <div class="social-content-fallback">
         {{ include.post.content }}

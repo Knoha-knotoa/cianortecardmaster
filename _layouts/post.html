@@ -26,7 +26,7 @@ layout: default
 {% endif %}
 {% unless item_label %}
   {% assign item_label = page.category_label %}
-{% endif %}
+{% endunless %}
 {% unless inferred_style %}
   {% assign inferred_style = item_label | slugify %}
 {% endunless %}
@@ -60,7 +60,8 @@ layout: default
   {% when "blog" %}{% assign fallback_image = site.data.images.post_defaults.blog %}
   {% when "comunidade" %}{% assign fallback_image = site.data.images.post_defaults.comunidade %}
 {% endcase %}
-{% assign explicit_image = page.image | strip %}
+
+{% assign explicit_image = page.image | default: "" | strip %}
 {% if explicit_image == "" %}
   {% assign hero_image = fallback_image %}
 {% else %}
@@ -72,8 +73,11 @@ layout: default
   {% endif %}
 {% endif %}
 
-{% assign hero_image_src = hero_image | relative_url %}
-{% if hero_image contains "://" %}{% assign hero_image_src = hero_image %}{% endif %}
+{% if hero_image contains "://" %}
+  {% assign hero_image_src = hero_image %}
+{% else %}
+  {% assign hero_image_src = hero_image | relative_url %}
+{% endif %}
 
 {% assign api_image_game = nil %}
 {% assign api_image_name = nil %}
@@ -84,8 +88,8 @@ layout: default
   {% if api_image_game == "scryfall" or api_image_game == "magic" %}{% assign api_image_game = "mtg" %}{% endif %}
   {% if api_image_game == "pkm" %}{% assign api_image_game = "pokemon" %}{% endif %}
   {% if api_image_game == "ygo" %}{% assign api_image_game = "yugioh" %}{% endif %}
-{% elsif hero_image contains ":" %}
-  {% assign hero_image_parts = hero_image | split: ":" %}
+{% elsif explicit_image != "" %}
+  {% assign hero_image_parts = explicit_image | split: ":" %}
   {% assign hero_image_prefix = hero_image_parts[0] | downcase | strip %}
   {% assign hero_image_name = hero_image_parts[1] | strip %}
   {% case hero_image_prefix %}
@@ -130,10 +134,10 @@ layout: default
       {% if hero_image %}
         {% if api_image_game and api_image_name %}
           <div class="post-main-image post-main-card-image" aria-label="Carta {{ api_image_name | escape }}">
-            {% include tcg-card.html game=api_image_game name=api_image_name cover=true %}
+            {% include tcg-card.html game=api_image_game name=api_image_name cover=true fallback=fallback_image fallback_alt=page.title %}
           </div>
         {% else %}
-          <img class="post-main-image" src="{{ hero_image_src }}" alt="{{ page.title | escape }}">
+          <img class="post-main-image" src="{{ hero_image_src }}" alt="{{ page.title | escape }}" onerror="this.onerror=null;this.src='{{ fallback_image | relative_url }}';">
         {% endif %}
       {% endif %}
     </div>

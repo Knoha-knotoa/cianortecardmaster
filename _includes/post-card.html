@@ -56,15 +56,19 @@
   {% when "blog" %}{% assign fallback_image = site.data.images.post_defaults.blog %}
   {% when "comunidade" %}{% assign fallback_image = site.data.images.post_defaults.comunidade %}
 {% endcase %}
-{% assign explicit_image = include.post.image | strip %}
+
+{% assign explicit_image = include.post.image | default: "" | strip %}
 {% if explicit_image == "" %}
   {% assign card_image = fallback_image %}
 {% else %}
   {% assign card_image = explicit_image %}
 {% endif %}
 
-{% assign card_image_src = card_image | relative_url %}
-{% if card_image contains "://" %}{% assign card_image_src = card_image %}{% endif %}
+{% if card_image contains "://" %}
+  {% assign card_image_src = card_image %}
+{% else %}
+  {% assign card_image_src = card_image | relative_url %}
+{% endif %}
 
 {% assign api_image_game = nil %}
 {% assign api_image_name = nil %}
@@ -75,8 +79,8 @@
   {% if api_image_game == "scryfall" or api_image_game == "magic" %}{% assign api_image_game = "mtg" %}{% endif %}
   {% if api_image_game == "pkm" %}{% assign api_image_game = "pokemon" %}{% endif %}
   {% if api_image_game == "ygo" %}{% assign api_image_game = "yugioh" %}{% endif %}
-{% elsif card_image contains ":" %}
-  {% assign card_image_parts = card_image | split: ":" %}
+{% elsif explicit_image != "" %}
+  {% assign card_image_parts = explicit_image | split: ":" %}
   {% assign card_image_prefix = card_image_parts[0] | downcase | strip %}
   {% assign card_image_name = card_image_parts[1] | strip %}
   {% case card_image_prefix %}
@@ -95,9 +99,9 @@
 <article class="post-card post-card-{{ include.post.collection }} post-style-{{ card_style }}">
   <a class="post-card-image" href="{{ include.post.url | relative_url }}" aria-label="Abrir post: {{ include.post.title | escape }}">
     {% if api_image_game and api_image_name %}
-      {% include tcg-card.html game=api_image_game name=api_image_name cover=true %}
+      {% include tcg-card.html game=api_image_game name=api_image_name cover=true fallback=fallback_image fallback_alt=include.post.title %}
     {% else %}
-      <img src="{{ card_image_src }}" alt="{{ include.post.title | escape }}" loading="lazy">
+      <img src="{{ card_image_src }}" alt="{{ include.post.title | escape }}" loading="lazy" onerror="this.onerror=null;this.src='{{ fallback_image | relative_url }}';">
     {% endif %}
   </a>
 

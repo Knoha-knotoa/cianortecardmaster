@@ -52,17 +52,34 @@
   }
 
   function setCardImage(element, imageUrl, altText) {
-    element.innerHTML = `<img src="${imageUrl}" alt="${altText}" loading="lazy">`;
+    const img = document.createElement("img");
+    img.src = imageUrl;
+    img.alt = altText || "Carta";
+    img.loading = "lazy";
+    element.replaceChildren(img);
+    element.classList.remove("tcg-card-error");
+  }
+
+  function setCardFallback(element, altText = "Imagem da postagem") {
+    const fallbackSrc = element.dataset.fallbackSrc || "";
+    if (!fallbackSrc) return false;
+    setCardImage(element, fallbackSrc, element.dataset.fallbackAlt || altText);
+    element.classList.add("tcg-card-fallback");
+    return true;
   }
 
   function setCardError(element, message, detail = "") {
+    if (setCardFallback(element, detail || message)) return;
     element.classList.add("tcg-card-error");
-    element.innerHTML = `
-      <span class="tcg-card-loading">
-        ${message}
-        ${detail ? `<small>${detail}</small>` : ""}
-      </span>
-    `;
+    const wrapper = document.createElement("span");
+    wrapper.className = "tcg-card-loading";
+    wrapper.append(document.createTextNode(message));
+    if (detail) {
+      const small = document.createElement("small");
+      small.textContent = detail;
+      wrapper.append(small);
+    }
+    element.replaceChildren(wrapper);
   }
 
   async function jsonFetch(url, options = {}) {
@@ -98,6 +115,7 @@
     if (caches.fab.has(cacheKey)) return caches.fab.get(cacheKey);
 
     const request = jsonFetch(`https://api.goagain.dev/v1/cards?name=${encodeURIComponent(name)}&limit=20`)
+      .catch(() => jsonFetch(`https://api.goagain.dev/v1/cards?q=${encodeURIComponent(name)}&limit=20`))
       .then(payload => {
         const cards = extractGoAgainCards(payload);
         const wanted = normalizeText(name);
