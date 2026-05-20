@@ -4,20 +4,46 @@ title: "Deck"
 permalink: /decks/
 ---
 
+{% assign posts_list = site.decks | sort: "date" | reverse %}
+
 <section class="page-hero">
   <div class="container">
     <p class="eyebrow">Listas e estratégias</p>
     <h1>Deck</h1>
-    <p>Deck lists, deck techs, relatos de torneio e análises de listas da comunidade.</p>
+    <p>Deck lists, deck techs, relatos de torneio e análises de listas da comunidade, agora organizados por formato.</p>
   </div>
 </section>
 
-<section class="listing">
+<section class="listing decks-listing">
   <div class="container">
-    <div class="card-grid grid-3">
-      {% assign posts_list = site.decks | sort: "date" | reverse %}
+    <nav class="section-index deck-filter-index" aria-label="Filtros de decks">
+      <a class="section-chip is-active" href="#decks" data-deck-filter="all">Todos</a>
+      <a class="section-chip post-style-silver-age" href="#silver-age" data-deck-filter="silver-age">Silver Age</a>
+      <a class="section-chip post-style-classic-constructed" href="#classic-constructed" data-deck-filter="classic-constructed">Classic Constructed</a>
+      <a class="section-chip post-style-sealed" href="#sealed" data-deck-filter="sealed">Sealed</a>
+      <a class="section-chip post-style-living-legend" href="#living-legend" data-deck-filter="living-legend">Living Legend</a>
+      <a class="section-chip post-style-blitz" href="#blitz" data-deck-filter="blitz">Blitz</a>
+      <a class="section-chip post-style-upf" href="#upf" data-deck-filter="upf">UPF</a>
+    </nav>
+
+    <p class="folder-hint">
+      Para organizar as postagens, salve os arquivos em <code>_decks/Silver-Age</code>, <code>_decks/Classic-Constructed</code>, <code>_decks/Sealed</code>, <code>_decks/Living-Legend</code>, <code>_decks/Blitz</code> ou <code>_decks/UPF</code>.
+    </p>
+
+    <div class="card-grid grid-3 deck-feed" id="decks">
       {% for post in posts_list %}
-        {% include post-card.html post=post %}
+        {% assign post_path = post.path | downcase %}
+        {% assign deck_format = post.deck_format | default: post.format | default: post.category_label | default: 'deck' | slugify %}
+        {% if post_path contains '_decks/silver-age/' %}{% assign deck_format = 'silver-age' %}
+        {% elsif post_path contains '_decks/classic-constructed/' %}{% assign deck_format = 'classic-constructed' %}
+        {% elsif post_path contains '_decks/sealed/' %}{% assign deck_format = 'sealed' %}
+        {% elsif post_path contains '_decks/living-legend/' %}{% assign deck_format = 'living-legend' %}
+        {% elsif post_path contains '_decks/blitz/' %}{% assign deck_format = 'blitz' %}
+        {% elsif post_path contains '_decks/upf/' %}{% assign deck_format = 'upf' %}
+        {% endif %}
+        <div data-deck-feed-item data-deck-format="{{ deck_format }}">
+          {% include post-card.html post=post %}
+        </div>
       {% else %}
         <p>Nenhum deck publicado ainda.</p>
       {% endfor %}
