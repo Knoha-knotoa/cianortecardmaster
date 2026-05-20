@@ -203,3 +203,46 @@ No corpo do post, use:
   {% include tcg-card.html game="yugioh" name="Blue-Eyes White Dragon" %}
 </div>
 ```
+
+
+## Imagens por API para posts futuros
+
+O suporte de imagens por API foi pensado para funcionar **automaticamente em posts futuros**, não só nos posts atuais.
+
+Ele vale para:
+- Home
+- Blog
+- Decks
+- Guias
+- Comunidade
+- Página individual do post
+- Cards sociais da comunidade (quando não houver embed e você quiser usar imagem de carta)
+
+### Formas de usar no front matter
+
+**Forma simples (recomendada):**
+```yaml
+image: "fab:Dash I/O"
+image: "goagain:Bios Update"
+image: "mtg:Lightning Bolt"
+image: "scryfall:Krenko, Mob Boss"
+image: "pokemon:Pikachu"
+image: "yugioh:Blue-Eyes White Dragon"
+```
+
+**Forma separada (também funciona):**
+```yaml
+image_game: "pokemon"
+image_card: "Charizard"
+```
+
+### Prefixos aceitos
+- FAB / Flesh and Blood: `fab:` ou `goagain:`
+- Magic: `mtg:`, `magic:` ou `scryfall:`
+- Pokémon: `pokemon:` ou `pkm:`
+- Yu-Gi-Oh!: `yugioh:` ou `ygo:`
+
+### Observações
+- Se o post não tiver `image`, o site usa a imagem padrão da seção.
+- Se o post tiver `image` apontando para arquivo local (`/assets/...`) ou URL externa (`https://...`), ele continua funcionando normalmente.
+- Para Pokémon, se depois você quiser mais precisão, também pode expandir o include `tcg-card.html` usando `set` e `number`.
