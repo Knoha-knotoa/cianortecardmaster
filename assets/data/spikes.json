@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-05-20T16:27:04.744Z",
-  "source": "JustTCG",
-  "schema": "spikes-daily-v4",
+  "updatedAt": "2026-05-19T18:04:32.892Z",
+  "source": "JustTCG + TCGCSV/TCGplayer para FAB",
+  "schema": "spikes-daily-v5-tcgcsv-fab",
   "windows": [
     "daily"
   ],
@@ -15,752 +15,438 @@
       "windows": {
         "daily": [
           {
-            "id": "flesh-and-blood-tcg-the-hunted-blade-beckoner-boots-rare",
-            "name": "Blade Beckoner Boots",
-            "set": "The Hunted",
-            "number": "HNT219",
-            "rarity": "Rare",
-            "price": 3.32,
-            "change1d": 2113.33,
-            "change7d": 2113.33,
-            "change30d": 2113.33,
-            "variant": "Normal / Moderately Played",
-            "imageUrl": "",
+            "id": "flesh-and-blood-tcg-arcane-rising-kano-kano-dracai-of-aether-token",
+            "name": "Kano // Kano, Dracai of Aether",
+            "set": "Arcane Rising",
+            "number": "ARC114 // ARC113",
+            "rarity": "Token",
+            "price": 0.43,
+            "change1d": 72,
+            "change7d": 72,
+            "change30d": 72,
+            "variant": "1st Edition Normal / Near Mint",
             "history": [
+              {
+                "t": 1778630400,
+                "p": 0.25
+              },
+              {
+                "t": 1778716800,
+                "p": 0.25
+              },
+              {
+                "t": 1778803200,
+                "p": 0.25
+              },
+              {
+                "t": 1778889600,
+                "p": 0.25
+              },
+              {
+                "t": 1778976000,
+                "p": 0.25
+              },
+              {
+                "t": 1779062400,
+                "p": 0.25
+              },
+              {
+                "t": 1779148800,
+                "p": 0.43
+              }
+            ],
+            "justtcgPrice": 0.43,
+            "sources": {
+              "justtcg": {
+                "label": "JustTCG",
+                "price": 0.43,
+                "variant": "1st Edition Normal / Near Mint",
+                "imageUrl": ""
+              },
+              "tcgplayer": null
+            },
+            "tcgcsvStatus": "aguardando workflow"
+          },
+          {
+            "id": "flesh-and-blood-tcg-crucible-of-war-chokeslam-yellow-common",
+            "name": "Chokeslam (Yellow)",
+            "set": "Crucible of War",
+            "number": "CRU036",
+            "rarity": "Common",
+            "price": 0.25,
+            "change1d": 66.67,
+            "change7d": 56.25,
+            "change30d": 108.33,
+            "variant": "Unlimited Edition Normal / Near Mint",
+            "history": [
+              {
+                "t": 1778630400,
+                "p": 0.15
+              },
+              {
+                "t": 1778716800,
+                "p": 0.15
+              },
+              {
+                "t": 1778803200,
+                "p": 0.15
+              },
+              {
+                "t": 1778889600,
+                "p": 0.15
+              },
+              {
+                "t": 1778976000,
+                "p": 0.15
+              },
               {
                 "t": 1779062400,
                 "p": 0.15
               },
               {
                 "t": 1779148800,
-                "p": 0.15
-              },
-              {
-                "t": 1779235200,
-                "p": 3.32
+                "p": 0.25
               }
-            ]
+            ],
+            "justtcgPrice": 0.25,
+            "sources": {
+              "justtcg": {
+                "label": "JustTCG",
+                "price": 0.25,
+                "variant": "Unlimited Edition Normal / Near Mint",
+                "imageUrl": ""
+              },
+              "tcgplayer": null
+            },
+            "tcgcsvStatus": "aguardando workflow"
           },
           {
-            "id": "flesh-and-blood-tcg-armory-deck-aurora-lightning-surge-red-common",
-            "name": "Lightning Surge (Red)",
-            "set": "Armory Deck: Aurora",
-            "number": "AST011",
-            "rarity": "Common",
-            "price": 0.26,
-            "change1d": 85.71,
-            "change7d": 73.33,
-            "change30d": 73.33,
-            "variant": "Normal / Near Mint",
-            "imageUrl": "",
-            "history": [
-              {
-                "t": 1778716800,
-                "p": 0.14
-              },
-              {
-                "t": 1778803200,
-                "p": 0.14
-              },
-              {
-                "t": 1778889600,
-                "p": 0.14
-              },
-              {
-                "t": 1778976000,
-                "p": 0.14
-              },
-              {
-                "t": 1779062400,
-                "p": 0.14
-              },
-              {
-                "t": 1779148800,
-                "p": 0.14
-              },
-              {
-                "t": 1779235200,
-                "p": 0.26
-              }
-            ]
-          },
-          {
-            "id": "flesh-and-blood-tcg-rosetta-helm-of-lignum-vitae-common",
-            "name": "Helm of Lignum Vitae",
-            "set": "Rosetta",
-            "number": "ROS029",
-            "rarity": "Common",
-            "price": 2,
-            "change1d": 51.52,
-            "change7d": 51.52,
-            "change30d": 212.5,
-            "variant": "Cold Foil / Lightly Played",
-            "imageUrl": "",
-            "history": [
-              {
-                "t": 1778716800,
-                "p": 1.32
-              },
-              {
-                "t": 1778803200,
-                "p": 1.32
-              },
-              {
-                "t": 1778889600,
-                "p": 1.32
-              },
-              {
-                "t": 1778976000,
-                "p": 1.32
-              },
-              {
-                "t": 1779062400,
-                "p": 1.32
-              },
-              {
-                "t": 1779148800,
-                "p": 1.32
-              },
-              {
-                "t": 1779235200,
-                "p": 2
-              }
-            ]
-          },
-          {
-            "id": "flesh-and-blood-tcg-flesh-and-blood-promo-cards-squizzy-floof-her100-promo",
-            "name": "Squizzy & Floof -  HER100",
-            "set": "Flesh and Blood: Promo Cards",
-            "number": "HER100",
-            "rarity": "Promo",
-            "price": 3.28,
-            "change1d": 50.46,
-            "change7d": 16.73,
-            "change30d": 16.73,
-            "variant": "Cold Foil / Lightly Played",
-            "imageUrl": "",
-            "history": [
-              {
-                "t": 1778716800,
-                "p": 2.23
-              },
-              {
-                "t": 1778803200,
-                "p": 2.23
-              },
-              {
-                "t": 1778889600,
-                "p": 2.23
-              },
-              {
-                "t": 1778976000,
-                "p": 2.23
-              },
-              {
-                "t": 1779062400,
-                "p": 2.23
-              },
-              {
-                "t": 1779148800,
-                "p": 2.18
-              },
-              {
-                "t": 1779235200,
-                "p": 3.28
-              }
-            ]
-          },
-          {
-            "id": "flesh-and-blood-tcg-welcome-to-rathe-pack-hunt-red-common",
-            "name": "Pack Hunt (Red)",
+            "id": "flesh-and-blood-tcg-welcome-to-rathe-show-time-exclamation-super-rare",
+            "name": "Show Time!",
             "set": "Welcome to Rathe",
-            "number": "WTR023",
-            "rarity": "Common",
-            "price": 0.69,
-            "change1d": 50,
-            "change7d": 50,
-            "change30d": 50,
-            "variant": "Unlimited Edition Rainbow Foil / Lightly Played",
-            "imageUrl": "",
+            "number": "WTR047",
+            "rarity": "Super Rare",
+            "price": 0.75,
+            "change1d": 56.25,
+            "change7d": 56.25,
+            "change30d": 56.25,
+            "variant": "Unlimited Edition Normal / Lightly Played",
             "history": [
               {
+                "t": 1778630400,
+                "p": 0.48
+              },
+              {
                 "t": 1778716800,
-                "p": 0.46
+                "p": 0.48
               },
               {
                 "t": 1778803200,
-                "p": 0.46
+                "p": 0.48
               },
               {
                 "t": 1778889600,
-                "p": 0.46
+                "p": 0.48
               },
               {
                 "t": 1778976000,
-                "p": 0.46
+                "p": 0.48
               },
               {
                 "t": 1779062400,
-                "p": 0.46
+                "p": 0.48
               },
               {
                 "t": 1779148800,
-                "p": 0.46
-              },
-              {
-                "t": 1779235200,
-                "p": 0.69
+                "p": 0.75
               }
-            ]
+            ],
+            "justtcgPrice": 0.75,
+            "sources": {
+              "justtcg": {
+                "label": "JustTCG",
+                "price": 0.75,
+                "variant": "Unlimited Edition Normal / Lightly Played",
+                "imageUrl": ""
+              },
+              "tcgplayer": null
+            },
+            "tcgcsvStatus": "aguardando workflow"
           },
           {
-            "id": "flesh-and-blood-tcg-outsiders-codex-of-inertia-majestic",
-            "name": "Codex of Inertia",
-            "set": "Outsiders",
-            "number": "OUT161",
-            "rarity": "Majestic",
-            "price": 18.89,
-            "change1d": 42.24,
-            "change7d": 42.24,
-            "change30d": 50.52,
-            "variant": "Rainbow Foil / Lightly Played",
-            "imageUrl": "",
-            "history": [
-              {
-                "t": 1778716800,
-                "p": 13.28
-              },
-              {
-                "t": 1778803200,
-                "p": 13.28
-              },
-              {
-                "t": 1778889600,
-                "p": 13.28
-              },
-              {
-                "t": 1778976000,
-                "p": 13.28
-              },
-              {
-                "t": 1779062400,
-                "p": 13.28
-              },
-              {
-                "t": 1779148800,
-                "p": 13.28
-              },
-              {
-                "t": 1779235200,
-                "p": 18.89
-              }
-            ]
-          },
-          {
-            "id": "flesh-and-blood-tcg-uprising-oasis-respite-blue-common",
-            "name": "Oasis Respite (Blue)",
-            "set": "Uprising",
-            "number": "UPR223",
+            "id": "flesh-and-blood-tcg-history-pack-vol-1-emerging-dominance-red-common",
+            "name": "Emerging Dominance (Red)",
+            "set": "History Pack Vol.1",
+            "number": "1HP079",
             "rarity": "Common",
             "price": 0.39,
-            "change1d": 39.29,
-            "change7d": 39.29,
-            "change30d": 69.57,
-            "variant": "Rainbow Foil / Near Mint",
-            "imageUrl": "",
+            "change1d": 56,
+            "change7d": 56,
+            "change30d": 56,
+            "variant": "Normal / Near Mint",
             "history": [
               {
+                "t": 1778630400,
+                "p": 0.25
+              },
+              {
                 "t": 1778716800,
-                "p": 0.28
+                "p": 0.25
               },
               {
                 "t": 1778803200,
-                "p": 0.28
+                "p": 0.25
               },
               {
                 "t": 1778889600,
-                "p": 0.28
+                "p": 0.25
               },
               {
                 "t": 1778976000,
-                "p": 0.28
+                "p": 0.25
               },
               {
                 "t": 1779062400,
-                "p": 0.28
+                "p": 0.25
               },
               {
                 "t": 1779148800,
-                "p": 0.28
-              },
-              {
-                "t": 1779235200,
                 "p": 0.39
               }
-            ]
-          },
-          {
-            "id": "flesh-and-blood-tcg-outsiders-knives-out-majestic",
-            "name": "Knives Out",
-            "set": "Outsiders",
-            "number": "OUT144",
-            "rarity": "Majestic",
-            "price": 6.36,
-            "change1d": 35.9,
-            "change7d": 35.9,
-            "change30d": 35.9,
-            "variant": "Rainbow Foil / Lightly Played",
-            "imageUrl": "",
-            "history": [
-              {
-                "t": 1778716800,
-                "p": 4.68
+            ],
+            "justtcgPrice": 0.39,
+            "sources": {
+              "justtcg": {
+                "label": "JustTCG",
+                "price": 0.39,
+                "variant": "Normal / Near Mint",
+                "imageUrl": ""
               },
-              {
-                "t": 1778803200,
-                "p": 4.68
-              },
-              {
-                "t": 1778889600,
-                "p": 4.68
-              },
-              {
-                "t": 1778976000,
-                "p": 4.68
-              },
-              {
-                "t": 1779062400,
-                "p": 4.68
-              },
-              {
-                "t": 1779148800,
-                "p": 4.68
-              },
-              {
-                "t": 1779235200,
-                "p": 6.36
-              }
-            ]
-          },
-          {
-            "id": "flesh-and-blood-tcg-arcane-rising-voltic-bolt-red-common",
-            "name": "Voltic Bolt (Red)",
-            "set": "Arcane Rising",
-            "number": "ARC147",
-            "rarity": "Common",
-            "price": 0.87,
-            "change1d": 31.82,
-            "change7d": 31.82,
-            "change30d": 70.59,
-            "variant": "Unlimited Edition Rainbow Foil / Lightly Played",
-            "imageUrl": "",
-            "history": [
-              {
-                "t": 1778716800,
-                "p": 0.66
-              },
-              {
-                "t": 1778803200,
-                "p": 0.66
-              },
-              {
-                "t": 1778889600,
-                "p": 0.66
-              },
-              {
-                "t": 1778976000,
-                "p": 0.66
-              },
-              {
-                "t": 1779062400,
-                "p": 0.66
-              },
-              {
-                "t": 1779148800,
-                "p": 0.66
-              },
-              {
-                "t": 1779235200,
-                "p": 0.87
-              }
-            ]
+              "tcgplayer": null
+            },
+            "tcgcsvStatus": "aguardando workflow"
           }
         ]
       },
       "items": [
         {
-          "id": "flesh-and-blood-tcg-the-hunted-blade-beckoner-boots-rare",
-          "name": "Blade Beckoner Boots",
-          "set": "The Hunted",
-          "number": "HNT219",
-          "rarity": "Rare",
-          "price": 3.32,
-          "change1d": 2113.33,
-          "change7d": 2113.33,
-          "change30d": 2113.33,
-          "variant": "Normal / Moderately Played",
-          "imageUrl": "",
+          "id": "flesh-and-blood-tcg-arcane-rising-kano-kano-dracai-of-aether-token",
+          "name": "Kano // Kano, Dracai of Aether",
+          "set": "Arcane Rising",
+          "number": "ARC114 // ARC113",
+          "rarity": "Token",
+          "price": 0.43,
+          "change1d": 72,
+          "change7d": 72,
+          "change30d": 72,
+          "variant": "1st Edition Normal / Near Mint",
           "history": [
+            {
+              "t": 1778630400,
+              "p": 0.25
+            },
+            {
+              "t": 1778716800,
+              "p": 0.25
+            },
+            {
+              "t": 1778803200,
+              "p": 0.25
+            },
+            {
+              "t": 1778889600,
+              "p": 0.25
+            },
+            {
+              "t": 1778976000,
+              "p": 0.25
+            },
+            {
+              "t": 1779062400,
+              "p": 0.25
+            },
+            {
+              "t": 1779148800,
+              "p": 0.43
+            }
+          ],
+          "justtcgPrice": 0.43,
+          "sources": {
+            "justtcg": {
+              "label": "JustTCG",
+              "price": 0.43,
+              "variant": "1st Edition Normal / Near Mint",
+              "imageUrl": ""
+            },
+            "tcgplayer": null
+          },
+          "tcgcsvStatus": "aguardando workflow"
+        },
+        {
+          "id": "flesh-and-blood-tcg-crucible-of-war-chokeslam-yellow-common",
+          "name": "Chokeslam (Yellow)",
+          "set": "Crucible of War",
+          "number": "CRU036",
+          "rarity": "Common",
+          "price": 0.25,
+          "change1d": 66.67,
+          "change7d": 56.25,
+          "change30d": 108.33,
+          "variant": "Unlimited Edition Normal / Near Mint",
+          "history": [
+            {
+              "t": 1778630400,
+              "p": 0.15
+            },
+            {
+              "t": 1778716800,
+              "p": 0.15
+            },
+            {
+              "t": 1778803200,
+              "p": 0.15
+            },
+            {
+              "t": 1778889600,
+              "p": 0.15
+            },
+            {
+              "t": 1778976000,
+              "p": 0.15
+            },
             {
               "t": 1779062400,
               "p": 0.15
             },
             {
               "t": 1779148800,
-              "p": 0.15
-            },
-            {
-              "t": 1779235200,
-              "p": 3.32
+              "p": 0.25
             }
-          ]
+          ],
+          "justtcgPrice": 0.25,
+          "sources": {
+            "justtcg": {
+              "label": "JustTCG",
+              "price": 0.25,
+              "variant": "Unlimited Edition Normal / Near Mint",
+              "imageUrl": ""
+            },
+            "tcgplayer": null
+          },
+          "tcgcsvStatus": "aguardando workflow"
         },
         {
-          "id": "flesh-and-blood-tcg-armory-deck-aurora-lightning-surge-red-common",
-          "name": "Lightning Surge (Red)",
-          "set": "Armory Deck: Aurora",
-          "number": "AST011",
-          "rarity": "Common",
-          "price": 0.26,
-          "change1d": 85.71,
-          "change7d": 73.33,
-          "change30d": 73.33,
-          "variant": "Normal / Near Mint",
-          "imageUrl": "",
-          "history": [
-            {
-              "t": 1778716800,
-              "p": 0.14
-            },
-            {
-              "t": 1778803200,
-              "p": 0.14
-            },
-            {
-              "t": 1778889600,
-              "p": 0.14
-            },
-            {
-              "t": 1778976000,
-              "p": 0.14
-            },
-            {
-              "t": 1779062400,
-              "p": 0.14
-            },
-            {
-              "t": 1779148800,
-              "p": 0.14
-            },
-            {
-              "t": 1779235200,
-              "p": 0.26
-            }
-          ]
-        },
-        {
-          "id": "flesh-and-blood-tcg-rosetta-helm-of-lignum-vitae-common",
-          "name": "Helm of Lignum Vitae",
-          "set": "Rosetta",
-          "number": "ROS029",
-          "rarity": "Common",
-          "price": 2,
-          "change1d": 51.52,
-          "change7d": 51.52,
-          "change30d": 212.5,
-          "variant": "Cold Foil / Lightly Played",
-          "imageUrl": "",
-          "history": [
-            {
-              "t": 1778716800,
-              "p": 1.32
-            },
-            {
-              "t": 1778803200,
-              "p": 1.32
-            },
-            {
-              "t": 1778889600,
-              "p": 1.32
-            },
-            {
-              "t": 1778976000,
-              "p": 1.32
-            },
-            {
-              "t": 1779062400,
-              "p": 1.32
-            },
-            {
-              "t": 1779148800,
-              "p": 1.32
-            },
-            {
-              "t": 1779235200,
-              "p": 2
-            }
-          ]
-        },
-        {
-          "id": "flesh-and-blood-tcg-flesh-and-blood-promo-cards-squizzy-floof-her100-promo",
-          "name": "Squizzy & Floof -  HER100",
-          "set": "Flesh and Blood: Promo Cards",
-          "number": "HER100",
-          "rarity": "Promo",
-          "price": 3.28,
-          "change1d": 50.46,
-          "change7d": 16.73,
-          "change30d": 16.73,
-          "variant": "Cold Foil / Lightly Played",
-          "imageUrl": "",
-          "history": [
-            {
-              "t": 1778716800,
-              "p": 2.23
-            },
-            {
-              "t": 1778803200,
-              "p": 2.23
-            },
-            {
-              "t": 1778889600,
-              "p": 2.23
-            },
-            {
-              "t": 1778976000,
-              "p": 2.23
-            },
-            {
-              "t": 1779062400,
-              "p": 2.23
-            },
-            {
-              "t": 1779148800,
-              "p": 2.18
-            },
-            {
-              "t": 1779235200,
-              "p": 3.28
-            }
-          ]
-        },
-        {
-          "id": "flesh-and-blood-tcg-welcome-to-rathe-pack-hunt-red-common",
-          "name": "Pack Hunt (Red)",
+          "id": "flesh-and-blood-tcg-welcome-to-rathe-show-time-exclamation-super-rare",
+          "name": "Show Time!",
           "set": "Welcome to Rathe",
-          "number": "WTR023",
-          "rarity": "Common",
-          "price": 0.69,
-          "change1d": 50,
-          "change7d": 50,
-          "change30d": 50,
-          "variant": "Unlimited Edition Rainbow Foil / Lightly Played",
-          "imageUrl": "",
+          "number": "WTR047",
+          "rarity": "Super Rare",
+          "price": 0.75,
+          "change1d": 56.25,
+          "change7d": 56.25,
+          "change30d": 56.25,
+          "variant": "Unlimited Edition Normal / Lightly Played",
           "history": [
             {
+              "t": 1778630400,
+              "p": 0.48
+            },
+            {
               "t": 1778716800,
-              "p": 0.46
+              "p": 0.48
             },
             {
               "t": 1778803200,
-              "p": 0.46
+              "p": 0.48
             },
             {
               "t": 1778889600,
-              "p": 0.46
+              "p": 0.48
             },
             {
               "t": 1778976000,
-              "p": 0.46
+              "p": 0.48
             },
             {
               "t": 1779062400,
-              "p": 0.46
+              "p": 0.48
             },
             {
               "t": 1779148800,
-              "p": 0.46
-            },
-            {
-              "t": 1779235200,
-              "p": 0.69
+              "p": 0.75
             }
-          ]
+          ],
+          "justtcgPrice": 0.75,
+          "sources": {
+            "justtcg": {
+              "label": "JustTCG",
+              "price": 0.75,
+              "variant": "Unlimited Edition Normal / Lightly Played",
+              "imageUrl": ""
+            },
+            "tcgplayer": null
+          },
+          "tcgcsvStatus": "aguardando workflow"
         },
         {
-          "id": "flesh-and-blood-tcg-outsiders-codex-of-inertia-majestic",
-          "name": "Codex of Inertia",
-          "set": "Outsiders",
-          "number": "OUT161",
-          "rarity": "Majestic",
-          "price": 18.89,
-          "change1d": 42.24,
-          "change7d": 42.24,
-          "change30d": 50.52,
-          "variant": "Rainbow Foil / Lightly Played",
-          "imageUrl": "",
-          "history": [
-            {
-              "t": 1778716800,
-              "p": 13.28
-            },
-            {
-              "t": 1778803200,
-              "p": 13.28
-            },
-            {
-              "t": 1778889600,
-              "p": 13.28
-            },
-            {
-              "t": 1778976000,
-              "p": 13.28
-            },
-            {
-              "t": 1779062400,
-              "p": 13.28
-            },
-            {
-              "t": 1779148800,
-              "p": 13.28
-            },
-            {
-              "t": 1779235200,
-              "p": 18.89
-            }
-          ]
-        },
-        {
-          "id": "flesh-and-blood-tcg-uprising-oasis-respite-blue-common",
-          "name": "Oasis Respite (Blue)",
-          "set": "Uprising",
-          "number": "UPR223",
+          "id": "flesh-and-blood-tcg-history-pack-vol-1-emerging-dominance-red-common",
+          "name": "Emerging Dominance (Red)",
+          "set": "History Pack Vol.1",
+          "number": "1HP079",
           "rarity": "Common",
           "price": 0.39,
-          "change1d": 39.29,
-          "change7d": 39.29,
-          "change30d": 69.57,
-          "variant": "Rainbow Foil / Near Mint",
-          "imageUrl": "",
+          "change1d": 56,
+          "change7d": 56,
+          "change30d": 56,
+          "variant": "Normal / Near Mint",
           "history": [
             {
+              "t": 1778630400,
+              "p": 0.25
+            },
+            {
               "t": 1778716800,
-              "p": 0.28
+              "p": 0.25
             },
             {
               "t": 1778803200,
-              "p": 0.28
+              "p": 0.25
             },
             {
               "t": 1778889600,
-              "p": 0.28
+              "p": 0.25
             },
             {
               "t": 1778976000,
-              "p": 0.28
+              "p": 0.25
             },
             {
               "t": 1779062400,
-              "p": 0.28
+              "p": 0.25
             },
             {
               "t": 1779148800,
-              "p": 0.28
-            },
-            {
-              "t": 1779235200,
               "p": 0.39
             }
-          ]
-        },
-        {
-          "id": "flesh-and-blood-tcg-outsiders-knives-out-majestic",
-          "name": "Knives Out",
-          "set": "Outsiders",
-          "number": "OUT144",
-          "rarity": "Majestic",
-          "price": 6.36,
-          "change1d": 35.9,
-          "change7d": 35.9,
-          "change30d": 35.9,
-          "variant": "Rainbow Foil / Lightly Played",
-          "imageUrl": "",
-          "history": [
-            {
-              "t": 1778716800,
-              "p": 4.68
+          ],
+          "justtcgPrice": 0.39,
+          "sources": {
+            "justtcg": {
+              "label": "JustTCG",
+              "price": 0.39,
+              "variant": "Normal / Near Mint",
+              "imageUrl": ""
             },
-            {
-              "t": 1778803200,
-              "p": 4.68
-            },
-            {
-              "t": 1778889600,
-              "p": 4.68
-            },
-            {
-              "t": 1778976000,
-              "p": 4.68
-            },
-            {
-              "t": 1779062400,
-              "p": 4.68
-            },
-            {
-              "t": 1779148800,
-              "p": 4.68
-            },
-            {
-              "t": 1779235200,
-              "p": 6.36
-            }
-          ]
-        },
-        {
-          "id": "flesh-and-blood-tcg-arcane-rising-voltic-bolt-red-common",
-          "name": "Voltic Bolt (Red)",
-          "set": "Arcane Rising",
-          "number": "ARC147",
-          "rarity": "Common",
-          "price": 0.87,
-          "change1d": 31.82,
-          "change7d": 31.82,
-          "change30d": 70.59,
-          "variant": "Unlimited Edition Rainbow Foil / Lightly Played",
-          "imageUrl": "",
-          "history": [
-            {
-              "t": 1778716800,
-              "p": 0.66
-            },
-            {
-              "t": 1778803200,
-              "p": 0.66
-            },
-            {
-              "t": 1778889600,
-              "p": 0.66
-            },
-            {
-              "t": 1778976000,
-              "p": 0.66
-            },
-            {
-              "t": 1779062400,
-              "p": 0.66
-            },
-            {
-              "t": 1779148800,
-              "p": 0.66
-            },
-            {
-              "t": 1779235200,
-              "p": 0.87
-            }
-          ]
+            "tcgplayer": null
+          },
+          "tcgcsvStatus": "aguardando workflow"
         }
       ],
-      "warnings": []
+      "warnings": [],
+      "priceSources": [
+        "JustTCG",
+        "TCGCSV/TCGplayer"
+      ]
     },
     {
       "id": "magic-the-gathering",
@@ -769,104 +455,21 @@
       "windows": {
         "daily": [
           {
-            "id": "magic-the-gathering-mystery-booster-2-memnite-future-sight-uncommon",
-            "name": "Memnite (Future Sight)",
-            "set": "Mystery Booster 2",
-            "number": "228",
-            "rarity": "Uncommon",
-            "price": 21.77,
-            "change1d": 2077,
-            "change7d": 2077,
-            "change30d": 2077,
-            "variant": "Foil / Moderately Played",
-            "imageUrl": "",
-            "history": [
-              {
-                "t": 1778716800,
-                "p": 1
-              },
-              {
-                "t": 1778803200,
-                "p": 1
-              },
-              {
-                "t": 1778889600,
-                "p": 1
-              },
-              {
-                "t": 1778976000,
-                "p": 1
-              },
-              {
-                "t": 1779062400,
-                "p": 1
-              },
-              {
-                "t": 1779148800,
-                "p": 1
-              },
-              {
-                "t": 1779235200,
-                "p": 21.77
-              }
-            ]
-          },
-          {
-            "id": "magic-the-gathering-duel-decks-ajani-vs-nicol-bolas-moroii-uncommon",
-            "name": "Moroii",
-            "set": "Duel Decks: Ajani vs. Nicol Bolas",
-            "number": "51",
-            "rarity": "Uncommon",
-            "price": 0.31,
-            "change1d": 1450,
-            "change7d": 1450,
-            "change30d": 1450,
-            "variant": "Normal / Near Mint",
-            "imageUrl": "",
-            "history": [
-              {
-                "t": 1778716800,
-                "p": 0.02
-              },
-              {
-                "t": 1778803200,
-                "p": 0.02
-              },
-              {
-                "t": 1778889600,
-                "p": 0.02
-              },
-              {
-                "t": 1778976000,
-                "p": 0.02
-              },
-              {
-                "t": 1779062400,
-                "p": 0.02
-              },
-              {
-                "t": 1779148800,
-                "p": 0.02
-              },
-              {
-                "t": 1779235200,
-                "p": 0.31
-              }
-            ]
-          },
-          {
-            "id": "magic-the-gathering-wilds-of-eldraine-horned-loch-whale-showcase-rare",
-            "name": "Horned Loch-Whale (Showcase)",
-            "set": "Wilds of Eldraine",
-            "number": "278",
+            "id": "magic-the-gathering-afr-ampersand-promos-meteor-swarm-rare",
+            "name": "Meteor Swarm",
+            "set": "AFR Ampersand Promos",
+            "number": "155",
             "rarity": "Rare",
-            "price": 0.38,
-            "change1d": 660,
-            "change7d": 660,
-            "change30d": 660,
-            "variant": "Normal / Moderately Played",
-            "imageUrl": "",
+            "price": 1.29,
+            "change1d": 2480,
+            "change7d": 2480,
+            "change30d": 2480,
+            "variant": "Foil / Near Mint",
             "history": [
+              {
+                "t": 1778630400,
+                "p": 0.05
+              },
               {
                 "t": 1778716800,
                 "p": 0.05
@@ -889,27 +492,137 @@
               },
               {
                 "t": 1779148800,
-                "p": 0.05
-              },
-              {
-                "t": 1779235200,
-                "p": 0.38
+                "p": 1.29
               }
-            ]
+            ],
+            "justtcgPrice": 1.29,
+            "sources": {
+              "justtcg": {
+                "label": "JustTCG",
+                "price": 1.29,
+                "variant": "Foil / Near Mint",
+                "imageUrl": ""
+              }
+            }
           },
           {
-            "id": "magic-the-gathering-art-series-kaldheim-kaya-the-inexorable-art-card-special",
-            "name": "Kaya the Inexorable Art Card",
-            "set": "Art Series: Kaldheim",
-            "number": "58",
-            "rarity": "Special",
+            "id": "magic-the-gathering-shadowmoor-ashenmoor-cohort-common",
+            "name": "Ashenmoor Cohort",
+            "set": "Shadowmoor",
+            "number": "56",
+            "rarity": "Common",
+            "price": 0.33,
+            "change1d": 1550,
+            "change7d": 1550,
+            "change30d": 1550,
+            "variant": "Normal / Moderately Played",
+            "history": [
+              {
+                "t": 1778630400,
+                "p": 0.02
+              },
+              {
+                "t": 1778716800,
+                "p": 0.02
+              },
+              {
+                "t": 1778803200,
+                "p": 0.02
+              },
+              {
+                "t": 1778889600,
+                "p": 0.02
+              },
+              {
+                "t": 1778976000,
+                "p": 0.02
+              },
+              {
+                "t": 1779062400,
+                "p": 0.02
+              },
+              {
+                "t": 1779148800,
+                "p": 0.33
+              }
+            ],
+            "justtcgPrice": 0.33,
+            "sources": {
+              "justtcg": {
+                "label": "JustTCG",
+                "price": 0.33,
+                "variant": "Normal / Moderately Played",
+                "imageUrl": ""
+              }
+            }
+          },
+          {
+            "id": "magic-the-gathering-time-spiral-flickering-spirit-common",
+            "name": "Flickering Spirit",
+            "set": "Time Spiral",
+            "number": "17",
+            "rarity": "Common",
+            "price": 0.27,
+            "change1d": 575,
+            "change7d": 575,
+            "change30d": 800,
+            "variant": "Normal / Lightly Played",
+            "history": [
+              {
+                "t": 1778630400,
+                "p": 0.04
+              },
+              {
+                "t": 1778716800,
+                "p": 0.04
+              },
+              {
+                "t": 1778803200,
+                "p": 0.04
+              },
+              {
+                "t": 1778889600,
+                "p": 0.04
+              },
+              {
+                "t": 1778976000,
+                "p": 0.04
+              },
+              {
+                "t": 1779062400,
+                "p": 0.04
+              },
+              {
+                "t": 1779148800,
+                "p": 0.27
+              }
+            ],
+            "justtcgPrice": 0.27,
+            "sources": {
+              "justtcg": {
+                "label": "JustTCG",
+                "price": 0.27,
+                "variant": "Normal / Lightly Played",
+                "imageUrl": ""
+              }
+            }
+          },
+          {
+            "id": "magic-the-gathering-champions-of-kamigawa-nine-ringed-bo-uncommon",
+            "name": "Nine-Ringed Bo",
+            "set": "Champions of Kamigawa",
+            "number": "263",
+            "rarity": "Uncommon",
             "price": 0.27,
             "change1d": 440,
             "change7d": 440,
             "change30d": 440,
-            "variant": "Normal / Lightly Played",
-            "imageUrl": "",
+            "variant": "Normal / Moderately Played",
             "history": [
+              {
+                "t": 1778630400,
+                "p": 0.05
+              },
               {
                 "t": 1778716800,
                 "p": 0.05
@@ -932,331 +645,38 @@
               },
               {
                 "t": 1779148800,
-                "p": 0.05
-              },
-              {
-                "t": 1779235200,
                 "p": 0.27
               }
-            ]
-          },
-          {
-            "id": "magic-the-gathering-art-series-kaldheim-niko-aris-art-card-special",
-            "name": "Niko Aris Art Card",
-            "set": "Art Series: Kaldheim",
-            "number": "63",
-            "rarity": "Special",
-            "price": 0.27,
-            "change1d": 440,
-            "change7d": 440,
-            "change30d": 42.11,
-            "variant": "Normal / Lightly Played",
-            "imageUrl": "",
-            "history": [
-              {
-                "t": 1778716800,
-                "p": 0.05
-              },
-              {
-                "t": 1778803200,
-                "p": 0.05
-              },
-              {
-                "t": 1778889600,
-                "p": 0.05
-              },
-              {
-                "t": 1778976000,
-                "p": 0.05
-              },
-              {
-                "t": 1779062400,
-                "p": 0.05
-              },
-              {
-                "t": 1779148800,
-                "p": 0.05
-              },
-              {
-                "t": 1779235200,
-                "p": 0.27
+            ],
+            "justtcgPrice": 0.27,
+            "sources": {
+              "justtcg": {
+                "label": "JustTCG",
+                "price": 0.27,
+                "variant": "Normal / Moderately Played",
+                "imageUrl": ""
               }
-            ]
-          },
-          {
-            "id": "magic-the-gathering-zendikar-rising-ruin-crab-uncommon",
-            "name": "Ruin Crab",
-            "set": "Zendikar Rising",
-            "number": "75",
-            "rarity": "Uncommon",
-            "price": 1.12,
-            "change1d": 366.67,
-            "change7d": 366.67,
-            "change30d": 366.67,
-            "variant": "Normal - Japanese / Lightly Played",
-            "imageUrl": "",
-            "history": [
-              {
-                "t": 1778716800,
-                "p": 0.24
-              },
-              {
-                "t": 1778803200,
-                "p": 0.24
-              },
-              {
-                "t": 1778889600,
-                "p": 0.24
-              },
-              {
-                "t": 1778976000,
-                "p": 0.24
-              },
-              {
-                "t": 1779062400,
-                "p": 0.24
-              },
-              {
-                "t": 1779148800,
-                "p": 0.24
-              },
-              {
-                "t": 1779235200,
-                "p": 1.12
-              }
-            ]
-          },
-          {
-            "id": "magic-the-gathering-modern-horizons-crashing-footfalls-rare",
-            "name": "Crashing Footfalls",
-            "set": "Modern Horizons",
-            "number": "160",
-            "rarity": "Rare",
-            "price": 1.21,
-            "change1d": 348.15,
-            "change7d": 348.15,
-            "change30d": 348.15,
-            "variant": "Normal / Heavily Played",
-            "imageUrl": "",
-            "history": [
-              {
-                "t": 1778716800,
-                "p": 0.27
-              },
-              {
-                "t": 1778803200,
-                "p": 0.27
-              },
-              {
-                "t": 1778889600,
-                "p": 0.27
-              },
-              {
-                "t": 1778976000,
-                "p": 0.27
-              },
-              {
-                "t": 1779062400,
-                "p": 0.27
-              },
-              {
-                "t": 1779148800,
-                "p": 0.27
-              },
-              {
-                "t": 1779235200,
-                "p": 1.21
-              }
-            ]
-          },
-          {
-            "id": "magic-the-gathering-theros-beyond-death-atris-oracle-of-half-truths-extended-art-rare",
-            "name": "Atris, Oracle of Half-Truths (Extended Art)",
-            "set": "Theros Beyond Death",
-            "number": "333",
-            "rarity": "Rare",
-            "price": 0.39,
-            "change1d": 290,
-            "change7d": 290,
-            "change30d": 290,
-            "variant": "Foil / Lightly Played",
-            "imageUrl": "",
-            "history": [
-              {
-                "t": 1778716800,
-                "p": 0.1
-              },
-              {
-                "t": 1778803200,
-                "p": 0.1
-              },
-              {
-                "t": 1778889600,
-                "p": 0.1
-              },
-              {
-                "t": 1778976000,
-                "p": 0.1
-              },
-              {
-                "t": 1779062400,
-                "p": 0.1
-              },
-              {
-                "t": 1779148800,
-                "p": 0.39
-              },
-              {
-                "t": 1779235200,
-                "p": 0.39
-              }
-            ]
-          },
-          {
-            "id": "magic-the-gathering-champions-of-kamigawa-forest-306-land",
-            "name": "Forest (306)",
-            "set": "Champions of Kamigawa",
-            "number": "306",
-            "rarity": "Land",
-            "price": 0.34,
-            "change1d": 277.78,
-            "change7d": 277.78,
-            "change30d": 277.78,
-            "variant": "Foil / Damaged",
-            "imageUrl": "",
-            "history": [
-              {
-                "t": 1778716800,
-                "p": 0.09
-              },
-              {
-                "t": 1778803200,
-                "p": 0.09
-              },
-              {
-                "t": 1778889600,
-                "p": 0.09
-              },
-              {
-                "t": 1778976000,
-                "p": 0.09
-              },
-              {
-                "t": 1779062400,
-                "p": 0.09
-              },
-              {
-                "t": 1779148800,
-                "p": 0.09
-              },
-              {
-                "t": 1779235200,
-                "p": 0.34
-              }
-            ]
+            }
           }
         ]
       },
       "items": [
         {
-          "id": "magic-the-gathering-mystery-booster-2-memnite-future-sight-uncommon",
-          "name": "Memnite (Future Sight)",
-          "set": "Mystery Booster 2",
-          "number": "228",
-          "rarity": "Uncommon",
-          "price": 21.77,
-          "change1d": 2077,
-          "change7d": 2077,
-          "change30d": 2077,
-          "variant": "Foil / Moderately Played",
-          "imageUrl": "",
-          "history": [
-            {
-              "t": 1778716800,
-              "p": 1
-            },
-            {
-              "t": 1778803200,
-              "p": 1
-            },
-            {
-              "t": 1778889600,
-              "p": 1
-            },
-            {
-              "t": 1778976000,
-              "p": 1
-            },
-            {
-              "t": 1779062400,
-              "p": 1
-            },
-            {
-              "t": 1779148800,
-              "p": 1
-            },
-            {
-              "t": 1779235200,
-              "p": 21.77
-            }
-          ]
-        },
-        {
-          "id": "magic-the-gathering-duel-decks-ajani-vs-nicol-bolas-moroii-uncommon",
-          "name": "Moroii",
-          "set": "Duel Decks: Ajani vs. Nicol Bolas",
-          "number": "51",
-          "rarity": "Uncommon",
-          "price": 0.31,
-          "change1d": 1450,
-          "change7d": 1450,
-          "change30d": 1450,
-          "variant": "Normal / Near Mint",
-          "imageUrl": "",
-          "history": [
-            {
-              "t": 1778716800,
-              "p": 0.02
-            },
-            {
-              "t": 1778803200,
-              "p": 0.02
-            },
-            {
-              "t": 1778889600,
-              "p": 0.02
-            },
-            {
-              "t": 1778976000,
-              "p": 0.02
-            },
-            {
-              "t": 1779062400,
-              "p": 0.02
-            },
-            {
-              "t": 1779148800,
-              "p": 0.02
-            },
-            {
-              "t": 1779235200,
-              "p": 0.31
-            }
-          ]
-        },
-        {
-          "id": "magic-the-gathering-wilds-of-eldraine-horned-loch-whale-showcase-rare",
-          "name": "Horned Loch-Whale (Showcase)",
-          "set": "Wilds of Eldraine",
-          "number": "278",
+          "id": "magic-the-gathering-afr-ampersand-promos-meteor-swarm-rare",
+          "name": "Meteor Swarm",
+          "set": "AFR Ampersand Promos",
+          "number": "155",
           "rarity": "Rare",
-          "price": 0.38,
-          "change1d": 660,
-          "change7d": 660,
-          "change30d": 660,
-          "variant": "Normal / Moderately Played",
-          "imageUrl": "",
+          "price": 1.29,
+          "change1d": 2480,
+          "change7d": 2480,
+          "change30d": 2480,
+          "variant": "Foil / Near Mint",
           "history": [
+            {
+              "t": 1778630400,
+              "p": 0.05
+            },
             {
               "t": 1778716800,
               "p": 0.05
@@ -1279,27 +699,137 @@
             },
             {
               "t": 1779148800,
-              "p": 0.05
-            },
-            {
-              "t": 1779235200,
-              "p": 0.38
+              "p": 1.29
             }
-          ]
+          ],
+          "justtcgPrice": 1.29,
+          "sources": {
+            "justtcg": {
+              "label": "JustTCG",
+              "price": 1.29,
+              "variant": "Foil / Near Mint",
+              "imageUrl": ""
+            }
+          }
         },
         {
-          "id": "magic-the-gathering-art-series-kaldheim-kaya-the-inexorable-art-card-special",
-          "name": "Kaya the Inexorable Art Card",
-          "set": "Art Series: Kaldheim",
-          "number": "58",
-          "rarity": "Special",
+          "id": "magic-the-gathering-shadowmoor-ashenmoor-cohort-common",
+          "name": "Ashenmoor Cohort",
+          "set": "Shadowmoor",
+          "number": "56",
+          "rarity": "Common",
+          "price": 0.33,
+          "change1d": 1550,
+          "change7d": 1550,
+          "change30d": 1550,
+          "variant": "Normal / Moderately Played",
+          "history": [
+            {
+              "t": 1778630400,
+              "p": 0.02
+            },
+            {
+              "t": 1778716800,
+              "p": 0.02
+            },
+            {
+              "t": 1778803200,
+              "p": 0.02
+            },
+            {
+              "t": 1778889600,
+              "p": 0.02
+            },
+            {
+              "t": 1778976000,
+              "p": 0.02
+            },
+            {
+              "t": 1779062400,
+              "p": 0.02
+            },
+            {
+              "t": 1779148800,
+              "p": 0.33
+            }
+          ],
+          "justtcgPrice": 0.33,
+          "sources": {
+            "justtcg": {
+              "label": "JustTCG",
+              "price": 0.33,
+              "variant": "Normal / Moderately Played",
+              "imageUrl": ""
+            }
+          }
+        },
+        {
+          "id": "magic-the-gathering-time-spiral-flickering-spirit-common",
+          "name": "Flickering Spirit",
+          "set": "Time Spiral",
+          "number": "17",
+          "rarity": "Common",
+          "price": 0.27,
+          "change1d": 575,
+          "change7d": 575,
+          "change30d": 800,
+          "variant": "Normal / Lightly Played",
+          "history": [
+            {
+              "t": 1778630400,
+              "p": 0.04
+            },
+            {
+              "t": 1778716800,
+              "p": 0.04
+            },
+            {
+              "t": 1778803200,
+              "p": 0.04
+            },
+            {
+              "t": 1778889600,
+              "p": 0.04
+            },
+            {
+              "t": 1778976000,
+              "p": 0.04
+            },
+            {
+              "t": 1779062400,
+              "p": 0.04
+            },
+            {
+              "t": 1779148800,
+              "p": 0.27
+            }
+          ],
+          "justtcgPrice": 0.27,
+          "sources": {
+            "justtcg": {
+              "label": "JustTCG",
+              "price": 0.27,
+              "variant": "Normal / Lightly Played",
+              "imageUrl": ""
+            }
+          }
+        },
+        {
+          "id": "magic-the-gathering-champions-of-kamigawa-nine-ringed-bo-uncommon",
+          "name": "Nine-Ringed Bo",
+          "set": "Champions of Kamigawa",
+          "number": "263",
+          "rarity": "Uncommon",
           "price": 0.27,
           "change1d": 440,
           "change7d": 440,
           "change30d": 440,
-          "variant": "Normal / Lightly Played",
-          "imageUrl": "",
+          "variant": "Normal / Moderately Played",
           "history": [
+            {
+              "t": 1778630400,
+              "p": 0.05
+            },
             {
               "t": 1778716800,
               "p": 0.05
@@ -1322,231 +852,24 @@
             },
             {
               "t": 1779148800,
-              "p": 0.05
-            },
-            {
-              "t": 1779235200,
               "p": 0.27
             }
-          ]
-        },
-        {
-          "id": "magic-the-gathering-art-series-kaldheim-niko-aris-art-card-special",
-          "name": "Niko Aris Art Card",
-          "set": "Art Series: Kaldheim",
-          "number": "63",
-          "rarity": "Special",
-          "price": 0.27,
-          "change1d": 440,
-          "change7d": 440,
-          "change30d": 42.11,
-          "variant": "Normal / Lightly Played",
-          "imageUrl": "",
-          "history": [
-            {
-              "t": 1778716800,
-              "p": 0.05
-            },
-            {
-              "t": 1778803200,
-              "p": 0.05
-            },
-            {
-              "t": 1778889600,
-              "p": 0.05
-            },
-            {
-              "t": 1778976000,
-              "p": 0.05
-            },
-            {
-              "t": 1779062400,
-              "p": 0.05
-            },
-            {
-              "t": 1779148800,
-              "p": 0.05
-            },
-            {
-              "t": 1779235200,
-              "p": 0.27
+          ],
+          "justtcgPrice": 0.27,
+          "sources": {
+            "justtcg": {
+              "label": "JustTCG",
+              "price": 0.27,
+              "variant": "Normal / Moderately Played",
+              "imageUrl": ""
             }
-          ]
-        },
-        {
-          "id": "magic-the-gathering-zendikar-rising-ruin-crab-uncommon",
-          "name": "Ruin Crab",
-          "set": "Zendikar Rising",
-          "number": "75",
-          "rarity": "Uncommon",
-          "price": 1.12,
-          "change1d": 366.67,
-          "change7d": 366.67,
-          "change30d": 366.67,
-          "variant": "Normal - Japanese / Lightly Played",
-          "imageUrl": "",
-          "history": [
-            {
-              "t": 1778716800,
-              "p": 0.24
-            },
-            {
-              "t": 1778803200,
-              "p": 0.24
-            },
-            {
-              "t": 1778889600,
-              "p": 0.24
-            },
-            {
-              "t": 1778976000,
-              "p": 0.24
-            },
-            {
-              "t": 1779062400,
-              "p": 0.24
-            },
-            {
-              "t": 1779148800,
-              "p": 0.24
-            },
-            {
-              "t": 1779235200,
-              "p": 1.12
-            }
-          ]
-        },
-        {
-          "id": "magic-the-gathering-modern-horizons-crashing-footfalls-rare",
-          "name": "Crashing Footfalls",
-          "set": "Modern Horizons",
-          "number": "160",
-          "rarity": "Rare",
-          "price": 1.21,
-          "change1d": 348.15,
-          "change7d": 348.15,
-          "change30d": 348.15,
-          "variant": "Normal / Heavily Played",
-          "imageUrl": "",
-          "history": [
-            {
-              "t": 1778716800,
-              "p": 0.27
-            },
-            {
-              "t": 1778803200,
-              "p": 0.27
-            },
-            {
-              "t": 1778889600,
-              "p": 0.27
-            },
-            {
-              "t": 1778976000,
-              "p": 0.27
-            },
-            {
-              "t": 1779062400,
-              "p": 0.27
-            },
-            {
-              "t": 1779148800,
-              "p": 0.27
-            },
-            {
-              "t": 1779235200,
-              "p": 1.21
-            }
-          ]
-        },
-        {
-          "id": "magic-the-gathering-theros-beyond-death-atris-oracle-of-half-truths-extended-art-rare",
-          "name": "Atris, Oracle of Half-Truths (Extended Art)",
-          "set": "Theros Beyond Death",
-          "number": "333",
-          "rarity": "Rare",
-          "price": 0.39,
-          "change1d": 290,
-          "change7d": 290,
-          "change30d": 290,
-          "variant": "Foil / Lightly Played",
-          "imageUrl": "",
-          "history": [
-            {
-              "t": 1778716800,
-              "p": 0.1
-            },
-            {
-              "t": 1778803200,
-              "p": 0.1
-            },
-            {
-              "t": 1778889600,
-              "p": 0.1
-            },
-            {
-              "t": 1778976000,
-              "p": 0.1
-            },
-            {
-              "t": 1779062400,
-              "p": 0.1
-            },
-            {
-              "t": 1779148800,
-              "p": 0.39
-            },
-            {
-              "t": 1779235200,
-              "p": 0.39
-            }
-          ]
-        },
-        {
-          "id": "magic-the-gathering-champions-of-kamigawa-forest-306-land",
-          "name": "Forest (306)",
-          "set": "Champions of Kamigawa",
-          "number": "306",
-          "rarity": "Land",
-          "price": 0.34,
-          "change1d": 277.78,
-          "change7d": 277.78,
-          "change30d": 277.78,
-          "variant": "Foil / Damaged",
-          "imageUrl": "",
-          "history": [
-            {
-              "t": 1778716800,
-              "p": 0.09
-            },
-            {
-              "t": 1778803200,
-              "p": 0.09
-            },
-            {
-              "t": 1778889600,
-              "p": 0.09
-            },
-            {
-              "t": 1778976000,
-              "p": 0.09
-            },
-            {
-              "t": 1779062400,
-              "p": 0.09
-            },
-            {
-              "t": 1779148800,
-              "p": 0.09
-            },
-            {
-              "t": 1779235200,
-              "p": 0.34
-            }
-          ]
+          }
         }
       ],
-      "warnings": []
+      "warnings": [],
+      "priceSources": [
+        "JustTCG"
+      ]
     },
     {
       "id": "pokemon",
@@ -1555,768 +878,421 @@
       "windows": {
         "daily": [
           {
-            "id": "pokemon-generations-lightning-energy-common",
-            "name": "Lightning Energy",
-            "set": "Generations",
-            "number": "78/83",
+            "id": "pokemon-call-of-legends-pineco-common",
+            "name": "Pineco",
+            "set": "Call of Legends",
+            "number": "68/95",
             "rarity": "Common",
-            "price": 2.2,
-            "change1d": 464.1,
-            "change7d": 464.1,
-            "change30d": 83.33,
-            "variant": "Reverse Holofoil / Heavily Played",
-            "imageUrl": "",
-            "history": [
-              {
-                "t": 1778716800,
-                "p": 0.39
-              },
-              {
-                "t": 1778803200,
-                "p": 0.39
-              },
-              {
-                "t": 1778889600,
-                "p": 0.39
-              },
-              {
-                "t": 1778976000,
-                "p": 0.39
-              },
-              {
-                "t": 1779062400,
-                "p": 0.39
-              },
-              {
-                "t": 1779148800,
-                "p": 0.39
-              },
-              {
-                "t": 1779235200,
-                "p": 2.2
-              }
-            ]
-          },
-          {
-            "id": "pokemon-supreme-victors-marshtomp-uncommon",
-            "name": "Marshtomp",
-            "set": "Supreme Victors",
-            "number": "67",
-            "rarity": "Uncommon",
-            "price": 30.26,
-            "change1d": 331.67,
-            "change7d": 331.67,
-            "change30d": 331.67,
+            "price": 3.58,
+            "change1d": 661.7,
+            "change7d": 661.7,
+            "change30d": 661.7,
             "variant": "Reverse Holofoil / Near Mint",
-            "imageUrl": "",
             "history": [
               {
+                "t": 1778630400,
+                "p": 0.47
+              },
+              {
                 "t": 1778716800,
-                "p": 7.01
+                "p": 0.47
               },
               {
                 "t": 1778803200,
-                "p": 7.01
+                "p": 0.47
               },
               {
                 "t": 1778889600,
-                "p": 7.01
+                "p": 0.47
               },
               {
                 "t": 1778976000,
-                "p": 7.01
+                "p": 0.47
               },
               {
                 "t": 1779062400,
-                "p": 7.01
+                "p": 0.47
               },
               {
                 "t": 1779148800,
-                "p": 7.01
-              },
-              {
-                "t": 1779235200,
-                "p": 30.26
+                "p": 3.58
               }
-            ]
+            ],
+            "justtcgPrice": 3.58,
+            "sources": {
+              "justtcg": {
+                "label": "JustTCG",
+                "price": 3.58,
+                "variant": "Reverse Holofoil / Near Mint",
+                "imageUrl": ""
+              }
+            }
           },
           {
-            "id": "pokemon-sm-burning-shadows-shiinotic-rare",
-            "name": "Shiinotic",
-            "set": "SM - Burning Shadows",
-            "number": "98/147",
-            "rarity": "Rare",
-            "price": 0.67,
-            "change1d": 294.12,
-            "change7d": 294.12,
-            "change30d": 294.12,
-            "variant": "Normal / Damaged",
-            "imageUrl": "",
+            "id": "pokemon-miscellaneous-cards-products-code-card-ex-battle-deck-ampharos-ex-code-card",
+            "name": "Code Card - ex Battle Deck [Ampharos ex]",
+            "set": "Miscellaneous Cards & Products",
+            "number": "N/A",
+            "rarity": "Code Card",
+            "price": 0.55,
+            "change1d": 511.11,
+            "change7d": 511.11,
+            "change30d": 511.11,
+            "variant": "Normal / Near Mint",
             "history": [
               {
-                "t": 1778889600,
-                "p": 0.17
+                "t": 1778630400,
+                "p": 0.09
               },
-              {
-                "t": 1778976000,
-                "p": 0.17
-              },
-              {
-                "t": 1779062400,
-                "p": 0.17
-              },
-              {
-                "t": 1779148800,
-                "p": 0.17
-              },
-              {
-                "t": 1779235200,
-                "p": 0.67
-              }
-            ]
-          },
-          {
-            "id": "pokemon-rising-rivals-aerodactyl-gl-common",
-            "name": "Aerodactyl GL",
-            "set": "Rising Rivals",
-            "number": "55/111",
-            "rarity": "Common",
-            "price": 2.56,
-            "change1d": 156,
-            "change7d": 156,
-            "change30d": 156,
-            "variant": "Reverse Holofoil / Damaged",
-            "imageUrl": "",
-            "history": [
               {
                 "t": 1778716800,
-                "p": 1
+                "p": 0.09
               },
               {
                 "t": 1778803200,
-                "p": 1
+                "p": 0.09
               },
               {
                 "t": 1778889600,
-                "p": 1
+                "p": 0.09
               },
               {
                 "t": 1778976000,
-                "p": 1
+                "p": 0.09
               },
               {
                 "t": 1779062400,
-                "p": 1
+                "p": 0.09
               },
               {
                 "t": 1779148800,
-                "p": 1
-              },
-              {
-                "t": 1779235200,
-                "p": 2.56
+                "p": 0.55
               }
-            ]
+            ],
+            "justtcgPrice": 0.55,
+            "sources": {
+              "justtcg": {
+                "label": "JustTCG",
+                "price": 0.55,
+                "variant": "Normal / Near Mint",
+                "imageUrl": ""
+              }
+            }
           },
           {
-            "id": "pokemon-dragons-exalted-braviary-rare",
-            "name": "Braviary",
-            "set": "Dragons Exalted",
-            "number": "112/124",
-            "rarity": "Rare",
-            "price": 0.25,
-            "change1d": 150,
-            "change7d": 150,
-            "change30d": 150,
-            "variant": "Normal / Damaged",
-            "imageUrl": "",
-            "history": [
-              {
-                "t": 1778716800,
-                "p": 0.1
-              },
-              {
-                "t": 1778803200,
-                "p": 0.1
-              },
-              {
-                "t": 1778889600,
-                "p": 0.1
-              },
-              {
-                "t": 1778976000,
-                "p": 0.1
-              },
-              {
-                "t": 1779062400,
-                "p": 0.1
-              },
-              {
-                "t": 1779148800,
-                "p": 0.1
-              },
-              {
-                "t": 1779235200,
-                "p": 0.25
-              }
-            ]
-          },
-          {
-            "id": "pokemon-swsh04-vivid-voltage-zeraora-holo-rare",
-            "name": "Zeraora",
-            "set": "SWSH04: Vivid Voltage",
-            "number": "061/185",
-            "rarity": "Holo Rare",
-            "price": 0.25,
-            "change1d": 150,
-            "change7d": 150,
-            "change30d": 150,
-            "variant": "Holofoil / Damaged",
-            "imageUrl": "",
-            "history": [
-              {
-                "t": 1778716800,
-                "p": 0.1
-              },
-              {
-                "t": 1778803200,
-                "p": 0.1
-              },
-              {
-                "t": 1778889600,
-                "p": 0.1
-              },
-              {
-                "t": 1778976000,
-                "p": 0.1
-              },
-              {
-                "t": 1779062400,
-                "p": 0.1
-              },
-              {
-                "t": 1779148800,
-                "p": 0.1
-              },
-              {
-                "t": 1779235200,
-                "p": 0.25
-              }
-            ]
-          },
-          {
-            "id": "pokemon-xy-primal-clash-tentacool-alpha-uncommon",
-            "name": "Tentacool (Alpha)",
-            "set": "XY - Primal Clash",
-            "number": "71/160",
+            "id": "pokemon-xy-phantom-forces-gengar-spirit-link-uncommon",
+            "name": "Gengar Spirit Link",
+            "set": "XY - Phantom Forces",
+            "number": "95/119",
             "rarity": "Uncommon",
-            "price": 1.33,
-            "change1d": 137.5,
-            "change7d": 141.82,
-            "change30d": 137.5,
-            "variant": "Normal / Lightly Played",
-            "imageUrl": "",
+            "price": 2.99,
+            "change1d": 510.2,
+            "change7d": 510.2,
+            "change30d": 510.2,
+            "variant": "Reverse Holofoil / Damaged",
             "history": [
               {
+                "t": 1778630400,
+                "p": 0.49
+              },
+              {
                 "t": 1778716800,
-                "p": 0.55
+                "p": 0.49
               },
               {
                 "t": 1778803200,
-                "p": 0.55
+                "p": 0.49
               },
               {
                 "t": 1778889600,
-                "p": 0.56
+                "p": 0.49
               },
               {
                 "t": 1778976000,
-                "p": 0.56
+                "p": 0.49
               },
               {
                 "t": 1779062400,
-                "p": 0.56
+                "p": 0.49
               },
               {
                 "t": 1779148800,
-                "p": 0.56
-              },
-              {
-                "t": 1779235200,
-                "p": 1.33
+                "p": 2.99
               }
-            ]
+            ],
+            "justtcgPrice": 2.99,
+            "sources": {
+              "justtcg": {
+                "label": "JustTCG",
+                "price": 2.99,
+                "variant": "Reverse Holofoil / Damaged",
+                "imageUrl": ""
+              }
+            }
           },
           {
-            "id": "pokemon-champion-s-path-altaria-holo-rare",
-            "name": "Altaria",
-            "set": "Champion's Path",
-            "number": "49/73",
-            "rarity": "Holo Rare",
-            "price": 0.32,
-            "change1d": 113.33,
-            "change7d": 113.33,
-            "change30d": 113.33,
-            "variant": "Reverse Holofoil / Damaged",
-            "imageUrl": "",
+            "id": "pokemon-mcdonald-s-promos-2016-totodile-5-12-promo",
+            "name": "Totodile - 5/12",
+            "set": "McDonald's Promos 2016",
+            "number": "005/012",
+            "rarity": "Promo",
+            "price": 16.5,
+            "change1d": 450,
+            "change7d": 450,
+            "change30d": 450,
+            "variant": "Holofoil / Heavily Played",
             "history": [
               {
+                "t": 1778630400,
+                "p": 3
+              },
+              {
                 "t": 1778716800,
-                "p": 0.15
+                "p": 3
               },
               {
                 "t": 1778803200,
-                "p": 0.15
+                "p": 3
               },
               {
                 "t": 1778889600,
-                "p": 0.15
+                "p": 3
               },
               {
                 "t": 1778976000,
-                "p": 0.15
+                "p": 3
               },
               {
                 "t": 1779062400,
-                "p": 0.15
+                "p": 3
               },
               {
                 "t": 1779148800,
-                "p": 0.15
-              },
-              {
-                "t": 1779235200,
-                "p": 0.32
+                "p": 16.5
               }
-            ]
-          },
-          {
-            "id": "pokemon-deoxys-electrike-060-107-common",
-            "name": "Electrike - 060/107",
-            "set": "Deoxys",
-            "number": "60/107",
-            "rarity": "Common",
-            "price": 2.14,
-            "change1d": 103.81,
-            "change7d": 103.81,
-            "change30d": 16.3,
-            "variant": "Reverse Holofoil / Damaged",
-            "imageUrl": "",
-            "history": [
-              {
-                "t": 1778716800,
-                "p": 1.05
-              },
-              {
-                "t": 1778803200,
-                "p": 1.05
-              },
-              {
-                "t": 1778889600,
-                "p": 1.05
-              },
-              {
-                "t": 1778976000,
-                "p": 1.05
-              },
-              {
-                "t": 1779062400,
-                "p": 1.05
-              },
-              {
-                "t": 1779148800,
-                "p": 1.05
-              },
-              {
-                "t": 1779235200,
-                "p": 2.14
+            ],
+            "justtcgPrice": 16.5,
+            "sources": {
+              "justtcg": {
+                "label": "JustTCG",
+                "price": 16.5,
+                "variant": "Holofoil / Heavily Played",
+                "imageUrl": ""
               }
-            ]
+            }
           }
         ]
       },
       "items": [
         {
-          "id": "pokemon-generations-lightning-energy-common",
-          "name": "Lightning Energy",
-          "set": "Generations",
-          "number": "78/83",
+          "id": "pokemon-call-of-legends-pineco-common",
+          "name": "Pineco",
+          "set": "Call of Legends",
+          "number": "68/95",
           "rarity": "Common",
-          "price": 2.2,
-          "change1d": 464.1,
-          "change7d": 464.1,
-          "change30d": 83.33,
-          "variant": "Reverse Holofoil / Heavily Played",
-          "imageUrl": "",
-          "history": [
-            {
-              "t": 1778716800,
-              "p": 0.39
-            },
-            {
-              "t": 1778803200,
-              "p": 0.39
-            },
-            {
-              "t": 1778889600,
-              "p": 0.39
-            },
-            {
-              "t": 1778976000,
-              "p": 0.39
-            },
-            {
-              "t": 1779062400,
-              "p": 0.39
-            },
-            {
-              "t": 1779148800,
-              "p": 0.39
-            },
-            {
-              "t": 1779235200,
-              "p": 2.2
-            }
-          ]
-        },
-        {
-          "id": "pokemon-supreme-victors-marshtomp-uncommon",
-          "name": "Marshtomp",
-          "set": "Supreme Victors",
-          "number": "67",
-          "rarity": "Uncommon",
-          "price": 30.26,
-          "change1d": 331.67,
-          "change7d": 331.67,
-          "change30d": 331.67,
+          "price": 3.58,
+          "change1d": 661.7,
+          "change7d": 661.7,
+          "change30d": 661.7,
           "variant": "Reverse Holofoil / Near Mint",
-          "imageUrl": "",
           "history": [
             {
+              "t": 1778630400,
+              "p": 0.47
+            },
+            {
               "t": 1778716800,
-              "p": 7.01
+              "p": 0.47
             },
             {
               "t": 1778803200,
-              "p": 7.01
+              "p": 0.47
             },
             {
               "t": 1778889600,
-              "p": 7.01
+              "p": 0.47
             },
             {
               "t": 1778976000,
-              "p": 7.01
+              "p": 0.47
             },
             {
               "t": 1779062400,
-              "p": 7.01
+              "p": 0.47
             },
             {
               "t": 1779148800,
-              "p": 7.01
-            },
-            {
-              "t": 1779235200,
-              "p": 30.26
+              "p": 3.58
             }
-          ]
+          ],
+          "justtcgPrice": 3.58,
+          "sources": {
+            "justtcg": {
+              "label": "JustTCG",
+              "price": 3.58,
+              "variant": "Reverse Holofoil / Near Mint",
+              "imageUrl": ""
+            }
+          }
         },
         {
-          "id": "pokemon-sm-burning-shadows-shiinotic-rare",
-          "name": "Shiinotic",
-          "set": "SM - Burning Shadows",
-          "number": "98/147",
-          "rarity": "Rare",
-          "price": 0.67,
-          "change1d": 294.12,
-          "change7d": 294.12,
-          "change30d": 294.12,
-          "variant": "Normal / Damaged",
-          "imageUrl": "",
+          "id": "pokemon-miscellaneous-cards-products-code-card-ex-battle-deck-ampharos-ex-code-card",
+          "name": "Code Card - ex Battle Deck [Ampharos ex]",
+          "set": "Miscellaneous Cards & Products",
+          "number": "N/A",
+          "rarity": "Code Card",
+          "price": 0.55,
+          "change1d": 511.11,
+          "change7d": 511.11,
+          "change30d": 511.11,
+          "variant": "Normal / Near Mint",
           "history": [
             {
-              "t": 1778889600,
-              "p": 0.17
+              "t": 1778630400,
+              "p": 0.09
             },
-            {
-              "t": 1778976000,
-              "p": 0.17
-            },
-            {
-              "t": 1779062400,
-              "p": 0.17
-            },
-            {
-              "t": 1779148800,
-              "p": 0.17
-            },
-            {
-              "t": 1779235200,
-              "p": 0.67
-            }
-          ]
-        },
-        {
-          "id": "pokemon-rising-rivals-aerodactyl-gl-common",
-          "name": "Aerodactyl GL",
-          "set": "Rising Rivals",
-          "number": "55/111",
-          "rarity": "Common",
-          "price": 2.56,
-          "change1d": 156,
-          "change7d": 156,
-          "change30d": 156,
-          "variant": "Reverse Holofoil / Damaged",
-          "imageUrl": "",
-          "history": [
             {
               "t": 1778716800,
-              "p": 1
+              "p": 0.09
             },
             {
               "t": 1778803200,
-              "p": 1
+              "p": 0.09
             },
             {
               "t": 1778889600,
-              "p": 1
+              "p": 0.09
             },
             {
               "t": 1778976000,
-              "p": 1
+              "p": 0.09
             },
             {
               "t": 1779062400,
-              "p": 1
+              "p": 0.09
             },
             {
               "t": 1779148800,
-              "p": 1
-            },
-            {
-              "t": 1779235200,
-              "p": 2.56
+              "p": 0.55
             }
-          ]
+          ],
+          "justtcgPrice": 0.55,
+          "sources": {
+            "justtcg": {
+              "label": "JustTCG",
+              "price": 0.55,
+              "variant": "Normal / Near Mint",
+              "imageUrl": ""
+            }
+          }
         },
         {
-          "id": "pokemon-dragons-exalted-braviary-rare",
-          "name": "Braviary",
-          "set": "Dragons Exalted",
-          "number": "112/124",
-          "rarity": "Rare",
-          "price": 0.25,
-          "change1d": 150,
-          "change7d": 150,
-          "change30d": 150,
-          "variant": "Normal / Damaged",
-          "imageUrl": "",
-          "history": [
-            {
-              "t": 1778716800,
-              "p": 0.1
-            },
-            {
-              "t": 1778803200,
-              "p": 0.1
-            },
-            {
-              "t": 1778889600,
-              "p": 0.1
-            },
-            {
-              "t": 1778976000,
-              "p": 0.1
-            },
-            {
-              "t": 1779062400,
-              "p": 0.1
-            },
-            {
-              "t": 1779148800,
-              "p": 0.1
-            },
-            {
-              "t": 1779235200,
-              "p": 0.25
-            }
-          ]
-        },
-        {
-          "id": "pokemon-swsh04-vivid-voltage-zeraora-holo-rare",
-          "name": "Zeraora",
-          "set": "SWSH04: Vivid Voltage",
-          "number": "061/185",
-          "rarity": "Holo Rare",
-          "price": 0.25,
-          "change1d": 150,
-          "change7d": 150,
-          "change30d": 150,
-          "variant": "Holofoil / Damaged",
-          "imageUrl": "",
-          "history": [
-            {
-              "t": 1778716800,
-              "p": 0.1
-            },
-            {
-              "t": 1778803200,
-              "p": 0.1
-            },
-            {
-              "t": 1778889600,
-              "p": 0.1
-            },
-            {
-              "t": 1778976000,
-              "p": 0.1
-            },
-            {
-              "t": 1779062400,
-              "p": 0.1
-            },
-            {
-              "t": 1779148800,
-              "p": 0.1
-            },
-            {
-              "t": 1779235200,
-              "p": 0.25
-            }
-          ]
-        },
-        {
-          "id": "pokemon-xy-primal-clash-tentacool-alpha-uncommon",
-          "name": "Tentacool (Alpha)",
-          "set": "XY - Primal Clash",
-          "number": "71/160",
+          "id": "pokemon-xy-phantom-forces-gengar-spirit-link-uncommon",
+          "name": "Gengar Spirit Link",
+          "set": "XY - Phantom Forces",
+          "number": "95/119",
           "rarity": "Uncommon",
-          "price": 1.33,
-          "change1d": 137.5,
-          "change7d": 141.82,
-          "change30d": 137.5,
-          "variant": "Normal / Lightly Played",
-          "imageUrl": "",
+          "price": 2.99,
+          "change1d": 510.2,
+          "change7d": 510.2,
+          "change30d": 510.2,
+          "variant": "Reverse Holofoil / Damaged",
           "history": [
             {
+              "t": 1778630400,
+              "p": 0.49
+            },
+            {
               "t": 1778716800,
-              "p": 0.55
+              "p": 0.49
             },
             {
               "t": 1778803200,
-              "p": 0.55
+              "p": 0.49
             },
             {
               "t": 1778889600,
-              "p": 0.56
+              "p": 0.49
             },
             {
               "t": 1778976000,
-              "p": 0.56
+              "p": 0.49
             },
             {
               "t": 1779062400,
-              "p": 0.56
+              "p": 0.49
             },
             {
               "t": 1779148800,
-              "p": 0.56
-            },
-            {
-              "t": 1779235200,
-              "p": 1.33
+              "p": 2.99
             }
-          ]
+          ],
+          "justtcgPrice": 2.99,
+          "sources": {
+            "justtcg": {
+              "label": "JustTCG",
+              "price": 2.99,
+              "variant": "Reverse Holofoil / Damaged",
+              "imageUrl": ""
+            }
+          }
         },
         {
-          "id": "pokemon-champion-s-path-altaria-holo-rare",
-          "name": "Altaria",
-          "set": "Champion's Path",
-          "number": "49/73",
-          "rarity": "Holo Rare",
-          "price": 0.32,
-          "change1d": 113.33,
-          "change7d": 113.33,
-          "change30d": 113.33,
-          "variant": "Reverse Holofoil / Damaged",
-          "imageUrl": "",
+          "id": "pokemon-mcdonald-s-promos-2016-totodile-5-12-promo",
+          "name": "Totodile - 5/12",
+          "set": "McDonald's Promos 2016",
+          "number": "005/012",
+          "rarity": "Promo",
+          "price": 16.5,
+          "change1d": 450,
+          "change7d": 450,
+          "change30d": 450,
+          "variant": "Holofoil / Heavily Played",
           "history": [
             {
+              "t": 1778630400,
+              "p": 3
+            },
+            {
               "t": 1778716800,
-              "p": 0.15
+              "p": 3
             },
             {
               "t": 1778803200,
-              "p": 0.15
+              "p": 3
             },
             {
               "t": 1778889600,
-              "p": 0.15
+              "p": 3
             },
             {
               "t": 1778976000,
-              "p": 0.15
+              "p": 3
             },
             {
               "t": 1779062400,
-              "p": 0.15
+              "p": 3
             },
             {
               "t": 1779148800,
-              "p": 0.15
-            },
-            {
-              "t": 1779235200,
-              "p": 0.32
+              "p": 16.5
             }
-          ]
-        },
-        {
-          "id": "pokemon-deoxys-electrike-060-107-common",
-          "name": "Electrike - 060/107",
-          "set": "Deoxys",
-          "number": "60/107",
-          "rarity": "Common",
-          "price": 2.14,
-          "change1d": 103.81,
-          "change7d": 103.81,
-          "change30d": 16.3,
-          "variant": "Reverse Holofoil / Damaged",
-          "imageUrl": "",
-          "history": [
-            {
-              "t": 1778716800,
-              "p": 1.05
-            },
-            {
-              "t": 1778803200,
-              "p": 1.05
-            },
-            {
-              "t": 1778889600,
-              "p": 1.05
-            },
-            {
-              "t": 1778976000,
-              "p": 1.05
-            },
-            {
-              "t": 1779062400,
-              "p": 1.05
-            },
-            {
-              "t": 1779148800,
-              "p": 1.05
-            },
-            {
-              "t": 1779235200,
-              "p": 2.14
+          ],
+          "justtcgPrice": 16.5,
+          "sources": {
+            "justtcg": {
+              "label": "JustTCG",
+              "price": 16.5,
+              "variant": "Holofoil / Heavily Played",
+              "imageUrl": ""
             }
-          ]
+          }
         }
       ],
-      "warnings": []
+      "warnings": [],
+      "priceSources": [
+        "JustTCG"
+      ]
     },
     {
       "id": "yugioh",
@@ -2325,784 +1301,433 @@
       "windows": {
         "daily": [
           {
-            "id": "yugioh-shadow-specters-number-c96-dark-storm-super-rare",
-            "name": "Number C96: Dark Storm",
-            "set": "Shadow Specters",
-            "number": "SHSP-EN046",
-            "rarity": "Super Rare",
-            "price": 1.95,
-            "change1d": 290,
-            "change7d": 290,
-            "change30d": 290,
-            "variant": "Unlimited / Moderately Played",
-            "imageUrl": "",
-            "history": [
-              {
-                "t": 1778716800,
-                "p": 0.5
-              },
-              {
-                "t": 1778803200,
-                "p": 0.5
-              },
-              {
-                "t": 1778889600,
-                "p": 0.5
-              },
-              {
-                "t": 1778976000,
-                "p": 0.5
-              },
-              {
-                "t": 1779062400,
-                "p": 0.5
-              },
-              {
-                "t": 1779148800,
-                "p": 0.5
-              },
-              {
-                "t": 1779235200,
-                "p": 1.95
-              }
-            ]
-          },
-          {
-            "id": "yugioh-spell-ruler-worldwide-english-toon-world-super-rare",
-            "name": "Toon World",
-            "set": "Spell Ruler (Worldwide English)",
-            "number": "SRL-EN076",
-            "rarity": "Super Rare",
-            "price": 8.48,
-            "change1d": 239.2,
-            "change7d": 239.2,
-            "change30d": 239.2,
-            "variant": "Unlimited / Moderately Played",
-            "imageUrl": "",
-            "history": [
-              {
-                "t": 1778716800,
-                "p": 2.5
-              },
-              {
-                "t": 1778803200,
-                "p": 2.5
-              },
-              {
-                "t": 1778889600,
-                "p": 2.5
-              },
-              {
-                "t": 1778976000,
-                "p": 2.5
-              },
-              {
-                "t": 1779062400,
-                "p": 2.5
-              },
-              {
-                "t": 1779148800,
-                "p": 2.5
-              },
-              {
-                "t": 1779235200,
-                "p": 8.48
-              }
-            ]
-          },
-          {
-            "id": "yugioh-dark-beginning-1-hysteric-fairy-common-short-print",
-            "name": "Hysteric Fairy",
-            "set": "Dark Beginning 1",
-            "number": "DB1-EN238",
-            "rarity": "Common / Short Print",
-            "price": 0.27,
-            "change1d": 170,
-            "change7d": 170,
-            "change30d": 170,
-            "variant": "Unlimited / Heavily Played",
-            "imageUrl": "",
-            "history": [
-              {
-                "t": 1778716800,
-                "p": 0.1
-              },
-              {
-                "t": 1778803200,
-                "p": 0.1
-              },
-              {
-                "t": 1778889600,
-                "p": 0.1
-              },
-              {
-                "t": 1778976000,
-                "p": 0.1
-              },
-              {
-                "t": 1779062400,
-                "p": 0.1
-              },
-              {
-                "t": 1779148800,
-                "p": 0.1
-              },
-              {
-                "t": 1779235200,
-                "p": 0.27
-              }
-            ]
-          },
-          {
-            "id": "yugioh-legendary-duelists-season-3-magician-of-dark-illusion-common-short-print",
-            "name": "Magician of Dark Illusion",
-            "set": "Legendary Duelists: Season 3",
-            "number": "LDS3-EN084",
-            "rarity": "Common / Short Print",
-            "price": 0.27,
-            "change1d": 170,
-            "change7d": 170,
-            "change30d": 170,
-            "variant": "1st Edition / Damaged",
-            "imageUrl": "",
-            "history": [
-              {
-                "t": 1778716800,
-                "p": 0.1
-              },
-              {
-                "t": 1778803200,
-                "p": 0.1
-              },
-              {
-                "t": 1778889600,
-                "p": 0.1
-              },
-              {
-                "t": 1778976000,
-                "p": 0.1
-              },
-              {
-                "t": 1779062400,
-                "p": 0.1
-              },
-              {
-                "t": 1779148800,
-                "p": 0.1
-              },
-              {
-                "t": 1779235200,
-                "p": 0.27
-              }
-            ]
-          },
-          {
-            "id": "yugioh-2018-mega-tins-elemental-hero-solid-soldier-ultra-rare",
-            "name": "Elemental HERO Solid Soldier",
-            "set": "2018 Mega-Tins",
-            "number": "CT15-EN003",
+            "id": "yugioh-ghosts-from-the-past-fairy-tail-tales-ultra-rare",
+            "name": "Fairy Tail Tales",
+            "set": "Ghosts From the Past",
+            "number": "GFTP-EN010",
             "rarity": "Ultra Rare",
-            "price": 0.63,
-            "change1d": 152,
-            "change7d": 152,
-            "change30d": 152,
-            "variant": "Limited / Damaged",
-            "imageUrl": "",
+            "price": 1.3,
+            "change1d": 550,
+            "change7d": 550,
+            "change30d": 550,
+            "variant": "1st Edition / Heavily Played",
             "history": [
               {
+                "t": 1778630400,
+                "p": 0.2
+              },
+              {
                 "t": 1778716800,
-                "p": 0.25
+                "p": 0.2
               },
               {
                 "t": 1778803200,
-                "p": 0.25
+                "p": 0.2
               },
               {
                 "t": 1778889600,
-                "p": 0.25
+                "p": 0.2
               },
               {
                 "t": 1778976000,
-                "p": 0.25
+                "p": 0.2
               },
               {
                 "t": 1779062400,
-                "p": 0.25
+                "p": 0.2
               },
               {
                 "t": 1779148800,
-                "p": 0.25
-              },
-              {
-                "t": 1779235200,
-                "p": 0.63
+                "p": 1.3
               }
-            ]
+            ],
+            "justtcgPrice": 1.3,
+            "sources": {
+              "justtcg": {
+                "label": "JustTCG",
+                "price": 1.3,
+                "variant": "1st Edition / Heavily Played",
+                "imageUrl": ""
+              }
+            }
           },
           {
-            "id": "yugioh-star-pack-2013-number-34-terror-byte-common-short-print",
-            "name": "Number 34: Terror-Byte",
-            "set": "Star Pack 2013",
-            "number": "SP13-EN025",
-            "rarity": "Common / Short Print",
+            "id": "yugioh-25th-anniversary-rarity-collection-fairy-tail-luna-super-rare",
+            "name": "Fairy Tail - Luna",
+            "set": "25th Anniversary Rarity Collection",
+            "number": "RA01-EN009",
+            "rarity": "Super Rare",
             "price": 0.39,
-            "change1d": 143.75,
-            "change7d": 143.75,
-            "change30d": 116.67,
-            "variant": "Unlimited / Lightly Played",
-            "imageUrl": "",
+            "change1d": 387.5,
+            "change7d": 387.5,
+            "change30d": 387.5,
+            "variant": "1st Edition / Moderately Played",
             "history": [
               {
+                "t": 1778630400,
+                "p": 0.08
+              },
+              {
                 "t": 1778716800,
-                "p": 0.16
+                "p": 0.08
               },
               {
                 "t": 1778803200,
-                "p": 0.16
+                "p": 0.08
               },
               {
                 "t": 1778889600,
-                "p": 0.16
+                "p": 0.08
               },
               {
                 "t": 1778976000,
-                "p": 0.16
+                "p": 0.08
               },
               {
                 "t": 1779062400,
-                "p": 0.16
+                "p": 0.08
               },
               {
                 "t": 1779148800,
-                "p": 0.16
-              },
-              {
-                "t": 1779235200,
                 "p": 0.39
               }
-            ]
+            ],
+            "justtcgPrice": 0.39,
+            "sources": {
+              "justtcg": {
+                "label": "JustTCG",
+                "price": 0.39,
+                "variant": "1st Edition / Moderately Played",
+                "imageUrl": ""
+              }
+            }
           },
           {
-            "id": "yugioh-dark-revelation-volume-2-ojama-yellow-common-short-print",
-            "name": "Ojama Yellow",
-            "set": "Dark Revelation Volume 2",
-            "number": "DR2-EN001",
+            "id": "yugioh-super-starter-v-for-victory-wonder-wand-common-short-print",
+            "name": "Wonder Wand",
+            "set": "Super Starter: V for Victory",
+            "number": "YS13-EN023",
             "rarity": "Common / Short Print",
-            "price": 0.47,
-            "change1d": 135,
-            "change7d": 135,
-            "change30d": 135,
-            "variant": "Unlimited / Lightly Played",
-            "imageUrl": "",
+            "price": 0.44,
+            "change1d": 340,
+            "change7d": 340,
+            "change30d": 340,
+            "variant": "1st Edition / Damaged",
             "history": [
               {
+                "t": 1778630400,
+                "p": 0.1
+              },
+              {
                 "t": 1778716800,
-                "p": 0.2
+                "p": 0.1
               },
               {
                 "t": 1778803200,
-                "p": 0.2
+                "p": 0.1
               },
               {
                 "t": 1778889600,
-                "p": 0.2
+                "p": 0.1
               },
               {
                 "t": 1778976000,
-                "p": 0.2
+                "p": 0.1
               },
               {
                 "t": 1779062400,
-                "p": 0.2
+                "p": 0.1
               },
               {
                 "t": 1779148800,
-                "p": 0.2
-              },
-              {
-                "t": 1779235200,
-                "p": 0.47
+                "p": 0.44
               }
-            ]
+            ],
+            "justtcgPrice": 0.44,
+            "sources": {
+              "justtcg": {
+                "label": "JustTCG",
+                "price": 0.44,
+                "variant": "1st Edition / Damaged",
+                "imageUrl": ""
+              }
+            }
           },
           {
-            "id": "yugioh-maximum-gold-el-dorado-sky-striker-ace-roze-premium-gold-rare",
-            "name": "Sky Striker Ace - Roze",
-            "set": "Maximum Gold: El Dorado",
-            "number": "MGED-EN021",
-            "rarity": "Premium Gold Rare",
-            "price": 0.47,
-            "change1d": 123.81,
-            "change7d": 571.43,
-            "change30d": 571.43,
-            "variant": "1st Edition / Heavily Played",
-            "imageUrl": "",
-            "history": [
-              {
-                "t": 1778716800,
-                "p": 0.07
-              },
-              {
-                "t": 1778803200,
-                "p": 0.07
-              },
-              {
-                "t": 1778889600,
-                "p": 0.07
-              },
-              {
-                "t": 1778976000,
-                "p": 0.07
-              },
-              {
-                "t": 1779062400,
-                "p": 0.21
-              },
-              {
-                "t": 1779148800,
-                "p": 0.21
-              },
-              {
-                "t": 1779235200,
-                "p": 0.47
-              }
-            ]
-          },
-          {
-            "id": "yugioh-legendary-collection-3-yugi-s-world-gravekeeper-s-spear-soldier-ultra-rare",
-            "name": "Gravekeeper's Spear Soldier",
-            "set": "Legendary Collection 3: Yugi's World",
-            "number": "LCYW-EN185",
-            "rarity": "Ultra Rare",
-            "price": 1.75,
-            "change1d": 118.75,
-            "change7d": 118.75,
-            "change30d": 118.75,
+            "id": "yugioh-return-of-the-duelist-rebound-super-rare",
+            "name": "Rebound",
+            "set": "Return of the Duelist",
+            "number": "REDU-EN079",
+            "rarity": "Super Rare",
+            "price": 0.37,
+            "change1d": 270,
+            "change7d": 270,
+            "change30d": 270,
             "variant": "1st Edition / Moderately Played",
-            "imageUrl": "",
             "history": [
               {
+                "t": 1778630400,
+                "p": 0.1
+              },
+              {
                 "t": 1778716800,
-                "p": 0.8
+                "p": 0.1
               },
               {
                 "t": 1778803200,
-                "p": 0.8
+                "p": 0.1
               },
               {
                 "t": 1778889600,
-                "p": 0.8
+                "p": 0.1
               },
               {
                 "t": 1778976000,
-                "p": 0.8
+                "p": 0.1
               },
               {
                 "t": 1779062400,
-                "p": 0.8
+                "p": 0.1
               },
               {
                 "t": 1779148800,
-                "p": 0.8
-              },
-              {
-                "t": 1779235200,
-                "p": 1.75
+                "p": 0.37
               }
-            ]
+            ],
+            "justtcgPrice": 0.37,
+            "sources": {
+              "justtcg": {
+                "label": "JustTCG",
+                "price": 0.37,
+                "variant": "1st Edition / Moderately Played",
+                "imageUrl": ""
+              }
+            }
           }
         ]
       },
       "items": [
         {
-          "id": "yugioh-shadow-specters-number-c96-dark-storm-super-rare",
-          "name": "Number C96: Dark Storm",
-          "set": "Shadow Specters",
-          "number": "SHSP-EN046",
-          "rarity": "Super Rare",
-          "price": 1.95,
-          "change1d": 290,
-          "change7d": 290,
-          "change30d": 290,
-          "variant": "Unlimited / Moderately Played",
-          "imageUrl": "",
-          "history": [
-            {
-              "t": 1778716800,
-              "p": 0.5
-            },
-            {
-              "t": 1778803200,
-              "p": 0.5
-            },
-            {
-              "t": 1778889600,
-              "p": 0.5
-            },
-            {
-              "t": 1778976000,
-              "p": 0.5
-            },
-            {
-              "t": 1779062400,
-              "p": 0.5
-            },
-            {
-              "t": 1779148800,
-              "p": 0.5
-            },
-            {
-              "t": 1779235200,
-              "p": 1.95
-            }
-          ]
-        },
-        {
-          "id": "yugioh-spell-ruler-worldwide-english-toon-world-super-rare",
-          "name": "Toon World",
-          "set": "Spell Ruler (Worldwide English)",
-          "number": "SRL-EN076",
-          "rarity": "Super Rare",
-          "price": 8.48,
-          "change1d": 239.2,
-          "change7d": 239.2,
-          "change30d": 239.2,
-          "variant": "Unlimited / Moderately Played",
-          "imageUrl": "",
-          "history": [
-            {
-              "t": 1778716800,
-              "p": 2.5
-            },
-            {
-              "t": 1778803200,
-              "p": 2.5
-            },
-            {
-              "t": 1778889600,
-              "p": 2.5
-            },
-            {
-              "t": 1778976000,
-              "p": 2.5
-            },
-            {
-              "t": 1779062400,
-              "p": 2.5
-            },
-            {
-              "t": 1779148800,
-              "p": 2.5
-            },
-            {
-              "t": 1779235200,
-              "p": 8.48
-            }
-          ]
-        },
-        {
-          "id": "yugioh-dark-beginning-1-hysteric-fairy-common-short-print",
-          "name": "Hysteric Fairy",
-          "set": "Dark Beginning 1",
-          "number": "DB1-EN238",
-          "rarity": "Common / Short Print",
-          "price": 0.27,
-          "change1d": 170,
-          "change7d": 170,
-          "change30d": 170,
-          "variant": "Unlimited / Heavily Played",
-          "imageUrl": "",
-          "history": [
-            {
-              "t": 1778716800,
-              "p": 0.1
-            },
-            {
-              "t": 1778803200,
-              "p": 0.1
-            },
-            {
-              "t": 1778889600,
-              "p": 0.1
-            },
-            {
-              "t": 1778976000,
-              "p": 0.1
-            },
-            {
-              "t": 1779062400,
-              "p": 0.1
-            },
-            {
-              "t": 1779148800,
-              "p": 0.1
-            },
-            {
-              "t": 1779235200,
-              "p": 0.27
-            }
-          ]
-        },
-        {
-          "id": "yugioh-legendary-duelists-season-3-magician-of-dark-illusion-common-short-print",
-          "name": "Magician of Dark Illusion",
-          "set": "Legendary Duelists: Season 3",
-          "number": "LDS3-EN084",
-          "rarity": "Common / Short Print",
-          "price": 0.27,
-          "change1d": 170,
-          "change7d": 170,
-          "change30d": 170,
-          "variant": "1st Edition / Damaged",
-          "imageUrl": "",
-          "history": [
-            {
-              "t": 1778716800,
-              "p": 0.1
-            },
-            {
-              "t": 1778803200,
-              "p": 0.1
-            },
-            {
-              "t": 1778889600,
-              "p": 0.1
-            },
-            {
-              "t": 1778976000,
-              "p": 0.1
-            },
-            {
-              "t": 1779062400,
-              "p": 0.1
-            },
-            {
-              "t": 1779148800,
-              "p": 0.1
-            },
-            {
-              "t": 1779235200,
-              "p": 0.27
-            }
-          ]
-        },
-        {
-          "id": "yugioh-2018-mega-tins-elemental-hero-solid-soldier-ultra-rare",
-          "name": "Elemental HERO Solid Soldier",
-          "set": "2018 Mega-Tins",
-          "number": "CT15-EN003",
+          "id": "yugioh-ghosts-from-the-past-fairy-tail-tales-ultra-rare",
+          "name": "Fairy Tail Tales",
+          "set": "Ghosts From the Past",
+          "number": "GFTP-EN010",
           "rarity": "Ultra Rare",
-          "price": 0.63,
-          "change1d": 152,
-          "change7d": 152,
-          "change30d": 152,
-          "variant": "Limited / Damaged",
-          "imageUrl": "",
+          "price": 1.3,
+          "change1d": 550,
+          "change7d": 550,
+          "change30d": 550,
+          "variant": "1st Edition / Heavily Played",
           "history": [
             {
+              "t": 1778630400,
+              "p": 0.2
+            },
+            {
               "t": 1778716800,
-              "p": 0.25
+              "p": 0.2
             },
             {
               "t": 1778803200,
-              "p": 0.25
+              "p": 0.2
             },
             {
               "t": 1778889600,
-              "p": 0.25
+              "p": 0.2
             },
             {
               "t": 1778976000,
-              "p": 0.25
+              "p": 0.2
             },
             {
               "t": 1779062400,
-              "p": 0.25
+              "p": 0.2
             },
             {
               "t": 1779148800,
-              "p": 0.25
-            },
-            {
-              "t": 1779235200,
-              "p": 0.63
+              "p": 1.3
             }
-          ]
+          ],
+          "justtcgPrice": 1.3,
+          "sources": {
+            "justtcg": {
+              "label": "JustTCG",
+              "price": 1.3,
+              "variant": "1st Edition / Heavily Played",
+              "imageUrl": ""
+            }
+          }
         },
         {
-          "id": "yugioh-star-pack-2013-number-34-terror-byte-common-short-print",
-          "name": "Number 34: Terror-Byte",
-          "set": "Star Pack 2013",
-          "number": "SP13-EN025",
-          "rarity": "Common / Short Print",
+          "id": "yugioh-25th-anniversary-rarity-collection-fairy-tail-luna-super-rare",
+          "name": "Fairy Tail - Luna",
+          "set": "25th Anniversary Rarity Collection",
+          "number": "RA01-EN009",
+          "rarity": "Super Rare",
           "price": 0.39,
-          "change1d": 143.75,
-          "change7d": 143.75,
-          "change30d": 116.67,
-          "variant": "Unlimited / Lightly Played",
-          "imageUrl": "",
+          "change1d": 387.5,
+          "change7d": 387.5,
+          "change30d": 387.5,
+          "variant": "1st Edition / Moderately Played",
           "history": [
             {
+              "t": 1778630400,
+              "p": 0.08
+            },
+            {
               "t": 1778716800,
-              "p": 0.16
+              "p": 0.08
             },
             {
               "t": 1778803200,
-              "p": 0.16
+              "p": 0.08
             },
             {
               "t": 1778889600,
-              "p": 0.16
+              "p": 0.08
             },
             {
               "t": 1778976000,
-              "p": 0.16
+              "p": 0.08
             },
             {
               "t": 1779062400,
-              "p": 0.16
+              "p": 0.08
             },
             {
               "t": 1779148800,
-              "p": 0.16
-            },
-            {
-              "t": 1779235200,
               "p": 0.39
             }
-          ]
+          ],
+          "justtcgPrice": 0.39,
+          "sources": {
+            "justtcg": {
+              "label": "JustTCG",
+              "price": 0.39,
+              "variant": "1st Edition / Moderately Played",
+              "imageUrl": ""
+            }
+          }
         },
         {
-          "id": "yugioh-dark-revelation-volume-2-ojama-yellow-common-short-print",
-          "name": "Ojama Yellow",
-          "set": "Dark Revelation Volume 2",
-          "number": "DR2-EN001",
+          "id": "yugioh-super-starter-v-for-victory-wonder-wand-common-short-print",
+          "name": "Wonder Wand",
+          "set": "Super Starter: V for Victory",
+          "number": "YS13-EN023",
           "rarity": "Common / Short Print",
-          "price": 0.47,
-          "change1d": 135,
-          "change7d": 135,
-          "change30d": 135,
-          "variant": "Unlimited / Lightly Played",
-          "imageUrl": "",
+          "price": 0.44,
+          "change1d": 340,
+          "change7d": 340,
+          "change30d": 340,
+          "variant": "1st Edition / Damaged",
           "history": [
             {
+              "t": 1778630400,
+              "p": 0.1
+            },
+            {
               "t": 1778716800,
-              "p": 0.2
+              "p": 0.1
             },
             {
               "t": 1778803200,
-              "p": 0.2
+              "p": 0.1
             },
             {
               "t": 1778889600,
-              "p": 0.2
+              "p": 0.1
             },
             {
               "t": 1778976000,
-              "p": 0.2
+              "p": 0.1
             },
             {
               "t": 1779062400,
-              "p": 0.2
+              "p": 0.1
             },
             {
               "t": 1779148800,
-              "p": 0.2
-            },
-            {
-              "t": 1779235200,
-              "p": 0.47
+              "p": 0.44
             }
-          ]
+          ],
+          "justtcgPrice": 0.44,
+          "sources": {
+            "justtcg": {
+              "label": "JustTCG",
+              "price": 0.44,
+              "variant": "1st Edition / Damaged",
+              "imageUrl": ""
+            }
+          }
         },
         {
-          "id": "yugioh-maximum-gold-el-dorado-sky-striker-ace-roze-premium-gold-rare",
-          "name": "Sky Striker Ace - Roze",
-          "set": "Maximum Gold: El Dorado",
-          "number": "MGED-EN021",
-          "rarity": "Premium Gold Rare",
-          "price": 0.47,
-          "change1d": 123.81,
-          "change7d": 571.43,
-          "change30d": 571.43,
-          "variant": "1st Edition / Heavily Played",
-          "imageUrl": "",
-          "history": [
-            {
-              "t": 1778716800,
-              "p": 0.07
-            },
-            {
-              "t": 1778803200,
-              "p": 0.07
-            },
-            {
-              "t": 1778889600,
-              "p": 0.07
-            },
-            {
-              "t": 1778976000,
-              "p": 0.07
-            },
-            {
-              "t": 1779062400,
-              "p": 0.21
-            },
-            {
-              "t": 1779148800,
-              "p": 0.21
-            },
-            {
-              "t": 1779235200,
-              "p": 0.47
-            }
-          ]
-        },
-        {
-          "id": "yugioh-legendary-collection-3-yugi-s-world-gravekeeper-s-spear-soldier-ultra-rare",
-          "name": "Gravekeeper's Spear Soldier",
-          "set": "Legendary Collection 3: Yugi's World",
-          "number": "LCYW-EN185",
-          "rarity": "Ultra Rare",
-          "price": 1.75,
-          "change1d": 118.75,
-          "change7d": 118.75,
-          "change30d": 118.75,
+          "id": "yugioh-return-of-the-duelist-rebound-super-rare",
+          "name": "Rebound",
+          "set": "Return of the Duelist",
+          "number": "REDU-EN079",
+          "rarity": "Super Rare",
+          "price": 0.37,
+          "change1d": 270,
+          "change7d": 270,
+          "change30d": 270,
           "variant": "1st Edition / Moderately Played",
-          "imageUrl": "",
           "history": [
             {
+              "t": 1778630400,
+              "p": 0.1
+            },
+            {
               "t": 1778716800,
-              "p": 0.8
+              "p": 0.1
             },
             {
               "t": 1778803200,
-              "p": 0.8
+              "p": 0.1
             },
             {
               "t": 1778889600,
-              "p": 0.8
+              "p": 0.1
             },
             {
               "t": 1778976000,
-              "p": 0.8
+              "p": 0.1
             },
             {
               "t": 1779062400,
-              "p": 0.8
+              "p": 0.1
             },
             {
               "t": 1779148800,
-              "p": 0.8
-            },
-            {
-              "t": 1779235200,
-              "p": 1.75
+              "p": 0.37
             }
-          ]
+          ],
+          "justtcgPrice": 0.37,
+          "sources": {
+            "justtcg": {
+              "label": "JustTCG",
+              "price": 0.37,
+              "variant": "1st Edition / Moderately Played",
+              "imageUrl": ""
+            }
+          }
         }
       ],
-      "warnings": []
+      "warnings": [],
+      "priceSources": [
+        "JustTCG"
+      ]
     }
-  ]
+  ],
+  "displayLimit": 9,
+  "tcgcsv": {
+    "enabledFor": [
+      "fab"
+    ],
+    "fabCategoryId": 62,
+    "referenceMultipliers": [
+      5,
+      6,
+      7
+    ]
+  }
 }

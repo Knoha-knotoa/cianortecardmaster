@@ -1,18 +1,28 @@
 import { readFile, writeFile } from "node:fs/promises";
 
-const API = "https://api.justtcg.com/v1";
+const JUSTTCG_API = "https://api.justtcg.com/v1";
+const TCGCSV_API = "https://tcgcsv.com/tcgplayer";
 const API_KEY = process.env.JUSTTCG_API_KEY;
 const OUTPUT_PATH = "assets/data/spikes.json";
 
-// O log do GitHub mostrou que o plano atual da JustTCG aceita limit entre 1 e 20.
+// O plano gratuito da JustTCG aceita até 20 cartas por chamada no endpoint /cards.
+// Para exibir 9 cartas reais, buscamos páginas extras até completar o bloco.
 const API_LIMIT = "20";
+const DISPLAY_LIMIT = 9;
+const MAX_PAGES_PER_GAME = Number(process.env.JUSTTCG_MAX_PAGES_PER_GAME || 5);
 
 // Evita 429 no plano gratuito/básico. Dá para diminuir pelo secret/env JUSTTCG_WAIT_MS se seu plano permitir.
 const REQUEST_WAIT_MS = Number(process.env.JUSTTCG_WAIT_MS || 8000);
 const MAX_RETRIES = Number(process.env.JUSTTCG_MAX_RETRIES || 3);
 
+// TCGCSV é usado apenas para Flesh and Blood, como referência de TCGplayer.
+// A documentação do TCGCSV recomenda User-Agent próprio e limite de polling diário.
+const TCGCSV_FAB_CATEGORY_FALLBACK = 62;
+const TCGCSV_WAIT_MS = Number(process.env.TCGCSV_WAIT_MS || 180);
+const TCGCSV_USER_AGENT = process.env.TCGCSV_USER_AGENT || "CianorteCardMasters/1.0 (+https://github.com/Knoha-knotoa/cianortecardmaster)";
+
 const targets = [
-  { code: "fab", label: "Flesh and Blood", match: /flesh\s*and\s*blood/i },
+  { code: "fab", label: "Flesh and Blood", match: /flesh\s*(and|&)\s*blood/i },
   { code: "mtg", label: "Magic: The Gathering", match: /magic/i },
   { code: "pokemon", label: "Pokémon TCG", match: /pok[eé]mon/i },
   { code: "yugioh", label: "Yu-Gi-Oh!", match: /yu-?gi-?oh/i }
@@ -30,6 +40,10 @@ if (!API_KEY) {
 
 let previousData = null;
 let lastRequestAt = 0;
+let lastTcgcsvRequestAt = 0;
+let cachedFabCategoryId = null;
+let cachedFabGroups = null;
+const tcgcsvGroupDataCache = new Map();
 
 async function loadPreviousData() {
   try {
@@ -47,10 +61,10 @@ function previousGameByCode(code) {
 function previousWindow(code, windowKey) {
   const game = previousGameByCode(code);
   const items = game?.windows?.[windowKey];
-  if (Array.isArray(items)) return items.slice(0, 9);
+  if (Array.isArray(items)) return items.slice(0, DISPLAY_LIMIT);
 
   // Compatibilidade com o primeiro formato, que só tinha game.items.
-  if ((windowKey === "weekly" || windowKey === "daily") && Array.isArray(game?.items)) return game.items.slice(0, 9);
+  if ((windowKey === "weekly" || windowKey === "daily") && Array.isArray(game?.items)) return game.items.slice(0, DISPLAY_LIMIT);
   return [];
 }
 
@@ -71,8 +85,16 @@ async function waitBeforeRequest() {
   lastRequestAt = Date.now();
 }
 
+async function waitBeforeTcgcsvRequest() {
+  const elapsed = Date.now() - lastTcgcsvRequestAt;
+  if (lastTcgcsvRequestAt && elapsed < TCGCSV_WAIT_MS) {
+    await sleep(TCGCSV_WAIT_MS - elapsed);
+  }
+  lastTcgcsvRequestAt = Date.now();
+}
+
 async function justtcg(path, options = {}) {
-  const url = `${API}${path}`;
+  const url = `${JUSTTCG_API}${path}`;
   const shouldThrottle = options.throttle !== false;
 
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt += 1) {
@@ -105,12 +127,36 @@ async function justtcg(path, options = {}) {
   throw new Error("JustTCG: número máximo de tentativas excedido.");
 }
 
+async function tcgcsv(path) {
+  const url = `${TCGCSV_API}${path}`;
+  await waitBeforeTcgcsvRequest();
+
+  const response = await fetch(url, {
+    headers: {
+      "accept": "application/json",
+      "user-agent": TCGCSV_USER_AGENT
+    }
+  });
+
+  if (!response.ok) {
+    const text = await response.text().catch(() => "");
+    throw new Error(`TCGCSV ${response.status}: ${text}`);
+  }
+
+  return response.json();
+}
+
 function numberOrNull(value) {
   if (value === null || value === undefined || value === "") return null;
   if (typeof value === "number") return Number.isFinite(value) ? value : null;
   const normalized = String(value).replace(/[%$,]/g, "").trim();
   const n = Number(normalized);
   return Number.isFinite(n) ? n : null;
+}
+
+function roundMoney(value) {
+  const n = numberOrNull(value);
+  return n === null ? null : Math.round(n * 100) / 100;
 }
 
 function validImageUrl(value) {
@@ -226,6 +272,8 @@ function cardToSpike(card, windowKey = "weekly") {
     if (!Number.isFinite(selectedChange) || selectedChange <= 0) return null;
   }
 
+  const imageUrl = extractImageUrl(card, variant);
+
   return {
     id: card.id || "",
     name: card.name || "Carta sem nome",
@@ -233,12 +281,21 @@ function cardToSpike(card, windowKey = "weekly") {
     number: card.number || "",
     rarity: card.rarity || "",
     price,
+    justtcgPrice: price,
     change1d,
     change7d,
     change30d,
     variant: [variant.printing, variant.condition].filter(Boolean).join(" / "),
-    imageUrl: extractImageUrl(card, variant),
-    history: normalizeHistory(variant, windowKey)
+    imageUrl,
+    history: normalizeHistory(variant, windowKey),
+    sources: {
+      justtcg: {
+        label: "JustTCG",
+        price,
+        variant: [variant.printing, variant.condition].filter(Boolean).join(" / "),
+        imageUrl
+      }
+    }
   };
 }
 
@@ -257,36 +314,448 @@ function sortWindowItems(items, windowKey) {
   });
 }
 
+function payloadHasMore(payload, cardsLength) {
+  const pagination = payload?.pagination || payload?.meta || payload?._metadata || {};
+  if (typeof pagination.hasMore === "boolean") return pagination.hasMore;
+  if (typeof pagination.has_more === "boolean") return pagination.has_more;
+  if (typeof pagination.total === "number" && typeof pagination.offset === "number") {
+    const limit = Number(pagination.limit || API_LIMIT);
+    return pagination.offset + limit < pagination.total;
+  }
+  return cardsLength >= Number(API_LIMIT);
+}
+
+function payloadNextOffset(payload, currentOffset) {
+  const pagination = payload?.pagination || payload?.meta || payload?._metadata || {};
+  const limit = Number(pagination.limit || API_LIMIT);
+
+  if (typeof pagination.nextOffset === "number") return pagination.nextOffset;
+  if (typeof pagination.next_offset === "number") return pagination.next_offset;
+  if (typeof pagination.offset === "number") return pagination.offset + limit;
+
+  return currentOffset + limit;
+}
+
 async function getCardsForWindow(gameId, windowConfig) {
-  const params = new URLSearchParams({
-    game: gameId,
-    orderBy: windowConfig.orderBy,
-    order: "desc",
-    limit: API_LIMIT,
-    min_price: windowConfig.minPrice,
-    include_price_history: "true",
-    include_statistics: "7d,30d,90d",
-    priceHistoryDuration: windowConfig.historyDuration
-  });
-
-  const payload = await justtcg(`/cards?${params.toString()}`);
-  const cards = Array.isArray(payload.data) ? payload.data : [];
-
   const seen = new Set();
   const items = [];
+  let offset = 0;
 
-  for (const card of cards) {
-    const item = cardToSpike(card, windowConfig.key);
-    if (!item) continue;
+  for (let page = 0; page < MAX_PAGES_PER_GAME && items.length < DISPLAY_LIMIT; page += 1) {
+    const params = new URLSearchParams({
+      game: gameId,
+      orderBy: windowConfig.orderBy,
+      order: "desc",
+      limit: API_LIMIT,
+      offset: String(offset),
+      min_price: windowConfig.minPrice,
+      include_price_history: "true",
+      include_statistics: "7d,30d,90d",
+      priceHistoryDuration: windowConfig.historyDuration
+    });
 
-    const uniqueKey = `${item.id || item.name}-${item.variant || ""}`;
-    if (seen.has(uniqueKey)) continue;
+    const payload = await justtcg(`/cards?${params.toString()}`);
+    const cards = Array.isArray(payload.data) ? payload.data : [];
+    if (!cards.length) break;
 
-    seen.add(uniqueKey);
-    items.push(item);
+    let newCardsOnThisPage = 0;
+
+    for (const card of cards) {
+      const item = cardToSpike(card, windowConfig.key);
+      if (!item) continue;
+
+      const uniqueKey = `${item.id || item.name}-${item.variant || ""}`;
+      if (seen.has(uniqueKey)) continue;
+
+      seen.add(uniqueKey);
+      newCardsOnThisPage += 1;
+      items.push(item);
+
+      if (items.length >= DISPLAY_LIMIT) break;
+    }
+
+    if (!payloadHasMore(payload, cards.length)) break;
+
+    const nextOffset = payloadNextOffset(payload, offset);
+    if (!Number.isFinite(nextOffset) || nextOffset <= offset) break;
+    offset = nextOffset;
+
+    // Proteção contra APIs que ignoram offset e devolvem sempre a mesma página.
+    if (!newCardsOnThisPage && page > 0) break;
   }
 
-  return sortWindowItems(items, windowConfig.key).slice(0, 9);
+  return sortWindowItems(items, windowConfig.key).slice(0, DISPLAY_LIMIT);
+}
+
+function stripHtml(value) {
+  return String(value || "").replace(/<[^>]*>/g, " ");
+}
+
+function normalizeText(value) {
+  return stripHtml(value)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/\/\//g, " ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\b(tcg|flesh|blood|fab)\b/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function normalizeSetName(value) {
+  return normalizeText(value)
+    .replace(/\b(first|1st|unlimited|edition|booster|deck|display|box)\b/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function normalizeCardNumber(value) {
+  return String(value || "")
+    .split("//")[0]
+    .trim()
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, "");
+}
+
+function fabNameCandidates(item) {
+  const raw = String(item?.name || "").trim();
+  const firstFace = raw.split("//")[0].trim();
+  const withoutParenPitch = firstFace.replace(/\s*\((red|yellow|blue)\)\s*$/i, "").trim();
+  const withoutDashPitch = firstFace.replace(/\s*[-–—]\s*(red|yellow|blue)\s*$/i, "").trim();
+  const withoutCommaPitch = firstFace.replace(/\s*,\s*(red|yellow|blue)\s*$/i, "").trim();
+
+  return Array.from(new Set([raw, firstFace, withoutParenPitch, withoutDashPitch, withoutCommaPitch]
+    .map(normalizeText)
+    .filter(Boolean)));
+}
+
+function detectFabPitch(itemOrProduct) {
+  const raw = [
+    itemOrProduct?.name,
+    itemOrProduct?.variant,
+    itemOrProduct?.pitch,
+    itemOrProduct?.pitchValue,
+    itemOrProduct?.pitch_value
+  ].filter(Boolean).join(" ");
+
+  const match = raw.match(/\b(red|yellow|blue)\b/i);
+  return match ? match[1].toLowerCase() : "";
+}
+
+function extendedMap(product) {
+  const map = new Map();
+  const data = Array.isArray(product?.extendedData) ? product.extendedData : [];
+  for (const entry of data) {
+    const keys = [entry?.name, entry?.displayName].filter(Boolean).map(key => normalizeText(key));
+    for (const key of keys) map.set(key, entry?.value ?? "");
+  }
+  return map;
+}
+
+function extendedValue(product, names) {
+  const map = extendedMap(product);
+  for (const name of names) {
+    const key = normalizeText(name);
+    if (map.has(key)) return map.get(key);
+  }
+  return "";
+}
+
+function productNumber(product) {
+  return extendedValue(product, ["Number", "Card Number", "CardNumber"]);
+}
+
+function productRarity(product) {
+  return extendedValue(product, ["Rarity"]);
+}
+
+function productPitch(product) {
+  const fromExtended = extendedValue(product, ["Pitch", "Pitch Value", "PitchValue"]);
+  if (fromExtended) return detectFabPitch({ name: fromExtended });
+  return detectFabPitch(product);
+}
+
+function cardLikeProduct(product) {
+  return Boolean(productNumber(product) || productRarity(product));
+}
+
+async function getFabCategoryId() {
+  if (cachedFabCategoryId) return cachedFabCategoryId;
+
+  try {
+    const payload = await tcgcsv("/categories");
+    const categories = Array.isArray(payload.results) ? payload.results : [];
+    const found = categories.find(category => /flesh\s*(and|&)\s*blood/i.test(`${category.name || ""} ${category.displayName || ""} ${category.seoCategoryName || ""}`));
+    cachedFabCategoryId = found?.categoryId || TCGCSV_FAB_CATEGORY_FALLBACK;
+  } catch (error) {
+    console.warn(`TCGCSV: não foi possível resolver categoria de FAB. Usando fallback ${TCGCSV_FAB_CATEGORY_FALLBACK}.`, error.message);
+    cachedFabCategoryId = TCGCSV_FAB_CATEGORY_FALLBACK;
+  }
+
+  return cachedFabCategoryId;
+}
+
+async function getFabGroups(categoryId) {
+  if (cachedFabGroups) return cachedFabGroups;
+  const payload = await tcgcsv(`/${categoryId}/groups`);
+  cachedFabGroups = Array.isArray(payload.results) ? payload.results : [];
+  return cachedFabGroups;
+}
+
+function matchFabGroup(groups, setName) {
+  const target = normalizeSetName(setName);
+  if (!target) return null;
+
+  let best = null;
+  let bestScore = 0;
+
+  for (const group of groups) {
+    const groupName = normalizeSetName(group.name || "");
+    const abbreviation = normalizeSetName(group.abbreviation || "");
+    let score = 0;
+
+    if (groupName === target) score = 100;
+    else if (abbreviation && abbreviation === target) score = 92;
+    else if (groupName.includes(target) && target.length >= 5) score = 82;
+    else if (target.includes(groupName) && groupName.length >= 5) score = 72;
+
+    if (score > bestScore) {
+      bestScore = score;
+      best = group;
+    }
+  }
+
+  return bestScore >= 70 ? best : null;
+}
+
+async function getTcgcsvGroupData(categoryId, group) {
+  const groupId = group?.groupId;
+  if (!groupId) return { products: [], pricesByProductId: new Map() };
+  if (tcgcsvGroupDataCache.has(groupId)) return tcgcsvGroupDataCache.get(groupId);
+
+  const productsPayload = await tcgcsv(`/${categoryId}/${groupId}/products`);
+  const pricesPayload = await tcgcsv(`/${categoryId}/${groupId}/prices`);
+
+  const products = Array.isArray(productsPayload.results) ? productsPayload.results.filter(cardLikeProduct) : [];
+  const prices = Array.isArray(pricesPayload.results) ? pricesPayload.results : [];
+  const pricesByProductId = new Map();
+
+  for (const price of prices) {
+    const list = pricesByProductId.get(price.productId) || [];
+    list.push(price);
+    pricesByProductId.set(price.productId, list);
+  }
+
+  const data = { products, pricesByProductId };
+  tcgcsvGroupDataCache.set(groupId, data);
+  return data;
+}
+
+function scoreFabProductMatch(item, product) {
+  const itemNumber = normalizeCardNumber(item.number);
+  const prodNumber = normalizeCardNumber(productNumber(product));
+  const names = fabNameCandidates(item);
+  const prodNames = Array.from(new Set([
+    normalizeText(product.name),
+    normalizeText(product.cleanName)
+  ].filter(Boolean)));
+  const itemPitch = detectFabPitch(item);
+  const prodPitch = productPitch(product);
+
+  let score = 0;
+
+  if (itemNumber && prodNumber && itemNumber === prodNumber) score += 70;
+  if (itemNumber && prodNumber && itemNumber !== prodNumber) score -= 35;
+
+  for (const itemName of names) {
+    for (const prodName of prodNames) {
+      if (itemName && prodName && itemName === prodName) score += 45;
+      else if (itemName && prodName && prodName.includes(itemName) && itemName.length >= 4) score += 24;
+      else if (itemName && prodName && itemName.includes(prodName) && prodName.length >= 4) score += 18;
+    }
+  }
+
+  if (itemPitch && prodPitch && itemPitch === prodPitch) score += 10;
+  if (itemPitch && prodPitch && itemPitch !== prodPitch) score -= 10;
+
+  return score;
+}
+
+function chooseTcgplayerPrice(item, prices) {
+  if (!Array.isArray(prices) || !prices.length) return null;
+  const variant = normalizeText(item.variant || "");
+
+  function subtypeScore(price) {
+    const subtype = normalizeText(price.subTypeName || "");
+    let score = 0;
+
+    if (variant.includes("cold foil") && subtype.includes("cold foil")) score += 50;
+    if (variant.includes("rainbow foil") && subtype.includes("rainbow foil")) score += 50;
+    if (variant.includes("foil") && !variant.includes("cold foil") && subtype.includes("foil")) score += 28;
+    if (variant.includes("normal") && subtype.includes("normal")) score += 42;
+    if (!variant && subtype.includes("normal")) score += 16;
+    if (numberOrNull(price.marketPrice) !== null) score += 8;
+    if (numberOrNull(price.midPrice) !== null) score += 4;
+
+    return score;
+  }
+
+  return prices
+    .slice()
+    .sort((a, b) => {
+      const diff = subtypeScore(b) - subtypeScore(a);
+      if (diff !== 0) return diff;
+      return Number(numberOrNull(b.marketPrice) ?? numberOrNull(b.midPrice) ?? 0) - Number(numberOrNull(a.marketPrice) ?? numberOrNull(a.midPrice) ?? 0);
+    })[0];
+}
+
+function tcgplayerPriceValue(price) {
+  return numberOrNull(price?.marketPrice) ?? numberOrNull(price?.midPrice) ?? numberOrNull(price?.lowPrice) ?? numberOrNull(price?.directLowPrice);
+}
+
+function applyTcgcsvMatch(item, group, product, price) {
+  const tcgPrice = roundMoney(tcgplayerPriceValue(price));
+  const productImage = validImageUrl(product?.imageUrl || "");
+
+  item.sources = item.sources || {};
+  item.sources.justtcg = item.sources.justtcg || {
+    label: "JustTCG",
+    price: item.price,
+    variant: item.variant || "",
+    imageUrl: item.imageUrl || ""
+  };
+
+  if (!tcgPrice) {
+    item.sources.tcgplayer = null;
+    item.tcgcsvStatus = "sem preço TCGplayer compatível";
+    return item;
+  }
+
+  const referenceBRL = {
+    x5: roundMoney(tcgPrice * 5),
+    x6: roundMoney(tcgPrice * 6),
+    x7: roundMoney(tcgPrice * 7)
+  };
+
+  item.tcgplayerPrice = tcgPrice;
+  item.tcgplayerReference = referenceBRL;
+  item.tcgcsvStatus = "ok";
+  item.tcgcsv = {
+    source: "TCGCSV",
+    categoryId: TCGCSV_FAB_CATEGORY_FALLBACK,
+    groupId: group?.groupId || null,
+    groupName: group?.name || "",
+    productId: product?.productId || null,
+    productName: product?.name || "",
+    subTypeName: price?.subTypeName || ""
+  };
+  item.sources.tcgplayer = {
+    label: "TCGplayer",
+    source: "TCGCSV",
+    price: tcgPrice,
+    marketPrice: roundMoney(price?.marketPrice),
+    midPrice: roundMoney(price?.midPrice),
+    lowPrice: roundMoney(price?.lowPrice),
+    highPrice: roundMoney(price?.highPrice),
+    directLowPrice: roundMoney(price?.directLowPrice),
+    subTypeName: price?.subTypeName || "",
+    productId: product?.productId || null,
+    productName: product?.name || "",
+    url: product?.url || "",
+    imageUrl: productImage,
+    referenceBRL
+  };
+
+  // Mantém prioridade para imagem da JustTCG. Só usa TCGCSV/TCGplayer se a JustTCG não enviou imagem.
+  if (!item.imageUrl && productImage) {
+    item.imageUrl = productImage;
+  }
+
+  return item;
+}
+
+function applyTcgcsvMiss(item, status) {
+  item.sources = item.sources || {};
+  item.sources.justtcg = item.sources.justtcg || {
+    label: "JustTCG",
+    price: item.price,
+    variant: item.variant || "",
+    imageUrl: item.imageUrl || ""
+  };
+  item.sources.tcgplayer = null;
+  item.tcgcsvStatus = status;
+  return item;
+}
+
+async function enrichFabWindowWithTcgcsv(items) {
+  if (!Array.isArray(items) || !items.length) return items;
+
+  let categoryId;
+  let groups;
+
+  try {
+    categoryId = await getFabCategoryId();
+    groups = await getFabGroups(categoryId);
+  } catch (error) {
+    console.warn("TCGCSV: não foi possível carregar grupos de FAB:", error.message);
+    return items.map(item => applyTcgcsvMiss(item, "erro ao carregar grupos TCGCSV"));
+  }
+
+  for (const item of items) {
+    try {
+      const group = matchFabGroup(groups, item.set);
+      if (!group) {
+        applyTcgcsvMiss(item, "set não encontrado no TCGCSV");
+        continue;
+      }
+
+      const { products, pricesByProductId } = await getTcgcsvGroupData(categoryId, group);
+      const candidates = products
+        .map(product => ({ product, score: scoreFabProductMatch(item, product) }))
+        .filter(candidate => candidate.score >= 50)
+        .sort((a, b) => b.score - a.score);
+
+      if (!candidates.length) {
+        applyTcgcsvMiss(item, "produto não encontrado no TCGCSV");
+        continue;
+      }
+
+      let selected = null;
+      for (const candidate of candidates.slice(0, 5)) {
+        const prices = pricesByProductId.get(candidate.product.productId) || [];
+        const price = chooseTcgplayerPrice(item, prices);
+        if (price && tcgplayerPriceValue(price) !== null) {
+          selected = { product: candidate.product, price };
+          break;
+        }
+      }
+
+      if (!selected) {
+        applyTcgcsvMiss(item, "preço TCGplayer não encontrado no TCGCSV");
+        continue;
+      }
+
+      applyTcgcsvMatch(item, group, selected.product, selected.price);
+    } catch (error) {
+      applyTcgcsvMiss(item, `erro TCGCSV: ${error.message}`);
+    }
+  }
+
+  return items;
+}
+
+async function enrichFabGameWithTcgcsv(gameResult) {
+  if (gameResult.code !== "fab") return gameResult;
+
+  for (const windowConfig of windows) {
+    gameResult.windows[windowConfig.key] = await enrichFabWindowWithTcgcsv(gameResult.windows[windowConfig.key]);
+  }
+
+  gameResult.items = gameResult.windows.daily;
+  gameResult.priceSources = ["JustTCG", "TCGCSV/TCGplayer"];
+  return gameResult;
 }
 
 async function getSpikesForGame(gameId, target) {
@@ -298,7 +767,8 @@ async function getSpikesForGame(gameId, target) {
       daily: []
     },
     items: [],
-    warnings: []
+    warnings: [],
+    priceSources: target.code === "fab" ? ["JustTCG", "TCGCSV/TCGplayer"] : ["JustTCG"]
   };
 
   for (const windowConfig of windows) {
@@ -316,7 +786,7 @@ async function getSpikesForGame(gameId, target) {
 
   // Compatibilidade com componentes antigos do site, como o card do banner hero.
   result.items = result.windows.daily;
-  return result;
+  return enrichFabGameWithTcgcsv(result);
 }
 
 async function main() {
@@ -332,11 +802,18 @@ async function main() {
 
   const output = {
     updatedAt: new Date().toISOString(),
-    source: "JustTCG",
-    schema: "spikes-daily-v4",
+    source: "JustTCG + TCGCSV/TCGplayer para FAB",
+    schema: "spikes-daily-v5-tcgcsv-fab",
     windows: windows.map(window => window.key),
     requestLimit: Number(API_LIMIT),
+    displayLimit: DISPLAY_LIMIT,
+    maxPagesPerGame: MAX_PAGES_PER_GAME,
     requestWaitMs: REQUEST_WAIT_MS,
+    tcgcsv: {
+      enabledFor: ["fab"],
+      fabCategoryId: TCGCSV_FAB_CATEGORY_FALLBACK,
+      referenceMultipliers: [5, 6, 7]
+    },
     games: []
   };
 

@@ -1,6 +1,6 @@
-/* Spikes JustTCG
+/* Spikes JustTCG + TCGCSV
    Lê assets/data/spikes.json e renderiza listas por jogo.
-   A atualização dos dados reais é feita pelo GitHub Actions usando a API JustTCG.
+   A atualização dos dados reais é feita pelo GitHub Actions para não expor chaves no navegador.
 */
 
 (() => {
@@ -13,24 +13,6 @@
       eyebrow: "Top spikes do dia",
       title: "Maiores altas das últimas 24h",
       description: "Até 9 cartas que mais subiram nas últimas 24 horas."
-    },
-    weekly: {
-      label: "Semana",
-      eyebrow: "Top spikes da semana",
-      title: "Maiores altas dos últimos 7 dias",
-      description: "As cartas que mais subiram na semana."
-    },
-    monthly: {
-      label: "Mês",
-      eyebrow: "Top spikes do mês",
-      title: "Maiores altas dos últimos 30 dias",
-      description: "As cartas que mais subiram no mês."
-    },
-    expensive: {
-      label: "Mais caras",
-      eyebrow: "Cartas mais caras",
-      title: "Maiores preços atuais",
-      description: "As cartas mais caras do jogo no momento."
     }
   };
 
@@ -38,15 +20,29 @@
   const WINDOW_ORDER = ["daily"];
   let pagePayloads = [];
 
+  function numberOrNull(value) {
+    if (value === null || value === undefined || value === "") return null;
+    const n = Number(value);
+    return Number.isFinite(n) ? n : null;
+  }
+
   function money(value) {
-    if (value === null || value === undefined || Number.isNaN(Number(value))) return "—";
-    return Number(value).toLocaleString("en-US", { style: "currency", currency: "USD" });
+    const n = numberOrNull(value);
+    if (n === null) return "—";
+    return n.toLocaleString("en-US", { style: "currency", currency: "USD" });
+  }
+
+  function brl(value) {
+    const n = numberOrNull(value);
+    if (n === null) return "—";
+    return n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
   }
 
   function percent(value) {
-    if (value === null || value === undefined || Number.isNaN(Number(value))) return "—";
-    const sign = Number(value) > 0 ? "+" : "";
-    return `${sign}${Number(value).toFixed(1)}%`;
+    const n = numberOrNull(value);
+    if (n === null) return "—";
+    const sign = n > 0 ? "+" : "";
+    return `${sign}${n.toFixed(1)}%`;
   }
 
   function dateBR(value) {
@@ -57,15 +53,6 @@
       day: "2-digit", month: "2-digit", year: "numeric",
       hour: "2-digit", minute: "2-digit"
     });
-  }
-
-  function shortDate(value) {
-    const numeric = Number(value || 0);
-    if (!numeric) return "";
-    const ms = numeric < 1000000000000 ? numeric * 1000 : numeric;
-    const date = new Date(ms);
-    if (Number.isNaN(date.getTime())) return "";
-    return date.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" });
   }
 
   function escapeHtml(value) {
@@ -89,70 +76,6 @@
     return String(game.code || game.id || game.label || "jogo").toLowerCase().replace(/[^a-z0-9-]+/g, "-");
   }
 
-  function normalizeHistory(history) {
-    if (!Array.isArray(history)) return [];
-    return history
-      .map(point => ({
-        t: Number(point.t || point.date || point.timestamp || 0),
-        p: Number(point.p || point.price || point.value || 0)
-      }))
-      .filter(point => point.p > 0)
-      .sort((a, b) => a.t - b.t);
-  }
-
-  function makeChart(history, size = "card") {
-    const points = normalizeHistory(history);
-    if (points.length < 2) {
-      return `<div class="spike-chart-empty">Sem histórico suficiente</div>`;
-    }
-
-    const large = size === "large";
-    const compact = size === "compact";
-    const width = large ? 780 : 360;
-    const height = large ? 300 : compact ? 92 : 136;
-    const padX = large ? 58 : 36;
-    const padTop = large ? 26 : 18;
-    const padBottom = large ? 42 : 28;
-    const chartHeight = height - padTop - padBottom;
-    const prices = points.map(p => p.p);
-    const min = Math.min(...prices);
-    const max = Math.max(...prices);
-    const range = max - min || 1;
-
-    function xy(point, index) {
-      const x = padX + (index / (points.length - 1)) * (width - padX * 2);
-      const y = padTop + (1 - ((point.p - min) / range)) * chartHeight;
-      return { x, y };
-    }
-
-    const coords = points.map(xy);
-    const d = coords.map((point, index) => `${index === 0 ? "M" : "L"} ${point.x.toFixed(2)} ${point.y.toFixed(2)}`).join(" ");
-    const area = `${d} L ${coords.at(-1).x.toFixed(2)} ${height - padBottom} L ${coords[0].x.toFixed(2)} ${height - padBottom} Z`;
-    const gridValues = [max, min + range / 2, min];
-    const grid = gridValues.map(value => {
-      const y = padTop + (1 - ((value - min) / range)) * chartHeight;
-      return `
-        <line class="spike-chart-grid" x1="${padX}" y1="${y.toFixed(2)}" x2="${width - padX}" y2="${y.toFixed(2)}"></line>
-        <text class="spike-chart-label spike-chart-y-label" x="8" y="${(y + 4).toFixed(2)}">${money(value).replace("US", "")}</text>
-      `;
-    }).join("");
-    const dots = coords.map((point, index) => {
-      if (!large && index !== 0 && index !== coords.length - 1) return "";
-      return `<circle class="spike-chart-dot" cx="${point.x.toFixed(2)}" cy="${point.y.toFixed(2)}" r="${large ? 4 : 3}"></circle>`;
-    }).join("");
-
-    return `
-      <svg class="spike-chart ${large ? "spike-chart-large" : ""}" viewBox="0 0 ${width} ${height}" role="img" aria-label="Gráfico de preço">
-        ${grid}
-        <path class="spike-chart-area" d="${area}"></path>
-        <path class="spike-chart-line" d="${d}"></path>
-        ${dots}
-        <text class="spike-chart-label" x="${padX}" y="${height - 10}">${shortDate(points[0].t)}</text>
-        <text class="spike-chart-label spike-chart-end-label" x="${width - padX}" y="${height - 10}">${shortDate(points.at(-1).t)}</text>
-      </svg>
-    `;
-  }
-
   function itemChange(item, windowKey) {
     if (windowKey === "daily") return item.change1d ?? item.change24h ?? item.change24hr ?? item.change7d ?? item.change30d;
     if (windowKey === "weekly") return item.change7d ?? item.change30d ?? item.change1d;
@@ -160,26 +83,70 @@
     return item.price;
   }
 
-  function metricTemplate(item, windowKey) {
-    if (windowKey === "expensive") {
-      return `
-        <div class="spike-metric-main">
-          <strong>${money(item.price)}</strong>
-          <span>Preço atual</span>
-        </div>
-      `;
-    }
+  function sourceJusttcg(item) {
+    return item.sources?.justtcg || { price: item.justtcgPrice ?? item.price, variant: item.variant || "" };
+  }
 
+  function sourceTcgplayer(item) {
+    return item.sources?.tcgplayer || null;
+  }
+
+  function tcgReference(item, multiplier) {
+    const tcg = sourceTcgplayer(item);
+    const key = `x${multiplier}`;
+    const direct = numberOrNull(tcg?.referenceBRL?.[key] ?? item.tcgplayerReference?.[key]);
+    if (direct !== null) return direct;
+
+    const tcgPrice = numberOrNull(tcg?.price ?? item.tcgplayerPrice);
+    if (tcgPrice === null) return null;
+    return Math.round(tcgPrice * multiplier * 100) / 100;
+  }
+
+  function metricBox(label, value, extraClass = "") {
     return `
-      <div class="spike-metric-main">
-        <strong>${percent(itemChange(item, windowKey))}</strong>
-        <span>Variação</span>
-      </div>
-      <div class="spike-metric-secondary">
-        <strong>${money(item.price)}</strong>
-        <span>Preço atual</span>
+      <div class="spike-metric-box ${extraClass}">
+        <strong>${value}</strong>
+        <span>${label}</span>
       </div>
     `;
+  }
+
+  function metricTemplate(item, game, windowKey, compact = false) {
+    const justtcg = sourceJusttcg(item);
+    const tcg = sourceTcgplayer(item);
+    const isFab = game?.code === "fab";
+    const boxes = [];
+
+    boxes.push(metricBox("Variação 24h", percent(itemChange(item, windowKey)), "spike-metric-up"));
+    boxes.push(metricBox("JustTCG", money(justtcg.price ?? item.price)));
+
+    if (isFab) {
+      boxes.push(metricBox("TCGplayer", money(tcg?.price ?? item.tcgplayerPrice)));
+
+      if (!compact) {
+        boxes.push(metricBox("TCG x5", brl(tcgReference(item, 5)), "spike-metric-brl"));
+        boxes.push(metricBox("TCG x6", brl(tcgReference(item, 6)), "spike-metric-brl"));
+        boxes.push(metricBox("TCG x7", brl(tcgReference(item, 7)), "spike-metric-brl"));
+      }
+    }
+
+    return `<div class="spike-metrics-grid ${isFab ? "spike-metrics-grid-fab" : ""} ${compact ? "spike-metrics-grid-compact" : ""}">${boxes.join("")}</div>`;
+  }
+
+  function sourceNoteTemplate(item, game) {
+    const justtcg = sourceJusttcg(item);
+    const tcg = sourceTcgplayer(item);
+
+    if (game?.code !== "fab") {
+      return `<p class="spike-source-note">Preço: JustTCG${justtcg.variant ? " • " + escapeHtml(justtcg.variant) : ""}</p>`;
+    }
+
+    if (tcg?.price) {
+      const subtype = tcg.subTypeName ? ` • ${escapeHtml(tcg.subTypeName)}` : "";
+      return `<p class="spike-source-note">Preço: JustTCG + TCGplayer via TCGCSV${subtype}</p>`;
+    }
+
+    return `<p class="spike-source-note spike-source-note-warning">TCGplayer via TCGCSV: aguardando atualização ou sem correspondência</p>`;
   }
 
   function fallbackCardName(item, game) {
@@ -201,7 +168,7 @@
   }
 
   function directImageUrl(item) {
-    return item.imageUrl || item.image_url || item.image || item.imageSmall || item.imageLarge || "";
+    return item.imageUrl || item.image_url || item.image || item.imageSmall || item.imageLarge || item.sources?.justtcg?.imageUrl || "";
   }
 
   function cardImageTemplate(item, game, extraClass = "") {
@@ -232,7 +199,6 @@
   }
 
   function cardTemplate(item, game, windowKey, payloads, compact = false) {
-    const history = item.history || [];
     const payloadIndex = payloads.push({ item, game, windowKey }) - 1;
 
     return `
@@ -244,10 +210,8 @@
           <p class="eyebrow">${escapeHtml(game.label)} • ${escapeHtml(WINDOW_CONFIG[windowKey]?.label || "Spikes")}</p>
           <h3>${escapeHtml(item.name)}</h3>
           <p>${escapeHtml(item.set || "Set não informado")}${item.variant ? " • " + escapeHtml(item.variant) : ""}</p>
-          <div class="spike-metrics-grid">${metricTemplate(item, windowKey)}</div>
-        </div>
-        <div class="spike-card-chart-wrap">
-          ${makeChart(history, compact ? "compact" : "card")}
+          ${metricTemplate(item, game, windowKey, compact)}
+          ${sourceNoteTemplate(item, game)}
         </div>
       </article>
     `;
@@ -258,7 +222,7 @@
       return game.windows[windowKey].slice(0, 9);
     }
 
-    if (windowKey === "weekly" && Array.isArray(game.items)) {
+    if ((windowKey === "weekly" || windowKey === "daily") && Array.isArray(game.items)) {
       return game.items.slice(0, 9);
     }
 
@@ -306,6 +270,7 @@
     const hasAnyItem = WINDOW_ORDER.some(windowKey => getItemsForWindow(game, windowKey).length > 0);
     if (!hasAnyItem) return "";
     const key = gameKey(game);
+    const sourceLabel = game.code === "fab" ? "JustTCG + TCGplayer/TCGCSV" : "JustTCG";
 
     return `
       <section class="spike-game-section" data-spike-game="${escapeHtml(key)}">
@@ -314,13 +279,54 @@
             <p class="eyebrow">Top spikes</p>
             <h2>${escapeHtml(game.label)}</h2>
           </div>
-          <span>Até 9 cartas nas últimas 24h</span>
+          <span>Até 9 cartas nas últimas 24h • ${escapeHtml(sourceLabel)}</span>
         </div>
         <div class="spike-window-stack">
           ${WINDOW_ORDER.map(windowKey => windowSectionTemplate(game, windowKey, payloads)).join("")}
         </div>
       </section>
     `;
+  }
+
+  function modalMetricList(item, game, windowKey) {
+    const justtcg = sourceJusttcg(item);
+    const tcg = sourceTcgplayer(item);
+    const isFab = game?.code === "fab";
+
+    const rows = [
+      `<span><strong>Variação 24h</strong>${percent(itemChange(item, windowKey))}</span>`,
+      `<span><strong>JustTCG</strong>${money(justtcg.price ?? item.price)}</span>`
+    ];
+
+    if (isFab) {
+      rows.push(`<span><strong>TCGplayer</strong>${money(tcg?.price ?? item.tcgplayerPrice)}</span>`);
+      rows.push(`<span><strong>TCG x5</strong>${brl(tcgReference(item, 5))}</span>`);
+      rows.push(`<span><strong>TCG x6</strong>${brl(tcgReference(item, 6))}</span>`);
+      rows.push(`<span><strong>TCG x7</strong>${brl(tcgReference(item, 7))}</span>`);
+    }
+
+    return rows.join("");
+  }
+
+  function sourceDetailsTemplate(item, game) {
+    if (game?.code !== "fab") {
+      return `<p class="spike-modal-source-text">Fonte de preço: JustTCG.</p>`;
+    }
+
+    const tcg = sourceTcgplayer(item);
+    if (!tcg?.price) {
+      return `<p class="spike-modal-source-text">Fonte de preço: JustTCG. O campo TCGplayer/TCGCSV aparecerá quando o workflow encontrar correspondência da carta no TCGCSV.</p>`;
+    }
+
+    const details = [
+      `Produto TCGplayer: ${escapeHtml(tcg.productName || "não informado")}`,
+      tcg.subTypeName ? `variante: ${escapeHtml(tcg.subTypeName)}` : "",
+      tcg.marketPrice ? `market: ${money(tcg.marketPrice)}` : "",
+      tcg.midPrice ? `mid: ${money(tcg.midPrice)}` : "",
+      tcg.lowPrice ? `low: ${money(tcg.lowPrice)}` : ""
+    ].filter(Boolean).join(" • ");
+
+    return `<p class="spike-modal-source-text">Fonte de preço: JustTCG + TCGplayer via TCGCSV. ${details}</p>`;
   }
 
   function openModal(item, game, windowKey) {
@@ -340,14 +346,11 @@
             <h2>${escapeHtml(item.name)}</h2>
             <p>${escapeHtml(item.set || "Set não informado")} ${item.variant ? "• " + escapeHtml(item.variant) : ""}</p>
             <div class="spike-modal-metrics">
-              <span><strong>Preço atual</strong>${money(item.price)}</span>
-              <span><strong>24h</strong>${percent(item.change1d ?? item.change24h ?? item.change24hr)}</span>
-              <span><strong>7 dias</strong>${percent(item.change7d)}</span>
-              <span><strong>30 dias</strong>${percent(item.change30d)}</span>
+              ${modalMetricList(item, game, windowKey)}
             </div>
+            ${sourceDetailsTemplate(item, game)}
           </div>
         </div>
-        ${makeChart(item.history || [], "large")}
       </div>
     `;
 
