@@ -88,7 +88,7 @@ layout: default
     </div>
   </header>
 
-  <div class="container post-content">
+  <div class="container post-content{% if page.wide_content %} post-content-wide{% endif %}">
     {{ content }}
 
     {% if page.results %}
