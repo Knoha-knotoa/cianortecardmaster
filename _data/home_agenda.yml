@@ -1,32 +1,33 @@
 # Agenda resumida exibida na Home.
-# Cada item aparece em uma linha e pode ser editado individualmente.
+# Cada item aparece em uma linha clicável e pode ser editado individualmente.
+# A página completa da agenda continua em /agenda/.
 
 - day: "Domingo"
   title: "Encontro semanal da comunidade"
-  location: "Centro Cultural"
-  time: "14:00 - 18:00"
+  game: "Card games, RPG e comunidade"
+  time: "13:30"
   url: "/agenda/"
 
 - day: "Quarta"
-  title: "Armory de Flesh and Blood"
-  location: "Bazar do Weezing"
+  title: "Armory — Flesh and Blood"
+  game: "Flesh and Blood"
   time: "19:00 - 22:30"
   url: "/agenda/"
 
 - day: "Quinta"
-  title: "Venha jogar Pokémon"
-  location: "Bazar do Weezing"
+  title: "Pokémon — Pokémon TCG"
+  game: "Pokémon TCG"
   time: "19:00 - 22:30"
   url: "/agenda/"
 
 - day: "Sexta"
   title: "Friday Night Magic"
-  location: "Bazar do Weezing"
+  game: "Magic: The Gathering"
   time: "19:00 - 22:30"
   url: "/agenda/"
 
 - day: "Sábado"
-  title: "Venha descobrir o que está rolando"
-  location: "Bazar do Weezing"
+  title: "Eventos — Card games variados"
+  game: "Card games variados"
   time: "14:00 - 18:00"
   url: "/agenda/"

@@ -2250,57 +2250,192 @@ h3 {
   display: none !important;
 }
 
-/* Home: agenda em linhas editáveis */
-.home-agenda-list {
-  display: grid;
-  gap: .75rem;
+/* Home: Agenda da Semana */
+.home-agenda-section {
+  position: relative;
+  overflow: hidden;
 }
 
-.home-agenda-item {
+.home-agenda-section::before {
+  content: "";
+  position: absolute;
+  inset: 1.4rem 0 auto;
+  height: 16rem;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(212,175,55,.16), transparent 20rem),
+    radial-gradient(circle at 82% 12%, rgba(31,184,92,.14), transparent 22rem);
+  opacity: .9;
+}
+
+.home-agenda-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+.home-agenda-header {
   display: grid;
-  grid-template-columns: 120px 1.25fr 1fr 150px;
-  gap: .8rem;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 1.25rem;
+  margin-bottom: 1.8rem;
+}
+
+.home-agenda-header h2 {
+  font-size: clamp(2.8rem, 6vw, 5.2rem);
+  margin-bottom: .45rem;
+}
+
+.home-agenda-header p {
+  margin: 0;
+  color: var(--muted);
+  max-width: 720px;
+}
+
+.home-agenda-link {
+  font-family: "Fugaz One", system-ui, sans-serif;
+  padding: .75rem 1rem;
+  border: 1px solid rgba(212,175,55,.35);
+  border-radius: 999px;
+  background: rgba(212,175,55,.08);
+}
+
+.home-agenda-board {
+  display: grid;
+  gap: .95rem;
+  padding: .75rem 0 0;
+  perspective: 900px;
+}
+
+.home-agenda-row {
+  --tilt: 0deg;
+  --row-scale: 1;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) auto;
+  gap: 1rem;
   align-items: center;
-  padding: .9rem 1rem;
-  border: 1px solid rgba(212,175,55,.2);
-  border-radius: 18px;
+  width: min(100%, 1080px);
+  margin-inline: auto;
+  padding: 1.05rem 1.25rem;
+  border: 1px solid rgba(212,175,55,.26);
+  border-radius: 24px;
+  overflow: hidden;
   text-decoration: none;
   background:
-    linear-gradient(90deg, rgba(212,175,55,.1), rgba(255,255,255,.03));
-  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    linear-gradient(90deg, rgba(212,175,55,.16), rgba(31,184,92,.07) 45%, rgba(255,255,255,.035)),
+    rgba(8, 14, 10, .92);
+  box-shadow: 0 18px 38px rgba(0,0,0,.28);
+  transform: rotate(var(--tilt)) scale(var(--row-scale));
+  transform-origin: center;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
 }
 
-.home-agenda-item:hover {
-  transform: translateY(-1px);
-  border-color: rgba(212,175,55,.45);
+.home-agenda-row::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 7px;
+  background: linear-gradient(180deg, var(--gold), var(--green));
+  z-index: 0;
+}
+
+.home-agenda-row::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
   background:
-    linear-gradient(90deg, rgba(212,175,55,.16), rgba(31,184,92,.06));
+    linear-gradient(120deg, transparent 0 18%, rgba(255,255,255,.08) 18% 20%, transparent 20% 100%);
+  opacity: .65;
 }
 
-.home-agenda-item strong,
-.home-agenda-item small {
+.home-agenda-row > * {
+  position: relative;
+  z-index: 1;
+}
+
+.home-agenda-row:hover {
+  transform: translateX(8px) rotate(0deg) scale(1.012);
+  border-color: rgba(212,175,55,.55);
+  background:
+    linear-gradient(90deg, rgba(212,175,55,.22), rgba(31,184,92,.12) 45%, rgba(255,255,255,.055)),
+    rgba(8, 14, 10, .96);
+  box-shadow: 0 22px 46px rgba(0,0,0,.36);
+}
+
+.home-agenda-row-1,
+.home-agenda-row-3,
+.home-agenda-row-5 {
+  --row-scale: 1.02;
+}
+
+.home-agenda-row-1 {
+  --tilt: -.42deg;
+}
+
+.home-agenda-row-2 {
+  --row-scale: .97;
+  --tilt: .18deg;
+}
+
+.home-agenda-row-3 {
+  --tilt: .44deg;
+}
+
+.home-agenda-row-4 {
+  --row-scale: .98;
+  --tilt: -.16deg;
+}
+
+.home-agenda-row-5 {
+  --tilt: -.36deg;
+}
+
+.home-agenda-day,
+.home-agenda-time {
   font-family: "Fugaz One", system-ui, sans-serif;
 }
 
-.home-agenda-item strong {
+.home-agenda-day {
   color: var(--gold);
   text-transform: uppercase;
-  letter-spacing: .04em;
+  letter-spacing: .06em;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
 }
 
-.home-agenda-item span {
+.home-agenda-main {
+  display: grid;
+  gap: .08rem;
+  min-width: 0;
+}
+
+.home-agenda-title {
   color: var(--white);
-  font-weight: 700;
+  font-weight: 800;
+  font-size: clamp(1.2rem, 2.4vw, 1.75rem);
+  line-height: 1.12;
 }
 
-.home-agenda-item em {
+.home-agenda-game {
   color: var(--muted);
-  font-style: normal;
+  font-size: .98rem;
+  line-height: 1.25;
 }
 
-.home-agenda-item small {
+.home-agenda-time {
   color: #fff2b8;
+  font-size: clamp(1rem, 1.6vw, 1.24rem);
   text-align: right;
+  white-space: nowrap;
+}
+
+.home-agenda-seo {
+  max-width: 900px;
+  margin: 2rem auto 0;
+  color: var(--muted);
+  text-align: center;
 }
 
 /* Spikes: cartas maiores, informação abaixo e gráfico detalhado */
@@ -2510,13 +2645,38 @@ h3 {
     grid-template-columns: 1fr;
   }
 
-  .home-agenda-item {
+  .home-agenda-header {
     grid-template-columns: 1fr;
-    gap: .25rem;
+    align-items: start;
   }
 
-  .home-agenda-item small {
+  .home-agenda-link {
+    width: fit-content;
+  }
+
+  .home-agenda-board {
+    gap: .75rem;
+  }
+
+  .home-agenda-row,
+  .home-agenda-row-1,
+  .home-agenda-row-2,
+  .home-agenda-row-3,
+  .home-agenda-row-4,
+  .home-agenda-row-5 {
+    grid-template-columns: 1fr;
+    gap: .18rem;
+    padding: 1rem;
+    transform: none;
+  }
+
+  .home-agenda-row:hover {
+    transform: translateY(-2px);
+  }
+
+  .home-agenda-time {
     text-align: left;
+    margin-top: .25rem;
   }
 }
 

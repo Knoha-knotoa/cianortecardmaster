@@ -136,21 +136,32 @@ title: "Início"
   </div>
 </section>
 
-<section class="section section-alt">
+<section class="section section-alt home-agenda-section">
   <div class="container">
-    {% include section-title.html kicker="Agenda" title="Agenda" text="Endereços, horários e encontros da comunidade." link="/agenda/" link_text="Ver agenda completa" %}
+    <div class="home-agenda-header">
+      <div>
+        <p class="eyebrow">Agenda</p>
+        <h2>Agenda da Semana</h2>
+        <p>Clique em qualquer encontro para ver endereço e detalhes na página de agenda.</p>
+      </div>
+      <a class="section-link home-agenda-link" href="{{ '/agenda/' | relative_url }}">Ver agenda completa</a>
+    </div>
 
-    <div class="events-grid">
-      {% for event in site.data.events limit:2 %}
-        <article class="event-card">
-          <p class="eyebrow">{{ event.day }} • {{ event.time }}</p>
-          <h3>{{ event.title }}</h3>
-          <p><strong>Jogos:</strong> {{ event.game }}</p>
-          <p><strong>Local:</strong> {{ event.location }}</p>
-          <p><strong>Endereço:</strong> {{ event.address }}</p>
-          <p>{{ event.note }}</p>
-        </article>
+    <div class="home-agenda-board" aria-label="Agenda semanal da Cianorte Card Masters">
+      {% for item in site.data.home_agenda %}
+        <a class="home-agenda-row home-agenda-row-{{ forloop.index }}" href="{{ item.url | relative_url }}">
+          <strong class="home-agenda-day">{{ item.day }}</strong>
+          <span class="home-agenda-main">
+            <span class="home-agenda-title">{{ item.title }}</span>
+            {% if item.game %}<span class="home-agenda-game">{{ item.game }}</span>{% endif %}
+          </span>
+          <small class="home-agenda-time">{{ item.time }}</small>
+        </a>
       {% endfor %}
     </div>
+
+    <p class="home-agenda-seo">
+      A Cianorte Card Masters reúne jogadores de Flesh and Blood, Pokémon TCG, Magic: The Gathering, RPG e outros card games em Cianorte. Confira nossa agenda semanal, participe dos encontros da comunidade e descubra onde jogar card games presenciais na cidade.
+    </p>
   </div>
 </section>
