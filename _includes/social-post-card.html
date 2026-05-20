@@ -9,6 +9,33 @@
 
 {% assign platform_label = include.post.category_label | default: social_platform | replace: 'youtube', 'YouTube' | replace: 'instagram', 'Instagram' | replace: 'tiktok', 'TikTok' | replace: 'x', 'X' %}
 
+{% assign social_image = include.post.image | default: '' | strip %}
+{% assign api_image_game = nil %}
+{% assign api_image_name = nil %}
+{% if include.post.image_game and include.post.image_card %}
+  {% assign api_image_game = include.post.image_game | downcase | strip %}
+  {% assign api_image_name = include.post.image_card | strip %}
+  {% if api_image_game == 'goagain' %}{% assign api_image_game = 'fab' %}{% endif %}
+  {% if api_image_game == 'scryfall' or api_image_game == 'magic' %}{% assign api_image_game = 'mtg' %}{% endif %}
+  {% if api_image_game == 'pkm' %}{% assign api_image_game = 'pokemon' %}{% endif %}
+  {% if api_image_game == 'ygo' %}{% assign api_image_game = 'yugioh' %}{% endif %}
+{% elsif social_image contains ':' %}
+  {% assign social_image_parts = social_image | split: ':' %}
+  {% assign social_image_prefix = social_image_parts[0] | downcase | strip %}
+  {% assign social_image_name = social_image_parts[1] | strip %}
+  {% case social_image_prefix %}
+    {% when 'goagain' %}{% assign api_image_game = 'fab' %}{% assign api_image_name = social_image_name %}
+    {% when 'fab' %}{% assign api_image_game = 'fab' %}{% assign api_image_name = social_image_name %}
+    {% when 'scryfall' %}{% assign api_image_game = 'mtg' %}{% assign api_image_name = social_image_name %}
+    {% when 'mtg' %}{% assign api_image_game = 'mtg' %}{% assign api_image_name = social_image_name %}
+    {% when 'magic' %}{% assign api_image_game = 'mtg' %}{% assign api_image_name = social_image_name %}
+    {% when 'pokemon' %}{% assign api_image_game = 'pokemon' %}{% assign api_image_name = social_image_name %}
+    {% when 'pkm' %}{% assign api_image_game = 'pokemon' %}{% assign api_image_name = social_image_name %}
+    {% when 'yugioh' %}{% assign api_image_game = 'yugioh' %}{% assign api_image_name = social_image_name %}
+    {% when 'ygo' %}{% assign api_image_game = 'yugioh' %}{% assign api_image_name = social_image_name %}
+  {% endcase %}
+{% endif %}
+
 <article class="social-post-card post-style-{{ social_platform }}" data-social-platform="{{ social_platform }}">
   <div class="social-post-topline">
     <p class="eyebrow">{{ platform_label }}</p>
@@ -50,6 +77,8 @@
           <img src="{{ foto | relative_url }}" alt="{{ include.post.title | escape }}" loading="lazy">
         {% endfor %}
       </div>
+    {% elsif api_image_game and api_image_name %}
+      {% include tcg-card.html game=api_image_game name=api_image_name cover=true %}
     {% elsif include.post.image %}
       <img src="{{ include.post.image | relative_url }}" alt="{{ include.post.title | escape }}" loading="lazy">
     {% else %}

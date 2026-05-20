@@ -1,4 +1,5 @@
 {% assign item_label = nil %}
+{% assign inferred_style = nil %}
 {% assign include_post_path = include.post.path | downcase %}
 {% if include.post.collection == "blog" %}
   {% if include_post_path contains "_blog/flesh-and-blood/" %}{% assign item_label = "Flesh and Blood" %}{% assign inferred_style = "flesh-and-blood" %}
@@ -36,21 +37,67 @@
 {% endunless %}
 
 {% assign card_style = include.post.content_style | default: inferred_style | slugify %}
-{% assign default_category_image = "/assets/img/category/" | append: card_style | append: ".svg" %}
-{% assign card_image = include.post.image | default: default_category_image %}
-{% unless include.post.image %}
-  {% if include.post.collection != "blog" and include.post.collection != "comunidade" %}
-    {% assign card_image = site.data.images.post_default %}
-  {% endif %}
-{% endunless %}
+{% assign fallback_image = site.data.images.post_default %}
+{% case card_style %}
+  {% when "flesh-and-blood" %}{% assign fallback_image = site.data.images.post_defaults.flesh_and_blood %}
+  {% when "magic" %}{% assign fallback_image = site.data.images.post_defaults.magic %}
+  {% when "pokemon" %}{% assign fallback_image = site.data.images.post_defaults.pokemon %}
+  {% when "tcg" %}{% assign fallback_image = site.data.images.post_defaults.tcg %}
+  {% when "rpg" %}{% assign fallback_image = site.data.images.post_defaults.rpg %}
+  {% when "cianorte-card-master" %}{% assign fallback_image = site.data.images.post_defaults.cianorte_card_master %}
+  {% when "deck" %}{% assign fallback_image = site.data.images.post_defaults.deck %}
+  {% when "classic-constructed" %}{% assign fallback_image = site.data.images.post_defaults.deck %}
+  {% when "silver-age" %}{% assign fallback_image = site.data.images.post_defaults.deck %}
+  {% when "sealed" %}{% assign fallback_image = site.data.images.post_defaults.deck %}
+  {% when "living-legend" %}{% assign fallback_image = site.data.images.post_defaults.deck %}
+  {% when "blitz" %}{% assign fallback_image = site.data.images.post_defaults.deck %}
+  {% when "upf" %}{% assign fallback_image = site.data.images.post_defaults.deck %}
+  {% when "guia" %}{% assign fallback_image = site.data.images.post_defaults.guia %}
+  {% when "blog" %}{% assign fallback_image = site.data.images.post_defaults.blog %}
+  {% when "comunidade" %}{% assign fallback_image = site.data.images.post_defaults.comunidade %}
+{% endcase %}
+{% assign explicit_image = include.post.image | strip %}
+{% if explicit_image == "" %}
+  {% assign card_image = fallback_image %}
+{% else %}
+  {% assign card_image = explicit_image %}
+{% endif %}
+
+{% assign card_image_src = card_image | relative_url %}
+{% if card_image contains "://" %}{% assign card_image_src = card_image %}{% endif %}
+
+{% assign api_image_game = nil %}
+{% assign api_image_name = nil %}
+{% if include.post.image_game and include.post.image_card %}
+  {% assign api_image_game = include.post.image_game | downcase | strip %}
+  {% assign api_image_name = include.post.image_card | strip %}
+  {% if api_image_game == "goagain" %}{% assign api_image_game = "fab" %}{% endif %}
+  {% if api_image_game == "scryfall" or api_image_game == "magic" %}{% assign api_image_game = "mtg" %}{% endif %}
+  {% if api_image_game == "pkm" %}{% assign api_image_game = "pokemon" %}{% endif %}
+  {% if api_image_game == "ygo" %}{% assign api_image_game = "yugioh" %}{% endif %}
+{% elsif card_image contains ":" %}
+  {% assign card_image_parts = card_image | split: ":" %}
+  {% assign card_image_prefix = card_image_parts[0] | downcase | strip %}
+  {% assign card_image_name = card_image_parts[1] | strip %}
+  {% case card_image_prefix %}
+    {% when "goagain" %}{% assign api_image_game = "fab" %}{% assign api_image_name = card_image_name %}
+    {% when "fab" %}{% assign api_image_game = "fab" %}{% assign api_image_name = card_image_name %}
+    {% when "scryfall" %}{% assign api_image_game = "mtg" %}{% assign api_image_name = card_image_name %}
+    {% when "mtg" %}{% assign api_image_game = "mtg" %}{% assign api_image_name = card_image_name %}
+    {% when "magic" %}{% assign api_image_game = "mtg" %}{% assign api_image_name = card_image_name %}
+    {% when "pokemon" %}{% assign api_image_game = "pokemon" %}{% assign api_image_name = card_image_name %}
+    {% when "pkm" %}{% assign api_image_game = "pokemon" %}{% assign api_image_name = card_image_name %}
+    {% when "yugioh" %}{% assign api_image_game = "yugioh" %}{% assign api_image_name = card_image_name %}
+    {% when "ygo" %}{% assign api_image_game = "yugioh" %}{% assign api_image_name = card_image_name %}
+  {% endcase %}
+{% endif %}
 
 <article class="post-card post-card-{{ include.post.collection }} post-style-{{ card_style }}">
   <a class="post-card-image" href="{{ include.post.url | relative_url }}" aria-label="Abrir post: {{ include.post.title | escape }}">
-    {% if card_image contains "goagain:" %}
-      {% assign card_name = card_image | remove: "goagain:" | strip %}
-      {% include tcg-card.html game="fab" name=card_name cover=true %}
+    {% if api_image_game and api_image_name %}
+      {% include tcg-card.html game=api_image_game name=api_image_name cover=true %}
     {% else %}
-      <img src="{{ card_image | relative_url }}" alt="{{ include.post.title | escape }}" loading="lazy">
+      <img src="{{ card_image_src }}" alt="{{ include.post.title | escape }}" loading="lazy">
     {% endif %}
   </a>
 

@@ -7,3 +7,18 @@ hero_card_logo: "/assets/img/logo/ccm-logo.png"
 
 # Imagem padrão usada quando um post não tiver image:
 post_default: "/assets/img/banners/post-default.jpg"
+
+# Fallbacks por categoria quando a postagem não tiver image:
+post_defaults:
+  flesh-and-blood: "/assets/img/banners/default-flesh-and-blood.webp"
+  flesh_and_blood: "/assets/img/banners/default-flesh-and-blood.webp"
+  magic: "/assets/img/banners/default-magic.jpg"
+  pokemon: "/assets/img/banners/default-pokemon.webp"
+  tcg: "/assets/img/banners/default-tcg.webp"
+  rpg: "/assets/img/banners/default-rpg.webp"
+  cianorte-card-master: "/assets/img/banners/default-cianorte-card-master.webp"
+  cianorte_card_master: "/assets/img/banners/default-cianorte-card-master.webp"
+  blog: "/assets/img/banners/default-tcg.webp"
+  comunidade: "/assets/img/banners/default-cianorte-card-master.webp"
+  deck: "/assets/img/banners/default-flesh-and-blood.webp"
+  guia: "/assets/img/banners/post-default.jpg"

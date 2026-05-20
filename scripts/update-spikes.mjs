@@ -30,7 +30,7 @@ const targets = [
 
 const windows = [
   // A página de Spikes mostra apenas altas das últimas 24h.
-  { key: "daily", orderBy: "24h", label: "24 horas", historyDuration: "7d", minPrice: "0.25" }
+  { key: "daily", orderBy: "24h", label: "24 horas", historyDuration: "7d", minPrice: "0.01" }
 ];
 
 if (!API_KEY) {
@@ -166,6 +166,41 @@ function validImageUrl(value) {
   return trimmed;
 }
 
+function extractCards(payload) {
+  if (Array.isArray(payload)) return payload;
+  if (Array.isArray(payload?.data)) return payload.data;
+  if (Array.isArray(payload?.data?.cards)) return payload.data.cards;
+  if (Array.isArray(payload?.data?.results)) return payload.data.results;
+  if (Array.isArray(payload?.cards)) return payload.cards;
+  if (Array.isArray(payload?.results)) return payload.results;
+  if (Array.isArray(payload?.items)) return payload.items;
+  return [];
+}
+
+function paginationInfo(payload) {
+  return payload?.pagination || payload?.meta || payload?._metadata || payload?.data?.pagination || payload?.data?.meta || payload?.data?._metadata || {};
+}
+
+function firstNumber(...values) {
+  for (const value of values) {
+    const n = numberOrNull(value);
+    if (n !== null) return n;
+  }
+  return null;
+}
+
+function historyChangePercent(history) {
+  if (!Array.isArray(history) || history.length < 2) return null;
+  const sorted = history
+    .filter(point => Number(point.p) > 0)
+    .sort((a, b) => Number(a.t) - Number(b.t));
+  if (sorted.length < 2) return null;
+  const first = sorted[0].p;
+  const last = sorted[sorted.length - 1].p;
+  if (!first || !last) return null;
+  return Math.round(((last - first) / first) * 1000) / 10;
+}
+
 function firstImageUrl(...values) {
   for (const value of values) {
     if (!value) continue;
@@ -218,15 +253,45 @@ function extractImageUrl(card, variant) {
 
 function variantChange(variant, windowKey) {
   if (!variant) return null;
-  if (windowKey === "daily") return numberOrNull(variant.priceChange24hr ?? variant.priceChange24h ?? variant.priceChange1d ?? variant.change24hr ?? variant.change24h ?? variant.change1d);
-  if (windowKey === "weekly") return numberOrNull(variant.priceChange7d ?? variant.change7d);
-  if (windowKey === "monthly") return numberOrNull(variant.priceChange30d ?? variant.change30d);
+  const stats = variant.statistics || variant.stats || variant.priceStatistics || variant.price_stats || {};
+
+  if (windowKey === "daily") {
+    return firstNumber(
+      variant.priceChange24hr, variant.priceChange24h, variant.priceChange1d,
+      variant.change24hr, variant.change24h, variant.change1d,
+      variant.priceChange24hrPercent, variant.priceChange24hPercent, variant.priceChange1dPercent,
+      variant.priceChangePercent24h, variant.changePercent24h, variant.percentChange24h,
+      variant.percentageChange24h, variant.price_change_24h, variant.price_change_24hr,
+      stats.priceChange24hr, stats.priceChange24h, stats.change24h, stats.percentChange24h
+    );
+  }
+
+  if (windowKey === "weekly") {
+    return firstNumber(
+      variant.priceChange7d, variant.change7d,
+      variant.priceChange7dPercent, variant.priceChangePercent7d,
+      variant.changePercent7d, variant.percentChange7d,
+      variant.percentageChange7d, variant.price_change_7d,
+      stats.priceChange7d, stats.change7d, stats.percentChange7d
+    );
+  }
+
+  if (windowKey === "monthly") {
+    return firstNumber(
+      variant.priceChange30d, variant.change30d,
+      variant.priceChange30dPercent, variant.priceChangePercent30d,
+      variant.changePercent30d, variant.percentChange30d,
+      variant.percentageChange30d, variant.price_change_30d,
+      stats.priceChange30d, stats.change30d, stats.percentChange30d
+    );
+  }
+
   if (windowKey === "expensive") return numberOrNull(variant.price);
   return null;
 }
 
 function bestVariant(card, windowKey = "weekly") {
-  const variants = Array.isArray(card.variants) ? card.variants : [];
+  const variants = Array.isArray(card.variants) && card.variants.length ? card.variants : [card];
   if (!variants.length) return null;
 
   return variants
@@ -262,10 +327,12 @@ function cardToSpike(card, windowKey = "weekly") {
   const variant = bestVariant(card, windowKey);
   if (!variant) return null;
 
-  const price = numberOrNull(variant.price) ?? 0;
-  const change1d = variantChange(variant, "daily");
-  const change7d = variantChange(variant, "weekly");
-  const change30d = variantChange(variant, "monthly");
+  const price = numberOrNull(variant.price ?? card.price ?? card.marketPrice ?? card.market_price) ?? 0;
+  const history = normalizeHistory(variant, windowKey);
+  const inferredChange = historyChangePercent(history);
+  const change1d = variantChange(variant, "daily") ?? (windowKey === "daily" ? inferredChange : null);
+  const change7d = variantChange(variant, "weekly") ?? (windowKey === "weekly" ? inferredChange : null);
+  const change30d = variantChange(variant, "monthly") ?? (windowKey === "monthly" ? inferredChange : null);
 
   if (windowKey !== "expensive") {
     const selectedChange = windowKey === "daily" ? change1d : windowKey === "monthly" ? change30d : change7d;
@@ -287,7 +354,7 @@ function cardToSpike(card, windowKey = "weekly") {
     change30d,
     variant: [variant.printing, variant.condition].filter(Boolean).join(" / "),
     imageUrl,
-    history: normalizeHistory(variant, windowKey),
+    history,
     sources: {
       justtcg: {
         label: "JustTCG",
@@ -315,7 +382,7 @@ function sortWindowItems(items, windowKey) {
 }
 
 function payloadHasMore(payload, cardsLength) {
-  const pagination = payload?.pagination || payload?.meta || payload?._metadata || {};
+  const pagination = paginationInfo(payload);
   if (typeof pagination.hasMore === "boolean") return pagination.hasMore;
   if (typeof pagination.has_more === "boolean") return pagination.has_more;
   if (typeof pagination.total === "number" && typeof pagination.offset === "number") {
@@ -326,7 +393,7 @@ function payloadHasMore(payload, cardsLength) {
 }
 
 function payloadNextOffset(payload, currentOffset) {
-  const pagination = payload?.pagination || payload?.meta || payload?._metadata || {};
+  const pagination = paginationInfo(payload);
   const limit = Number(pagination.limit || API_LIMIT);
 
   if (typeof pagination.nextOffset === "number") return pagination.nextOffset;
@@ -355,7 +422,7 @@ async function getCardsForWindow(gameId, windowConfig) {
     });
 
     const payload = await justtcg(`/cards?${params.toString()}`);
-    const cards = Array.isArray(payload.data) ? payload.data : [];
+    const cards = extractCards(payload);
     if (!cards.length) break;
 
     let newCardsOnThisPage = 0;
@@ -795,7 +862,7 @@ async function main() {
   let games = [];
   try {
     const gamesPayload = await justtcg("/games", { throttle: false });
-    games = Array.isArray(gamesPayload.data) ? gamesPayload.data : [];
+    games = extractCards(gamesPayload);
   } catch (error) {
     console.error("Erro ao buscar lista de jogos. Tentando usar ids do JSON anterior:", error.message);
   }
