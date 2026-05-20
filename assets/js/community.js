@@ -282,14 +282,33 @@
     });
   }
 
+  function initDeckFilter() {
+    const items = Array.from(document.querySelectorAll("[data-deck-feed-item]"));
+    const filters = Array.from(document.querySelectorAll("[data-deck-filter]"));
+    if (!items.length || !filters.length) return;
+
+    filters.forEach(filter => {
+      filter.addEventListener("click", event => {
+        event.preventDefault();
+        const active = filter.dataset.deckFilter || "all";
+        filters.forEach(item => item.classList.toggle("is-active", item === filter));
+        items.forEach(item => {
+          item.hidden = active !== "all" && item.dataset.deckFormat !== active;
+        });
+      });
+    });
+  }
+
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => {
       initBlogFilter();
+      initDeckFilter();
       initCommunityPagination();
       renderArmoryStats();
     });
   } else {
     initBlogFilter();
+    initDeckFilter();
     initCommunityPagination();
     renderArmoryStats();
   }

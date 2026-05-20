@@ -41,42 +41,18 @@ permalink: /comunidade/
   <div class="container">
     <div class="section-title">
       <div>
-        <p class="eyebrow">Armory do mês</p>
-        <h2>Último resultado e gráficos</h2>
-        <p>Os gráficos somam automaticamente os resultados dos posts cadastrados em <code>_comunidade/Armory</code> dentro do mês vigente.</p>
+        <p class="eyebrow">Último Armory</p>
+        <h2>Resultado mais recente</h2>
+        <p>Esta área mostra apenas o último resultado cadastrado em <code>_comunidade/Armory</code>.</p>
       </div>
     </div>
 
-    <div class="community-dashboard-grid">
-      <article class="latest-armory-card" id="latest-armory-card">
+    <div class="community-dashboard-grid community-dashboard-single">
+      <article class="latest-armory-card latest-armory-card-wide" id="latest-armory-card">
         <p class="eyebrow">Último Armory</p>
         <h3>Nenhum resultado cadastrado</h3>
         <p>Crie um Markdown em <code>_comunidade/Armory</code> usando o modelo de resultados para preencher esta área.</p>
       </article>
-
-      <div class="armory-chart-stack">
-        <article class="armory-chart-card">
-          <div class="chart-card-head">
-            <p class="eyebrow">Vitórias por jogador</p>
-            <span id="armory-player-month">Mês atual</span>
-          </div>
-          <div class="pie-chart-wrap">
-            <div id="armory-player-chart" class="pie-chart-empty">Sem dados</div>
-            <ul id="armory-player-legend" class="pie-legend"></ul>
-          </div>
-        </article>
-
-        <article class="armory-chart-card">
-          <div class="chart-card-head">
-            <p class="eyebrow">Vitórias por herói</p>
-            <span id="armory-hero-month">Mês atual</span>
-          </div>
-          <div class="pie-chart-wrap">
-            <div id="armory-hero-chart" class="pie-chart-empty">Sem dados</div>
-            <ul id="armory-hero-legend" class="pie-legend"></ul>
-          </div>
-        </article>
-      </div>
     </div>
   </div>
 </section>
@@ -86,16 +62,17 @@ permalink: /comunidade/
     <div class="community-feed-toolbar">
       <div>
         <p class="eyebrow">Postagens da comunidade</p>
-        <h2>Fotos, vídeos, música, memes e fanservice</h2>
-        <p>Feed em ordem de postagem, com filtro por tipo e paginação.</p>
+        <h2>Feed social incorporado</h2>
+        <p>Instagram, YouTube, TikTok, X e outros compartilhamentos aparecem direto na página, com identidade visual por rede.</p>
       </div>
 
       <div class="community-feed-controls">
         <label>
           Mostrar
           <select id="community-page-size">
-            <option value="10" selected>10 por página</option>
-            <option value="20">20 por página</option>
+            <option value="6" selected>6 por página</option>
+            <option value="12">12 por página</option>
+            <option value="24">24 por página</option>
           </select>
         </label>
       </div>
@@ -103,29 +80,29 @@ permalink: /comunidade/
 
     <nav class="section-index community-filter-index" aria-label="Filtros da comunidade">
       <a class="section-chip is-active" href="#postagens" data-community-filter="all">Todos</a>
-      <a class="section-chip post-style-fanservice" href="#fanservice" data-community-filter="fanservice">Fanservice</a>
-      <a class="section-chip post-style-fotos" href="#fotos" data-community-filter="fotos">Fotos</a>
-      <a class="section-chip post-style-videos" href="#videos" data-community-filter="videos">Vídeos</a>
-      <a class="section-chip post-style-musica" href="#musica" data-community-filter="musica">Música</a>
-      <a class="section-chip post-style-meme" href="#meme" data-community-filter="meme">Meme</a>
+      <a class="section-chip post-style-instagram" href="#instagram" data-community-filter="instagram">Instagram</a>
+      <a class="section-chip post-style-youtube" href="#youtube" data-community-filter="youtube">YouTube</a>
+      <a class="section-chip post-style-tiktok" href="#tiktok" data-community-filter="tiktok">TikTok</a>
+      <a class="section-chip post-style-x" href="#x" data-community-filter="x">X</a>
+      <a class="section-chip post-style-fotos" href="#outros" data-community-filter="outros">Outros</a>
     </nav>
 
-    <div class="card-grid grid-3 community-feed" id="postagens">
+    <div class="community-feed social-feed-grid" id="postagens">
       {% assign social_count = 0 %}
       {% for post in comunidade_posts %}
         {% assign post_path = post.path | downcase %}
-        {% assign style_slug = post.content_style | default: post.category_label | default: '' | slugify %}
-        {% if post_path contains '/fanservice/' or post_path contains '/fotos/' or post_path contains '/videos/' or post_path contains '/musica/' or post_path contains '/meme/' or post_path contains '_comunidade/fanservice/' or post_path contains '_comunidade/fotos/' or post_path contains '_comunidade/videos/' or post_path contains '_comunidade/musica/' or post_path contains '_comunidade/meme/' or style_slug == 'fanservice' or style_slug == 'fotos' or style_slug == 'videos' or style_slug == 'musica' or style_slug == 'meme' %}
-          {% if style_slug == '' %}
-            {% if post_path contains '/fanservice/' or post_path contains '_comunidade/fanservice/' %}{% assign style_slug = 'fanservice' %}
-            {% elsif post_path contains '/fotos/' or post_path contains '_comunidade/fotos/' %}{% assign style_slug = 'fotos' %}
-            {% elsif post_path contains '/videos/' or post_path contains '_comunidade/videos/' %}{% assign style_slug = 'videos' %}
-            {% elsif post_path contains '/musica/' or post_path contains '_comunidade/musica/' %}{% assign style_slug = 'musica' %}
-            {% elsif post_path contains '/meme/' or post_path contains '_comunidade/meme/' %}{% assign style_slug = 'meme' %}
-            {% endif %}
+        {% assign style_slug = post.content_style | default: post.social_platform | default: post.video_platform | default: post.category_label | default: '' | slugify %}
+        {% if post_path contains '/instagram/' or post_path contains '/youtube/' or post_path contains '/tiktok/' or post_path contains '/x/' or post_path contains '/fanservice/' or post_path contains '/fotos/' or post_path contains '/videos/' or post_path contains '/musica/' or post_path contains '/meme/' or style_slug == 'instagram' or style_slug == 'youtube' or style_slug == 'tiktok' or style_slug == 'x' or style_slug == 'twitter' or style_slug == 'fanservice' or style_slug == 'fotos' or style_slug == 'videos' or style_slug == 'musica' or style_slug == 'meme' %}
+          {% assign social_platform = style_slug %}
+          {% if post_path contains '/instagram/' %}{% assign social_platform = 'instagram' %}
+          {% elsif post_path contains '/youtube/' %}{% assign social_platform = 'youtube' %}
+          {% elsif post_path contains '/tiktok/' %}{% assign social_platform = 'tiktok' %}
+          {% elsif post_path contains '/x/' %}{% assign social_platform = 'x' %}
+          {% elsif social_platform == 'twitter' %}{% assign social_platform = 'x' %}
+          {% elsif social_platform != 'instagram' and social_platform != 'youtube' and social_platform != 'tiktok' and social_platform != 'x' %}{% assign social_platform = 'outros' %}
           {% endif %}
-          <div data-community-feed-item data-community-category="{{ style_slug }}">
-            {% include post-card.html post=post %}
+          <div data-community-feed-item data-community-category="{{ social_platform }}">
+            {% include social-post-card.html post=post platform=social_platform %}
           </div>
           {% assign social_count = social_count | plus: 1 %}
         {% endif %}

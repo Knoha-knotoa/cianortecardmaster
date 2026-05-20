@@ -1,0 +1,32 @@
+# Agenda resumida exibida na Home.
+# Cada item aparece em uma linha e pode ser editado individualmente.
+
+- day: "Domingo"
+  title: "Encontro semanal da comunidade"
+  location: "Centro Cultural"
+  time: "14:00 - 18:00"
+  url: "/agenda/"
+
+- day: "Quarta"
+  title: "Armory de Flesh and Blood"
+  location: "Bazar do Weezing"
+  time: "19:00 - 22:30"
+  url: "/agenda/"
+
+- day: "Quinta"
+  title: "Venha jogar Pokémon"
+  location: "Bazar do Weezing"
+  time: "19:00 - 22:30"
+  url: "/agenda/"
+
+- day: "Sexta"
+  title: "Friday Night Magic"
+  location: "Bazar do Weezing"
+  time: "19:00 - 22:30"
+  url: "/agenda/"
+
+- day: "Sábado"
+  title: "Venha descobrir o que está rolando"
+  location: "Bazar do Weezing"
+  time: "14:00 - 18:00"
+  url: "/agenda/"

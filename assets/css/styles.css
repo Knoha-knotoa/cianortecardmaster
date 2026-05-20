@@ -2012,3 +2012,531 @@ h3 {
     margin-top: .55rem;
   }
 }
+
+/* ==========================================
+   Ajustes 20/05/2026 - Comunidade, Decks, Spikes e Agenda Home
+========================================== */
+
+/* Novas identidades por rede/formato */
+.post-style-instagram {
+  --category-accent: #ff4fd8;
+  --category-soft: rgba(255, 79, 216, .12);
+  --category-line: rgba(255, 79, 216, .3);
+}
+
+.post-style-youtube {
+  --category-accent: #ff3030;
+  --category-soft: rgba(255, 48, 48, .12);
+  --category-line: rgba(255, 48, 48, .3);
+}
+
+.post-style-tiktok {
+  --category-accent: #57f5ff;
+  --category-soft: rgba(87, 245, 255, .12);
+  --category-line: rgba(87, 245, 255, .3);
+}
+
+.post-style-x {
+  --category-accent: #f6f1df;
+  --category-soft: rgba(246, 241, 223, .08);
+  --category-line: rgba(246, 241, 223, .22);
+}
+
+.post-style-silver-age {
+  --category-accent: #cfd8dc;
+  --category-soft: rgba(207, 216, 220, .1);
+  --category-line: rgba(207, 216, 220, .26);
+}
+
+.post-style-classic-constructed {
+  --category-accent: #d4af37;
+  --category-soft: rgba(212, 175, 55, .14);
+  --category-line: rgba(212, 175, 55, .34);
+}
+
+.post-style-sealed {
+  --category-accent: #8ecae6;
+  --category-soft: rgba(142, 202, 230, .12);
+  --category-line: rgba(142, 202, 230, .28);
+}
+
+.post-style-living-legend {
+  --category-accent: #c77dff;
+  --category-soft: rgba(199, 125, 255, .12);
+  --category-line: rgba(199, 125, 255, .3);
+}
+
+.post-style-blitz {
+  --category-accent: #ffca3a;
+  --category-soft: rgba(255, 202, 58, .13);
+  --category-line: rgba(255, 202, 58, .3);
+}
+
+.post-style-upf {
+  --category-accent: #70e000;
+  --category-soft: rgba(112, 224, 0, .12);
+  --category-line: rgba(112, 224, 0, .28);
+}
+
+/* Comunidade: Armory sem gráficos no topo */
+.community-dashboard-single {
+  grid-template-columns: 1fr;
+}
+
+.latest-armory-card-wide {
+  max-width: 980px;
+}
+
+.latest-armory-card-wide .latest-armory-podium {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Comunidade: feed social incorporado */
+.social-feed-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem;
+  align-items: start;
+}
+
+.social-post-card {
+  border: 1px solid var(--category-line, rgba(212, 175, 55, .18));
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at top right, var(--category-soft, rgba(212, 175, 55, .1)), transparent 36%),
+    linear-gradient(180deg, rgba(16,27,19,.96), rgba(8,13,9,.98));
+  box-shadow: 0 14px 28px rgba(0,0,0,.24);
+  overflow: hidden;
+}
+
+.social-post-topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 1rem .6rem;
+  border-top: 4px solid var(--category-accent, var(--gold));
+}
+
+.social-post-topline .eyebrow {
+  margin: 0;
+  color: var(--category-accent, var(--gold));
+}
+
+.social-post-topline span {
+  color: var(--muted);
+  font-size: .88rem;
+}
+
+.social-post-embed {
+  margin: 0 1rem;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 22px;
+  background: rgba(0,0,0,.22);
+  overflow: hidden;
+}
+
+.social-post-embed iframe,
+.social-post-embed img {
+  display: block;
+  width: 100%;
+  border: 0;
+}
+
+.social-post-embed-youtube {
+  aspect-ratio: 16 / 9;
+}
+
+.social-post-embed-youtube iframe {
+  height: 100%;
+}
+
+.social-post-embed-instagram {
+  max-width: 440px;
+  margin-inline: auto;
+  aspect-ratio: 9 / 16;
+  min-height: 560px;
+}
+
+.social-post-embed-instagram iframe {
+  height: 100%;
+}
+
+.social-post-embed-tiktok {
+  max-width: 420px;
+  margin-inline: auto;
+  min-height: 620px;
+}
+
+.social-post-embed-tiktok iframe {
+  min-height: 620px;
+}
+
+.social-post-embed-x {
+  min-height: 340px;
+  padding: 1rem;
+}
+
+.social-gallery-preview {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: .35rem;
+  padding: .35rem;
+}
+
+.social-gallery-preview img,
+.social-post-embed > img {
+  aspect-ratio: 1;
+  height: 100%;
+  object-fit: cover;
+}
+
+.social-content-fallback {
+  padding: 1rem;
+  color: var(--muted);
+}
+
+.social-post-content {
+  padding: 1rem;
+}
+
+.social-post-content h3 {
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.18;
+}
+
+.social-post-content p {
+  color: var(--muted);
+}
+
+.social-post-actions {
+  display: flex;
+  gap: .85rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: .9rem;
+}
+
+.instagram-embed-wrapper {
+  max-width: 440px;
+  margin: 1rem auto;
+  aspect-ratio: 9 / 16;
+}
+
+.instagram-embed-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 18px;
+}
+
+/* Decks por formato */
+.folder-hint {
+  color: var(--muted);
+  margin: -1rem 0 1.4rem;
+}
+
+.folder-hint code {
+  color: #ffe9a3;
+  background: rgba(212, 175, 55, .1);
+  border: 1px solid rgba(212, 175, 55, .18);
+  border-radius: 999px;
+  padding: .08rem .36rem;
+  white-space: nowrap;
+}
+
+.deck-feed > [hidden] {
+  display: none !important;
+}
+
+/* Home: agenda em linhas editáveis */
+.home-agenda-list {
+  display: grid;
+  gap: .75rem;
+}
+
+.home-agenda-item {
+  display: grid;
+  grid-template-columns: 120px 1.25fr 1fr 150px;
+  gap: .8rem;
+  align-items: center;
+  padding: .9rem 1rem;
+  border: 1px solid rgba(212,175,55,.2);
+  border-radius: 18px;
+  text-decoration: none;
+  background:
+    linear-gradient(90deg, rgba(212,175,55,.1), rgba(255,255,255,.03));
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.home-agenda-item:hover {
+  transform: translateY(-1px);
+  border-color: rgba(212,175,55,.45);
+  background:
+    linear-gradient(90deg, rgba(212,175,55,.16), rgba(31,184,92,.06));
+}
+
+.home-agenda-item strong,
+.home-agenda-item small {
+  font-family: "Fugaz One", system-ui, sans-serif;
+}
+
+.home-agenda-item strong {
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.home-agenda-item span {
+  color: var(--white);
+  font-weight: 700;
+}
+
+.home-agenda-item em {
+  color: var(--muted);
+  font-style: normal;
+}
+
+.home-agenda-item small {
+  color: #fff2b8;
+  text-align: right;
+}
+
+/* Spikes: cartas maiores, informação abaixo e gráfico detalhado */
+.spikes-game-filter-card {
+  border: 1px solid rgba(212,175,55,.18);
+  border-radius: 24px;
+  background: rgba(255,255,255,.035);
+  padding: 1rem;
+  margin: 0 0 1.5rem;
+}
+
+.spikes-game-filter-card .eyebrow {
+  margin-bottom: .65rem;
+}
+
+.spikes-game-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+}
+
+.spikes-game-filter-chip {
+  cursor: pointer;
+}
+
+.spikes-game-filter-chip input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.spikes-game-filter-chip span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  padding: .55rem .85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(212,175,55,.28);
+  background: rgba(255,255,255,.04);
+  color: var(--white);
+  font-family: "Fugaz One", system-ui, sans-serif;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.spikes-game-filter-chip.is-active span {
+  border-color: var(--gold);
+  background: linear-gradient(135deg, rgba(212,175,55,.18), rgba(31,184,92,.08));
+  color: #fff6d8;
+}
+
+.spikes-game-filter-chip:hover span {
+  transform: translateY(-1px);
+  border-color: var(--gold);
+}
+
+.spike-row {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.spike-card {
+  display: grid;
+  grid-template-rows: auto auto auto;
+}
+
+.spike-card-media {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 1rem .5rem;
+}
+
+.spike-card-image {
+  width: min(100%, 250px);
+  min-height: 340px;
+  max-height: 360px;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at top, rgba(212,175,55,.16), transparent 44%),
+    linear-gradient(180deg, rgba(16,27,19,.96), rgba(8,13,9,.98));
+}
+
+.spike-card-image img {
+  width: 100%;
+  height: auto;
+  max-height: 360px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 18px;
+}
+
+.spike-card-data {
+  padding: .25rem 1rem 0;
+  text-align: center;
+}
+
+.spike-card-data h3 {
+  font-size: 1.18rem;
+  margin-bottom: .35rem;
+}
+
+.spike-card-data p:not(.eyebrow) {
+  max-width: 32ch;
+  margin-inline: auto;
+}
+
+.spike-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .55rem;
+  margin-top: .75rem;
+}
+
+.spike-metric-main,
+.spike-metric-secondary {
+  display: grid;
+  gap: .12rem;
+  padding: .65rem;
+  border-radius: 15px;
+  border: 1px solid rgba(212,175,55,.16);
+  background: rgba(255,255,255,.04);
+}
+
+.spike-metric-main strong,
+.spike-metric-secondary strong {
+  font-family: "Fugaz One", system-ui, sans-serif;
+  color: #86ffab;
+}
+
+.spike-metric-main span,
+.spike-metric-secondary span {
+  color: var(--muted);
+  font-size: .8rem;
+}
+
+.spike-card-chart-wrap {
+  padding: .75rem 1rem 1rem;
+}
+
+.spike-chart {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  border: 1px solid rgba(212,175,55,.14);
+  border-radius: 16px;
+  background: rgba(0,0,0,.18);
+}
+
+.spike-chart-grid {
+  stroke: rgba(246,241,223,.12);
+  stroke-width: 1;
+}
+
+.spike-chart-label {
+  fill: rgba(246,241,223,.68);
+  font-size: 13px;
+  font-family: "Barlow", system-ui, sans-serif;
+}
+
+.spike-chart-y-label {
+  font-size: 12px;
+}
+
+.spike-chart-end-label {
+  text-anchor: end;
+}
+
+.spike-chart-dot {
+  fill: var(--gold);
+  stroke: rgba(5,8,6,.9);
+  stroke-width: 2;
+}
+
+.spike-card-compact .spike-card-image {
+  width: min(100%, 190px);
+  min-height: 260px;
+  max-height: 280px;
+}
+
+.spike-card-compact .spike-card-image img {
+  max-height: 280px;
+}
+
+.spike-card-compact .spike-metrics-grid {
+  grid-template-columns: 1fr;
+}
+
+.spike-modal-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.spike-modal-image {
+  min-height: 320px;
+  max-height: 360px;
+}
+
+.spike-modal-image img {
+  max-height: 360px;
+  object-fit: contain;
+}
+
+@media (max-width: 900px) {
+  .social-feed-grid,
+  .latest-armory-card-wide .latest-armory-podium,
+  .spike-modal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-agenda-item {
+    grid-template-columns: 1fr;
+    gap: .25rem;
+  }
+
+  .home-agenda-item small {
+    text-align: left;
+  }
+}
+
+@media (max-width: 520px) {
+  .social-post-embed-instagram,
+  .social-post-embed-tiktok {
+    min-height: 520px;
+  }
+
+  .spike-card-image {
+    width: min(100%, 220px);
+    min-height: 300px;
+    max-height: 320px;
+  }
+
+  .spike-card-image img {
+    max-height: 320px;
+  }
+
+  .spike-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}

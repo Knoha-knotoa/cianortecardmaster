@@ -38,6 +38,50 @@ defaults:
       layout: post
       author: "Cianorte Card Masters"
       category_label: "Deck"
+
+  # Decks: subpastas por formato
+  - scope:
+      path: "_decks/Silver-Age"
+      type: "decks"
+    values:
+      category_label: "Silver Age"
+      deck_format: "Silver Age"
+      content_style: "silver-age"
+  - scope:
+      path: "_decks/Classic-Constructed"
+      type: "decks"
+    values:
+      category_label: "Classic Constructed"
+      deck_format: "Classic Constructed"
+      content_style: "classic-constructed"
+  - scope:
+      path: "_decks/Sealed"
+      type: "decks"
+    values:
+      category_label: "Sealed"
+      deck_format: "Sealed"
+      content_style: "sealed"
+  - scope:
+      path: "_decks/Living-Legend"
+      type: "decks"
+    values:
+      category_label: "Living Legend"
+      deck_format: "Living Legend"
+      content_style: "living-legend"
+  - scope:
+      path: "_decks/Blitz"
+      type: "decks"
+    values:
+      category_label: "Blitz"
+      deck_format: "Blitz"
+      content_style: "blitz"
+  - scope:
+      path: "_decks/UPF"
+      type: "decks"
+    values:
+      category_label: "UPF"
+      deck_format: "UPF"
+      content_style: "upf"
   - scope:
       path: ""
       type: "blog"
@@ -85,13 +129,41 @@ defaults:
       category_label: "RPG"
       content_style: "rpg"
   - scope:
-      path: "_blog/Cianorte-card-master"
+      path: "_blog/cianorte-card-master"
       type: "blog"
     values:
       category_label: "Cianorte Card Master"
       content_style: "cianorte-card-master"
 
   # Comunidade: subpastas com rótulo automático
+  - scope:
+      path: "_comunidade/Instagram"
+      type: "comunidade"
+    values:
+      category_label: "Instagram"
+      content_style: "instagram"
+      social_platform: "instagram"
+  - scope:
+      path: "_comunidade/YouTube"
+      type: "comunidade"
+    values:
+      category_label: "YouTube"
+      content_style: "youtube"
+      social_platform: "youtube"
+  - scope:
+      path: "_comunidade/TikTok"
+      type: "comunidade"
+    values:
+      category_label: "TikTok"
+      content_style: "tiktok"
+      social_platform: "tiktok"
+  - scope:
+      path: "_comunidade/X"
+      type: "comunidade"
+    values:
+      category_label: "X"
+      content_style: "x"
+      social_platform: "x"
   - scope:
       path: "_comunidade/Fanservice"
       type: "comunidade"
@@ -106,6 +178,12 @@ defaults:
       content_style: "fotos"
   - scope:
       path: "_comunidade/Videos"
+      type: "comunidade"
+    values:
+      category_label: "Vídeos"
+      content_style: "videos"
+  - scope:
+      path: "_comunidade/videos"
       type: "comunidade"
     values:
       category_label: "Vídeos"

@@ -1,0 +1,70 @@
+{% assign social_post_path = include.post.path | downcase %}
+{% assign social_platform = include.platform | default: include.post.social_platform | default: include.post.video_platform | default: include.post.content_style | default: include.post.category_label | default: 'outros' | slugify %}
+{% if social_platform == 'twitter' %}{% assign social_platform = 'x' %}{% endif %}
+{% if social_post_path contains '_comunidade/instagram/' %}{% assign social_platform = 'instagram' %}{% endif %}
+{% if social_post_path contains '_comunidade/youtube/' %}{% assign social_platform = 'youtube' %}{% endif %}
+{% if social_post_path contains '_comunidade/tiktok/' %}{% assign social_platform = 'tiktok' %}{% endif %}
+{% if social_post_path contains '_comunidade/x/' %}{% assign social_platform = 'x' %}{% endif %}
+{% if social_platform == '' %}{% assign social_platform = 'outros' %}{% endif %}
+
+{% assign platform_label = include.post.category_label | default: social_platform | replace: 'youtube', 'YouTube' | replace: 'instagram', 'Instagram' | replace: 'tiktok', 'TikTok' | replace: 'x', 'X' %}
+
+<article class="social-post-card post-style-{{ social_platform }}" data-social-platform="{{ social_platform }}">
+  <div class="social-post-topline">
+    <p class="eyebrow">{{ platform_label }}</p>
+    {% if include.post.date %}<span>{{ include.post.date | date: "%d/%m/%Y" }}</span>{% endif %}
+  </div>
+
+  <div class="social-post-embed social-post-embed-{{ social_platform }}">
+    {% if include.post.youtube_id %}
+      <iframe
+        src="https://www.youtube.com/embed/{{ include.post.youtube_id }}"
+        title="{{ include.post.title | escape }}"
+        loading="lazy"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    {% elsif include.post.social_embed_url %}
+      <iframe
+        src="{{ include.post.social_embed_url }}"
+        title="{{ include.post.title | escape }}"
+        loading="lazy"
+        frameborder="0"
+        scrolling="no"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    {% elsif include.post.embed_url %}
+      <iframe
+        src="{{ include.post.embed_url }}"
+        title="{{ include.post.title | escape }}"
+        loading="lazy"
+        frameborder="0"
+        scrolling="no"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    {% elsif include.post.social_embed_html %}
+      {{ include.post.social_embed_html }}
+    {% elsif include.post.gallery %}
+      <div class="social-gallery-preview">
+        {% for foto in include.post.gallery limit:4 %}
+          <img src="{{ foto | relative_url }}" alt="{{ include.post.title | escape }}" loading="lazy">
+        {% endfor %}
+      </div>
+    {% elsif include.post.image %}
+      <img src="{{ include.post.image | relative_url }}" alt="{{ include.post.title | escape }}" loading="lazy">
+    {% else %}
+      <div class="social-content-fallback">
+        {{ include.post.content }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="social-post-content">
+    <h3>{{ include.post.title }}</h3>
+    {% if include.post.summary %}<p>{{ include.post.summary }}</p>{% endif %}
+    <div class="social-post-actions">
+      <a class="btn btn-secondary" href="{{ include.post.url | relative_url }}">Detalhes no site</a>
+      {% if include.post.social_url %}<a class="section-link" href="{{ include.post.social_url }}">Origem</a>{% endif %}
+    </div>
+  </div>
+</article>
