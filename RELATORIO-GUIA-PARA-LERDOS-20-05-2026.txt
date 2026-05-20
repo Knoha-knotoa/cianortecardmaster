@@ -1,0 +1,19 @@
+Alterações realizadas no Guia para Lerdos
+Data: 20/05/2026
+
+Arquivos alterados:
+- _guias/guia-fab-para-lerdos.md
+- _layouts/post.html
+- assets/css/styles.css
+
+Resumo:
+- Removido o CSS interno do arquivo do guia, que criava visual próprio de livro/página e destoava das demais postagens.
+- Removida a capa interna repetida e o botão de imprimir, pois o layout padrão de post já possui hero, imagem, título, resumo, autor, data e tags.
+- Mantida a estrutura completa do guia: capítulos, sumário, caixas de explicação, exemplos, humor, tabelas e imagens.
+- Adicionado wide_content: true para permitir que este guia use uma largura maior sem afetar os demais posts.
+- Atualizado _layouts/post.html para aceitar post-content-wide somente quando o post solicitar.
+- Adicionado CSS global e escopado para .fab-lerdos-guide, mantendo fundo escuro, bordas, cards e caixas no padrão do site.
+
+Observação:
+- As imagens do guia foram mantidas em assets/img/guias/fab-para-lerdos/.
+- O visual agora segue o padrão geral do site, mas ainda preserva uma identidade própria do guia por meio de caixas, capítulos e grids.

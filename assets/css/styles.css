@@ -3001,7 +3001,21 @@ h3 {
 .fab-lerdos-guide table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 620px;
+  min-width: min(620px, 100%);
+}
+
+.fab-lerdos-guide .card {
+  min-width: 0;
+}
+
+.fab-lerdos-guide .card table {
+  table-layout: auto;
+}
+
+.fab-lerdos-guide .card th,
+.fab-lerdos-guide .card td {
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .fab-lerdos-guide th,
