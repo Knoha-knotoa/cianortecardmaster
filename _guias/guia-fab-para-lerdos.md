@@ -4,7 +4,6 @@ category_label: "Guia"
 summary: "Um guia em português simples, visual e bem-humorado para ensinar Flesh and Blood a jogadores iniciantes."
 image: "/assets/img/guias/fab-para-lerdos/capa-orc-lerdo.webp"
 author: "Cianorte Card Masters"
-wide_content: true
 date: 2026-05-18
 tags:
   - Guia
@@ -13,8 +12,1057 @@ tags:
   - FAB para Lerdos
 ---
 
-<div class="fab-lerdos-guide fab-lerdos-guide--post">
-<section class="guide-section" id="aviso">
+<style>
+
+
+    .fab-lerdos-guide {
+      --bg: #120d0a;
+      --bg-2: #1a120e;
+      --paper: #efe1c7;
+      --paper-2: #e4cfab;
+      --panel: rgba(250, 241, 223, 0.92);
+      --panel-2: rgba(236, 221, 190, 0.92);
+      --ink: #24160f;
+      --muted: #6f5a46;
+      --gold: #c89a3b;
+      --gold-2: #8e6725;
+      --bronze: #5a2f1e;
+      --red: #8f2d1f;
+      --red-2: #592017;
+      --green: #3f6645;
+      --blue: #294e70;
+      --purple: #5d4676;
+      --shadow: rgba(0, 0, 0, 0.34);
+      --border: rgba(117, 78, 37, 0.42);
+      --light-border: rgba(255, 236, 191, 0.28);
+      --radius: 22px;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Arial, Helvetica, sans-serif;
+    }
+
+    .fab-lerdos-guide, .fab-lerdos-guide * { box-sizing: border-box; }
+
+    .fab-lerdos-guide { scroll-behavior: smooth; }
+
+    .fab-lerdos-guide {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--serif);
+      line-height: 1.65;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(209, 151, 51, 0.12), transparent 28%),
+        radial-gradient(circle at top left, rgba(149, 51, 33, 0.12), transparent 24%),
+        radial-gradient(circle at bottom right, rgba(35, 86, 53, 0.10), transparent 22%),
+        linear-gradient(180deg, #211611 0%, var(--bg) 35%, #090706 100%);
+    }
+.fab-lerdos-guide .book {
+      width: min(1080px, calc(100% - 24px));
+      margin: 26px auto 44px;
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.28), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.20), rgba(255,255,255,0.02) 18%),
+        linear-gradient(180deg, #f4e8d0 0%, var(--paper) 100%);
+      border: 3px solid #2d1a11;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow:
+        0 24px 90px rgba(0,0,0,0.48),
+        inset 0 0 0 2px rgba(255,235,189,0.12),
+        inset 0 12px 24px rgba(255,255,255,0.18);
+      position: relative;
+    }
+
+    .fab-lerdos-guide .book::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border-radius: 22px;
+      border: 1px solid rgba(103, 71, 39, 0.20);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .fab-lerdos-guide .page {
+      position: relative;
+      z-index: 0;
+      min-height: 900px;
+      padding: 56px 68px;
+      border-bottom: 1px solid rgba(93, 58, 27, 0.18);
+      background:
+        radial-gradient(circle at 20% 0%, rgba(255,255,255,0.16), transparent 22%),
+        radial-gradient(circle at 88% 5%, rgba(200,154,59,0.10), transparent 15%),
+        linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0) 25%),
+        linear-gradient(180deg, rgba(231,212,178,0.42), rgba(244,232,208,0.18));
+    }
+
+    .fab-lerdos-guide .page::before {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border: 1px solid rgba(128, 92, 48, 0.18);
+      border-radius: 18px;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .fab-lerdos-guide .page::after {
+      content: "";
+      position: absolute;
+      top: 28px;
+      right: 28px;
+      width: 132px;
+      height: 132px;
+      background:
+        radial-gradient(circle, rgba(200,154,59,0.18) 0%, rgba(200,154,59,0.08) 34%, transparent 72%);
+      opacity: 0.9;
+      pointer-events: none;
+      filter: blur(1px);
+      z-index: -1;
+      border-radius: 50%;
+    }
+
+    .fab-lerdos-guide .page:last-child { border-bottom: none; }
+
+    .fab-lerdos-guide .cover {
+      min-height: 980px;
+      background:
+        linear-gradient(rgba(17, 12, 10, 0.32), rgba(17, 12, 10, 0.34)),
+        radial-gradient(circle at 50% 16%, rgba(255,219,145,0.14), rgba(180,69,49,0.14) 22%, transparent 60%),
+        url('{{ '/assets/img/guias/fab-para-lerdos/capa-orc-lerdo.webp' | relative_url }}') center center / cover no-repeat;
+      color: #fff5df;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-top: 112px;
+      overflow: hidden;
+    }
+
+    .fab-lerdos-guide .cover::before,
+.fab-lerdos-guide .cover::after {
+      content: "";
+      position: absolute;
+      inset: 22px;
+      border: 2px solid rgba(255, 230, 174, 0.28);
+      border-radius: 18px;
+      pointer-events: none;
+    }
+
+    .fab-lerdos-guide .cover::after {
+      inset: 38px;
+      border-width: 1px;
+      border-color: rgba(255, 230, 174, 0.16);
+    }
+
+    .fab-lerdos-guide .kicker {
+      font-family: var(--sans);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 14px;
+      color: #ffd991;
+      margin-bottom: 20px;
+      font-weight: 800;
+      text-shadow: 0 6px 18px rgba(0,0,0,0.75);
+    }
+
+    .fab-lerdos-guide h1,
+.fab-lerdos-guide h2,
+.fab-lerdos-guide h3,
+.fab-lerdos-guide h4 {
+      line-height: 1.1;
+      margin: 0 0 18px;
+      color: #2c160c;
+    }
+
+    .fab-lerdos-guide .cover h1 {
+      color: #fff6df;
+      font-size: clamp(48px, 8vw, 92px);
+      text-transform: uppercase;
+      letter-spacing: -0.05em;
+      text-shadow: 0 10px 28px rgba(0,0,0,0.72);
+      margin: 0 auto 16px;
+      max-width: 800px;
+    }
+
+    .fab-lerdos-guide .cover .subtitle {
+      max-width: 760px;
+      margin: 0 auto 36px;
+      font-size: 26px;
+      color: #ffebbe;
+      font-weight: 700;
+      text-shadow: 0 6px 18px rgba(0,0,0,0.58);
+    }
+
+    .fab-lerdos-guide .cover .seal {
+      display: inline-block;
+      margin: 32px auto 0;
+      padding: 14px 24px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 221, 144, 0.58);
+      background: linear-gradient(180deg, rgba(17,11,8,0.58), rgba(17,11,8,0.36));
+      color: #ffe3a1;
+      font-family: var(--sans);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.10em;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.24), inset 0 0 0 1px rgba(255,255,255,0.06);
+    }
+
+    .fab-lerdos-guide h2 {
+      position: relative;
+      font-size: 42px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: none;
+    }
+
+    .fab-lerdos-guide h2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: min(260px, 38%);
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--red) 0%, var(--gold) 72%, transparent 100%);
+      box-shadow: 0 2px 8px rgba(143,45,31,0.18);
+    }
+
+    .fab-lerdos-guide h2::before {
+      content: "✦";
+      position: absolute;
+      left: calc(min(260px, 38%) + 8px);
+      bottom: -7px;
+      color: var(--gold);
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .fab-lerdos-guide h3 {
+      font-size: 30px;
+      margin-top: 30px;
+      color: #4a2819;
+    }
+
+    .fab-lerdos-guide h4 { font-size: 22px; }
+
+    .fab-lerdos-guide p {
+      margin: 0 0 16px;
+      font-size: 18px;
+    }
+
+    .fab-lerdos-guide strong { color: #201109; }
+
+    .fab-lerdos-guide .lead {
+      font-size: 22px;
+      font-weight: 700;
+      color: #38251a;
+      margin-bottom: 24px;
+    }
+
+    .fab-lerdos-guide .chapter-number {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding: 7px 12px 7px 0;
+      font-family: var(--sans);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-weight: 900;
+      color: var(--red);
+    }
+
+    .fab-lerdos-guide .chapter-number::before {
+      content: "";
+      width: 38px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    .fab-lerdos-guide .toc {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 26px;
+      counter-reset: item;
+    }
+
+    .fab-lerdos-guide .toc a {
+      position: relative;
+      display: grid;
+      grid-template-columns: 62px 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 16px 18px;
+      border-radius: 18px;
+      text-decoration: none;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.36), rgba(255,255,255,0.12)),
+        linear-gradient(135deg, rgba(234,216,184,0.80), rgba(250,241,223,0.68));
+      border: 1px solid rgba(131, 93, 45, 0.30);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.28);
+      transition: transform .15s ease, box-shadow .15s ease;
+      break-inside: avoid;
+    }
+
+    .fab-lerdos-guide .toc a:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 26px rgba(0,0,0,0.09), inset 0 1px 0 rgba(255,255,255,0.34);
+    }
+
+    .fab-lerdos-guide .toc a::before {
+      counter-increment: item;
+      content: counter(item, decimal-leading-zero);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 30% 30%, #f8d685, #b07728 72%, #764716 100%);
+      color: #2f180c;
+      font-family: var(--sans);
+      font-weight: 900;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.14), inset 0 1px 2px rgba(255,255,255,0.3);
+    }
+
+    .fab-lerdos-guide .toc span {
+      color: var(--muted);
+      font-size: 15px;
+      font-family: var(--sans);
+    }
+
+    .fab-lerdos-guide .box,
+.fab-lerdos-guide .card,
+.fab-lerdos-guide .side-image,
+.fab-lerdos-guide .playmat-figure,
+.fab-lerdos-guide .chapter4-card,
+.fab-lerdos-guide .pitch-color-figure,
+.fab-lerdos-guide .combat-card-example,
+.fab-lerdos-guide .image-strip figure,
+.fab-lerdos-guide .chapter-banner,
+.fab-lerdos-guide .full-figure,
+.fab-lerdos-guide .step-card,
+.fab-lerdos-guide .phase-card,
+.fab-lerdos-guide .keyword-card,
+.fab-lerdos-guide .class-card,
+.fab-lerdos-guide .compact-list {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      border: 1px solid rgba(126, 88, 44, 0.34);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.04)),
+        linear-gradient(135deg, rgba(250,241,223,0.92), rgba(236,221,190,0.88));
+      box-shadow:
+        0 14px 26px rgba(0,0,0,0.08),
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        inset 0 -10px 18px rgba(115, 78, 39, 0.05);
+    }
+
+    .fab-lerdos-guide .box::before,
+.fab-lerdos-guide .card::before,
+.fab-lerdos-guide .side-image::before,
+.fab-lerdos-guide .playmat-figure::before,
+.fab-lerdos-guide .chapter4-card::before,
+.fab-lerdos-guide .pitch-color-figure::before,
+.fab-lerdos-guide .combat-card-example::before,
+.fab-lerdos-guide .image-strip figure::before,
+.fab-lerdos-guide .chapter-banner::before,
+.fab-lerdos-guide .full-figure::before,
+.fab-lerdos-guide .step-card::before,
+.fab-lerdos-guide .phase-card::before,
+.fab-lerdos-guide .keyword-card::before,
+.fab-lerdos-guide .class-card::before,
+.fab-lerdos-guide .compact-list::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(122, 84, 44, 0.14);
+      pointer-events: none;
+    }
+
+    .fab-lerdos-guide .box {
+      margin: 24px 0;
+      padding: 22px 24px 20px;
+      border-left: 10px solid var(--gold-2);
+      break-inside: avoid;
+    }
+
+    .fab-lerdos-guide .box h4 {
+      margin: 0 0 10px;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.10em;
+      color: #2e1a11;
+    }
+
+    .fab-lerdos-guide .box p:last-child,
+.fab-lerdos-guide .box ul:last-child,
+.fab-lerdos-guide .box ol:last-child { margin-bottom: 0; }
+
+    .fab-lerdos-guide .humor {
+      border-left-color: var(--red);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.02)),
+        linear-gradient(135deg, rgba(247,223,207,0.98), rgba(238,199,183,0.94));
+    }
+
+    .fab-lerdos-guide .example {
+      border-left-color: var(--green);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.02)),
+        linear-gradient(135deg, rgba(228,239,216,0.98), rgba(207,224,190,0.94));
+    }
+
+    .fab-lerdos-guide .warning {
+      border-left-color: var(--gold);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.02)),
+        linear-gradient(135deg, rgba(248,237,197,0.98), rgba(235,218,159,0.96));
+    }
+
+    .fab-lerdos-guide .rules {
+      border-left-color: var(--blue);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.02)),
+        linear-gradient(135deg, rgba(220,232,242,0.98), rgba(198,218,233,0.94));
+    }
+
+    .fab-lerdos-guide .lore {
+      border-left-color: var(--purple);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.02)),
+        linear-gradient(135deg, rgba(231,223,240,0.98), rgba(215,203,230,0.94));
+    }
+
+    .fab-lerdos-guide .grid-2,
+.fab-lerdos-guide .friendly-list,
+.fab-lerdos-guide .keyword-grid,
+.fab-lerdos-guide .class-grid,
+.fab-lerdos-guide .phase-strip {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin: 24px 0;
+    }
+
+    .fab-lerdos-guide .phase-strip { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .fab-lerdos-guide .card {
+      padding: 20px 22px;
+      break-inside: avoid;
+    }
+
+    .fab-lerdos-guide .card h4 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #472515;
+    }
+
+    .fab-lerdos-guide table {
+      width: 100%;
+      margin: 24px 0;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 16px;
+      border: 1px solid rgba(122,84,44,0.28);
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.22);
+      box-shadow: 0 10px 18px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.2);
+      break-inside: avoid;
+    }
+
+    .fab-lerdos-guide th,
+.fab-lerdos-guide td {
+      padding: 13px 14px;
+      border-right: 1px solid rgba(122,84,44,0.22);
+      border-bottom: 1px solid rgba(122,84,44,0.22);
+      vertical-align: top;
+    }
+
+    .fab-lerdos-guide tr:last-child td { border-bottom: none; }
+    .fab-lerdos-guide td:last-child,
+.fab-lerdos-guide th:last-child { border-right: none; }
+
+    .fab-lerdos-guide th {
+      background:
+        linear-gradient(180deg, #643421 0%, #49271b 100%);
+      color: #ffeabf;
+      font-family: var(--sans);
+      font-size: 14px;
+      letter-spacing: 0.03em;
+      text-align: left;
+      text-transform: none;
+      box-shadow: inset 0 -1px 0 rgba(255,255,255,0.06);
+    }
+
+    .fab-lerdos-guide tbody tr:nth-child(even) td {
+      background: rgba(255,255,255,0.16);
+    }
+
+    .fab-lerdos-guide tbody tr:nth-child(odd) td {
+      background: rgba(255,247,232,0.12);
+    }
+
+    .fab-lerdos-guide ul,
+.fab-lerdos-guide ol { font-size: 18px; margin-top: 0; }
+    .fab-lerdos-guide li { margin-bottom: 9px; }
+
+    .fab-lerdos-guide .mini-title {
+      margin: 26px 0 8px;
+      font-family: var(--sans);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--red);
+    }
+
+    .fab-lerdos-guide .fake-card {
+      width: min(400px, 100%);
+      margin: 30px auto;
+      border-radius: 24px;
+      padding: 18px;
+      background: linear-gradient(150deg, #3c1a12, #d8b165 44%, #f6e8c5 45%, #76402b);
+      border: 5px solid #25130c;
+      box-shadow: 0 24px 36px rgba(0,0,0,0.32);
+      break-inside: avoid;
+    }
+
+    .fab-lerdos-guide .fake-card-inner {
+      background: #f5e8cc;
+      border-radius: 16px;
+      border: 2px solid #2b1710;
+      overflow: hidden;
+    }
+
+    .fab-lerdos-guide .fake-card-top,
+.fab-lerdos-guide .fake-card-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 14px;
+      font-family: var(--sans);
+      font-weight: 900;
+    }
+
+    .fab-lerdos-guide .fake-card-top {
+      background: #33180f;
+      color: #ffe6b0;
+    }
+
+    .fab-lerdos-guide .fake-art {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff3cf;
+      font-size: 60px;
+      background: radial-gradient(circle at 50% 35%, #ffdf74 0%, #c8482f 35%, #31160e 75%);
+    }
+
+    .fab-lerdos-guide .fake-card-text {
+      padding: 14px;
+      font-size: 15px;
+      font-family: var(--sans);
+    }
+
+    .fab-lerdos-guide .fake-card-bottom {
+      background: #ead2a8;
+      color: #2b1710;
+    }
+
+    .fab-lerdos-guide .side-by-side,
+.fab-lerdos-guide .chapter4-top,
+.fab-lerdos-guide .combat-card-row,
+.fab-lerdos-guide .image-strip,
+.fab-lerdos-guide .chapter-banner,
+.fab-lerdos-guide .step-grid {
+      display: grid;
+      gap: 22px;
+      margin: 26px 0;
+      align-items: center;
+    }
+
+    .fab-lerdos-guide .side-by-side { grid-template-columns: 1.35fr 0.85fr; }
+    .fab-lerdos-guide .chapter4-top { grid-template-columns: 1.15fr 0.85fr; align-items: start; }
+    .fab-lerdos-guide .combat-card-row { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
+    .fab-lerdos-guide .image-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .fab-lerdos-guide .chapter-banner { grid-template-columns: 0.95fr 1.05fr; padding: 18px; }
+    .fab-lerdos-guide .chapter-banner.reverse { grid-template-columns: 1.05fr 0.95fr; }
+    .fab-lerdos-guide .step-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); counter-reset: steps; }
+
+    .fab-lerdos-guide .side-text p:last-child,
+.fab-lerdos-guide .side-text ul:last-child,
+.fab-lerdos-guide .chapter-banner p:last-child { margin-bottom: 0; }
+
+    .fab-lerdos-guide .side-image,
+.fab-lerdos-guide .playmat-figure,
+.fab-lerdos-guide .chapter4-card,
+.fab-lerdos-guide .pitch-color-figure,
+.fab-lerdos-guide .combat-card-example,
+.fab-lerdos-guide .full-figure { 
+      padding: 16px; 
+      text-align: center; 
+      break-inside: avoid;
+    }
+
+    .fab-lerdos-guide .side-image img,
+.fab-lerdos-guide .playmat-figure img,
+.fab-lerdos-guide .pitch-color-figure img,
+.fab-lerdos-guide .chapter-banner img,
+.fab-lerdos-guide .full-figure img,
+.fab-lerdos-guide .chapter4-card img,
+.fab-lerdos-guide .combat-card-example img,
+.fab-lerdos-guide .image-strip img {
+      width: 100%;
+      display: block;
+      border-radius: 14px;
+      box-shadow: 0 14px 28px rgba(0,0,0,0.24);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .fab-lerdos-guide .side-image img { max-width: 320px; margin: 0 auto 10px; height: auto; }
+    .fab-lerdos-guide .playmat-figure img,
+.fab-lerdos-guide .pitch-color-figure img,
+.fab-lerdos-guide .full-figure img,
+.fab-lerdos-guide .chapter-banner img,
+.fab-lerdos-guide .chapter4-card img { height: auto; }
+    .fab-lerdos-guide .combat-card-example img { max-height: 390px; object-fit: contain; margin: 0 auto 12px; }
+    .fab-lerdos-guide .image-strip img { height: 180px; object-fit: cover; object-position: center; margin-bottom: 10px; }
+
+    .fab-lerdos-guide .chapter-banner .eyebrow {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--red);
+      margin-bottom: 10px;
+    }
+
+    .fab-lerdos-guide .chapter-banner h3 { margin-top: 0; font-size: 31px; }
+
+    .fab-lerdos-guide .side-image figcaption,
+.fab-lerdos-guide .playmat-figure figcaption,
+.fab-lerdos-guide .chapter4-card figcaption,
+.fab-lerdos-guide .pitch-color-figure figcaption,
+.fab-lerdos-guide .combat-card-example p,
+.fab-lerdos-guide .image-strip figcaption,
+.fab-lerdos-guide .full-figure figcaption {
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .fab-lerdos-guide .combat-card-example h4 {
+      margin: 0 0 8px;
+      color: var(--red);
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .fab-lerdos-guide .badge-cloud,
+.fab-lerdos-guide .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0 8px;
+    }
+
+    .fab-lerdos-guide .badge,
+.fab-lerdos-guide .mini-tag,
+.fab-lerdos-guide .keyword-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: 1px solid rgba(114, 78, 39, 0.22);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.20);
+    }
+
+    .fab-lerdos-guide .badge {
+      background: linear-gradient(180deg, rgba(255,250,240,0.9), rgba(232,216,184,0.9));
+      color: #4a2819;
+    }
+
+    .fab-lerdos-guide .badge::before {
+      content: "✦";
+      color: var(--gold);
+      font-size: 12px;
+    }
+
+    .fab-lerdos-guide .step-card {
+      min-height: 118px;
+      padding: 20px 18px 16px 64px;
+    }
+
+    .fab-lerdos-guide .step-card::before {
+      counter-increment: steps;
+      content: counter(steps);
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 30% 30%, #ffe18e, #c4852b 72%, #8b551d 100%);
+      color: #341b0d;
+      font-family: var(--sans);
+      font-weight: 900;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.16);
+      z-index: 2;
+    }
+
+    .fab-lerdos-guide .step-card h4,
+.fab-lerdos-guide .phase-card h4,
+.fab-lerdos-guide .keyword-card h4,
+.fab-lerdos-guide .class-card h4 { color: #4a2819; }
+    .fab-lerdos-guide .step-card h4 { margin: 0 0 8px; font-size: 20px; }
+    .fab-lerdos-guide .step-card p { margin: 0; font-size: 16px; }
+
+    .fab-lerdos-guide .friendly-list .card h4 { font-size: 18px; margin-bottom: 10px; }
+    .fab-lerdos-guide .friendly-list ul,
+.fab-lerdos-guide .mini-list { margin: 0; padding-left: 20px; font-size: 16px; }
+
+    .fab-lerdos-guide .footer-note {
+      margin-top: 34px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(90,43,26,0.18);
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .fab-lerdos-guide .print-button {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 30;
+      border: 1px solid rgba(255,232,182,0.25);
+      border-radius: 999px;
+      padding: 14px 18px;
+      font-family: var(--sans);
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      color: #ffefcc;
+      background: linear-gradient(180deg, #7e2419, #5d1a12);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.12);
+      cursor: pointer;
+    }
+
+    .fab-lerdos-guide .print-button:hover { filter: brightness(1.04); }
+
+    .fab-lerdos-guide .small-note,
+.fab-lerdos-guide .class-note {
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .fab-lerdos-guide .keyword-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .fab-lerdos-guide .keyword-card,
+.fab-lerdos-guide .class-card,
+.fab-lerdos-guide .phase-card {
+      padding: 18px;
+      box-shadow: 0 14px 26px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.30);
+    }
+
+    .fab-lerdos-guide .keyword-card::after,
+.fab-lerdos-guide .class-card::after,
+.fab-lerdos-guide .phase-card::after {
+      content: "";
+      position: absolute;
+      right: -26px;
+      top: -26px;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,154,59,0.22), transparent 68%);
+      pointer-events: none;
+    }
+
+    .fab-lerdos-guide .keyword-card h4 { font-size: 24px; margin-bottom: 8px; }
+    .fab-lerdos-guide .keyword-card p,
+.fab-lerdos-guide .phase-card p,
+.fab-lerdos-guide .class-card p { font-size: 15.5px; }
+    .fab-lerdos-guide .keyword-card .small-note { display: block; margin-top: 6px; }
+
+    .fab-lerdos-guide .keyword-chip {
+      color: #fff;
+      background: linear-gradient(180deg, #983126, #7f2419);
+    }
+    .fab-lerdos-guide .keyword-chip.label { background: linear-gradient(180deg, #6e5391, #594175); }
+    .fab-lerdos-guide .keyword-chip.warning { background: linear-gradient(180deg, #d2aa4f, #b8872b); color: #321c0d; }
+    .fab-lerdos-guide .keyword-chip.defense { background: linear-gradient(180deg, #3b668d, #2c5275); }
+    .fab-lerdos-guide .keyword-chip.shadow { background: linear-gradient(180deg, #6e3028, #58241f); }
+    .fab-lerdos-guide .keyword-chip.tech { background: linear-gradient(180deg, #4d7a54, #3c6442); }
+
+    .fab-lerdos-guide .class-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .fab-lerdos-guide .class-card { border-left: 6px solid var(--gold); }
+    .fab-lerdos-guide .class-card h4 { font-size: 22px; margin-bottom: 8px; }
+    .fab-lerdos-guide .class-card p { margin-bottom: 8px; }
+
+    .fab-lerdos-guide .mini-tag {
+      padding: 5px 9px;
+      background: linear-gradient(180deg, rgba(255,248,232,0.9), rgba(232,216,184,0.92));
+      color: #53301f;
+    }
+
+    .fab-lerdos-guide .hero-roster {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin: 24px 0 30px;
+      align-items: start;
+    }
+
+    .fab-lerdos-guide .hero-class {
+      border-radius: 20px;
+      border: 1px solid rgba(126, 88, 44, 0.34);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.20), rgba(255,255,255,0.03)),
+        linear-gradient(135deg, rgba(250,241,223,0.94), rgba(236,221,190,0.90));
+      box-shadow: 0 14px 26px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.30);
+      overflow: hidden;
+      break-inside: avoid;
+    }
+
+    .fab-lerdos-guide .hero-class summary {
+      cursor: pointer;
+      list-style: none;
+      display: block;
+      position: relative;
+      min-height: 240px;
+      padding: 0;
+      color: #ffeabf;
+      background: #1c110d;
+      border-bottom: 1px solid rgba(255,235,189,0.16);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .fab-lerdos-guide .hero-class summary::-webkit-details-marker { display: none; }
+
+    .fab-lerdos-guide .hero-class .hero-banner {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      background: #2a1710;
+      z-index: 0;
+    }
+
+    .fab-lerdos-guide .hero-class .summary-copy {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      display: grid;
+      gap: 8px;
+      padding: 82px 18px 18px;
+      background: linear-gradient(180deg, rgba(10,5,4,0.00) 0%, rgba(10,5,4,0.10) 22%, rgba(10,5,4,0.60) 52%, rgba(10,5,4,0.88) 100%);
+    }
+
+    .fab-lerdos-guide .hero-class summary span {
+      display: block;
+      font-size: 24px;
+      font-weight: 900;
+      color: #fff1cf;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding-right: 28px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    }
+
+    .fab-lerdos-guide .hero-class summary small {
+      display: block;
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 1.45;
+      color: rgba(255,239,210,0.92);
+      padding-right: 28px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    }
+
+    .fab-lerdos-guide .hero-class summary::after {
+      content: "▼";
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      font-family: var(--sans);
+      color: var(--gold);
+      font-size: 12px;
+      line-height: 1;
+      z-index: 2;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+      background: rgba(20, 10, 8, 0.58);
+      border: 1px solid rgba(255,235,189,0.18);
+      border-radius: 999px;
+      padding: 8px 9px;
+      backdrop-filter: blur(2px);
+    }
+
+    .fab-lerdos-guide .hero-class[open] summary::after { content: "▲"; }
+
+    .fab-lerdos-guide .hero-table-wrap {
+      overflow-x: auto;
+      padding: 14px 16px 18px;
+    }
+
+    .fab-lerdos-guide .hero-table {
+      margin: 0;
+      width: 100%;
+      table-layout: fixed;
+      font-size: 14.5px;
+    }
+
+    .fab-lerdos-guide .hero-table th:nth-child(1),
+.fab-lerdos-guide .hero-table td:nth-child(1) { width: 26%; }
+
+    .fab-lerdos-guide .hero-table th:nth-child(2),
+.fab-lerdos-guide .hero-table td:nth-child(2) { width: 14%; }
+
+    .fab-lerdos-guide .hero-table th:nth-child(3),
+.fab-lerdos-guide .hero-table td:nth-child(3) { width: 60%; }
+
+    .fab-lerdos-guide .hero-name strong {
+      display: block;
+      line-height: 1.25;
+    }
+
+    .fab-lerdos-guide .hero-stat {
+      white-space: nowrap;
+      font-weight: 700;
+    }
+
+    .fab-lerdos-guide .hero-name strong { color: #32180d; }
+
+    .fab-lerdos-guide .hero-stat {
+      white-space: nowrap;
+      text-align: center;
+      font-family: var(--sans);
+      font-weight: 900;
+      color: #4a2819;
+    }
+
+    .fab-lerdos-guide code {
+      padding: 1px 5px;
+      border-radius: 6px;
+      background: rgba(70,38,24,0.10);
+      border: 1px solid rgba(70,38,24,0.12);
+      font-family: var(--sans);
+      font-size: 0.92em;
+    }
+
+    .fab-lerdos-guide #cap10 { overflow: visible; }
+
+    @media (max-width: 760px) {
+      .fab-lerdos-guide .book { width: min(100%, calc(100% - 10px)); margin: 8px auto 20px; border-radius: 18px; }
+      .fab-lerdos-guide .page { padding: 34px 22px; min-height: auto; }
+      .fab-lerdos-guide .grid-2,
+.fab-lerdos-guide .side-by-side,
+.fab-lerdos-guide .chapter4-top,
+.fab-lerdos-guide .combat-card-row,
+.fab-lerdos-guide .image-strip,
+.fab-lerdos-guide .chapter-banner,
+.fab-lerdos-guide .chapter-banner.reverse,
+.fab-lerdos-guide .step-grid,
+.fab-lerdos-guide .friendly-list,
+.fab-lerdos-guide .keyword-grid,
+.fab-lerdos-guide .phase-strip,
+.fab-lerdos-guide .class-grid,
+.fab-lerdos-guide .hero-roster { grid-template-columns: 1fr; }
+      .fab-lerdos-guide .phase-strip { gap: 14px; }
+      .fab-lerdos-guide .side-image img { max-width: 260px; }
+      .fab-lerdos-guide h2 { font-size: 34px; }
+      .fab-lerdos-guide .cover { min-height: 88vh; padding-top: 72px; }
+      .fab-lerdos-guide .cover h1 { font-size: 50px; }
+      .fab-lerdos-guide .cover .subtitle { font-size: 22px; }
+      .fab-lerdos-guide .toc a { grid-template-columns: 52px 1fr; }
+      .fab-lerdos-guide .toc span { display: none; }
+      .fab-lerdos-guide .hero-class summary { min-height: 220px; }
+      .fab-lerdos-guide .hero-class summary { min-height: 200px; }
+      .fab-lerdos-guide .hero-class summary::after { right: 16px; top: 16px; }
+      .fab-lerdos-guide .print-button { display: none; }
+    }
+
+    @media print {
+      @page { size: A4; margin: 11mm; }
+      .fab-lerdos-guide { background: #fff; }
+.fab-lerdos-guide .book { width: 100%; margin: 0; border: 0; box-shadow: none; }
+      .fab-lerdos-guide .book::before { display: none; }
+      .fab-lerdos-guide .page {
+        min-height: auto;
+        padding: 28px 34px;
+        page-break-after: always;
+        background: #fffaf2;
+      }
+      .fab-lerdos-guide .page::before,
+.fab-lerdos-guide .page::after { display: none; }
+      .fab-lerdos-guide .cover { min-height: 94vh; }
+      .fab-lerdos-guide .hero-class summary::after { right: 16px; top: 16px; }
+      .fab-lerdos-guide .print-button { display: none; }
+      .fab-lerdos-guide a { color: inherit; }
+    }
+
+  
+
+.fab-lerdos-guide {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  padding: 1px 0;
+}
+.fab-lerdos-guide .book {
+  max-width: 100%;
+}
+.fab-lerdos-guide img {
+  max-width: 100%;
+  height: auto;
+}
+
+</style>
+
+<div class="fab-lerdos-guide">
+<button class="print-button" onclick="window.print()">Imprimir / PDF</button>
+
+  <main class="book">
+    <section class="page cover">
+      <div class="kicker">Guia não oficial para sobreviver em Rathe</div>
+      <h1>Flesh and Blood<br>para Lerdos</h1>
+      <p class="subtitle">Como jogar FAB sem saber inglês, sem ler textão e sem inventar regra baseada na arte da carta.</p>
+    </section>
+
+    <section class="page" id="aviso">
       <div class="chapter-number">Antes da primeira pancada</div>
       <h2>Como usar este guia</h2>
       <p class="lead">Este guia é para quem nunca jogou TCG, para quem sabe jogar outros TCGs mas se perdeu em Rathe, e para o jogador clássico que olha a imagem, olha os números e diz: “entendi”.</p>
@@ -59,7 +1107,7 @@ tags:
       <div class="footer-note">Material não oficial, criado para ensino casual e comunidades de jogadores.</div>
     </section>
 
-    <section class="guide-section" id="sumario">
+    <section class="page" id="sumario">
       <div class="chapter-number">Mapa da desgraça</div>
       <h2>Sumário</h2>
 
@@ -79,7 +1127,7 @@ tags:
       </nav>
     </section>
 
-    <section class="guide-section" id="cap1">
+    <section class="page" id="cap1">
       <div class="chapter-number">Capítulo 1</div>
       <h2>O que é TCG e por que tem gente gastando dinheiro com papel?</h2>
       <p class="lead">TCG significa Trading Card Game: um jogo de cartas colecionáveis. Ou, na tradução honesta, um jeito socialmente aceito de transformar papelão colorido em estratégia, amizade, dívida e discussão de regra.</p>
@@ -125,7 +1173,7 @@ tags:
       <p>Agora que você já sabe que TCG é uma briga organizada com papel caro, vamos para Rathe.</p>
     </section>
 
-    <section class="guide-section" id="cap2">
+    <section class="page" id="cap2">
       <div class="chapter-number">Capítulo 2</div>
       <h2>O que é Flesh and Blood?</h2>
       <p class="lead">Flesh and Blood é um duelo entre heróis. Você não invoca um monstrinho fofo para morrer por você. Você mesmo veste a armadura, pega a arma e vai apanhar de mago, ninja, pirata, assassino, brutamontes e gente que claramente não deveria ter acesso a laboratório.</p>
@@ -178,7 +1226,7 @@ tags:
       <p>Para entender essa mão que bate, defende e paga boleto, primeiro precisamos entender a mesa.</p>
     </section>
 
-    <section class="guide-section" id="cap3">
+    <section class="page" id="cap3">
       <div class="chapter-number">Capítulo 3</div>
       <h2>A mesa de jogo</h2>
       <p class="lead">Antes de sair distribuindo espadada, hadouken, flechada, machadada e trauma psicológico, você precisa saber onde cada coisa fica na mesa. Porque nada transmite confiança como o jogador que coloca o arsenal no cemitério e chama isso de estratégia.</p>
@@ -292,7 +1340,7 @@ tags:
       <p>Agora que a mesa não parece mais um acidente de papelaria, vamos aprender a olhar a estrela do desastre: a carta.</p>
     </section>
 
-    <section class="guide-section" id="cap4">
+    <section class="page" id="cap4">
       <div class="chapter-number">Capítulo 4</div>
       <h2>Como ler uma carta sem fingir que leu</h2>
 
@@ -367,7 +1415,7 @@ tags:
       <p>Agora que você sabe olhar a cor e interpretar os números sem depender totalmente do inglês, vem a tragédia financeira de Rathe: <strong>pagar custo</strong>.</p>
     </section>
 
-    <section class="guide-section" id="cap5">
+    <section class="page" id="cap5">
       <div class="chapter-number">Capítulo 5</div>
       <h2>Pitch, custo e recursos</h2>
       <p class="lead">Nada em Rathe é de graça. Nem magia, nem machadada, nem levar uma surra com estilo. Para jogar cartas, você geralmente precisa pagar recursos. E é aqui que muitos iniciantes descobrem que uma mão cheia de carta bonita pode ser só um boleto parcelado em sofrimento.</p>
@@ -620,7 +1668,7 @@ tags:
       <p>Pagou a carta? Ótimo. Agora vamos ver se ela bate ou se serve para impedir que você vire estatística.</p>
     </section>
 
-    <section class="guide-section" id="cap6">
+    <section class="page" id="cap6">
       <div class="chapter-number">Capítulo 6</div>
       <h2>Ataque, defesa e cartas que te obrigam a ler</h2>
       <p class="lead">Ataque é a flecha da violência. Defesa é o escudo da sobrevivência. E existem cartas que não batem nem bloqueiam, mas ainda assim podem salvar sua pele — ou confundir um iniciante até ele levantar a mão e gritar: “Juuudge!”</p>
@@ -723,7 +1771,7 @@ tags:
       <p>Agora que você sabe bater, bloquear e desconfiar de carta sem número, falta entender por que alguns jogadores batem uma vez e param, enquanto outros fazem uma carreata de ataques. A culpa é do <strong>Go Again</strong>.</p>
     </section>
 
-    <section class="guide-section" id="cap7">
+    <section class="page" id="cap7">
       <div class="chapter-number">Capítulo 7</div>
       <h2>Go Again e ponto de ação</h2>
       <p class="lead">No começo do turno, você normalmente tem um ponto de ação. Jogou uma ação? Gastou. Sem Go Again, acabou a festa. Com Go Again, a festa continua e alguém vai sair machucado.</p>
@@ -762,7 +1810,7 @@ tags:
       <p>Agora que você conhece a palavra mágica dos ataques em sequência, vamos aprender outras palavras que salvam você de ler contrato em inglês.</p>
     </section>
 
-    <section class="guide-section" id="cap8">
+    <section class="page" id="cap8">
       <div class="chapter-number">Capítulo 8</div>
       <h2>Keywords essenciais: o inglês que realmente bate</h2>
       <p class="lead">Saber keyword é como aprender palavrão em outra língua: talvez você não entenda a frase inteira, mas já sabe quando vai dar problema.</p>
@@ -888,7 +1936,7 @@ tags:
       <p>Com as keywords na cabeça, já dá para sobreviver ao turno. Então vamos montar um turno guiado, com erro, correção e dignidade parcial.</p>
     </section>
 
-    <section class="guide-section" id="cap9">
+    <section class="page" id="cap9">
       <div class="chapter-number">Capítulo 9</div>
       <h2>Um turno guiado</h2>
       <p class="lead">Este é o turno do iniciante funcional: ainda erra, mas erra com método.</p>
@@ -956,7 +2004,7 @@ tags:
       <p>Depois de alguns turnos, você começa a perceber que nem todo deck quer vencer do mesmo jeito. Aí entram os estilos de jogo.</p>
     </section>
 
-    <section class="guide-section" id="cap10">
+    <section class="page" id="cap10">
       <div class="chapter-number">Capítulo 10</div>
       <h2>Classes e estilos</h2>
       <p class="lead">Escolher classe em FAB é escolher o seu jeito favorito de causar problema. Tem classe que bate em sequência, classe que ganha no peso, classe que atrasa sua vida e classe que parece jogar outro jogo dentro do jogo.</p>
@@ -1676,7 +2724,7 @@ tags:
       <p>Escolheu seu tipo de problema? Agora falta escolher onde jogar sem ser atropelado por um campeão com deck que custa mais do que sua dignidade.</p>
     </section>
 
-    <section class="guide-section" id="cap11">
+    <section class="page" id="cap11">
       <div class="chapter-number">Capítulo 11</div>
       <h2>Formatos para começar</h2>
       <p class="lead">Formato é o tipo de partida. Ele define herói, tamanho do deck, cartas permitidas e nível de sofrimento financeiro.</p>
@@ -1764,7 +2812,7 @@ tags:
       <p>Agora vamos fechar com um plano prático de primeira partida, porque ler guia demais sem jogar também é uma forma sofisticada de procrastinação.</p>
     </section>
 
-    <section class="guide-section" id="cap12">
+    <section class="page" id="cap12">
       <div class="chapter-number">Capítulo 12</div>
       <h2>Plano de primeira partida</h2>
       <p class="lead">Dois lerdos entram. Um lerdo sai menos perdido. Esse é o objetivo.</p>
@@ -1808,4 +2856,5 @@ tags:
         <p>Parabéns. Você ainda não sabe jogar bem, mas já sabe o suficiente para perder entendendo aproximadamente o motivo. Isso, em Flesh and Blood, já é evolução espiritual.</p>
       </div>
 </section>
+  </main>
 </div>
