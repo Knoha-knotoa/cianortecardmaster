@@ -121,6 +121,136 @@
     `).join("");
   }
 
+  function assetUrl(path) {
+    const base = String(window.CCM_BASEURL || "").replace(/\/$/, "");
+    const normalized = String(path || "");
+    if (/^(https?:)?\/\//i.test(normalized) || normalized.startsWith("data:")) return normalized;
+    return `${base}${normalized.startsWith("/") ? "" : "/"}${normalized}`;
+  }
+
+  const armoryIcons = {
+    depth: {
+      badge: assetUrl("/assets/img/armory-icons/depth/badge-armory.png"),
+      champion: assetUrl("/assets/img/armory-icons/depth/badge-campeao.png"),
+      placement: assetUrl("/assets/img/armory-icons/depth/badge-colocacao.png"),
+      trophy: assetUrl("/assets/img/armory-icons/depth/icon-trofeu.png"),
+      swords: assetUrl("/assets/img/armory-icons/depth/icon-espadas.png"),
+      people: assetUrl("/assets/img/armory-icons/depth/icon-pessoas.png"),
+      cards: assetUrl("/assets/img/armory-icons/depth/icon-cartas.png"),
+      calendar: assetUrl("/assets/img/armory-icons/depth/icon-calendario.png")
+    },
+    flat: {
+      trophy: assetUrl("/assets/img/armory-icons/flat/icon-trofeu.png"),
+      swords: assetUrl("/assets/img/armory-icons/flat/icon-espadas.png"),
+      people: assetUrl("/assets/img/armory-icons/flat/icon-pessoas.png"),
+      cards: assetUrl("/assets/img/armory-icons/flat/icon-cartas.png"),
+      calendar: assetUrl("/assets/img/armory-icons/flat/icon-calendario.png")
+    }
+  };
+
+  function cleanHeroName(value) {
+    return String(value || "")
+      .replace(/^Armory\s+Deck\s*[–—-]\s*/i, "")
+      .replace(/\s+Edit\s+card\s*$/i, "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function shortHeroName(value) {
+    const clean = cleanHeroName(value);
+    if (!clean) return "Herói";
+    const parts = clean.split(",").map(part => part.trim()).filter(Boolean);
+    if (/^Arakni$/i.test(parts[0] || "") && parts[1]) return parts[1];
+    return parts[0] || clean;
+  }
+
+  function heroInitials(value) {
+    const words = shortHeroName(value).split(/\s+/).filter(Boolean);
+    return words.slice(0, 2).map(word => word[0]).join("").toUpperCase() || "?";
+  }
+
+  function recordRoundCount(record) {
+    const text = String(record || "").trim();
+    const match = text.match(/^(\d+)\s*[-–xX]\s*(\d+)/);
+    return match ? Number(match[1]) + Number(match[2]) : 0;
+  }
+
+  function roundsFromResults(results, explicitRounds) {
+    const explicit = Number(explicitRounds);
+    if (Number.isFinite(explicit) && explicit > 0) return explicit;
+    return Math.max(...results.map(result => recordRoundCount(result.record || result.campanha || result.score)), 0);
+  }
+
+  function uniqueHeroes(results) {
+    const map = new Map();
+    results.forEach(result => {
+      const rawHero = cleanHeroName(getHero(result));
+      if (!rawHero) return;
+      const key = rawHero.toLowerCase();
+      if (!map.has(key)) {
+        map.set(key, {
+          name: rawHero,
+          shortName: shortHeroName(rawHero),
+          icon: result.hero_icon || result.heroIcon || result.icon || ""
+        });
+      }
+    });
+    return Array.from(map.values());
+  }
+
+  function iconImage(src, className, alt = "") {
+    return `<img class="${className}" src="${src}" alt="${escapeHtml(alt)}" loading="lazy">`;
+  }
+
+  function heroBadge(hero, icon = "", size = "normal") {
+    const clean = cleanHeroName(hero);
+    const label = clean || "Herói não informado";
+    const resolvedIcon = icon ? assetUrl(icon) : "";
+    return `
+      <span class="armory-hero-badge armory-hero-badge-${size}" data-hero-name="${escapeHtml(clean)}" data-hero-icon="${escapeHtml(resolvedIcon)}" title="${escapeHtml(label)}">
+        <span class="armory-hero-initials">${escapeHtml(heroInitials(label))}</span>
+      </span>
+    `;
+  }
+
+  async function loadHeroBadge(badge) {
+    if (!badge || badge.dataset.loaded === "true") return;
+    badge.dataset.loaded = "true";
+
+    const heroName = cleanHeroName(badge.dataset.heroName);
+    const explicitIcon = badge.dataset.heroIcon || "";
+
+    function applyImage(src) {
+      if (!src) return;
+      const img = new Image();
+      img.loading = "lazy";
+      img.alt = heroName || "Herói";
+      img.onload = () => {
+        badge.classList.add("has-image");
+        badge.replaceChildren(img);
+      };
+      img.src = src;
+    }
+
+    if (explicitIcon) {
+      applyImage(explicitIcon);
+      return;
+    }
+
+    if (!heroName || !window.CCMCardApis?.getImageUrl) return;
+
+    try {
+      const imageUrl = await window.CCMCardApis.getImageUrl("fab", heroName);
+      applyImage(imageUrl);
+    } catch (error) {
+      console.warn("Imagem do herói indisponível:", heroName, error);
+    }
+  }
+
+  function initArmoryHeroBadges(scope = document) {
+    scope.querySelectorAll(".armory-hero-badge[data-hero-name]").forEach(loadHeroBadge);
+  }
+
   function renderLatestArmory(items) {
     const target = document.querySelector("#latest-armory-card");
     if (!target) return;
@@ -128,26 +258,86 @@
     if (!latest) return;
 
     const results = Array.isArray(latest.results) ? latest.results : [];
-    const podium = results.slice(0, 8).map((result, index) => {
+    const playerCount = new Set(results.map(getPlayer).filter(Boolean)).size || results.length;
+    const rounds = roundsFromResults(results, latest.rounds);
+    const game = latest.game || "Flesh and Blood";
+    const nextArmory = latest.next_armory || latest.nextArmory || "Quarta • 19:00";
+    const heroes = uniqueHeroes(results);
+
+    const rows = results.slice(0, 12).map((result, index) => {
       const player = getPlayer(result) || "Jogador";
-      const hero = getHero(result) || "Herói não informado";
-      const record = result.record || result.campanha || "";
+      const hero = cleanHeroName(getHero(result)) || "Herói não informado";
+      const heroName = shortHeroName(hero);
+      const record = result.record || result.campanha || result.score || "";
+      const heroIcon = result.hero_icon || result.heroIcon || result.icon || "";
       return `
-        <li>
-          <span>${index + 1}º</span>
-          <strong>${escapeHtml(player)}</strong>
-          <em>${escapeHtml(hero)}${record ? " • " + escapeHtml(record) : ""}</em>
+        <li class="armory-result-row${index === 0 ? " is-champion" : ""}">
+          <span class="armory-rank-badge" aria-label="${index + 1}º colocado">${index + 1}º</span>
+          <div class="armory-player-cell">
+            ${heroBadge(hero, heroIcon, index === 0 ? "featured" : "normal")}
+            <div>
+              <strong>${escapeHtml(player)}</strong>
+              <small>${escapeHtml(heroName)}</small>
+            </div>
+          </div>
+          <span class="armory-hero-name" title="${escapeHtml(hero)}">${escapeHtml(heroName)}</span>
+          <span class="armory-record">${iconImage(armoryIcons.flat.trophy, "armory-record-icon", "")}${escapeHtml(record || "-")}</span>
         </li>
       `;
     }).join("");
 
+    const statItems = [
+      { icon: armoryIcons.depth.people, label: "Jogadores", value: playerCount || "-" },
+      { icon: armoryIcons.depth.swords, label: "Rodadas", value: rounds || "-" },
+      { icon: armoryIcons.depth.cards, label: "Jogo", value: game },
+      { icon: armoryIcons.depth.calendar, label: "Próximo Armory", value: nextArmory }
+    ].map(item => `
+      <div class="armory-stat-item">
+        ${iconImage(item.icon, "armory-stat-icon", "")}
+        <span>${escapeHtml(item.label)}</span>
+        <strong>${escapeHtml(item.value)}</strong>
+      </div>
+    `).join("");
+
+    const heroList = heroes.map(hero => `
+      <li>
+        ${heroBadge(hero.name, hero.icon, "mini")}
+        <span title="${escapeHtml(hero.name)}">${escapeHtml(hero.shortName)}</span>
+      </li>
+    `).join("");
+
     target.innerHTML = `
-      <p class="eyebrow">Último Armory</p>
-      <h3>${escapeHtml(latest.title || "Resultado Armory")}</h3>
-      <p>${dateLabel(latest.date)}${latest.summary ? " • " + escapeHtml(latest.summary) : ""}</p>
-      ${podium ? `<ol class="latest-armory-podium">${podium}</ol>` : `<p class="empty-section">Resultado sem lista de jogadores.</p>`}
-      ${latest.url ? `<a class="btn btn-secondary" href="${latest.url}">Ver resultado completo</a>` : ""}
+      <div class="armory-board-glow" aria-hidden="true"></div>
+      <div class="armory-board-heading">
+        <div class="armory-event-badge">${iconImage(armoryIcons.depth.badge, "armory-event-badge-img", "")}</div>
+        <div>
+          <p class="eyebrow">Último Armory</p>
+          <h3>${escapeHtml(latest.title || "Resultado Armory")}</h3>
+          <p>${dateLabel(latest.date)}${latest.summary ? " • " + escapeHtml(latest.summary) : ""}</p>
+        </div>
+      </div>
+
+      <div class="armory-board-layout">
+        <div class="armory-results-panel">
+          ${rows ? `<ol class="latest-armory-podium armory-results-list">${rows}</ol>` : `<p class="empty-section">Resultado sem lista de jogadores.</p>`}
+        </div>
+
+        <aside class="armory-board-sidebar" aria-label="Resumo do Armory">
+          <div class="armory-stat-panel">${statItems}</div>
+          <div class="armory-heroes-panel">
+            <div class="armory-panel-title"><span></span><strong>Heróis do evento</strong><span></span></div>
+            ${heroList ? `<ul>${heroList}</ul>` : `<p class="empty-section">Nenhum herói informado.</p>`}
+          </div>
+        </aside>
+      </div>
+
+      <div class="armory-board-actions">
+        ${latest.url ? `<a class="btn armory-btn-primary" href="${latest.url}">${iconImage(armoryIcons.flat.trophy, "armory-btn-icon", "")}Ver resultado completo</a>` : ""}
+        <a class="btn armory-btn-secondary" href="#armory-historico">Ver histórico</a>
+      </div>
     `;
+
+    initArmoryHeroBadges(target);
   }
 
   function renderArmoryStats() {

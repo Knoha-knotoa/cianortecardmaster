@@ -274,6 +274,33 @@
     }
   }
 
+  async function getImageUrl(game, name, options = {}) {
+    const normalizedGame = normalizeText(game);
+    let card = null;
+
+    if (normalizedGame === "fab") {
+      card = await fetchFabCard(name, options.pitch || "");
+      return fabImageUrl(card);
+    }
+
+    if (normalizedGame === "mtg" || normalizedGame === "magic") {
+      card = await fetchMtgCard(name);
+      return mtgImageUrl(card);
+    }
+
+    if (normalizedGame === "pokemon" || normalizedGame === "pkm") {
+      card = await fetchPokemonCard(name, options.set || "", options.number || "");
+      return pokemonImageUrl(card);
+    }
+
+    if (normalizedGame === "yugioh" || normalizedGame === "ygo") {
+      card = await fetchYugiohCard(name);
+      return yugiohImageUrl(card);
+    }
+
+    throw new Error(`Jogo não suportado: ${game}`);
+  }
+
   function initGlobalCardApis() {
     document.querySelectorAll(".tcg-card-image[data-game][data-name]").forEach(loadCardElement);
   }
@@ -287,6 +314,7 @@
   // API pública opcional para inicializar manualmente conteúdo injetado depois
   window.CCMCardApis = {
     init: initGlobalCardApis,
-    load: loadCardElement
+    load: loadCardElement,
+    getImageUrl
   };
 })();
