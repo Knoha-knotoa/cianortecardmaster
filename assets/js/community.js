@@ -133,14 +133,9 @@
       badge: assetUrl("/assets/img/armory-icons/depth/badge-armory.png"),
       champion: assetUrl("/assets/img/armory-icons/depth/badge-campeao.png"),
       placement: assetUrl("/assets/img/armory-icons/depth/badge-colocacao.png"),
-      trophy: assetUrl("/assets/img/armory-icons/depth/icon-trofeu.png"),
-      swords: assetUrl("/assets/img/armory-icons/depth/icon-espadas.png"),
-      people: assetUrl("/assets/img/armory-icons/depth/icon-pessoas.png"),
-      cards: assetUrl("/assets/img/armory-icons/depth/icon-cartas.png"),
-      calendar: assetUrl("/assets/img/armory-icons/depth/icon-calendario.png")
+      trophy: assetUrl("/assets/img/armory-icons/depth/icon-trofeu.png")
     },
     flat: {
-      trophy: assetUrl("/assets/img/armory-icons/flat/icon-trofeu.png"),
       swords: assetUrl("/assets/img/armory-icons/flat/icon-espadas.png"),
       people: assetUrl("/assets/img/armory-icons/flat/icon-pessoas.png"),
       cards: assetUrl("/assets/img/armory-icons/flat/icon-cartas.png"),
@@ -253,7 +248,30 @@
   }
 
   function iconImage(src, className, alt = "") {
+    if (!src) return "";
     return `<img class="${className}" src="${src}" alt="${escapeHtml(alt)}" loading="lazy">`;
+  }
+
+  function cssUrl(value) {
+    return String(value || "").replace(/[\\'"\n\r]/g, "");
+  }
+
+  function flatIcon(src, className = "", label = "") {
+    if (!src) return "";
+    const a11y = label ? `role="img" aria-label="${escapeHtml(label)}"` : `aria-hidden="true"`;
+    return `<span class="armory-flat-icon ${className}" style="--icon-url: url('${escapeHtml(cssUrl(src))}')" ${a11y}></span>`;
+  }
+
+  function rankBadge(index) {
+    const rank = index + 1;
+    const src = index === 0 ? armoryIcons.depth.champion : armoryIcons.depth.placement;
+    const tone = index === 0 ? "champion" : index === 1 ? "silver" : index === 2 ? "bronze" : "dark";
+    return `
+      <span class="armory-rank-badge armory-rank-badge-${tone}" aria-label="${rank}º colocado">
+        ${iconImage(src, "armory-rank-badge-img", "")}
+        <span class="armory-rank-badge-number">${rank}º</span>
+      </span>
+    `;
   }
 
   function heroBadge(hero, icon = "", size = "normal") {
@@ -329,7 +347,7 @@
       const heroIcon = result.hero_icon || result.heroIcon || result.icon || "";
       return `
         <li class="armory-result-row${index === 0 ? " is-champion" : ""}">
-          <span class="armory-rank-badge" aria-label="${index + 1}º colocado">${index + 1}º</span>
+          ${rankBadge(index)}
           <div class="armory-player-cell">
             ${heroBadge(hero, heroIcon, index === 0 ? "featured" : "normal")}
             <div>
@@ -338,19 +356,19 @@
             </div>
           </div>
           <span class="armory-hero-name" title="${escapeHtml(hero)}">${escapeHtml(heroName)}</span>
-          <span class="armory-record">${iconImage(armoryIcons.flat.trophy, "armory-record-icon", "")}${escapeHtml(record || "-")}</span>
+          <span class="armory-record">${iconImage(armoryIcons.depth.trophy, "armory-record-icon", "")}${escapeHtml(record || "-")}</span>
         </li>
       `;
     }).join("");
 
     const statItems = [
-      { icon: armoryIcons.depth.people, label: "Jogadores", value: playerCount || "-" },
-      { icon: armoryIcons.depth.swords, label: "Rodadas", value: rounds || "-" },
-      { icon: armoryIcons.depth.cards, label: "Jogo", value: game },
-      { icon: armoryIcons.depth.calendar, label: "Próximo Armory", value: nextArmory }
+      { icon: armoryIcons.flat.people, label: "Jogadores", value: playerCount || "-" },
+      { icon: armoryIcons.flat.swords, label: "Rodadas", value: rounds || "-" },
+      { icon: armoryIcons.flat.cards, label: "Jogo", value: game },
+      { icon: armoryIcons.flat.calendar, label: "Próximo Armory", value: nextArmory }
     ].map(item => `
       <div class="armory-stat-item">
-        ${iconImage(item.icon, "armory-stat-icon", "")}
+        ${flatIcon(item.icon, "armory-stat-icon", item.label)}
         <span>${escapeHtml(item.label)}</span>
         <strong>${escapeHtml(item.value)}</strong>
       </div>
@@ -389,7 +407,7 @@
       </div>
 
       <div class="armory-board-actions">
-        ${latest.url ? `<a class="btn armory-btn-primary" href="${latest.url}">${iconImage(armoryIcons.flat.trophy, "armory-btn-icon", "")}Ver resultado completo</a>` : ""}
+        ${latest.url ? `<a class="btn armory-btn-primary" href="${latest.url}">${iconImage(armoryIcons.depth.trophy, "armory-btn-icon", "")}Ver resultado completo</a>` : ""}
         <a class="btn armory-btn-secondary" href="#armory-historico">Ver histórico</a>
       </div>
     `;
