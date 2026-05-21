@@ -246,3 +246,10 @@ image_card: "Charizard"
 - Se o post não tiver `image`, o site usa a imagem padrão da seção.
 - Se o post tiver `image` apontando para arquivo local (`/assets/...`) ou URL externa (`https://...`), ele continua funcionando normalmente.
 - Para Pokémon, se depois você quiser mais precisão, também pode expandir o include `tcg-card.html` usando `set` e `number`.
+
+
+## Ícones de heróis do Armory
+
+- Coloque os ícones em `assets/img/fab-heroes/`.
+- Quando o nome do herói no resultado for igual ao nome do arquivo (ex.: `Arakni, Huntsman.webp`), o badge circular carrega a imagem local automaticamente.
+- Opcionalmente, você ainda pode informar `hero_icon` em cada jogador.
