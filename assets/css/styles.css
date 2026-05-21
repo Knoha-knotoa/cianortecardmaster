@@ -3741,437 +3741,212 @@ h3 {
   }
 }
 
-/* ==========================================
-   Correção Armory: ícones, badges e bloco Último Armory
-   21/05/2026
-========================================== */
-:root {
-  --armory-flat-icon-green: #70e000;
+/* Ajuste 21/05/2026 — Armory: badges locais de herói, nomes completos e bloco mais compacto */
+.latest-armory-card-wide.armory-board {
+  padding: 1.15rem 1.2rem !important;
 }
 
 .armory-board-heading {
-  grid-template-columns: 112px 1fr;
-  gap: 1.15rem;
+  grid-template-columns: 82px 1fr !important;
+  gap: .85rem !important;
+  margin-bottom: .82rem !important;
 }
 
 .armory-event-badge {
-  width: 104px;
-  height: 104px;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  overflow: visible;
+  width: 72px !important;
+  height: 72px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 .armory-event-badge-img {
-  width: 104px;
-  height: 104px;
-  object-fit: contain;
-  transform: scale(1.16);
-  transform-origin: center;
-  filter:
-    drop-shadow(0 14px 18px rgba(0,0,0,.52))
-    drop-shadow(0 0 18px rgba(212,175,55,.20));
+  width: 72px !important;
+  height: 72px !important;
 }
 
-.armory-flat-icon {
-  display: inline-block;
-  flex: 0 0 auto;
-  width: 1em;
-  height: 1em;
-  background: var(--armory-flat-icon-green);
-  -webkit-mask: var(--icon-url) center / contain no-repeat;
-  mask: var(--icon-url) center / contain no-repeat;
-  filter:
-    drop-shadow(0 0 8px rgba(112,224,0,.42))
-    drop-shadow(0 4px 7px rgba(0,0,0,.38));
+.armory-board-layout {
+  gap: .85rem !important;
 }
 
-.armory-stat-icon.armory-flat-icon {
-  grid-row: span 2;
-  width: 34px;
-  height: 34px;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  object-fit: unset;
-  background: var(--armory-flat-icon-green);
+.latest-armory-podium.armory-results-list {
+  gap: .42rem !important;
 }
 
-.armory-stat-item {
-  grid-template-columns: 42px 1fr;
+.latest-armory-podium.armory-results-list .armory-result-row,
+.armory-result-row {
+  grid-template-columns: 60px minmax(165px, .95fr) minmax(190px, 1.05fr) 82px !important;
+  min-height: 58px !important;
+  gap: .62rem !important;
+  padding: .38rem .68rem !important;
+  border-radius: 12px !important;
+}
+
+.armory-result-row::after {
+  inset: 8px 92px 8px auto !important;
+}
+
+.latest-armory-podium.armory-results-list .armory-rank-badge,
+.armory-rank-badge {
+  position: relative !important;
+  display: grid !important;
+  place-items: center !important;
+  width: 48px !important;
+  height: 48px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #fff4c0 !important;
+  overflow: visible !important;
+}
+
+.armory-rank-icon,
+.latest-armory-podium.armory-results-list .armory-rank-icon {
+  grid-area: 1 / 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  display: block !important;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.42));
+}
+
+.armory-rank-badge strong,
+.latest-armory-podium.armory-results-list .armory-rank-badge strong {
+  grid-area: 1 / 1 !important;
+  position: relative !important;
+  z-index: 1 !important;
+  margin-top: .03rem !important;
+  color: #fff4c0 !important;
+  font-family: "Fugaz One", system-ui, sans-serif !important;
+  font-size: .9rem !important;
+  line-height: 1 !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,.82), 0 0 6px rgba(0,0,0,.55) !important;
+}
+
+.armory-rank-2 .armory-rank-icon {
+  filter: saturate(.78) brightness(1.12) drop-shadow(0 6px 10px rgba(0,0,0,.42));
+}
+
+.armory-rank-3 .armory-rank-icon {
+  filter: sepia(.62) saturate(1.35) hue-rotate(338deg) brightness(.92) drop-shadow(0 6px 10px rgba(0,0,0,.42));
+}
+
+.armory-rank-4 .armory-rank-icon,
+.armory-rank-5 .armory-rank-icon,
+.armory-rank-6 .armory-rank-icon,
+.armory-rank-7 .armory-rank-icon,
+.armory-rank-8 .armory-rank-icon,
+.armory-rank-9 .armory-rank-icon,
+.armory-rank-10 .armory-rank-icon,
+.armory-rank-11 .armory-rank-icon,
+.armory-rank-12 .armory-rank-icon {
+  filter: grayscale(1) brightness(.52) contrast(1.1) drop-shadow(0 6px 10px rgba(0,0,0,.42));
+}
+
+.latest-armory-podium.armory-results-list .armory-hero-badge,
+.armory-hero-badge {
+  display: grid !important;
+  place-items: center !important;
+  overflow: hidden !important;
+}
+
+.armory-hero-badge > * {
+  grid-area: 1 / 1;
+}
+
+.armory-hero-badge.has-image .armory-hero-initials {
+  display: none !important;
+}
+
+.armory-hero-badge img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.armory-hero-name {
+  font-size: .92rem !important;
+  color: #f2ead6 !important;
+}
+
+.armory-player-cell {
+  gap: .58rem !important;
+}
+
+.armory-record {
+  gap: .32rem !important;
+  font-size: 1.08rem !important;
 }
 
 .armory-record-icon,
 .armory-btn-icon {
-  filter:
-    drop-shadow(0 4px 8px rgba(0,0,0,.50))
-    drop-shadow(0 0 10px rgba(212,175,55,.18));
-}
-
-.armory-result-row,
-.latest-armory-podium.armory-results-list .armory-result-row {
-  grid-template-columns: 82px minmax(180px, 1.1fr) minmax(120px, .8fr) 96px;
-  min-height: 76px;
-}
-
-.armory-rank-badge,
-.latest-armory-podium.armory-results-list .armory-rank-badge {
-  position: relative;
-  isolation: isolate;
-  display: grid;
-  place-items: center;
-  width: 66px;
-  height: 66px;
-  border: 0;
-  border-radius: 0;
-  overflow: visible;
-  background: transparent !important;
-  box-shadow: none;
-  color: #fff7d6;
-  font-family: "Fugaz One", system-ui, sans-serif;
-  font-size: 1.08rem;
-  line-height: 1;
-  text-shadow:
-    0 2px 0 rgba(0,0,0,.62),
-    0 0 10px rgba(0,0,0,.82);
-}
-
-.armory-rank-badge-img {
-  position: absolute;
-  inset: -5px;
-  z-index: 0;
-  width: calc(100% + 10px);
-  height: calc(100% + 10px);
-  object-fit: contain;
-  pointer-events: none;
-}
-
-.armory-rank-badge-number {
-  position: relative;
-  z-index: 1;
-  transform: translateY(1px);
-}
-
-.armory-rank-badge-champion,
-.latest-armory-podium.armory-results-list .armory-rank-badge-champion {
-  width: 72px;
-  height: 72px;
-  color: #fff4c0;
-  font-size: 1.16rem;
-}
-
-.armory-rank-badge-champion .armory-rank-badge-img {
-  filter:
-    saturate(1.12)
-    contrast(1.06)
-    drop-shadow(0 10px 15px rgba(0,0,0,.54))
-    drop-shadow(0 0 15px rgba(255,217,94,.35));
-}
-
-.armory-rank-badge-silver .armory-rank-badge-img {
-  filter:
-    grayscale(1)
-    saturate(.18)
-    brightness(1.35)
-    contrast(1.08)
-    drop-shadow(0 9px 14px rgba(0,0,0,.48))
-    drop-shadow(0 0 12px rgba(220,236,255,.22));
-}
-
-.armory-rank-badge-bronze .armory-rank-badge-img {
-  filter:
-    sepia(1)
-    saturate(2.15)
-    hue-rotate(336deg)
-    brightness(.86)
-    contrast(1.12)
-    drop-shadow(0 9px 14px rgba(0,0,0,.48))
-    drop-shadow(0 0 12px rgba(190,95,30,.20));
-}
-
-.armory-rank-badge-dark .armory-rank-badge-img {
-  filter:
-    grayscale(1)
-    saturate(.08)
-    brightness(.48)
-    contrast(1.28)
-    drop-shadow(0 8px 12px rgba(0,0,0,.52));
-  opacity: .92;
-}
-
-.armory-rank-badge-dark,
-.latest-armory-podium.armory-results-list .armory-rank-badge-dark {
-  color: #d8d8d8;
-}
-
-.armory-hero-badge.has-image {
-  border-color: rgba(112,224,0,.42);
-  background: #07110a;
-  box-shadow:
-    inset 0 0 0 2px rgba(5,8,6,.56),
-    0 8px 18px rgba(0,0,0,.34),
-    0 0 12px rgba(112,224,0,.12);
-}
-
-.armory-hero-badge.has-image img {
-  transform: scale(1.08);
-  object-position: top center;
-}
-
-@media (max-width: 760px) {
-  .armory-board-heading {
-    grid-template-columns: 78px 1fr;
-  }
-
-  .armory-event-badge,
-  .armory-event-badge-img {
-    width: 70px;
-    height: 70px;
-  }
-
-  .armory-event-badge-img {
-    transform: scale(1.12);
-  }
-
-  .armory-result-row,
-  .latest-armory-podium.armory-results-list .armory-result-row {
-    grid-template-columns: 60px minmax(0, 1fr) auto;
-    min-height: 64px;
-  }
-
-  .armory-rank-badge,
-  .latest-armory-podium.armory-results-list .armory-rank-badge,
-  .armory-rank-badge-champion,
-  .latest-armory-podium.armory-results-list .armory-rank-badge-champion {
-    width: 52px;
-    height: 52px;
-    font-size: .9rem;
-  }
-
-  .armory-stat-icon.armory-flat-icon {
-    width: 30px;
-    height: 30px;
-  }
-}
-
-/* ==========================================
-   Ajuste fino Armory: badges alinhadas, heróis e altura do bloco
-   21/05/2026
-========================================== */
-.latest-armory-card-wide.armory-board {
-  padding: 1.08rem 1.22rem 1rem;
-}
-
-.armory-board-heading {
-  grid-template-columns: 104px 1fr;
-  gap: .95rem;
-  margin-bottom: .8rem;
-}
-
-.armory-event-badge,
-.armory-event-badge-img {
-  width: 92px;
-  height: 92px;
-}
-
-.armory-event-badge-img {
-  transform: scale(1.14);
-}
-
-.armory-board-layout {
-  gap: .78rem;
-}
-
-.latest-armory-podium.armory-results-list {
-  gap: .42rem;
-}
-
-.armory-result-row,
-.latest-armory-podium.armory-results-list .armory-result-row {
-  grid-template-columns: 66px minmax(180px, 1.1fr) minmax(120px, .8fr) 88px;
-  min-height: 60px;
-  padding: .42rem .72rem;
-  border-radius: 12px;
-}
-
-.armory-result-row::after {
-  inset: 8px 98px 8px auto;
-}
-
-.armory-rank-badge,
-.latest-armory-podium.armory-results-list .armory-rank-badge,
-.armory-rank-badge-champion,
-.latest-armory-podium.armory-results-list .armory-rank-badge-champion {
-  width: 54px;
-  height: 54px;
-  font-size: 1rem;
-}
-
-.armory-rank-badge-img {
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transform: translate(0, 0) scale(1.02);
-  transform-origin: center;
-}
-
-.armory-rank-badge-number {
-  display: inline-grid;
-  place-items: center;
-  width: 58%;
-  height: 58%;
-  position: relative;
-  z-index: 2;
-  transform: translateY(-1px);
-  text-align: center;
-}
-
-.armory-rank-badge-champion .armory-rank-badge-number {
-  transform: translateY(-2px);
-}
-
-.armory-rank-badge-silver .armory-rank-badge-img,
-.armory-rank-badge-bronze .armory-rank-badge-img,
-.armory-rank-badge-dark .armory-rank-badge-img {
-  transform: translateY(0) scale(.98);
-}
-
-.armory-rank-badge-silver .armory-rank-badge-number,
-.armory-rank-badge-bronze .armory-rank-badge-number,
-.armory-rank-badge-dark .armory-rank-badge-number {
-  transform: translateY(-1px);
-}
-
-.armory-player-cell {
-  gap: .62rem;
-}
-
-.armory-hero-badge-normal,
-.latest-armory-podium.armory-results-list .armory-hero-badge-normal {
-  width: 42px;
-  height: 42px;
-}
-
-.armory-hero-badge-featured,
-.latest-armory-podium.armory-results-list .armory-hero-badge-featured {
-  width: 46px;
-  height: 46px;
-}
-
-.armory-hero-badge-mini {
-  width: 26px;
-  height: 26px;
-}
-
-.armory-hero-badge.has-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  transform: scale(1.12);
-}
-
-.armory-record {
-  gap: .35rem;
-}
-
-.latest-armory-podium.armory-results-list .armory-record {
-  gap: .35rem;
-  font-size: 1.12rem;
-}
-
-.armory-record-icon {
-  width: 21px;
-  height: 21px;
-}
-
-.armory-board-sidebar {
-  gap: .62rem;
+  width: 18px !important;
+  height: 18px !important;
 }
 
 .armory-stat-panel {
-  padding: .52rem .75rem;
+  padding: .48rem .68rem !important;
 }
 
 .armory-stat-item {
-  grid-template-columns: 38px 1fr;
-  gap: .45rem .58rem;
-  padding: .42rem 0;
+  grid-template-columns: 34px 1fr !important;
+  gap: .38rem .55rem !important;
+  padding: .42rem 0 !important;
 }
 
-.armory-stat-icon.armory-flat-icon {
-  width: 29px;
-  height: 29px;
+.armory-stat-icon {
+  width: 28px !important;
+  height: 28px !important;
+  padding: .12rem !important;
+  border: 0 !important;
+  background: transparent !important;
+  filter: brightness(0) saturate(100%) invert(66%) sepia(99%) saturate(1055%) hue-rotate(55deg) brightness(111%) contrast(116%) drop-shadow(0 5px 8px rgba(0,0,0,.42)) !important;
 }
 
 .armory-heroes-panel {
-  padding: .6rem .75rem .5rem;
-}
-
-.armory-panel-title {
-  margin-bottom: .35rem;
-}
-
-.armory-heroes-panel ul {
-  gap: .1rem;
+  padding: .55rem .68rem .48rem !important;
 }
 
 .armory-heroes-panel li {
-  min-height: 28px;
-  padding: .1rem 0;
+  min-height: 28px !important;
+  padding: .1rem 0 !important;
+  gap: .45rem !important;
 }
 
 .armory-board-actions {
-  margin-top: .82rem;
-  padding-top: .72rem;
+  margin-top: .85rem !important;
+  padding-top: .8rem !important;
 }
 
 @media (max-width: 760px) {
-  .latest-armory-card-wide.armory-board {
-    padding: .88rem;
-  }
-
   .armory-board-heading {
-    grid-template-columns: 72px 1fr;
-    gap: .68rem;
-    margin-bottom: .65rem;
+    grid-template-columns: 64px 1fr !important;
   }
 
   .armory-event-badge,
   .armory-event-badge-img {
-    width: 64px;
-    height: 64px;
+    width: 58px !important;
+    height: 58px !important;
   }
 
-  .armory-result-row,
-  .latest-armory-podium.armory-results-list .armory-result-row {
-    grid-template-columns: 52px minmax(0, 1fr) auto;
-    min-height: 56px;
-    gap: .45rem;
-    padding: .42rem .55rem;
+  .latest-armory-podium.armory-results-list .armory-result-row,
+  .armory-result-row {
+    grid-template-columns: 48px minmax(0, 1fr) auto !important;
+    min-height: 56px !important;
+    padding: .42rem .58rem !important;
   }
 
-  .armory-rank-badge,
   .latest-armory-podium.armory-results-list .armory-rank-badge,
-  .armory-rank-badge-champion,
-  .latest-armory-podium.armory-results-list .armory-rank-badge-champion {
-    width: 45px;
-    height: 45px;
-    font-size: .82rem;
+  .armory-rank-badge {
+    width: 42px !important;
+    height: 42px !important;
   }
 
-  .armory-hero-badge-normal,
-  .armory-hero-badge-featured,
-  .latest-armory-podium.armory-results-list .armory-hero-badge-normal,
-  .latest-armory-podium.armory-results-list .armory-hero-badge-featured {
-    width: 38px;
-    height: 38px;
-  }
-
-  .latest-armory-podium.armory-results-list .armory-record {
-    font-size: .95rem;
+  .armory-rank-badge strong,
+  .latest-armory-podium.armory-results-list .armory-rank-badge strong {
+    font-size: .78rem !important;
   }
 }
