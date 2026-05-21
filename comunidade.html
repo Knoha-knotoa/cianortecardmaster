@@ -29,6 +29,9 @@ permalink: /comunidade/
       "url": {{ post.url | relative_url | jsonify }},
       "date": {{ post.date | date_to_xmlschema | jsonify }},
       "summary": {{ post.summary | default: post.excerpt | strip_html | strip | jsonify }},
+      "game": {{ post.game | default: "Flesh and Blood" | jsonify }},
+      "rounds": {{ post.rounds | default: "" | jsonify }},
+      "next_armory": {{ post.next_armory | default: "Quarta • 19:00" | jsonify }},
       "results": {% if post.results %}{{ post.results | jsonify }}{% else %}[]{% endif %}
     }
     {% assign first_armory = false %}
@@ -37,18 +40,18 @@ permalink: /comunidade/
 ]
 </script>
 
-<section class="section community-dashboard-section">
+<section class="section community-dashboard-section armory-feature-section">
   <div class="container">
-    <div class="section-title">
+    <div class="section-title armory-feature-title">
       <div>
         <p class="eyebrow">Último Armory</p>
         <h2>Resultado mais recente</h2>
-        <p>Esta área mostra apenas o último resultado cadastrado em <code>_comunidade/Armory</code>.</p>
+        <p>Confira aqui o resultado mais recente do nosso Armory, o torneio semanal da comunidade.</p>
       </div>
     </div>
 
     <div class="community-dashboard-grid community-dashboard-single">
-      <article class="latest-armory-card latest-armory-card-wide" id="latest-armory-card">
+      <article class="latest-armory-card latest-armory-card-wide armory-board" id="latest-armory-card">
         <p class="eyebrow">Último Armory</p>
         <h3>Nenhum resultado cadastrado</h3>
         <p>Crie um Markdown em <code>_comunidade/Armory</code> usando o modelo de resultados para preencher esta área.</p>
@@ -179,7 +182,7 @@ permalink: /comunidade/
   </div>
 </section>
 
-<section class="section section-alt armory-history-section">
+<section class="section section-alt armory-history-section" id="armory-historico">
   <div class="container">
     <div class="section-title">
       <div>
