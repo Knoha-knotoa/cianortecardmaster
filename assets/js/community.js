@@ -159,11 +159,25 @@
     return heroNameAliases[clean.toLowerCase()] || clean;
   }
 
+  function slugHeroFileName(value) {
+    return String(value || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/&/g, " and ")
+      .replace(/[^a-zA-Z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .replace(/-+/g, "-")
+      .toLowerCase();
+  }
+
   function heroAssetCandidates(heroName) {
     const canonical = canonicalHeroName(heroName);
     if (!canonical) return [];
+    const slug = slugHeroFileName(canonical);
     const encoded = encodeURIComponent(canonical);
     return [
+      assetUrl(`/assets/img/fab-heroes/${slug}.webp`),
+      assetUrl(`/assets/img/fab-heroes/${slug}.png`),
       assetUrl(`/assets/img/fab-heroes/${encoded}.webp`),
       assetUrl(`/assets/img/fab-heroes/${encoded}.png`)
     ];
