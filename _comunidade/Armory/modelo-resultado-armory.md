@@ -13,6 +13,7 @@ results:
     hero: "Nome do herói"
     # Opcional: use uma imagem local do herói. Se não informar, o site tenta buscar pela API GoAgain.
     # hero_icon: "/assets/img/fab-heroes/nome-do-heroi.webp"
+    # Se existir um arquivo local com o nome exato do herói em assets/img/fab-heroes/, o site tenta carregar automaticamente.
     record: "3-0"
     wins: 3
   - player: "Nome do jogador 2"
