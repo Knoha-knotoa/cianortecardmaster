@@ -3955,3 +3955,223 @@ h3 {
     height: 30px;
   }
 }
+
+/* ==========================================
+   Ajuste fino Armory: badges alinhadas, heróis e altura do bloco
+   21/05/2026
+========================================== */
+.latest-armory-card-wide.armory-board {
+  padding: 1.08rem 1.22rem 1rem;
+}
+
+.armory-board-heading {
+  grid-template-columns: 104px 1fr;
+  gap: .95rem;
+  margin-bottom: .8rem;
+}
+
+.armory-event-badge,
+.armory-event-badge-img {
+  width: 92px;
+  height: 92px;
+}
+
+.armory-event-badge-img {
+  transform: scale(1.14);
+}
+
+.armory-board-layout {
+  gap: .78rem;
+}
+
+.latest-armory-podium.armory-results-list {
+  gap: .42rem;
+}
+
+.armory-result-row,
+.latest-armory-podium.armory-results-list .armory-result-row {
+  grid-template-columns: 66px minmax(180px, 1.1fr) minmax(120px, .8fr) 88px;
+  min-height: 60px;
+  padding: .42rem .72rem;
+  border-radius: 12px;
+}
+
+.armory-result-row::after {
+  inset: 8px 98px 8px auto;
+}
+
+.armory-rank-badge,
+.latest-armory-podium.armory-results-list .armory-rank-badge,
+.armory-rank-badge-champion,
+.latest-armory-podium.armory-results-list .armory-rank-badge-champion {
+  width: 54px;
+  height: 54px;
+  font-size: 1rem;
+}
+
+.armory-rank-badge-img {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: translate(0, 0) scale(1.02);
+  transform-origin: center;
+}
+
+.armory-rank-badge-number {
+  display: inline-grid;
+  place-items: center;
+  width: 58%;
+  height: 58%;
+  position: relative;
+  z-index: 2;
+  transform: translateY(-1px);
+  text-align: center;
+}
+
+.armory-rank-badge-champion .armory-rank-badge-number {
+  transform: translateY(-2px);
+}
+
+.armory-rank-badge-silver .armory-rank-badge-img,
+.armory-rank-badge-bronze .armory-rank-badge-img,
+.armory-rank-badge-dark .armory-rank-badge-img {
+  transform: translateY(0) scale(.98);
+}
+
+.armory-rank-badge-silver .armory-rank-badge-number,
+.armory-rank-badge-bronze .armory-rank-badge-number,
+.armory-rank-badge-dark .armory-rank-badge-number {
+  transform: translateY(-1px);
+}
+
+.armory-player-cell {
+  gap: .62rem;
+}
+
+.armory-hero-badge-normal,
+.latest-armory-podium.armory-results-list .armory-hero-badge-normal {
+  width: 42px;
+  height: 42px;
+}
+
+.armory-hero-badge-featured,
+.latest-armory-podium.armory-results-list .armory-hero-badge-featured {
+  width: 46px;
+  height: 46px;
+}
+
+.armory-hero-badge-mini {
+  width: 26px;
+  height: 26px;
+}
+
+.armory-hero-badge.has-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transform: scale(1.12);
+}
+
+.armory-record {
+  gap: .35rem;
+}
+
+.latest-armory-podium.armory-results-list .armory-record {
+  gap: .35rem;
+  font-size: 1.12rem;
+}
+
+.armory-record-icon {
+  width: 21px;
+  height: 21px;
+}
+
+.armory-board-sidebar {
+  gap: .62rem;
+}
+
+.armory-stat-panel {
+  padding: .52rem .75rem;
+}
+
+.armory-stat-item {
+  grid-template-columns: 38px 1fr;
+  gap: .45rem .58rem;
+  padding: .42rem 0;
+}
+
+.armory-stat-icon.armory-flat-icon {
+  width: 29px;
+  height: 29px;
+}
+
+.armory-heroes-panel {
+  padding: .6rem .75rem .5rem;
+}
+
+.armory-panel-title {
+  margin-bottom: .35rem;
+}
+
+.armory-heroes-panel ul {
+  gap: .1rem;
+}
+
+.armory-heroes-panel li {
+  min-height: 28px;
+  padding: .1rem 0;
+}
+
+.armory-board-actions {
+  margin-top: .82rem;
+  padding-top: .72rem;
+}
+
+@media (max-width: 760px) {
+  .latest-armory-card-wide.armory-board {
+    padding: .88rem;
+  }
+
+  .armory-board-heading {
+    grid-template-columns: 72px 1fr;
+    gap: .68rem;
+    margin-bottom: .65rem;
+  }
+
+  .armory-event-badge,
+  .armory-event-badge-img {
+    width: 64px;
+    height: 64px;
+  }
+
+  .armory-result-row,
+  .latest-armory-podium.armory-results-list .armory-result-row {
+    grid-template-columns: 52px minmax(0, 1fr) auto;
+    min-height: 56px;
+    gap: .45rem;
+    padding: .42rem .55rem;
+  }
+
+  .armory-rank-badge,
+  .latest-armory-podium.armory-results-list .armory-rank-badge,
+  .armory-rank-badge-champion,
+  .latest-armory-podium.armory-results-list .armory-rank-badge-champion {
+    width: 45px;
+    height: 45px;
+    font-size: .82rem;
+  }
+
+  .armory-hero-badge-normal,
+  .armory-hero-badge-featured,
+  .latest-armory-podium.armory-results-list .armory-hero-badge-normal,
+  .latest-armory-podium.armory-results-list .armory-hero-badge-featured {
+    width: 38px;
+    height: 38px;
+  }
+
+  .latest-armory-podium.armory-results-list .armory-record {
+    font-size: .95rem;
+  }
+}

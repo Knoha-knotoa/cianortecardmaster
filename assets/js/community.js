@@ -144,14 +144,78 @@
   };
 
   const heroNameAliases = {
+    "ira": "Ira, Crimson Haze",
     "ira, scarlet revenger": "Ira, Crimson Haze",
-    "dash i/o": "Dash I-O"
+    "ser boltyn": "Ser Boltyn, Breaker of Dawn",
+    "boltyn": "Ser Boltyn, Breaker of Dawn",
+    "prism": "Prism, Awakener of Sol",
+    "pleiades": "Pleiades, Superstar",
+    "marionette": "Arakni, Marionette",
+    "arakni marionette": "Arakni, Marionette",
+    "teklovossen": "Teklovossen, Esteemed Magnate",
+    "dash i/o": "Dash I-O",
+    "dash i-o": "Dash I-O",
+    "fai": "Fai, Rising Rebellion",
+    "aurora": "Aurora, Shooting Star",
+    "azalea": "Azalea, Ace in the Hole",
+    "bravo": "Bravo, Showstopper",
+    "katsu": "Katsu, the Wanderer",
+    "kayo": "Kayo, Berserker Runt",
+    "nuu": "Nuu, Alluring Desire",
+    "zen": "Zen, Tamer of Purpose",
+    "enigma": "Enigma, Ledger of Ancestry",
+    "riptide": "Riptide, Lurker of the Deep",
+    "dorinthea": "Dorinthea Ironsong",
+    "dromai": "Dromai, Ash Artist",
+    "lexi": "Lexi, Livewire",
+    "kano": "Kano, Dracai of Aether",
+    "florian": "Florian, Rotwood Harbinger",
+    "verdance": "Verdance, Thorn of the Rose",
+    "victor": "Victor Goldmane, High and Mighty",
+    "olympia": "Olympia, Prized Fighter",
+    "maxx": "Maxx 'The Hype' Nitro",
+    "vynnset": "Vynnset, Iron Maiden",
+    "viserai": "Viserai, Rune Blood",
+    "levia": "Levia, Shadowborn Abomination",
+    "rhinar": "Rhinar, Reckless Rampage"
   };
+
+  const heroFileSlugAliases = {
+    "dash i-o": "dash-i-o",
+    "dash i/o": "dash-i-o",
+    "ser boltyn, breaker of dawn": "ser-boltyn-breaker-of-dawn",
+    "ser boltyn": "ser-boltyn-breaker-of-dawn",
+    "prism, awakener of sol": "prism-awakener-of-sol",
+    "prism": "prism-awakener-of-sol",
+    "ira, crimson haze": "ira-crimson-haze",
+    "ira": "ira-crimson-haze",
+    "pleiades, superstar": "pleiades-superstar",
+    "pleiades": "pleiades-superstar",
+    "arakni, marionette": "arakni-marionette",
+    "marionette": "arakni-marionette",
+    "teklovossen, esteemed magnate": "teklovossen-esteemed-magnate",
+    "teklovossen": "teklovossen-esteemed-magnate",
+    "fai, rising rebellion": "fai-rising-rebellion",
+    "fai": "fai-rising-rebellion"
+  };
+
+  function heroLookupKey(value) {
+    return String(value || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/&/g, " and ")
+      .replace(/[^a-zA-Z0-9/'\s,-]+/g, " ")
+      .replace(/[,]/g, ",")
+      .replace(/\s+/g, " ")
+      .trim()
+      .toLowerCase();
+  }
 
   function canonicalHeroName(value) {
     const clean = cleanHeroName(value);
     if (!clean) return "";
-    return heroNameAliases[clean.toLowerCase()] || clean;
+    const key = heroLookupKey(clean);
+    return heroNameAliases[key] || clean;
   }
 
   function slugHeroFileName(value) {
@@ -168,14 +232,26 @@
   function heroAssetCandidates(heroName) {
     const canonical = canonicalHeroName(heroName);
     if (!canonical) return [];
+    const clean = cleanHeroName(heroName);
+    const canonicalKey = heroLookupKey(canonical);
+    const cleanKey = heroLookupKey(clean);
+    const aliasSlug = heroFileSlugAliases[canonicalKey] || heroFileSlugAliases[cleanKey] || "";
     const slug = slugHeroFileName(canonical);
+    const cleanSlug = slugHeroFileName(clean);
     const encoded = encodeURIComponent(canonical);
-    return [
-      assetUrl(`/assets/img/fab-heroes/${slug}.webp`),
-      assetUrl(`/assets/img/fab-heroes/${slug}.png`),
+    const candidates = [];
+
+    [aliasSlug, slug, cleanSlug].filter(Boolean).forEach(item => {
+      candidates.push(assetUrl(`/assets/img/fab-heroes/${item}.webp`));
+      candidates.push(assetUrl(`/assets/img/fab-heroes/${item}.png`));
+    });
+
+    candidates.push(
       assetUrl(`/assets/img/fab-heroes/${encoded}.webp`),
       assetUrl(`/assets/img/fab-heroes/${encoded}.png`)
-    ];
+    );
+
+    return Array.from(new Set(candidates));
   }
 
   function tryLoadImage(candidates = []) {
@@ -292,23 +368,23 @@
     const heroName = canonicalHeroName(badge.dataset.heroName);
     const explicitIcon = badge.dataset.heroIcon || "";
 
-    function applyImage(src) {
+    function showImage(src) {
       if (!src) return;
       const img = new Image();
       img.loading = "lazy";
+      img.decoding = "async";
       img.alt = heroName || "Herói";
-      img.onload = () => {
-        badge.classList.add("has-image");
-        badge.replaceChildren(img);
-      };
       img.src = src;
+      badge.classList.add("has-image");
+      badge.replaceChildren(img);
     }
 
     if (!heroName) return;
 
-    const localIcon = await tryLoadImage(explicitIcon ? [explicitIcon, ...heroAssetCandidates(heroName)] : heroAssetCandidates(heroName));
+    const candidates = explicitIcon ? [explicitIcon, ...heroAssetCandidates(heroName)] : heroAssetCandidates(heroName);
+    const localIcon = await tryLoadImage(candidates);
     if (localIcon) {
-      applyImage(localIcon);
+      showImage(localIcon);
       return;
     }
 
@@ -316,7 +392,7 @@
 
     try {
       const imageUrl = await window.CCMCardApis.getImageUrl("fab", heroName);
-      applyImage(imageUrl);
+      showImage(imageUrl);
     } catch (error) {
       console.warn("Imagem do herói indisponível:", heroName, error);
     }
