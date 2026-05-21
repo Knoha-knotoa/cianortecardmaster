@@ -2,12 +2,17 @@
 published: false
 title: "Armory - DD/MM/AAAA"
 summary: "Resultado do Armory de Flesh and Blood."
+game: "Flesh and Blood"
+rounds: 3
+next_armory: "Quarta • 19:00"
 date: 2026-05-19
 author: "Cianorte Card Masters"
 image: "/assets/img/category/armory.svg"
 results:
   - player: "Nome do jogador"
     hero: "Nome do herói"
+    # Opcional: use uma imagem local do herói. Se não informar, o site tenta buscar pela API GoAgain.
+    # hero_icon: "/assets/img/fab-heroes/nome-do-heroi.webp"
     record: "3-0"
     wins: 3
   - player: "Nome do jogador 2"
