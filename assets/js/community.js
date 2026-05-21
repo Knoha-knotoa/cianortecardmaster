@@ -148,6 +148,46 @@
     }
   };
 
+  const heroNameAliases = {
+    "ira, scarlet revenger": "Ira, Crimson Haze",
+    "dash i/o": "Dash I-O"
+  };
+
+  function canonicalHeroName(value) {
+    const clean = cleanHeroName(value);
+    if (!clean) return "";
+    return heroNameAliases[clean.toLowerCase()] || clean;
+  }
+
+  function heroAssetCandidates(heroName) {
+    const canonical = canonicalHeroName(heroName);
+    if (!canonical) return [];
+    const encoded = encodeURIComponent(canonical);
+    return [
+      assetUrl(`/assets/img/fab-heroes/${encoded}.webp`),
+      assetUrl(`/assets/img/fab-heroes/${encoded}.png`)
+    ];
+  }
+
+  function tryLoadImage(candidates = []) {
+    const list = Array.isArray(candidates) ? [...candidates].filter(Boolean) : [];
+    return new Promise(resolve => {
+      const attempt = () => {
+        const src = list.shift();
+        if (!src) {
+          resolve("");
+          return;
+        }
+        const img = new Image();
+        img.loading = "lazy";
+        img.onload = () => resolve(src);
+        img.onerror = attempt;
+        img.src = src;
+      };
+      attempt();
+    });
+  }
+
   function cleanHeroName(value) {
     return String(value || "")
       .replace(/^Armory\s+Deck\s*[–—-]\s*/i, "")
@@ -157,7 +197,7 @@
   }
 
   function shortHeroName(value) {
-    const clean = cleanHeroName(value);
+    const clean = canonicalHeroName(value);
     if (!clean) return "Herói";
     const parts = clean.split(",").map(part => part.trim()).filter(Boolean);
     if (/^Arakni$/i.test(parts[0] || "") && parts[1]) return parts[1];
@@ -184,7 +224,7 @@
   function uniqueHeroes(results) {
     const map = new Map();
     results.forEach(result => {
-      const rawHero = cleanHeroName(getHero(result));
+      const rawHero = canonicalHeroName(getHero(result));
       if (!rawHero) return;
       const key = rawHero.toLowerCase();
       if (!map.has(key)) {
@@ -203,7 +243,7 @@
   }
 
   function heroBadge(hero, icon = "", size = "normal") {
-    const clean = cleanHeroName(hero);
+    const clean = canonicalHeroName(hero);
     const label = clean || "Herói não informado";
     const resolvedIcon = icon ? assetUrl(icon) : "";
     return `
@@ -217,7 +257,7 @@
     if (!badge || badge.dataset.loaded === "true") return;
     badge.dataset.loaded = "true";
 
-    const heroName = cleanHeroName(badge.dataset.heroName);
+    const heroName = canonicalHeroName(badge.dataset.heroName);
     const explicitIcon = badge.dataset.heroIcon || "";
 
     function applyImage(src) {
@@ -232,12 +272,15 @@
       img.src = src;
     }
 
-    if (explicitIcon) {
-      applyImage(explicitIcon);
+    if (!heroName) return;
+
+    const localIcon = await tryLoadImage(explicitIcon ? [explicitIcon, ...heroAssetCandidates(heroName)] : heroAssetCandidates(heroName));
+    if (localIcon) {
+      applyImage(localIcon);
       return;
     }
 
-    if (!heroName || !window.CCMCardApis?.getImageUrl) return;
+    if (!window.CCMCardApis?.getImageUrl) return;
 
     try {
       const imageUrl = await window.CCMCardApis.getImageUrl("fab", heroName);
