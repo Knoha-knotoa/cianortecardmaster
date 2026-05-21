@@ -136,6 +136,7 @@
       trophy: assetUrl("/assets/img/armory-icons/depth/icon-trofeu.png")
     },
     flat: {
+      trophy: assetUrl("/assets/img/armory-icons/flat/icon-trofeu.png"),
       swords: assetUrl("/assets/img/armory-icons/flat/icon-espadas.png"),
       people: assetUrl("/assets/img/armory-icons/flat/icon-pessoas.png"),
       cards: assetUrl("/assets/img/armory-icons/flat/icon-cartas.png"),
@@ -144,78 +145,27 @@
   };
 
   const heroNameAliases = {
-    "ira": "Ira, Crimson Haze",
-    "ira, scarlet revenger": "Ira, Crimson Haze",
-    "ser boltyn": "Ser Boltyn, Breaker of Dawn",
-    "boltyn": "Ser Boltyn, Breaker of Dawn",
-    "prism": "Prism, Awakener of Sol",
-    "pleiades": "Pleiades, Superstar",
-    "marionette": "Arakni, Marionette",
     "arakni marionette": "Arakni, Marionette",
-    "teklovossen": "Teklovossen, Esteemed Magnate",
+    "marionette": "Arakni, Marionette",
+    "aurora": "Aurora, Shooting Star",
+    "aurora shooting star": "Aurora, Shooting Star",
+    "azalea": "Azalea, Ace in the Hole",
+    "boltyn": "Ser Boltyn, Breaker of Dawn",
+    "ser boltyn": "Ser Boltyn, Breaker of Dawn",
     "dash i/o": "Dash I-O",
     "dash i-o": "Dash I-O",
     "fai": "Fai, Rising Rebellion",
-    "aurora": "Aurora, Shooting Star",
-    "azalea": "Azalea, Ace in the Hole",
-    "bravo": "Bravo, Showstopper",
-    "katsu": "Katsu, the Wanderer",
-    "kayo": "Kayo, Berserker Runt",
-    "nuu": "Nuu, Alluring Desire",
-    "zen": "Zen, Tamer of Purpose",
-    "enigma": "Enigma, Ledger of Ancestry",
-    "riptide": "Riptide, Lurker of the Deep",
-    "dorinthea": "Dorinthea Ironsong",
-    "dromai": "Dromai, Ash Artist",
-    "lexi": "Lexi, Livewire",
-    "kano": "Kano, Dracai of Aether",
-    "florian": "Florian, Rotwood Harbinger",
-    "verdance": "Verdance, Thorn of the Rose",
-    "victor": "Victor Goldmane, High and Mighty",
-    "olympia": "Olympia, Prized Fighter",
-    "maxx": "Maxx 'The Hype' Nitro",
-    "vynnset": "Vynnset, Iron Maiden",
-    "viserai": "Viserai, Rune Blood",
-    "levia": "Levia, Shadowborn Abomination",
-    "rhinar": "Rhinar, Reckless Rampage"
+    "ira": "Ira, Crimson Haze",
+    "ira, scarlet revenger": "Ira, Crimson Haze",
+    "pleiades": "Pleiades, Superstar",
+    "prism": "Prism, Awakener of Sol",
+    "teklovossen": "Teklovossen, Esteemed Magnate"
   };
-
-  const heroFileSlugAliases = {
-    "dash i-o": "dash-i-o",
-    "dash i/o": "dash-i-o",
-    "ser boltyn, breaker of dawn": "ser-boltyn-breaker-of-dawn",
-    "ser boltyn": "ser-boltyn-breaker-of-dawn",
-    "prism, awakener of sol": "prism-awakener-of-sol",
-    "prism": "prism-awakener-of-sol",
-    "ira, crimson haze": "ira-crimson-haze",
-    "ira": "ira-crimson-haze",
-    "pleiades, superstar": "pleiades-superstar",
-    "pleiades": "pleiades-superstar",
-    "arakni, marionette": "arakni-marionette",
-    "marionette": "arakni-marionette",
-    "teklovossen, esteemed magnate": "teklovossen-esteemed-magnate",
-    "teklovossen": "teklovossen-esteemed-magnate",
-    "fai, rising rebellion": "fai-rising-rebellion",
-    "fai": "fai-rising-rebellion"
-  };
-
-  function heroLookupKey(value) {
-    return String(value || "")
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/&/g, " and ")
-      .replace(/[^a-zA-Z0-9/'\s,-]+/g, " ")
-      .replace(/[,]/g, ",")
-      .replace(/\s+/g, " ")
-      .trim()
-      .toLowerCase();
-  }
 
   function canonicalHeroName(value) {
     const clean = cleanHeroName(value);
     if (!clean) return "";
-    const key = heroLookupKey(clean);
-    return heroNameAliases[key] || clean;
+    return heroNameAliases[clean.toLowerCase()] || clean;
   }
 
   function slugHeroFileName(value) {
@@ -229,48 +179,25 @@
       .toLowerCase();
   }
 
-  function heroAssetCandidates(heroName) {
+  function heroAssetCandidates(heroName, explicitIcon = "") {
     const canonical = canonicalHeroName(heroName);
     if (!canonical) return [];
-    const clean = cleanHeroName(heroName);
-    const canonicalKey = heroLookupKey(canonical);
-    const cleanKey = heroLookupKey(clean);
-    const aliasSlug = heroFileSlugAliases[canonicalKey] || heroFileSlugAliases[cleanKey] || "";
+
     const slug = slugHeroFileName(canonical);
-    const cleanSlug = slugHeroFileName(clean);
     const encoded = encodeURIComponent(canonical);
-    const candidates = [];
-
-    [aliasSlug, slug, cleanSlug].filter(Boolean).forEach(item => {
-      candidates.push(assetUrl(`/assets/img/fab-heroes/${item}.webp`));
-      candidates.push(assetUrl(`/assets/img/fab-heroes/${item}.png`));
-    });
-
-    candidates.push(
+    const explicit = String(explicitIcon || "").trim();
+    const localExplicit = explicit && !/^[a-z]+:/i.test(explicit) ? assetUrl(explicit) : "";
+    const candidates = [
+      localExplicit,
+      // Padrão escolhido para o bloco Armory: arquivos em slug minúsculo, sem vírgula e sem espaços.
+      assetUrl(`/assets/img/fab-heroes/${slug}.webp`),
+      assetUrl(`/assets/img/fab-heroes/${slug}.png`),
+      // Fallback para os arquivos duplicados antigos com nome completo.
       assetUrl(`/assets/img/fab-heroes/${encoded}.webp`),
       assetUrl(`/assets/img/fab-heroes/${encoded}.png`)
-    );
+    ];
 
-    return Array.from(new Set(candidates));
-  }
-
-  function tryLoadImage(candidates = []) {
-    const list = Array.isArray(candidates) ? [...candidates].filter(Boolean) : [];
-    return new Promise(resolve => {
-      const attempt = () => {
-        const src = list.shift();
-        if (!src) {
-          resolve("");
-          return;
-        }
-        const img = new Image();
-        img.loading = "lazy";
-        img.onload = () => resolve(src);
-        img.onerror = attempt;
-        img.src = src;
-      };
-      attempt();
-    });
+    return Array.from(new Set(candidates.filter(Boolean)));
   }
 
   function cleanHeroName(value) {
@@ -287,6 +214,10 @@
     const parts = clean.split(",").map(part => part.trim()).filter(Boolean);
     if (/^Arakni$/i.test(parts[0] || "") && parts[1]) return parts[1];
     return parts[0] || clean;
+  }
+
+  function fullHeroName(value) {
+    return canonicalHeroName(value) || "Herói não informado";
   }
 
   function heroInitials(value) {
@@ -315,7 +246,7 @@
       if (!map.has(key)) {
         map.set(key, {
           name: rawHero,
-          shortName: shortHeroName(rawHero),
+          shortName: fullHeroName(rawHero),
           icon: result.hero_icon || result.heroIcon || result.icon || ""
         });
       }
@@ -324,82 +255,53 @@
   }
 
   function iconImage(src, className, alt = "") {
-    if (!src) return "";
     return `<img class="${className}" src="${src}" alt="${escapeHtml(alt)}" loading="lazy">`;
-  }
-
-  function cssUrl(value) {
-    return String(value || "").replace(/[\\'"\n\r]/g, "");
-  }
-
-  function flatIcon(src, className = "", label = "") {
-    if (!src) return "";
-    const a11y = label ? `role="img" aria-label="${escapeHtml(label)}"` : `aria-hidden="true"`;
-    return `<span class="armory-flat-icon ${className}" style="--icon-url: url('${escapeHtml(cssUrl(src))}')" ${a11y}></span>`;
-  }
-
-  function rankBadge(index) {
-    const rank = index + 1;
-    const src = index === 0 ? armoryIcons.depth.champion : armoryIcons.depth.placement;
-    const tone = index === 0 ? "champion" : index === 1 ? "silver" : index === 2 ? "bronze" : "dark";
-    return `
-      <span class="armory-rank-badge armory-rank-badge-${tone}" aria-label="${rank}º colocado">
-        ${iconImage(src, "armory-rank-badge-img", "")}
-        <span class="armory-rank-badge-number">${rank}º</span>
-      </span>
-    `;
   }
 
   function heroBadge(hero, icon = "", size = "normal") {
     const clean = canonicalHeroName(hero);
     const label = clean || "Herói não informado";
-    const resolvedIcon = icon ? assetUrl(icon) : "";
+    const candidates = heroAssetCandidates(clean, icon);
+    const firstImage = candidates[0] || "";
+    const fallbacks = candidates.slice(1);
+    const initials = `<span class="armory-hero-initials">${escapeHtml(heroInitials(label))}</span>`;
+    const image = firstImage
+      ? `<img src="${escapeHtml(firstImage)}" alt="${escapeHtml(label)}" loading="lazy" data-fallbacks="${escapeHtml(JSON.stringify(fallbacks))}">`
+      : "";
+
     return `
-      <span class="armory-hero-badge armory-hero-badge-${size}" data-hero-name="${escapeHtml(clean)}" data-hero-icon="${escapeHtml(resolvedIcon)}" title="${escapeHtml(label)}">
-        <span class="armory-hero-initials">${escapeHtml(heroInitials(label))}</span>
+      <span class="armory-hero-badge armory-hero-badge-${size}${image ? " has-image" : ""}" data-hero-name="${escapeHtml(clean)}" title="${escapeHtml(label)}">
+        ${image}
+        ${initials}
       </span>
     `;
   }
 
-  async function loadHeroBadge(badge) {
-    if (!badge || badge.dataset.loaded === "true") return;
-    badge.dataset.loaded = "true";
-
-    const heroName = canonicalHeroName(badge.dataset.heroName);
-    const explicitIcon = badge.dataset.heroIcon || "";
-
-    function showImage(src) {
-      if (!src) return;
-      const img = new Image();
-      img.loading = "lazy";
-      img.decoding = "async";
-      img.alt = heroName || "Herói";
-      img.src = src;
-      badge.classList.add("has-image");
-      badge.replaceChildren(img);
-    }
-
-    if (!heroName) return;
-
-    const candidates = explicitIcon ? [explicitIcon, ...heroAssetCandidates(heroName)] : heroAssetCandidates(heroName);
-    const localIcon = await tryLoadImage(candidates);
-    if (localIcon) {
-      showImage(localIcon);
-      return;
-    }
-
-    if (!window.CCMCardApis?.getImageUrl) return;
-
-    try {
-      const imageUrl = await window.CCMCardApis.getImageUrl("fab", heroName);
-      showImage(imageUrl);
-    } catch (error) {
-      console.warn("Imagem do herói indisponível:", heroName, error);
-    }
-  }
-
   function initArmoryHeroBadges(scope = document) {
-    scope.querySelectorAll(".armory-hero-badge[data-hero-name]").forEach(loadHeroBadge);
+    scope.querySelectorAll(".armory-hero-badge img[data-fallbacks]").forEach(img => {
+      if (img.dataset.bound === "true") return;
+      img.dataset.bound = "true";
+
+      img.addEventListener("error", () => {
+        let fallbacks = [];
+        try {
+          fallbacks = JSON.parse(img.dataset.fallbacks || "[]");
+        } catch (error) {
+          fallbacks = [];
+        }
+
+        const next = fallbacks.shift();
+        if (next) {
+          img.dataset.fallbacks = JSON.stringify(fallbacks);
+          img.src = next;
+          return;
+        }
+
+        const badge = img.closest(".armory-hero-badge");
+        if (badge) badge.classList.remove("has-image");
+        img.remove();
+      });
+    });
   }
 
   function renderLatestArmory(items) {
@@ -417,13 +319,18 @@
 
     const rows = results.slice(0, 12).map((result, index) => {
       const player = getPlayer(result) || "Jogador";
-      const hero = cleanHeroName(getHero(result)) || "Herói não informado";
-      const heroName = shortHeroName(hero);
+      const hero = fullHeroName(getHero(result));
+      const heroName = hero;
       const record = result.record || result.campanha || result.score || "";
       const heroIcon = result.hero_icon || result.heroIcon || result.icon || "";
+      const placement = index + 1;
+      const placementIcon = index === 0 ? armoryIcons.depth.champion : armoryIcons.depth.placement;
       return `
         <li class="armory-result-row${index === 0 ? " is-champion" : ""}">
-          ${rankBadge(index)}
+          <span class="armory-rank-badge armory-rank-${placement}" aria-label="${placement}º colocado">
+            ${iconImage(placementIcon, "armory-rank-icon", "")}
+            <strong>${placement}º</strong>
+          </span>
           <div class="armory-player-cell">
             ${heroBadge(hero, heroIcon, index === 0 ? "featured" : "normal")}
             <div>
@@ -444,7 +351,7 @@
       { icon: armoryIcons.flat.calendar, label: "Próximo Armory", value: nextArmory }
     ].map(item => `
       <div class="armory-stat-item">
-        ${flatIcon(item.icon, "armory-stat-icon", item.label)}
+        ${iconImage(item.icon, "armory-stat-icon", "")}
         <span>${escapeHtml(item.label)}</span>
         <strong>${escapeHtml(item.value)}</strong>
       </div>
