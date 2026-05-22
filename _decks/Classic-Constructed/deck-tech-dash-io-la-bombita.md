@@ -341,17 +341,19 @@ A liga foi longa, então alguns detalhes podem ter se misturado na memória. O p
 
 Mas alguns pontos ficaram bem marcados.
 
-Contra **Fai**, o jogo foi corrida de dano. Ninguém bloqueia, todo mundo troca soco até alguém parar de respirar. Ganhei, mas teve momento em que fiquei com vida baixíssima e senti aquela fé duvidosa de quem decide não bloquear e torce para o universo colaborar.
+Contra **Fai** (2-0), o jogo foi corrida de dano. Ninguém bloqueia, todo mundo troca soco até alguém parar de respirar. Ganhei, mas teve momento em que fiquei com vida baixíssima e senti aquela fé duvidosa de quem decide não bloquear e torce para o universo colaborar.
 
-Contra outra **Dash I/O**, na versão Maximum Velocity, eu senti na pele como é horrível jogar contra a própria heroína. Tomar bomba do topo é uma experiência educativa e desagradável. A versão BIOS pareceu mais constante, principalmente quando a mão do adversário brickou.
+Contra outra **Dash I/O** (2-0), na versão Maximum Velocity, eu senti na pele como é horrível jogar contra a própria heroína. Tomar bomba do topo é uma experiência educativa e desagradável. A versão BIOS pareceu mais constante, principalmente quando a mão do adversário brickou.
 
-Contra **Riptide**, foi aquele tipo de diversão que parece castigo. Frailty, trap, bomba não explodindo, arma batendo pouco… um inferno. No segundo jogo, Teklo Pounder apareceu cedo e a coisa ficou mais tranquila.
+Contra **Riptide** (2-0), foi aquele tipo de diversão que parece castigo. Frailty, trap, bomba não explodindo, arma batendo pouco… um inferno. No segundo jogo, Teklo Pounder apareceu cedo e a coisa ficou mais tranquila.
 
-Contra **RKO**, a partida foi pesada. Esse tipo de deck é muito forte contra Dash porque pressiona vida, bloqueia bem e ainda consegue ganhar vida. É uma match cansativa, daquelas em que no fim você não sabe se jogou Flesh and Blood ou declarou imposto de renda.
+Contra **RKO** (0-2), a partida foi pesada. Esse tipo de deck é muito forte contra Dash porque pressiona vida, bloqueia bem e ainda consegue ganhar vida. É uma match cansativa, daquelas em que no fim você não sabe se jogou Flesh and Blood ou declarou imposto de renda.
 
-Contra **Pleiades**, a build de fadiga funcionou melhor. Consegui montar board com Teklo Pounder, Plasma Mainline, Teklo Core e Boom Grenade. Em outro jogo, Convection Amplifier foi decisivo para passar ataques com dominate.
+Contra **Pleiades** (2-0), a build de fadiga funcionou melhor. Consegui montar board com Teklo Pounder, Plasma Mainline, Teklo Core e Boom Grenade. Em outro jogo, Convection Amplifier foi decisivo para passar ataques com dominate.
 
-Contra **Verdance**, usei plano mais cuidadoso por causa do dano arcano. A ideia era não ficar abaixo de uma faixa perigosa de vida e forçar bloqueios com pressão constante.
+Contra **Verdance** (2-0), usei plano mais cuidadoso por causa do dano arcano. A ideia era não ficar abaixo de uma faixa perigosa de vida e forçar bloqueios com pressão constante.
+
+Contra **Arakni** (1-1), o primeiro jogo perdi, bloqueei bastante e ele passou por cima, não consegui recuperar, no seguindo veio muitos ataques e itens do topo, consegui jogar aggro.
 
 No fim, a liga virou, o deck funcionou e consegui terminar em primeiro lugar.
 
