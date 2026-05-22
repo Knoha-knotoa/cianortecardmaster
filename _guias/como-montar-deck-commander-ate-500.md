@@ -4,7 +4,7 @@ category_label: "Guia Decks"
 summary: "Aprenda como montar um deck Commander até R$ 500 para jogar Magic casual com estratégia, sinergia e orçamento controlado."
 description: "Guia prático para montar um deck Commander até R$ 500, com estrutura, orçamento, erros comuns e evolução para mesas casuais."
 slug: "como-montar-deck-commander-ate-500"
-image: "/assets/img/posts/commander-500.jpg"
+image: "https://res.cloudinary.com/dwbyl8zdn/image/upload/q_auto/f_auto/v1779413596/6fd45899-0c2d-4034-87e1-04cc7537855e_1_xxhxvf.png"
 author: "Neto"
 date: 2026-05-21
 tags:
