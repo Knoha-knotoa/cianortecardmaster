@@ -455,24 +455,3 @@ Só não esquece: se a bomba está na mesa, a culpa não é minha.
 É engenharia.
 
 ---
-
-## Checklist SEO aplicado
-
-**Palavra-chave principal:**  
-Deck Tech Dash I/O
-
-**Palavras-chave secundárias:**  
-Dash I/O Flesh and Blood  
-deck Mechanologist Flesh and Blood  
-Dash I/O La Bombita  
-Flesh and Blood Cianorte  
-Cianorte Card Masters  
-
-**Slug sugerido:**  
-deck-tech-dash-io-la-bombita
-
-**Meta description sugerida:**  
-Deck Tech Dash I/O La Bombita: lista Mechanologist explosiva com Bios Update, Boom Grenade, itens e pressão constante para Flesh and Blood.
-
-**Alt text sugerido para imagem principal:**  
-Dash I/O de Flesh and Blood em uma Deck Tech Mechanologist chamada La Bombita, com foco em granadas, itens e pressão explosiva.
