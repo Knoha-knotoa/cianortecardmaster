@@ -59,7 +59,7 @@ Eu quero explodir o oponente.
 
 A **Dash I/O La Bombita** é um **deck Mechanologist Flesh and Blood** que trabalha em três camadas:
 
-1. Pressionar com ataques de custo 0.
+1. Pressionar com ataques 4 ou mais de poder.
 2. Montar itens que melhoram seus turnos.
 3. Fazer o oponente viver com medo da Boom Grenade.
 
@@ -86,7 +86,7 @@ Contra controle e fadiga, respira. A bomba também sabe esperar.
 
 ### Dash I/O
 
-Dash I/O é o coração do deck. Olhar o topo e poder jogar um item como instant uma vez por turno cria linhas de jogo muito interessantes. Às vezes vem um item útil no turno do oponente. Às vezes vem uma Boom Grenade no momento certo. Às vezes vem uma carta que não faz nada e você finge que estava tudo sob controle.
+Dash I/O tem uma habilidade divertida e forte, isso justifica uma vida mais curta. Olhar o topo e poder jogar um item como instant uma vez por turno cria linhas de jogo muito interessantes. Às vezes vem um item útil no turno do oponente. Às vezes vem uma Boom Grenade no momento certo. Às vezes vem uma carta que não faz nada e você finge que estava tudo sob controle.
 
 A vantagem da Dash é justamente essa: transformar o topo do deck em ameaça.
 
@@ -102,9 +102,9 @@ Bios Update é aquela carta bonita que parece elegante, até você perceber que 
 
 <div class="tcg-card-grid">
   {% include tcg-card.html game="fab" name="Bios Update" pitch="red" %}
-  {% include tcg-card.html game="fab" name="Spark of Genius" pitch="yellow" %}
+  {% include tcg-card.html game="fab" name="Teklo Pounder" pitch="blue" %}
+  {% include tcg-card.html game="fab" name="Plasma Mainline" pitch="red" %}
   {% include tcg-card.html game="fab" name="Heist" pitch="red" %}
-  {% include tcg-card.html game="fab" name="Soup Up" pitch="red" %}
 </div>
 
 ### Boom Grenade
@@ -112,8 +112,6 @@ Bios Update é aquela carta bonita que parece elegante, até você perceber que 
 **Boom Grenade** é o nome do deck em forma de carta.
 
 Ela entra, ameaça dano extra e obriga o oponente a pensar. Contra decks que bloqueiam muito, eu evito tirar contador das granadas vermelhas à toa. Se a bomba vai sair de campo sem valor, é melhor segurar. O ideal é que ela venha do topo, entre como surpresa e crie aquela tensão psicológica gostosa.
-
-A Aurora tem carta que explode mais fácil e ninguém reclama. Mas quando é a Dash, todo mundo olha torto. Vai entender.
 
 ### Teklo Pounder
 
@@ -127,22 +125,22 @@ Contra RKO e outros decks que pressionam muito, nem sempre dá para montar com c
 
 **Spark of Genius** é o coringa da lista.
 
-Contra aggro, busca ferramenta para estabilizar ou acelerar. Contra fadiga, encontra itens importantes como **Teklo Pounder**, **Cerebellum Processor**, **Plasma Mainline** ou **Teklo Core**.
+Contra aggro, busca ferramenta para estabilizar ou acelerar. Contra fadiga, encontra itens importantes como **Teklo Pounder**, **Cerebellum Processor**, **Plasma Mainline**.
 
 Só cuidado: contra fadiga, às vezes você busca um item sem crank e perde o go again. Também precisa ficar atento contra cartas e equipamentos que mexem na sua mão, intimidam ou atrapalham seu plano. Não é porque a carta chama Spark of Genius que o piloto pode desligar o cérebro.
+
+<div class="tcg-card-grid">
+  {% include tcg-card.html game="fab" name="Spark of Genius" pitch="yellow" %}
+  {% include tcg-card.html game="fab" name="Test of Iron Grip" pitch="red" %}
+  {% include tcg-card.html game="fab" name="Two-Faced" %}
+  {% include tcg-card.html game="fab" name="Scowling Flesh Bag" %}
+</div>
 
 ### Plasma Mainline
 
 **Plasma Mainline** é uma peça muito boa contra fadiga. Ela ajuda a manter seus itens relevantes por mais tempo e coloca contadores onde realmente importa.
 
 Normalmente, eu prefiro colocar os counters primeiro em **Teklo Pounder** e **Convection Amplifier**. Contra fadiga, se der para buscar cedo com Spark of Genius, melhor ainda. Como ela custa 2, não é o tipo de carta que quero contra aggro o tempo todo. Ali o jogo é outro: correr, pressionar e torcer para ninguém tropeçar no próprio boost.
-
-<div class="tcg-card-grid">
-  {% include tcg-card.html game="fab" name="Plasma Mainline" pitch="red" %}
-  {% include tcg-card.html game="fab" name="Convection Amplifier" pitch="red" %}
-  {% include tcg-card.html game="fab" name="Teklo Core" pitch="blue" %}
-  {% include tcg-card.html game="fab" name="Cerebellum Processor" pitch="blue" %}
-</div>
 
 ### Convection Amplifier
 
