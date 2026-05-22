@@ -18,7 +18,7 @@ tags:
   - Cianorte Card Masters
 ---
 
-# Deck Tech Dash I/O: La Bombita, BIOS Update e Granadas no Talo
+# Deck Tech Dash I/O: La Bombita, BIOS Update e Granadas no Topo
 
 Olá! Meu nome é Neto e, no momento, eu sou praticamente um jogador monoclasse: Mechanologist na veia, óleo na mão e neon piscando no olho.
 
@@ -28,7 +28,7 @@ E aí veio Dash I/O.
 
 A proposta da heroína é muito divertida: olhar o topo do deck, jogar item como instant e criar aquela tensão gostosa de “será que vem bomba?”. Parece bagunça, mas é engenharia. Engenharia irresponsável, talvez, mas ainda engenharia.
 
-Esta **Deck Tech Dash I/O** é sobre a minha lista chamada **La Bombita**, uma versão Mechanologist focada em ataques de custo 0, itens, **Boom Grenade**, **Bios Update**, pressão constante e turnos explosivos. Foi com esse deck que joguei a primeira Liga Classic Constructed de Cianorte e, depois de muito sofrimento, bloqueio, fadiga e gente tentando me impedir de me divertir, consegui terminar em primeiro lugar.
+Esta **Deck Tech Dash I/O** é sobre a minha lista chamada **La Bombita**, uma versão Mechanologist trazida por Sam Sutherland focada em ataques que quebram a defesa, itens, **Boom Grenade**, **Bios Update**, pressão constante e turnos explosivos. Foi com esse deck que joguei a primeira Liga Classic Constructed de Cianorte e, depois de muito sofrimento, bloqueio, fadiga e gente tentando me impedir de me divertir, consegui terminar em primeiro lugar.
 
 A bomba estava armada. O oponente que lute.
 
