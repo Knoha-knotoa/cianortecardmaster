@@ -3952,330 +3952,292 @@ h3 {
 }
 
 /* =========================================================
-   Cianorte Card Masters — Decklist Card + Links Internos
-   Componentes reutilizáveis para Deck Techs e artigos.
-========================================================= */
+   CCM ACCORDION / EXPANDABLE PANELS
+   Reutilizável para guias, FAQ, classes, deck techs e blocos rápidos
+   ========================================================= */
 
-.ccm-decklist-card,
-.ccm-internal-links-card {
-  margin: 2.5rem 0;
-  padding: 1.25rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 22px;
-  background:
-    radial-gradient(circle at top left, rgba(255, 196, 0, 0.12), transparent 34%),
-    linear-gradient(135deg, rgba(22, 24, 32, 0.96), rgba(10, 12, 18, 0.98));
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
-  overflow: hidden;
-}
-
-.ccm-decklist-header,
-.ccm-internal-links-header {
+.ccm-accordion {
   display: grid;
-  gap: 0.8rem;
-  margin-bottom: 1.25rem;
+  gap: 1rem;
+  margin: 2rem 0;
 }
 
-.ccm-decklist-kicker,
-.ccm-internal-links-kicker {
+.ccm-accordion__intro {
+  margin-bottom: .35rem;
+  padding: .95rem 1rem;
+  border: 1px solid rgba(212, 175, 55, .14);
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at top right, rgba(212, 175, 55, .10), transparent 38%),
+    rgba(255, 255, 255, .025);
+}
+
+.ccm-accordion__intro h2,
+.ccm-accordion__intro h3 {
+  margin: 0 0 .35rem;
+}
+
+.ccm-accordion__intro p {
   margin: 0;
-  font-family: var(--font-subtitle, "Fugaz One", sans-serif);
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: #f7c948;
+  color: rgba(255, 255, 255, .82);
 }
 
-.ccm-decklist-title,
-.ccm-internal-links-header h2 {
-  margin: 0;
-  font-family: var(--font-title, "Bangers", sans-serif);
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  line-height: 0.95;
-  letter-spacing: 0.03em;
-  color: #ffffff;
-  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.45);
-}
-
-.ccm-decklist-description,
-.ccm-internal-links-header p:last-child {
-  max-width: 780px;
-  margin: 0;
-  color: rgba(255, 255, 255, 0.78);
-  font-family: var(--font-body, "Barlow", sans-serif);
-  font-size: 1rem;
-  line-height: 1.55;
-}
-
-.ccm-decklist-meta {
+.ccm-accordion-shortcuts {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.25rem;
+  gap: .55rem;
+  margin: 1.25rem 0 1.75rem;
 }
 
-.ccm-decklist-chip {
+.ccm-accordion-shortcuts a {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.42rem 0.7rem;
+  justify-content: center;
+  min-height: 36px;
+  padding: .45rem .75rem;
+  border: 1px solid rgba(212, 175, 55, .20);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.88);
-  font-family: var(--font-subtitle, "Fugaz One", sans-serif);
-  font-size: 0.78rem;
+  background: rgba(255, 255, 255, .035);
+  color: #fff6d8;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: .82rem;
   line-height: 1;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  transition: transform .2s ease, border-color .2s ease, background .2s ease;
 }
 
-.ccm-decklist-chip strong {
-  color: #f7c948;
-  font-weight: 700;
+.ccm-accordion-shortcuts a:hover,
+.ccm-accordion-shortcuts a:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(212, 175, 55, .42);
+  background: linear-gradient(135deg, rgba(212, 175, 55, .18), rgba(255, 255, 255, .055));
 }
 
-.ccm-decklist-grid {
-  display: grid;
-  gap: 0.85rem;
-}
-
-.ccm-decklist-section {
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.055);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.ccm-accordion__item {
+  border: 1px solid rgba(212, 175, 55, .16);
+  border-radius: 22px;
   overflow: hidden;
+  background:
+    radial-gradient(circle at top right, rgba(212, 175, 55, .08), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, .035), rgba(255, 255, 255, .015));
+  box-shadow: 0 14px 32px rgba(0, 0, 0, .22);
+  scroll-margin-top: 100px;
+  transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
 }
 
-.ccm-decklist-section summary {
-  cursor: pointer;
-  list-style: none;
-  padding: 0.9rem 1rem;
+.ccm-accordion__item:hover {
+  border-color: rgba(212, 175, 55, .26);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, .28);
+}
+
+.ccm-accordion__item.is-open {
+  border-color: rgba(212, 175, 55, .36);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, .32);
+}
+
+.ccm-accordion__trigger {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
-  font-family: var(--font-subtitle, "Fugaz One", sans-serif);
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.045);
+  gap: 1rem;
+  padding: 1rem 1.15rem;
+  cursor: pointer;
+  font: inherit;
 }
 
-.ccm-decklist-section summary::-webkit-details-marker {
-  display: none;
+.ccm-accordion__trigger:focus-visible {
+  outline: 3px solid rgba(212, 175, 55, .42);
+  outline-offset: -5px;
 }
 
-.ccm-decklist-section summary::after {
-  content: "＋";
-  color: #f7c948;
-  font-size: 1.2rem;
-  line-height: 1;
-}
-
-.ccm-decklist-section[open] summary::after {
-  content: "−";
-}
-
-.ccm-decklist-section-title {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-}
-
-.ccm-decklist-count {
-  padding: 0.25rem 0.5rem;
-  border-radius: 999px;
-  background: rgba(247, 201, 72, 0.15);
-  color: #f7c948;
-  font-size: 0.72rem;
-  white-space: nowrap;
-}
-
-.ccm-decklist-list {
-  margin: 0;
-  padding: 0.75rem;
+.ccm-accordion__title-wrap {
   display: grid;
-  gap: 0.45rem;
+  gap: .18rem;
+}
+
+.ccm-accordion__eyebrow {
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: .78rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: .95;
+}
+
+.ccm-accordion__title {
+  font-family: "Bangers", system-ui, sans-serif;
+  font-size: clamp(1.55rem, 2.2vw, 2.15rem);
+  line-height: 1;
+  letter-spacing: .035em;
+}
+
+.ccm-accordion__subtitle {
+  max-width: 70ch;
+  font-size: .98rem;
+  color: rgba(255, 255, 255, .78);
+}
+
+.ccm-accordion__icon {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+}
+
+.ccm-accordion__icon::before,
+.ccm-accordion__icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--gold);
+  transform: translate(-50%, -50%);
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+.ccm-accordion__icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.ccm-accordion__item.is-open .ccm-accordion__icon::after {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(90deg) scale(.55);
+}
+
+.ccm-accordion__content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s ease;
+}
+
+.ccm-accordion__inner {
+  display: grid;
+  grid-template-columns: minmax(220px, 330px) minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0 1.15rem 1.15rem;
+}
+
+.ccm-accordion__media {
+  align-self: start;
+}
+
+.ccm-accordion__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid rgba(212, 175, 55, .14);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, .22);
+}
+
+.ccm-accordion--class-guide .ccm-accordion__media img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.ccm-accordion__body p:first-child {
+  margin-top: 0;
+}
+
+.ccm-accordion__facts {
+  display: grid;
+  gap: .45rem;
+  margin: .85rem 0 0;
+  padding: 0;
   list-style: none;
 }
 
-.ccm-decklist-list li {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+.ccm-accordion__facts li {
+  padding: .55rem .65rem;
+  border: 1px solid rgba(212, 175, 55, .12);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .025);
+}
+
+.ccm-accordion__link {
+  display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
-  padding: 0.55rem 0.65rem;
-  border-radius: 12px;
-  background: rgba(0, 0, 0, 0.18);
-  color: rgba(255, 255, 255, 0.88);
-  font-family: var(--font-body, "Barlow", sans-serif);
-  font-size: 0.97rem;
-  line-height: 1.25;
-}
-
-.ccm-decklist-qty {
-  min-width: 2rem;
-  padding: 0.18rem 0.45rem;
-  border-radius: 999px;
-  text-align: center;
-  font-weight: 800;
-  color: #101010;
-  background: #f7c948;
-}
-
-.ccm-decklist-card-name {
-  font-weight: 600;
-}
-
-.ccm-decklist-pitch {
-  justify-self: end;
-  padding: 0.18rem 0.48rem;
-  border-radius: 999px;
-  font-family: var(--font-subtitle, "Fugaz One", sans-serif);
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.92);
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.ccm-decklist-pitch.red {
-  background: rgba(255, 70, 70, 0.25);
-  color: #ffc7c7;
-}
-
-.ccm-decklist-pitch.yellow {
-  background: rgba(255, 205, 70, 0.25);
-  color: #ffe9a6;
-}
-
-.ccm-decklist-pitch.blue {
-  background: rgba(70, 135, 255, 0.25);
-  color: #cbdcff;
-}
-
-.ccm-decklist-note {
+  gap: .4rem;
   margin-top: 1rem;
-  padding: 0.85rem 1rem;
-  border-radius: 16px;
-  background: rgba(247, 201, 72, 0.09);
-  border: 1px solid rgba(247, 201, 72, 0.16);
-  color: rgba(255, 255, 255, 0.82);
-  font-family: var(--font-body, "Barlow", sans-serif);
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
-.ccm-internal-links-card {
-  margin-top: 3rem;
-  background:
-    radial-gradient(circle at top right, rgba(70, 135, 255, 0.15), transparent 34%),
-    linear-gradient(135deg, rgba(15, 18, 28, 0.98), rgba(8, 10, 16, 0.99));
-}
-
-.ccm-internal-links-grid {
-  display: grid;
-  gap: 0.8rem;
-}
-
-.ccm-internal-link-item {
-  position: relative;
-  display: grid;
-  gap: 0.35rem;
-  min-height: 118px;
-  padding: 1rem;
-  border-radius: 18px;
   text-decoration: none;
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.11);
-  overflow: hidden;
-  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
-}
-
-.ccm-internal-link-item::before {
-  content: "";
-  position: absolute;
-  inset: auto 0 0;
-  height: 3px;
-  background: linear-gradient(90deg, #f7c948, rgba(247, 201, 72, 0.15));
-  opacity: 0.9;
-}
-
-.ccm-internal-link-item:hover,
-.ccm-internal-link-item:focus-visible {
-  transform: translateY(-2px);
-  border-color: rgba(247, 201, 72, 0.42);
-  background: rgba(255, 255, 255, 0.085);
-}
-
-.ccm-internal-link-item.featured {
-  background:
-    radial-gradient(circle at top left, rgba(247, 201, 72, 0.16), transparent 45%),
-    rgba(255, 255, 255, 0.07);
-}
-
-.ccm-internal-link-tag {
-  width: fit-content;
-  padding: 0.24rem 0.55rem;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  color: #fff6d8;
+  background: linear-gradient(135deg, rgba(212, 175, 55, .18), rgba(255, 255, 255, .05));
+  border: 1px solid rgba(212, 175, 55, .22);
   border-radius: 999px;
-  font-family: var(--font-subtitle, "Fugaz One", sans-serif);
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #f7c948;
-  background: rgba(247, 201, 72, 0.12);
-  border: 1px solid rgba(247, 201, 72, 0.18);
+  padding: .65rem .95rem;
+  transition: transform .2s ease, border-color .2s ease, background .2s ease;
 }
 
-.ccm-internal-link-item strong {
-  font-family: var(--font-subtitle, "Fugaz One", sans-serif);
-  font-size: 1rem;
-  line-height: 1.2;
-  color: #ffffff;
+.ccm-accordion__link:hover,
+.ccm-accordion__link:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(212, 175, 55, .4);
+  background: linear-gradient(135deg, rgba(212, 175, 55, .24), rgba(255, 255, 255, .07));
 }
 
-.ccm-internal-link-item small {
-  color: rgba(255, 255, 255, 0.72);
-  font-family: var(--font-body, "Barlow", sans-serif);
-  font-size: 0.9rem;
-  line-height: 1.35;
+.ccm-accordion--compact .ccm-accordion__inner {
+  grid-template-columns: 1fr;
 }
 
-@media (min-width: 800px) {
-  .ccm-decklist-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+.ccm-accordion--compact .ccm-accordion__media {
+  display: none;
+}
 
-  .ccm-decklist-section.full {
-    grid-column: 1 / -1;
-  }
-
-  .ccm-internal-links-grid {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+@media (prefers-reduced-motion: reduce) {
+  .ccm-accordion__content,
+  .ccm-accordion__icon::before,
+  .ccm-accordion__icon::after,
+  .ccm-accordion__item,
+  .ccm-accordion__link,
+  .ccm-accordion-shortcuts a {
+    transition: none;
   }
 }
 
-@media (max-width: 900px) and (min-width: 621px) {
-  .ccm-internal-links-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+@media (max-width: 860px) {
+  .ccm-accordion__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .ccm-accordion__subtitle {
+    font-size: .95rem;
   }
 }
 
-@media (max-width: 520px) {
-  .ccm-decklist-card,
-  .ccm-internal-links-card {
-    padding: 1rem;
-    border-radius: 18px;
+@media (max-width: 560px) {
+  .ccm-accordion-shortcuts {
+    gap: .42rem;
   }
 
-  .ccm-decklist-list li {
-    grid-template-columns: auto 1fr;
+  .ccm-accordion-shortcuts a {
+    min-height: 34px;
+    padding: .42rem .65rem;
+    font-size: .78rem;
   }
 
-  .ccm-decklist-pitch {
-    grid-column: 2;
-    justify-self: start;
+  .ccm-accordion__trigger {
+    padding: .95rem 1rem;
   }
 
-  .ccm-internal-link-item {
-    min-height: auto;
+  .ccm-accordion__inner {
+    padding: 0 1rem 1rem;
+  }
+
+  .ccm-accordion__title {
+    font-size: 1.45rem;
+  }
+
+  .ccm-accordion__subtitle {
+    font-size: .92rem;
   }
 }
 

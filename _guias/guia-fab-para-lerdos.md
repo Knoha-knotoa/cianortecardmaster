@@ -291,131 +291,352 @@ No fim do turno, se seu arsenal estiver vazio, você pode guardar uma carta da m
 
 ## Classes e estilos de jogo {#classes-e-estilos}
 
-Cada classe em Flesh and Blood tem uma identidade. Você pode escolher pela estética, pelo estilo de jogo ou pelo método de tortura psicológica que mais combina com sua personalidade.
+Cada classe em Flesh and Blood tem uma identidade. Você pode escolher pela estética, pelo estilo de jogo ou pelo método de tortura psicológica que mais combina com sua personalidade. O segredo é simples: **não escolha só pelo meta**. Meta muda. Vergonha estética é para sempre.
 
 <figure>
   <img src="{{ '/assets/img/guias/fab-para-lerdos/mesa-taverna.webp' | relative_url }}" alt="Mesa com jogadores de card game em cenário de fantasia representando classes de Flesh and Blood">
   <figcaption>Escolher classe é importante. É basicamente decidir qual máscara você vai usar enquanto erra triggers.</figcaption>
 </figure>
 
-### Guardian
+<nav class="ccm-accordion-shortcuts" aria-label="Atalhos para classes de Flesh and Blood">
+  <a href="#classe-guardian">Guardian</a>
+  <a href="#classe-ninja">Ninja</a>
+  <a href="#classe-brute">Brute</a>
+  <a href="#classe-warrior">Warrior</a>
+  <a href="#classe-ranger">Ranger</a>
+  <a href="#classe-mechanologist">Mechanologist</a>
+  <a href="#classe-wizard">Wizard</a>
+  <a href="#classe-runeblade">Runeblade</a>
+  <a href="#classe-illusionist">Illusionist</a>
+  <a href="#classe-assassin">Assassin</a>
+  <a href="#classe-pirate">Pirate</a>
+  <a href="#classe-necromancer">Necromancer</a>
+</nav>
 
-<figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/guardian-banner.webp' | relative_url }}" alt="Banner com heróis Guardian de Flesh and Blood">
-</figure>
+<section class="ccm-accordion ccm-accordion--class-guide" data-accordion id="guia-classes-fab">
+  <div class="ccm-accordion__intro">
+    <h3>Atalho das classes: escolha sua doença favorita</h3>
+    <p>Clique em uma classe para abrir o resumo. Ideal para quem quer ir direto ao ponto sem atravessar o pântano inteiro da teoria.</p>
+  </div>
 
-Guardian gosta de bloquear bem, gerar valor e bater com ataques grandes. É a classe de quem olha para o oponente e diz: “você pode jogar, mas só depois de preencher este formulário”.
+  <article id="classe-guardian" class="ccm-accordion__item is-open">
+    <button class="ccm-accordion__trigger" type="button" aria-expanded="true" aria-controls="painel-classe-guardian">
+      <span class="ccm-accordion__title-wrap">
+        <span class="ccm-accordion__eyebrow">Classe</span>
+        <span class="ccm-accordion__title">Guardian</span>
+        <span class="ccm-accordion__subtitle">Defende muito, bate pesado e transforma partida em assembleia de condomínio.</span>
+      </span>
+      <span class="ccm-accordion__icon" aria-hidden="true"></span>
+    </button>
+    <div class="ccm-accordion__content" id="painel-classe-guardian">
+      <div class="ccm-accordion__inner">
+        <div class="ccm-accordion__media">
+          <img src="{{ '/assets/img/guias/fab-para-lerdos/guardian-banner.webp' | relative_url }}" alt="Banner com heróis Guardian de Flesh and Blood">
+        </div>
+        <div class="ccm-accordion__body">
+          <p>Guardian gosta de bloquear bem, gerar valor e bater com ataques grandes. É a classe de quem olha para o oponente e diz: “você pode jogar, mas só depois de preencher este formulário”.</p>
+          <ul class="ccm-accordion__facts">
+            <li><strong>Estilo:</strong> defesa sólida, ataques grandes e controle de ritmo.</li>
+            <li><strong>Combina com:</strong> jogadores pacientes, calculistas e levemente rancorosos.</li>
+            <li><strong>Dificuldade:</strong> baixa a média para começar; alta para espremer valor.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
 
-**Combina com quem:** gosta de defesa, paciência, pancada pesada e partidas que parecem reunião de condomínio.
+  <article id="classe-ninja" class="ccm-accordion__item">
+    <button class="ccm-accordion__trigger" type="button" aria-expanded="false" aria-controls="painel-classe-ninja">
+      <span class="ccm-accordion__title-wrap">
+        <span class="ccm-accordion__eyebrow">Classe</span>
+        <span class="ccm-accordion__title">Ninja</span>
+        <span class="ccm-accordion__subtitle">Vários ataques pequenos, muita velocidade e dano parcelado em humilhação.</span>
+      </span>
+      <span class="ccm-accordion__icon" aria-hidden="true"></span>
+    </button>
+    <div class="ccm-accordion__content" id="painel-classe-ninja">
+      <div class="ccm-accordion__inner">
+        <div class="ccm-accordion__media">
+          <img src="{{ '/assets/img/guias/fab-para-lerdos/ninja-banner.webp' | relative_url }}" alt="Banner com heróis Ninja de Flesh and Blood">
+        </div>
+        <div class="ccm-accordion__body">
+          <p>Ninja faz sequências rápidas, usa Go Again e pressiona com vários ataques pequenos. Parece leve, até você perceber que levou 11 de dano em parcelas sem juros.</p>
+          <ul class="ccm-accordion__facts">
+            <li><strong>Estilo:</strong> combo, sequência e pressão constante.</li>
+            <li><strong>Combina com:</strong> quem gosta de ritmo, agressividade e contar ataques com cara de inocente.</li>
+            <li><strong>Dificuldade:</strong> média; errar a ordem das cartas dói no corpo e no espírito.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
 
-### Ninja
+  <article id="classe-brute" class="ccm-accordion__item">
+    <button class="ccm-accordion__trigger" type="button" aria-expanded="false" aria-controls="painel-classe-brute">
+      <span class="ccm-accordion__title-wrap">
+        <span class="ccm-accordion__eyebrow">Classe</span>
+        <span class="ccm-accordion__title">Brute</span>
+        <span class="ccm-accordion__subtitle">Força bruta, descarte, rolagem de dado moral e caos com excelente custo-benefício.</span>
+      </span>
+      <span class="ccm-accordion__icon" aria-hidden="true"></span>
+    </button>
+    <div class="ccm-accordion__content" id="painel-classe-brute">
+      <div class="ccm-accordion__inner">
+        <div class="ccm-accordion__media">
+          <img src="{{ '/assets/img/guias/fab-para-lerdos/brute-banner.webp' | relative_url }}" alt="Banner com heróis Brute de Flesh and Blood">
+        </div>
+        <div class="ccm-accordion__body">
+          <p>Brute bate forte, descarta carta, aposta em variância e às vezes parece pilotado por um goblin bêbado com excelente custo-benefício.</p>
+          <ul class="ccm-accordion__facts">
+            <li><strong>Estilo:</strong> dano alto, risco e explosão.</li>
+            <li><strong>Combina com:</strong> quem gosta de frases como “se der certo, acabou”.</li>
+            <li><strong>Dificuldade:</strong> baixa para se divertir; média para não virar refém do próprio caos.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
 
-<figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/ninja-banner.webp' | relative_url }}" alt="Banner com heróis Ninja de Flesh and Blood">
-</figure>
+  <article id="classe-warrior" class="ccm-accordion__item">
+    <button class="ccm-accordion__trigger" type="button" aria-expanded="false" aria-controls="painel-classe-warrior">
+      <span class="ccm-accordion__title-wrap">
+        <span class="ccm-accordion__eyebrow">Classe</span>
+        <span class="ccm-accordion__title">Warrior</span>
+        <span class="ccm-accordion__subtitle">Arma, reação, blefe e aquele ataque honesto que de honesto não tinha nada.</span>
+      </span>
+      <span class="ccm-accordion__icon" aria-hidden="true"></span>
+    </button>
+    <div class="ccm-accordion__content" id="painel-classe-warrior">
+      <div class="ccm-accordion__inner">
+        <div class="ccm-accordion__media">
+          <img src="{{ '/assets/img/guias/fab-para-lerdos/warrior-banner.webp' | relative_url }}" alt="Banner com heróis Warrior de Flesh and Blood">
+        </div>
+        <div class="ccm-accordion__body">
+          <p>Warrior usa armas, reações e truques para transformar ataques aparentemente honestos em pequenas ações judiciais.</p>
+          <ul class="ccm-accordion__facts">
+            <li><strong>Estilo:</strong> combate técnico, reações e ameaça de dano escondido.</li>
+            <li><strong>Combina com:</strong> quem gosta de blefe, cálculo fino e fazer o oponente bloquear errado.</li>
+            <li><strong>Dificuldade:</strong> média; exige leitura de mesa e sangue frio.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
 
-Ninja faz sequências rápidas, usa Go Again e pressiona com vários ataques pequenos. Parece leve, até você perceber que levou 11 de dano em parcelas sem juros.
+  <article id="classe-ranger" class="ccm-accordion__item">
+    <button class="ccm-accordion__trigger" type="button" aria-expanded="false" aria-controls="painel-classe-ranger">
+      <span class="ccm-accordion__title-wrap">
+        <span class="ccm-accordion__eyebrow">Classe</span>
+        <span class="ccm-accordion__title">Ranger</span>
+        <span class="ccm-accordion__subtitle">Flechas, arsenal, armadilhas e a alegria duvidosa de dizer “tem mais um efeito”.</span>
+      </span>
+      <span class="ccm-accordion__icon" aria-hidden="true"></span>
+    </button>
+    <div class="ccm-accordion__content" id="painel-classe-ranger">
+      <div class="ccm-accordion__inner">
+        <div class="ccm-accordion__media">
+          <img src="{{ '/assets/img/guias/fab-para-lerdos/ranger-banner.webp' | relative_url }}" alt="Banner com heróis Ranger de Flesh and Blood">
+        </div>
+        <div class="ccm-accordion__body">
+          <p>Ranger usa arco, flechas, arsenal e efeitos desagradáveis. É a classe que transforma planejamento em armadilha e armadilha em trauma.</p>
+          <ul class="ccm-accordion__facts">
+            <li><strong>Estilo:</strong> setup, arsenal e ataques com efeitos incômodos.</li>
+            <li><strong>Combina com:</strong> quem gosta de preparar o turno e punir descuido.</li>
+            <li><strong>Dificuldade:</strong> média a alta; o arsenal é ferramenta, não depósito de arrependimento.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
 
-**Combina com quem:** gosta de velocidade, combo, agressividade e contar até cinco ataques no mesmo turno com cara de inocente.
+  <article id="classe-mechanologist" class="ccm-accordion__item">
+    <button class="ccm-accordion__trigger" type="button" aria-expanded="false" aria-controls="painel-classe-mechanologist">
+      <span class="ccm-accordion__title-wrap">
+        <span class="ccm-accordion__eyebrow">Classe</span>
+        <span class="ccm-accordion__title">Mechanologist</span>
+        <span class="ccm-accordion__subtitle">Máquinas, boost, itens e a chance permanente de fazer besteira com estilo.</span>
+      </span>
+      <span class="ccm-accordion__icon" aria-hidden="true"></span>
+    </button>
+    <div class="ccm-accordion__content" id="painel-classe-mechanologist">
+      <div class="ccm-accordion__inner">
+        <div class="ccm-accordion__media">
+          <img src="{{ '/assets/img/guias/fab-para-lerdos/mech-banner.webp' | relative_url }}" alt="Banner com heróis Mechanologist de Flesh and Blood">
+        </div>
+        <div class="ccm-accordion__body">
+          <p>Mechanologist usa itens, boost, armas e máquinas. Quando funciona, parece motor turbo. Quando falha, parece impressora velha engasgando papel.</p>
+          <ul class="ccm-accordion__facts">
+            <li><strong>Estilo:</strong> pressão, engine, itens e sinergia.</li>
+            <li><strong>Combina com:</strong> quem gosta de tecnologia, sequência e topo de deck te julgando.</li>
+            <li><strong>Dificuldade:</strong> média; algumas versões sobem para “manual técnico em klingon”.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
 
-### Brute
+  <article id="classe-wizard" class="ccm-accordion__item">
+    <button class="ccm-accordion__trigger" type="button" aria-expanded="false" aria-controls="painel-classe-wizard">
+      <span class="ccm-accordion__title-wrap">
+        <span class="ccm-accordion__eyebrow">Classe</span>
+        <span class="ccm-accordion__title">Wizard</span>
+        <span class="ccm-accordion__subtitle">Dano arcano, janelas estranhas e perguntas que começam com “posso responder?”.</span>
+      </span>
+      <span class="ccm-accordion__icon" aria-hidden="true"></span>
+    </button>
+    <div class="ccm-accordion__content" id="painel-classe-wizard">
+      <div class="ccm-accordion__inner">
+        <div class="ccm-accordion__media">
+          <img src="{{ '/assets/img/guias/fab-para-lerdos/wizard-banner.webp' | relative_url }}" alt="Banner com heróis Wizard de Flesh and Blood">
+        </div>
+        <div class="ccm-accordion__body">
+          <p>Wizard causa dano arcano, joga em momentos estranhos e exige que ambos os jogadores leiam mais do que gostariam.</p>
+          <ul class="ccm-accordion__facts">
+            <li><strong>Estilo:</strong> dano arcano, instantâneos e timing preciso.</li>
+            <li><strong>Combina com:</strong> quem gosta de magia, matemática e ver o oponente consultar a alma.</li>
+            <li><strong>Dificuldade:</strong> alta; excelente para quem acha sofrimento instrutivo.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
 
-<figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/brute-banner.webp' | relative_url }}" alt="Banner com heróis Brute de Flesh and Blood">
-</figure>
+  <article id="classe-runeblade" class="ccm-accordion__item">
+    <button class="ccm-accordion__trigger" type="button" aria-expanded="false" aria-controls="painel-classe-runeblade">
+      <span class="ccm-accordion__title-wrap">
+        <span class="ccm-accordion__eyebrow">Classe</span>
+        <span class="ccm-accordion__title">Runeblade</span>
+        <span class="ccm-accordion__subtitle">Faca, feitiço, Runechant e dano vindo de dois lugares só para piorar.</span>
+      </span>
+      <span class="ccm-accordion__icon" aria-hidden="true"></span>
+    </button>
+    <div class="ccm-accordion__content" id="painel-classe-runeblade">
+      <div class="ccm-accordion__inner">
+        <div class="ccm-accordion__media">
+          <img src="{{ '/assets/img/guias/fab-para-lerdos/runeblade-banner.webp' | relative_url }}" alt="Banner com heróis Runeblade de Flesh and Blood">
+        </div>
+        <div class="ccm-accordion__body">
+          <p>Runeblade mistura ataque físico com dano arcano. É a classe que olha para duas formas de dano e pensa: “por que não piorar a vida dos dois lados?”.</p>
+          <ul class="ccm-accordion__facts">
+            <li><strong>Estilo:</strong> híbrido físico/arcano, pressão e turnos explosivos.</li>
+            <li><strong>Combina com:</strong> quem gosta de sinergia, Runechant e feitiço com faca.</li>
+            <li><strong>Dificuldade:</strong> média a alta; exige entender duas camadas de ameaça.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
 
-Brute bate forte, descarta carta, aposta em variância e às vezes parece pilotado por um goblin bêbado com excelente custo-benefício.
+  <article id="classe-illusionist" class="ccm-accordion__item">
+    <button class="ccm-accordion__trigger" type="button" aria-expanded="false" aria-controls="painel-classe-illusionist">
+      <span class="ccm-accordion__title-wrap">
+        <span class="ccm-accordion__eyebrow">Classe</span>
+        <span class="ccm-accordion__title">Illusionist</span>
+        <span class="ccm-accordion__subtitle">Auras, aliados, truques e ataques que parecem mentira. Às vezes são.</span>
+      </span>
+      <span class="ccm-accordion__icon" aria-hidden="true"></span>
+    </button>
+    <div class="ccm-accordion__content" id="painel-classe-illusionist">
+      <div class="ccm-accordion__inner">
+        <div class="ccm-accordion__media">
+          <img src="{{ '/assets/img/guias/fab-para-lerdos/illusionist-banner.webp' | relative_url }}" alt="Banner com heróis Illusionist de Flesh and Blood">
+        </div>
+        <div class="ccm-accordion__body">
+          <p>Illusionist cria ameaças, auras, aliados e ataques que parecem mentira. Às vezes são mesmo, mas ainda machucam.</p>
+          <ul class="ccm-accordion__facts">
+            <li><strong>Estilo:</strong> construção de mesa, valor progressivo e enganação elegante.</li>
+            <li><strong>Combina com:</strong> quem gosta de truques, presença de mesa e ambiguidade moral.</li>
+            <li><strong>Dificuldade:</strong> média a alta; suas cartas exigem leitura e oponente atento.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
 
-**Combina com quem:** gosta de dano alto, risco, caos e frases como “se der certo, acabou”.
+  <article id="classe-assassin" class="ccm-accordion__item">
+    <button class="ccm-accordion__trigger" type="button" aria-expanded="false" aria-controls="painel-classe-assassin">
+      <span class="ccm-accordion__title-wrap">
+        <span class="ccm-accordion__eyebrow">Classe</span>
+        <span class="ccm-accordion__title">Assassin</span>
+        <span class="ccm-accordion__subtitle">Stealth, contratos, banish e a sensação de ter sido assaltado legalmente.</span>
+      </span>
+      <span class="ccm-accordion__icon" aria-hidden="true"></span>
+    </button>
+    <div class="ccm-accordion__content" id="painel-classe-assassin">
+      <div class="ccm-accordion__inner">
+        <div class="ccm-accordion__media">
+          <img src="{{ '/assets/img/guias/fab-para-lerdos/assassin-banner.webp' | relative_url }}" alt="Banner com heróis Assassin de Flesh and Blood">
+        </div>
+        <div class="ccm-accordion__body">
+          <p>Assassin trabalha com stealth, contratos, banish e ataques traiçoeiros. É a classe que vence não só sua vida, mas sua confiança nas pessoas.</p>
+          <ul class="ccm-accordion__facts">
+            <li><strong>Estilo:</strong> blefe, disrupção, banish e pressão seletiva.</li>
+            <li><strong>Combina com:</strong> quem gosta de truques sujos e sorrir pouco antes do desastre.</li>
+            <li><strong>Dificuldade:</strong> média a alta; exige saber quando incomodar e quando finalizar.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
 
-### Warrior
+  <article id="classe-pirate" class="ccm-accordion__item">
+    <button class="ccm-accordion__trigger" type="button" aria-expanded="false" aria-controls="painel-classe-pirate">
+      <span class="ccm-accordion__title-wrap">
+        <span class="ccm-accordion__eyebrow">Classe</span>
+        <span class="ccm-accordion__title">Pirate</span>
+        <span class="ccm-accordion__subtitle">Tema estiloso, clima de pilhagem e promessa de confusão marítima.</span>
+      </span>
+      <span class="ccm-accordion__icon" aria-hidden="true"></span>
+    </button>
+    <div class="ccm-accordion__content" id="painel-classe-pirate">
+      <div class="ccm-accordion__inner">
+        <div class="ccm-accordion__media">
+          <img src="{{ '/assets/img/guias/fab-para-lerdos/pirate-banner.webp' | relative_url }}" alt="Banner com heróis Pirate de Flesh and Blood">
+        </div>
+        <div class="ccm-accordion__body">
+          <p>Pirate aparece como tema mais específico e ainda em expansão dentro do jogo. É uma estética forte, com cara de mesa divertida e futuro potencial para gente que gosta de caos com chapéu.</p>
+          <ul class="ccm-accordion__facts">
+            <li><strong>Estilo:</strong> depende do card pool disponível e do formato.</li>
+            <li><strong>Combina com:</strong> quem escolhe deck também pelo carisma e pela pirataria emocional.</li>
+            <li><strong>Dificuldade:</strong> variável; acompanhe o suporte oficial e os lançamentos.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
 
-<figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/warrior-banner.webp' | relative_url }}" alt="Banner com heróis Warrior de Flesh and Blood">
-</figure>
-
-Warrior usa armas, reações e truques para transformar ataques aparentemente honestos em pequenas ações judiciais.
-
-**Combina com quem:** gosta de blefe, combate corpo a corpo, cálculo fino e fazer o oponente bloquear errado.
-
-### Ranger
-
-<figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/ranger-banner.webp' | relative_url }}" alt="Banner com heróis Ranger de Flesh and Blood">
-</figure>
-
-Ranger usa arco, flechas, arsenal e efeitos desagradáveis. É a classe que transforma planejamento em armadilha e armadilha em trauma.
-
-**Combina com quem:** gosta de setup, controle de arsenal, flechas e o prazer duvidoso de dizer “tem mais um efeito”.
-
-### Mechanologist
-
-<figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/mech-banner.webp' | relative_url }}" alt="Banner com heróis Mechanologist de Flesh and Blood">
-</figure>
-
-Mechanologist usa itens, boost, armas e máquinas. Quando funciona, parece motor turbo. Quando falha, parece impressora velha engasgando papel.
-
-**Combina com quem:** gosta de tecnologia, sequência, pressão, itens e aceitar que o topo do deck pode te humilhar em público.
-
-### Wizard
-
-<figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/wizard-banner.webp' | relative_url }}" alt="Banner com heróis Wizard de Flesh and Blood">
-</figure>
-
-Wizard causa dano arcano, joga em momentos estranhos e exige que ambos os jogadores leiam mais do que gostariam.
-
-**Combina com quem:** gosta de magia, instant, matemática, pilha de efeitos e ver o oponente perguntar “posso responder a isso?”.
-
-### Runeblade
-
-<figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/runeblade-banner.webp' | relative_url }}" alt="Banner com heróis Runeblade de Flesh and Blood">
-</figure>
-
-Runeblade mistura ataque físico com dano arcano. É a classe que olha para duas formas de dano e pensa: “por que não piorar a vida dos dois lados?”.
-
-**Combina com quem:** gosta de híbridos, pressão estranha, Runechant e turnos que parecem feitiço com faca.
-
-### Illusionist
-
-<figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/illusionist-banner.webp' | relative_url }}" alt="Banner com heróis Illusionist de Flesh and Blood">
-</figure>
-
-Illusionist cria ameaças, auras, aliados e ataques que parecem mentira. Às vezes são mesmo, mas ainda machucam.
-
-**Combina com quem:** gosta de mesa, valor progressivo, truques e fazer o oponente duvidar da própria leitura.
-
-### Assassin
-
-<figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/assassin-banner.webp' | relative_url }}" alt="Banner com heróis Assassin de Flesh and Blood">
-</figure>
-
-Assassin trabalha com stealth, contratos, banish e ataques traiçoeiros. É a classe que vence não só sua vida, mas sua confiança nas pessoas.
-
-**Combina com quem:** gosta de blefe, precisão, truques sujos e sorrir pouco antes do desastre.
-
-### Pirate e Necromancer
-
-<figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/pirate-banner.webp' | relative_url }}" alt="Banner com heróis Pirate de Flesh and Blood">
-</figure>
-
-<figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/necromancer-banner.webp' | relative_url }}" alt="Banner com heróis Necromancer de Flesh and Blood">
-</figure>
-
-Algumas classes aparecem de forma mais específica, casual, promocional ou ainda em expansão dentro do jogo. Pirate e Necromancer são exemplos de temas que chamam atenção e podem ganhar espaço conforme o card pool evolui.
-
-Tradução: se você gostou da estética, acompanhe. Em card game, o que hoje é nicho amanhã pode virar sua próxima crise financeira.
+  <article id="classe-necromancer" class="ccm-accordion__item">
+    <button class="ccm-accordion__trigger" type="button" aria-expanded="false" aria-controls="painel-classe-necromancer">
+      <span class="ccm-accordion__title-wrap">
+        <span class="ccm-accordion__eyebrow">Classe</span>
+        <span class="ccm-accordion__title">Necromancer</span>
+        <span class="ccm-accordion__subtitle">Morto-vivo, estética sombria e a promessa de que nem o cemitério fica em paz.</span>
+      </span>
+      <span class="ccm-accordion__icon" aria-hidden="true"></span>
+    </button>
+    <div class="ccm-accordion__content" id="painel-classe-necromancer">
+      <div class="ccm-accordion__inner">
+        <div class="ccm-accordion__media">
+          <img src="{{ '/assets/img/guias/fab-para-lerdos/necromancer-banner.webp' | relative_url }}" alt="Banner com heróis Necromancer de Flesh and Blood">
+        </div>
+        <div class="ccm-accordion__body">
+          <p>Necromancer chama atenção pela fantasia sombria e pela ideia de explorar morte, recurso e presença recorrente. Tradução honesta: se você gostou da estética, acompanhe. Em card game, o nicho de hoje pode virar a sua próxima crise financeira.</p>
+          <ul class="ccm-accordion__facts">
+            <li><strong>Estilo:</strong> ainda depende de suporte, formato e card pool.</li>
+            <li><strong>Combina com:</strong> quem gosta de horror, valor recorrente e problemas que voltam do túmulo.</li>
+            <li><strong>Dificuldade:</strong> variável; ótimo para ficar de olho nos próximos lançamentos.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
 
 <figure>
   <img src="{{ '/assets/img/guias/fab-para-lerdos/heroi-cartas-classe.webp' | relative_url }}" alt="Herói de fantasia cercado por cartas representando classes e estilos de Flesh and Blood">
   <figcaption>Escolha classe por estilo, não só por força. Meta muda. Trauma estético é para sempre.</figcaption>
 </figure>
+
 
 ## Formatos para começar {#formatos-para-comecar}
 
