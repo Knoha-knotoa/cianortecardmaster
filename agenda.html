@@ -1,69 +1,468 @@
 ---
 layout: default
-title: "Agenda"
+title: "Agenda da Comunidade"
+description: "Agenda da Cianorte Card Masters com encontros de Flesh and Blood, Pokémon TCG, Magic Commander, RPG e card games em Cianorte."
 permalink: /agenda/
 ---
 
-<section class="page-hero agenda-page-hero">
-  <div class="container">
-    <p class="eyebrow">Encontros e calendário</p>
-    <h1>Agenda</h1>
-    <p>
-      Horários, locais e rotas para quem quer jogar, aprender ou participar dos torneios do Cianorte Card Masters.
-    </p>
-  </div>
-</section>
+{% assign today = site.time | date: "%Y-%m-%d" %}
+{% assign agenda_items = site.data.agenda | default: site.data.events %}
+{% assign agenda_sorted = agenda_items | sort: "ordem" %}
+{% assign eventos_especiais = site.data.eventos_especiais | sort: "data" %}
 
-<section class="section agenda-section">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": {{ page.title | jsonify }},
+  "description": {{ page.description | jsonify }},
+  "url": {{ page.url | absolute_url | jsonify }},
+  "about": [
+    "card games em Cianorte",
+    "Flesh and Blood em Cianorte",
+    "Pokémon TCG em Cianorte",
+    "Magic Commander em Cianorte",
+    "RPG em Cianorte",
+    "comunidade de card games"
+  ]
+}
+</script>
+
+<section class="page-hero agenda-page-hero agenda-hero">
   <div class="container">
-    <div class="events-grid agenda-events-grid">
-      {% for event in site.data.events %}
-        <article class="event-card agenda-card">
-          {% if event.image %}
-            <img class="agenda-card-image" src="{{ event.image | relative_url }}" alt="{{ event.location | escape }}">
-          {% endif %}
-          <div class="agenda-card-body">
-            <p class="eyebrow">{{ event.day }} • {{ event.time }}</p>
-            <h3>{{ event.title }}</h3>
-            <p><strong>Jogos:</strong> {{ event.game }}</p>
-            <p><strong>Local:</strong> {{ event.location }}</p>
-            <p><strong>Endereço:</strong> {{ event.address }}</p>
-            {% if event.note %}<p>{{ event.note }}</p>{% endif %}
-            {% if event.schedule %}
-              <div class="agenda-schedule-list">
-                {% for item in event.schedule %}
-                  <div class="agenda-schedule-item">
-                    <strong>{{ item.day }}</strong>
-                    <span>{{ item.event }}{% if item.game %} — {{ item.game }}{% endif %}</span>
-                    <em>{{ item.time }}</em>
-                  </div>
-                {% endfor %}
-              </div>
-            {% endif %}
-            <div class="btn-row">
-              {% if event.maps_url %}
-                <a class="btn btn-primary" href="{{ event.maps_url }}" target="_blank" rel="noopener">Como chegar no Google Maps</a>
-              {% endif %}
-              {% if event.calendar_note %}
-                <span class="agenda-note-pill">{{ event.calendar_note }}</span>
-              {% endif %}
-            </div>
-          </div>
-        </article>
-      {% endfor %}
+    <p class="eyebrow">Encontros, torneios e calendário</p>
+
+    <h1>Agenda da Comunidade</h1>
+
+    <p>
+      Confira os encontros semanais, eventos especiais, torneios e sessões de RPG da
+      Cianorte Card Masters. Veja horários, locais e rotas para chegar sem precisar
+      invocar um mago, um GPS místico ou aquele amigo que sempre responde depois do evento acabar.
+    </p>
+
+    <div class="btn-row agenda-actions">
+      <a class="btn btn-primary" href="#agenda-semanal">Ver agenda semanal</a>
+      <a class="btn" href="#eventos-especiais">Próximos eventos</a>
+      <a class="btn" href="#locais">Locais da comunidade</a>
     </div>
   </div>
 </section>
 
-<section class="section section-alt">
+<section class="section agenda-section agenda-intro-section">
+  <div class="container">
+    <div class="cta-box agenda-intro-box">
+      <p class="eyebrow">Card games em Cianorte</p>
+
+      <h2>Quer jogar? É só aparecer.</h2>
+
+      <p>
+        A agenda da Cianorte Card Masters reúne os encontros de Flesh and Blood,
+        Pokémon TCG, Magic: The Gathering Commander, RPG, boardgames e eventos especiais
+        da comunidade. Jogador iniciante, veterano, curioso ou perdido no metagame:
+        todo mundo começa de algum lugar.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="agenda-semanal" class="section agenda-section agenda-weekly">
+  <div class="container">
+    <div class="section-heading agenda-section-heading">
+      <p class="eyebrow">Programação recorrente</p>
+
+      <h2>Agenda semanal fixa</h2>
+
+      <p>
+        Estes são os encontros que costumam acontecer durante a semana. Em caso de feriado,
+        evento especial ou mudança de local, confirme nos canais da comunidade antes de sair de casa.
+      </p>
+    </div>
+
+    {% if agenda_sorted and agenda_sorted.size > 0 %}
+      <div class="agenda-weekly-grid">
+        {% for item in agenda_sorted %}
+          {% assign item_day = item.dia | default: item.day %}
+          {% assign item_time = item.horario | default: item.time %}
+          {% assign item_title = item.titulo | default: item.title %}
+          {% assign item_game = item.atividade | default: item.game %}
+          {% assign item_description = item.descricao | default: item.note %}
+
+          {% assign local = nil %}
+          {% if item.local_id and site.data.locais %}
+            {% assign local = site.data.locais | where: "id", item.local_id | first %}
+          {% endif %}
+
+          {% assign local_name = item.local | default: item.location %}
+          {% assign local_address = item.endereco | default: item.address %}
+
+          {% if local %}
+            {% assign local_name = local.nome | default: local_name %}
+            {% assign local_address = local.endereco | default: local_address %}
+          {% endif %}
+
+          {% assign local_name = local_name | default: "Local a confirmar" %}
+
+          {% assign maps_url = item.maps_url %}
+          {% assign maps_directions_url = item.maps_directions_url %}
+
+          {% if local %}
+            {% assign maps_url = maps_url | default: local.maps_url %}
+            {% assign maps_directions_url = maps_directions_url | default: local.maps_directions_url %}
+          {% endif %}
+
+          {% assign maps_directions_url = maps_directions_url | default: maps_url %}
+
+          <article class="event-card agenda-card agenda-weekly-card">
+            {% if item.image %}
+              <img
+                class="agenda-card-image"
+                src="{{ item.image | relative_url }}"
+                alt="{{ item_title | escape }}"
+                loading="lazy"
+              >
+            {% endif %}
+
+            <div class="agenda-card-body">
+              <div class="agenda-card-date">
+                <p class="eyebrow">{{ item_day }}</p>
+                <strong>{{ item_time }}</strong>
+              </div>
+
+              <h3>{{ item_title }}</h3>
+
+              {% if item_game %}
+                <p class="agenda-card-game">
+                  <strong>Atividade:</strong> {{ item_game }}
+                </p>
+              {% endif %}
+
+              <p>
+                <strong>Local:</strong> {{ local_name }}
+              </p>
+
+              {% if local_address %}
+                <p>
+                  <strong>Endereço:</strong> {{ local_address }}
+                </p>
+              {% endif %}
+
+              {% if item_description %}
+                <p>{{ item_description }}</p>
+              {% endif %}
+
+              {% if item.schedule %}
+                <div class="agenda-schedule-list">
+                  {% for schedule_item in item.schedule %}
+                    <div class="agenda-schedule-item">
+                      <strong>{{ schedule_item.day }}</strong>
+                      <span>
+                        {{ schedule_item.event }}
+                        {% if schedule_item.game %}
+                          — {{ schedule_item.game }}
+                        {% endif %}
+                      </span>
+                      <em>{{ schedule_item.time }}</em>
+                    </div>
+                  {% endfor %}
+                </div>
+              {% endif %}
+
+              <div class="btn-row agenda-actions">
+                {% if maps_directions_url and maps_directions_url != "" %}
+                  <a
+                    class="btn btn-primary"
+                    href="{{ maps_directions_url }}"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Como chegar
+                  </a>
+                {% elsif maps_url and maps_url != "" %}
+                  <a
+                    class="btn btn-primary"
+                    href="{{ maps_url }}"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Ver no Google Maps
+                  </a>
+                {% endif %}
+
+                {% if item.link %}
+                  <a class="btn" href="{{ item.link | relative_url }}">Saiba mais</a>
+                {% endif %}
+
+                {% if item.calendar_note %}
+                  <span class="agenda-note-pill">{{ item.calendar_note }}</span>
+                {% endif %}
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="agenda-empty-state">
+        <p>
+          A agenda semanal ainda não foi cadastrada. Assim que os horários forem definidos,
+          eles aparecem por aqui.
+        </p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<section id="eventos-especiais" class="section section-alt agenda-section agenda-special-events">
+  <div class="container">
+    <div class="section-heading agenda-section-heading">
+      <p class="eyebrow">Torneios, RPG e eventos pontuais</p>
+
+      <h2>Próximos eventos especiais</h2>
+
+      <p>
+        Aqui aparecem Armory, torneios, ligas, oficinas, sessões especiais de RPG e outros eventos
+        com data marcada. Evento passado não fica assombrando a página — já basta a memória daquela
+        partida que você perdeu por um recurso.
+      </p>
+    </div>
+
+    {% assign future_events_count = 0 %}
+
+    {% if eventos_especiais and eventos_especiais.size > 0 %}
+      <div class="agenda-events-list">
+        {% for event in eventos_especiais %}
+          {% assign event_date = event.data | date: "%Y-%m-%d" %}
+
+          {% if event_date >= today %}
+            {% assign future_events_count = future_events_count | plus: 1 %}
+
+            {% assign event_local = nil %}
+            {% if event.local_id and site.data.locais %}
+              {% assign event_local = site.data.locais | where: "id", event.local_id | first %}
+            {% endif %}
+
+            {% assign event_local_name = event.local | default: event.location %}
+            {% assign event_local_address = event.endereco | default: event.address %}
+
+            {% if event_local %}
+              {% assign event_local_name = event_local.nome | default: event_local_name %}
+              {% assign event_local_address = event_local.endereco | default: event_local_address %}
+            {% endif %}
+
+            {% assign event_local_name = event_local_name | default: "Local a confirmar" %}
+
+            {% assign event_maps_url = event.maps_url %}
+            {% assign event_maps_directions_url = event.maps_directions_url %}
+
+            {% if event_local %}
+              {% assign event_maps_url = event_maps_url | default: event_local.maps_url %}
+              {% assign event_maps_directions_url = event_maps_directions_url | default: event_local.maps_directions_url %}
+            {% endif %}
+
+            {% assign event_maps_directions_url = event_maps_directions_url | default: event_maps_url %}
+
+            <article class="event-card agenda-card agenda-event">
+              <div class="agenda-card-body">
+                <div class="agenda-card-date">
+                  <p class="eyebrow">
+                    {{ event.dia_semana | default: event_date }}
+                  </p>
+                  <strong>
+                    {{ event.data | date: "%d/%m/%Y" }}
+                    {% if event.horario %}
+                      • {{ event.horario }}
+                    {% endif %}
+                  </strong>
+                </div>
+
+                <h3>{{ event.titulo | default: event.title }}</h3>
+
+                {% if event.categoria or event.formato %}
+                  <p>
+                    <strong>Formato:</strong>
+                    {% if event.formato %}{{ event.formato }}{% endif %}
+                    {% if event.formato and event.categoria %} — {% endif %}
+                    {% if event.categoria %}{{ event.categoria }}{% endif %}
+                  </p>
+                {% endif %}
+
+                <p>
+                  <strong>Local:</strong> {{ event_local_name }}
+                </p>
+
+                {% if event_local_address %}
+                  <p>
+                    <strong>Endereço:</strong> {{ event_local_address }}
+                  </p>
+                {% endif %}
+
+                {% if event.descricao or event.description %}
+                  <p>{{ event.descricao | default: event.description }}</p>
+                {% endif %}
+
+                <div class="btn-row agenda-actions">
+                  {% if event_maps_directions_url and event_maps_directions_url != "" %}
+                    <a
+                      class="btn btn-primary"
+                      href="{{ event_maps_directions_url }}"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      Como chegar
+                    </a>
+                  {% elsif event_maps_url and event_maps_url != "" %}
+                    <a
+                      class="btn btn-primary"
+                      href="{{ event_maps_url }}"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      Ver no Google Maps
+                    </a>
+                  {% endif %}
+
+                  {% if event.link %}
+                    <a class="btn" href="{{ event.link | relative_url }}">Ver detalhes</a>
+                  {% endif %}
+
+                  {% if event.destaque %}
+                    <span class="agenda-note-pill">Destaque</span>
+                  {% endif %}
+                </div>
+              </div>
+            </article>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if future_events_count == 0 %}
+      <div class="agenda-empty-state">
+        <h3>Nenhum evento especial anunciado no momento.</h3>
+        <p>
+          Mas a agenda semanal continua firme — só chegar junto. Quando surgir Armory,
+          torneio, RPG, oficina ou campeonato, o evento aparece aqui.
+        </p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<section id="locais" class="section agenda-section agenda-locations">
+  <div class="container">
+    <div class="section-heading agenda-section-heading">
+      <p class="eyebrow">Rotas e pontos de encontro</p>
+
+      <h2>Locais da comunidade</h2>
+
+      <p>
+        Estes são os locais usados pela comunidade para encontros, RPG, torneios e jogatinas.
+        Use os botões de rota para abrir direto no Google Maps.
+      </p>
+    </div>
+
+    {% if site.data.locais and site.data.locais.size > 0 %}
+      <div class="agenda-location-grid">
+        {% for local in site.data.locais %}
+          {% unless local.id == "local-a-definir" %}
+            <article class="event-card agenda-card agenda-location">
+              <div class="agenda-card-body">
+                <p class="eyebrow">Ponto de encontro</p>
+
+                <h3>{{ local.nome }}</h3>
+
+                {% if local.endereco %}
+                  <p>
+                    <strong>Endereço:</strong> {{ local.endereco }}
+                  </p>
+                {% endif %}
+
+                {% if local.descricao %}
+                  <p>{{ local.descricao }}</p>
+                {% endif %}
+
+                {% if local.atividades and local.atividades.size > 0 %}
+                  <div class="agenda-schedule-list agenda-location-activities">
+                    {% for atividade in local.atividades %}
+                      <div class="agenda-schedule-item">
+                        <span>{{ atividade }}</span>
+                      </div>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+
+                <div class="btn-row agenda-actions">
+                  {% if local.maps_directions_url and local.maps_directions_url != "" %}
+                    <a
+                      class="btn btn-primary"
+                      href="{{ local.maps_directions_url }}"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      Como chegar
+                    </a>
+                  {% endif %}
+
+                  {% if local.maps_url and local.maps_url != "" %}
+                    <a
+                      class="btn"
+                      href="{{ local.maps_url }}"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      Abrir no Google Maps
+                    </a>
+                  {% endif %}
+                </div>
+
+                {% if local.maps_embed_url and local.maps_embed_url != "" %}
+                  <div class="agenda-map">
+                    <iframe
+                      src="{{ local.maps_embed_url }}"
+                      title="Mapa de {{ local.nome | escape }}"
+                      width="100%"
+                      height="260"
+                      style="border:0;"
+                      allowfullscreen=""
+                      loading="lazy"
+                      referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                  </div>
+                {% endif %}
+              </div>
+            </article>
+          {% endunless %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="agenda-empty-state">
+        <p>
+          Os locais da comunidade ainda não foram cadastrados. Enquanto isso, confirme o ponto
+          de encontro nos canais da Cianorte Card Masters.
+        </p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section section-alt agenda-section agenda-start-here">
   <div class="container">
     <div class="cta-box">
       <p class="eyebrow">Novos jogadores são bem-vindos</p>
+
       <h2>Não tem deck? Pode aparecer mesmo assim.</h2>
+
       <p>
         A comunidade ajuda a ensinar, emprestar decks quando possível e apresentar os jogos.
-        O mais importante é chegar com vontade de conhecer a galera.
+        O mais importante é chegar com vontade de conhecer a galera — e talvez aceitar que
+        perder a primeira partida faz parte do ritual de entrada.
       </p>
+
+      <div class="btn-row agenda-actions">
+        <a class="btn btn-primary" href="{{ '/guias/' | relative_url }}">Ver guias para iniciantes</a>
+        <a class="btn" href="{{ '/deck-tech/' | relative_url }}">Ver deck techs</a>
+        <a class="btn" href="{{ '/comunidade/' | relative_url }}">Ver comunidade</a>
+        <a class="btn" href="{{ '/blog/' | relative_url }}">Ver blog</a>
+      </div>
     </div>
   </div>
 </section>
