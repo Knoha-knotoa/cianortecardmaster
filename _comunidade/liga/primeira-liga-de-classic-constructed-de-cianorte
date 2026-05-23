@@ -1,0 +1,64 @@
+---
+published: true
+title: "Liga de Flesh and Blood formato Classic Constructed - 01/03/2026"
+summary: "Resultado final da primeira lida de classic constructed organizado pela prefeitura de cianorte"
+game: "Flesh and Blood"
+rounds: 20
+date: 2026-05-03
+author: "Cianorte Card Masters"
+image: "/assets/img/banners/banner-liga-prefeitura-flesh-and-blood.png"
+results:
+  - player: "Neto"
+    hero: "Dash I/O"
+    # Opcional: use uma imagem local do herói. Se não informar, o site tenta buscar pela API GoAgain.
+    # hero_icon: "/assets/img/fab-heroes/nome-do-heroi.webp"
+    # Se existir um arquivo local com o nome do herói em assets/img/fab-heroes/, o site carrega o badge automaticamente.
+    # Se existir um arquivo local com o nome exato do herói em assets/img/fab-heroes/, o site tenta carregar automaticamente.
+    record: "17-3"
+    wins: 17
+  - player: "Gorla"
+    hero: "Kayo, Underhanded Cheat"
+    record: "16-4"
+    wins: 16
+  - player: "Scopel"
+    hero: "Verdance, Thorn of the Rose"
+    record: "15-5"
+    wins: 15
+  - player: "Mizuno"
+    hero: "Arakni, 5L!p3d 7hRu 7h3 cR4X"
+    record: "15-5"
+    wins: 5
+  - player: "Adrian"
+    hero: "Fai, Rising Rebellion"
+    record: "11-9"
+    wins: 11
+  - player: "Iuri"
+    hero: "Dash I/O"
+    record: "7-13"
+    wins: 7
+  - player: "Erick"
+    hero: "Riptide, Lurker of the Deep"
+    record: "6-14"
+    wins: 6
+  - player: "Marcelo"
+    hero: "Rhinar, Reckless Rampage"
+    record: "6-14"
+    wins: 6
+  - player: "Hermes"
+    hero: "Pleiades, Superstar"
+    record: "5-15"
+    wins: 5
+  - player: "Lucas Barros"
+    hero: "Gravy Bones, Shipwrecked Looter"
+    record: "5-15"
+    wins: 5
+  - player: "Akira"
+    hero: "Ser Boltyn, Breaker of Dawn"
+    record: "0-20"
+    wins: 0  
+    
+---
+
+Resultado padronizado do Armory.
+
+Copie este arquivo, remova `published: false`, altere a data e preencha a lista `results`.
