@@ -1,0 +1,60 @@
+{% assign latest_armory = nil %}
+{% assign community_posts = site.comunidade | where_exp: "item", "item.published != false" | sort: "date" | reverse %}
+{% for community_post in community_posts %}
+  {% assign community_path = community_post.path | downcase %}
+  {% if community_path contains "_comunidade/armory/" %}
+    {% assign latest_armory = community_post %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+<section class="ccm-internal-links-card" aria-labelledby="ccm-internal-links-title">
+  <header class="ccm-internal-links-header">
+    <p class="ccm-internal-links-kicker">Continue navegando</p>
+    <h2 id="ccm-internal-links-title">Mais conteúdo do Cianorte Card Masters</h2>
+    <p>
+      Se você curtiu esta Deck Tech, esses links ajudam a seguir estudando Flesh and Blood,
+      acompanhar a comunidade local e encontrar os próximos encontros presenciais em Cianorte.
+    </p>
+  </header>
+
+  <div class="ccm-internal-links-grid">
+    {% if latest_armory %}
+      <a class="ccm-internal-link-item featured" href="{{ latest_armory.url | relative_url }}">
+        <span class="ccm-internal-link-tag">Armory</span>
+        <strong>Último Armory de Flesh and Blood</strong>
+        <small>{{ latest_armory.title }}</small>
+      </a>
+    {% else %}
+      <a class="ccm-internal-link-item featured" href="{{ '/comunidade/' | relative_url }}">
+        <span class="ccm-internal-link-tag">Comunidade</span>
+        <strong>Resultados de Armory</strong>
+        <small>Acompanhe os torneios e encontros da comunidade.</small>
+      </a>
+    {% endif %}
+
+    <a class="ccm-internal-link-item" href="{{ '/guias/guia-fab-para-lerdos/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Guia</span>
+      <strong>Flesh and Blood para iniciantes</strong>
+      <small>O guia para começar sem entrar em combustão.</small>
+    </a>
+
+    <a class="ccm-internal-link-item" href="{{ '/decks/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Deck Techs</span>
+      <strong>Mais decks de card games</strong>
+      <small>Veja outras listas, ideias e planos de jogo.</small>
+    </a>
+
+    <a class="ccm-internal-link-item" href="{{ '/blog/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Blog</span>
+      <strong>Notícias e artigos de TCG</strong>
+      <small>Atualizações, análises e conteúdo da comunidade.</small>
+    </a>
+
+    <a class="ccm-internal-link-item" href="{{ '/agenda/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Agenda</span>
+      <strong>Onde jogar em Cianorte</strong>
+      <small>Veja datas dos encontros, Armory e eventos presenciais.</small>
+    </a>
+  </div>
+</section>

@@ -390,6 +390,8 @@ Também é uma boa opção para quem curte Flesh and Blood físico, torneio pres
 
 Se você gosta de Mechanologist, Dash I/O, ficção científica, neon, robô, bomba e plano mirabolante que parece errado até funcionar, La Bombita pode ser para você.
 
+## Decklist completa
+
 {% include decklist-card.html deck="dash_io_la_bombita" %}
 
 ## Conclusão: Deck Tech Dash I/O para quem gosta de explosão com personalidade
@@ -406,4 +408,4 @@ Só não esquece: se a bomba está na mesa, a culpa não é minha.
 
 É engenharia.
 
----
+{% include internal-links-card.html %}

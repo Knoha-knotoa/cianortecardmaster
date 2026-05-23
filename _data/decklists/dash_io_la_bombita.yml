@@ -1,17 +1,16 @@
 title: "Dash I/O — La Bombita"
 hero: "Dash I/O"
 format: "Classic Constructed"
-deck_class: "Mechanologist"
+class: "Mechanologist"
 plan: "Itens + Granadas"
-source_label: "FaBrary"
-description: "Lista focada em ataques de custo 0, itens, Boom Grenade, Bios Update e pressão constante. Parece bagunça, mas é engenharia. Meio criminosa, talvez, mas engenharia."
-note: "Observação: esta lista foi usada como base da Dash I/O La Bombita. Depois da liga, uma mudança possível é testar Scramble Pulse vermelho no lugar de Throttle vermelho, principalmente contra decks com muitos equipamentos com temper ou battleworn."
+description: "Lista focada em ataques de custo 0, itens, Boom Grenade, Bios Update e pressão constante. Parece bagunça, mas é engenharia."
+note: "Depois da liga, uma mudança possível é testar Scramble Pulse vermelho no lugar de Throttle vermelho, principalmente contra decks com muitos equipamentos com temper ou battleworn."
 
 sections:
   - title: "Arena Cards"
     count: "8 cartas"
-    full: true
     open: true
+    full: true
     cards:
       - qty: "1x"
         name: "Achilles Accelerator"
