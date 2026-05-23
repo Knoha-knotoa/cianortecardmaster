@@ -1,10 +1,12 @@
 ---
 published: true
 title: "Liga de Flesh and Blood formato Classic Constructed - 01/03/2026"
-summary: "Resultado final da primeira lida de classic constructed organizado pela prefeitura de cianorte"
+summary: "Resultado final da primeira liga de Classic Constructed organizada pela prefeitura de Cianorte"
 game: "Flesh and Blood"
 rounds: 20
 date: 2026-05-03
+event_date: 2026-03-01
+next_liga: "Domingo • 13:30"
 author: "Cianorte Card Masters"
 image: "/assets/img/banners/banner-liga-prefeitura-flesh-and-blood.png"
 results:
@@ -59,6 +61,6 @@ results:
     
 ---
 
-Resultado padronizado do Armory.
+Resultado padronizado da Liga.
 
 Copie este arquivo, remova `published: false`, altere a data e preencha a lista `results`.

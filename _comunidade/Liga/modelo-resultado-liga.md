@@ -5,6 +5,8 @@ summary: "Resultado do da liga de Classic Constructed."
 game: "Flesh and Blood"
 rounds: 20
 date: 2026-05-19
+event_date: 2026-05-19
+next_liga: "Domingo • 13:30"
 author: "Cianorte Card Masters"
 image: "/assets/img/banners/banner-liga-fab-resultado.png"
 results:
@@ -30,6 +32,6 @@ results:
     wins: 0
 ---
 
-Resultado padronizado do Armory.
+Resultado padronizado da Liga.
 
 Copie este arquivo, remova `published: false`, altere a data e preencha a lista `results`.
