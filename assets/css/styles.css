@@ -242,10 +242,10 @@ h3 {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(5,8,6,.96), rgba(5,8,6,.73) 42%, rgba(5,8,6,.35)),
+    linear-gradient(90deg, rgba(5,8,6,.96), rgba(5,8,6,.72) 40%, rgba(5,8,6,.36)),
     var(--hero-image, none);
   background-size: cover;
-  background-position: center;
+  background-position: var(--hero-position, center);
   transform: scale(1.02);
 }
 
@@ -508,13 +508,64 @@ h3 {
 /* Listing pages */
 
 .page-hero {
+  position: relative;
+  display: grid;
+  align-items: center;
+  min-height: clamp(340px, 38vw, 460px);
   padding: 4.5rem 0 2rem;
+  overflow: hidden;
   border-bottom: 1px solid rgba(212,175,55,.12);
+  background:
+    linear-gradient(90deg, rgba(5,8,6,.94), rgba(5,8,6,.74) 42%, rgba(5,8,6,.28)),
+    linear-gradient(180deg, rgba(5,8,6,.10), rgba(5,8,6,.72)),
+    var(--page-hero-image, linear-gradient(135deg, #102018, #050806));
+  background-size: cover;
+  background-position: var(--page-hero-position, center);
+}
+
+.page-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 120px;
+  background: linear-gradient(transparent, rgba(5,8,6,.94));
+  pointer-events: none;
+}
+
+.page-hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+.page-hero h1,
+.page-hero p,
+.page-hero .eyebrow {
+  text-shadow: 0 3px 18px rgba(0,0,0,.78);
 }
 
 .page-hero p {
-  color: var(--muted);
+  color: rgba(246,241,223,.84);
   max-width: 760px;
+}
+
+@media (max-width: 760px) {
+  .hero-bg {
+    background:
+      linear-gradient(90deg, rgba(5,8,6,.96), rgba(5,8,6,.72) 46%, rgba(5,8,6,.40)),
+      var(--hero-image-mobile, var(--hero-image, none));
+    background-size: cover;
+    background-position: var(--hero-position-mobile, center);
+  }
+
+  .page-hero {
+    min-height: clamp(300px, 86vw, 430px);
+    background:
+      linear-gradient(90deg, rgba(5,8,6,.96), rgba(5,8,6,.76) 50%, rgba(5,8,6,.42)),
+      linear-gradient(180deg, rgba(5,8,6,.16), rgba(5,8,6,.76)),
+      var(--page-hero-image-mobile, var(--page-hero-image, linear-gradient(135deg, #102018, #050806)));
+    background-size: cover;
+    background-position: var(--page-hero-position-mobile, center);
+  }
 }
 
 .listing {

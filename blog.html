@@ -6,7 +6,7 @@ permalink: /blog/
 
 {% assign posts_list = site.blog | sort: "date" | reverse %}
 
-<section class="page-hero blog-page-hero">
+<section class="page-hero blog-page-hero" style="--page-hero-image: url('{{ '/assets/img/banners/banner-blog.webp' | relative_url }}'); --page-hero-image-mobile: url('{{ '/assets/img/banners/banner-blog-mobile.webp' | relative_url }}'); --page-hero-position: center; --page-hero-position-mobile: center;">
   <div class="container">
     <p class="eyebrow">Opinião, notícias e bastidores</p>
     <h1>Blog</h1>

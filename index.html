@@ -9,7 +9,7 @@ title: "Início"
 {% assign comunidade_posts = site.comunidade %}
 
 <section class="hero">
-  <div class="hero-bg" style="--hero-image: url('{{ site.data.images.hero_background | relative_url }}');"></div>
+  <div class="hero-bg" style="--hero-image: url('{{ site.data.images.hero_background | relative_url }}'); --hero-image-mobile: url('{{ site.data.images.hero_background_mobile | default: site.data.images.hero_background | relative_url }}');"></div>
 
   <div class="container hero-inner">
     <div>

@@ -2,7 +2,8 @@
 # Troque apenas os caminhos abaixo quando quiser mudar imagens principais.
 
 logo_menu: "/assets/img/logo/ccm-logo.png"
-hero_background: "/assets/img/banners/banner-hero.jpg"
+hero_background: "/assets/img/banners/banner-home.webp"
+hero_background_mobile: "/assets/img/banners/banner-home-mobile.webp"
 hero_card_logo: "/assets/img/logo/ccm-logo.png"
 
 # Imagem padrão usada quando um post não tiver image:
