@@ -1,0 +1,80 @@
+{% assign deck = site.data.decklists[include.deck] %}
+
+{% unless deck %}
+  <p class="ccm-decklist-note">
+    Decklist não encontrada: <code>{{ include.deck }}</code>. Verifique se existe um arquivo em <code>_data/decklists/</code> com esse nome.
+  </p>
+{% else %}
+<section class="ccm-decklist-card" aria-labelledby="decklist-{{ include.deck | slugify }}">
+
+  <header class="ccm-decklist-header">
+    <div class="ccm-decklist-kicker">Decklist completa</div>
+
+    <h2 id="decklist-{{ include.deck | slugify }}" class="ccm-decklist-title">{{ deck.title }}</h2>
+
+    {% if deck.description %}
+      <p class="ccm-decklist-description">{{ deck.description }}</p>
+    {% endif %}
+
+    <div class="ccm-decklist-meta">
+      {% if deck.hero %}
+        <span class="ccm-decklist-chip"><strong>Herói:</strong> {{ deck.hero }}</span>
+      {% endif %}
+
+      {% if deck.format %}
+        <span class="ccm-decklist-chip"><strong>Formato:</strong> {{ deck.format }}</span>
+      {% endif %}
+
+      {% if deck.deck_class %}
+        <span class="ccm-decklist-chip"><strong>Classe:</strong> {{ deck.deck_class }}</span>
+      {% endif %}
+
+      {% if deck.plan %}
+        <span class="ccm-decklist-chip"><strong>Plano:</strong> {{ deck.plan }}</span>
+      {% endif %}
+
+      {% if deck.source_label %}
+        {% if deck.source_url %}
+          <a class="ccm-decklist-chip ccm-decklist-chip-link" href="{{ deck.source_url }}" target="_blank" rel="noopener"><strong>Fonte:</strong> {{ deck.source_label }}</a>
+        {% else %}
+          <span class="ccm-decklist-chip"><strong>Fonte:</strong> {{ deck.source_label }}</span>
+        {% endif %}
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="ccm-decklist-grid">
+    {% for section in deck.sections %}
+      <details class="ccm-decklist-section{% if section.full %} full{% endif %}" {% if section.open %}open{% endif %}>
+        <summary>
+          <span class="ccm-decklist-section-title">{{ section.title }}</span>
+
+          {% if section.count %}
+            <span class="ccm-decklist-count">{{ section.count }}</span>
+          {% endif %}
+        </summary>
+
+        <ul class="ccm-decklist-list">
+          {% for card in section.cards %}
+            <li>
+              <span class="ccm-decklist-qty">{{ card.qty }}</span>
+              <span class="ccm-decklist-card-name">{{ card.name }}</span>
+
+              {% if card.pitch %}
+                <span class="ccm-decklist-pitch {{ card.pitch | downcase }}">{{ card.pitch }}</span>
+              {% elsif card.type %}
+                <span class="ccm-decklist-pitch">{{ card.type }}</span>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </details>
+    {% endfor %}
+  </div>
+
+  {% if deck.note %}
+    <p class="ccm-decklist-note">{{ deck.note }}</p>
+  {% endif %}
+
+</section>
+{% endunless %}

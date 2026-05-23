@@ -390,55 +390,7 @@ Também é uma boa opção para quem curte Flesh and Blood físico, torneio pres
 
 Se você gosta de Mechanologist, Dash I/O, ficção científica, neon, robô, bomba e plano mirabolante que parece errado até funcionar, La Bombita pode ser para você.
 
-## Decklist completa
-
-Hero: Dash I/O  
-Format: Classic Constructed  
-FaBrary: Dash I/O La Bombita  
-
-### Arena cards
-
-1x Achilles Accelerator  
-1x Adaptive Plating  
-1x Bracers of Belief  
-1x Cogwerx Tinker Rings  
-1x Crown of Providence  
-1x Symbiosis Shot  
-1x Teklo Foundry Heart  
-1x Viziertronic Model i  
-
-### Deck cards
-
-2x Backup Protocol: RED (red)  
-3x Bios Update (red)  
-3x Boom Grenade (red)  
-1x Convection Amplifier (red)  
-2x Dumpster Dive (red)  
-3x Fast and Furious (red)  
-3x Fender Bender (red)  
-3x Heist (red)  
-3x Out Pace (red)  
-1x Plasma Mainline (red)  
-3x Pulsewave Harpoon (red)  
-3x Soup Up (red)  
-3x Throttle (red)  
-3x Zero to Sixty (red)  
-3x Zipper Hit (red)  
-
-3x Boom Grenade (yellow)  
-2x Prismatic Lens (yellow)  
-3x Spark of Genius (yellow)  
-3x Zipper Hit (yellow)  
-
-1x Backup Protocol: BLU (blue)  
-3x Cerebellum Processor (blue)  
-3x Hyper Scrapper (blue)  
-1x Null Time Zone (blue)  
-3x Teklo Core (blue)  
-3x Teklo Pounder (blue)  
-3x Teklo Trebuchet 2000 (blue)  
-3x Throttle (blue)  
-2x Zero to Sixty (blue)  
+{% include decklist-card.html deck="dash_io_la_bombita" %}
 
 ## Conclusão: Deck Tech Dash I/O para quem gosta de explosão com personalidade
 
