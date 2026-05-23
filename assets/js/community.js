@@ -1,4 +1,4 @@
-/* Comunidade: paginação do feed social e estatísticas do Armory. */
+/* Comunidade: paginação do feed social, estatísticas do Armory e destaque da última Liga. */
 (() => {
   function escapeHtml(value) {
     return String(value || "")
@@ -17,10 +17,26 @@
       return Array.isArray(data)
         ? data
             .filter(item => item && item.date)
-            .sort((a, b) => new Date(b.date) - new Date(a.date))
+            .sort((a, b) => new Date(b.event_date || b.date) - new Date(a.event_date || a.date))
         : [];
     } catch (error) {
       console.warn("Erro ao ler dados de Armory:", error);
+      return [];
+    }
+  }
+
+  function parseLeagueData() {
+    const script = document.querySelector("#league-data");
+    if (!script) return [];
+    try {
+      const data = JSON.parse(script.textContent || "[]");
+      return Array.isArray(data)
+        ? data
+            .filter(item => item && item.date)
+            .sort((a, b) => new Date(b.event_date || b.date) - new Date(a.event_date || a.date))
+        : [];
+    } catch (error) {
+      console.warn("Erro ao ler dados de Liga:", error);
       return [];
     }
   }
@@ -131,6 +147,7 @@
   const armoryIcons = {
     depth: {
       badge: assetUrl("/assets/img/armory-icons/depth/badge-armory.png"),
+      leagueBadge: assetUrl("/assets/img/armory-icons/depth/badge-liga.png"),
       champion: assetUrl("/assets/img/armory-icons/depth/badge-campeao.png"),
       placement: assetUrl("/assets/img/armory-icons/depth/badge-colocacao.png"),
       trophy: assetUrl("/assets/img/armory-icons/depth/icon-trofeu.png")
@@ -311,6 +328,7 @@
     if (!latest) return;
 
     const results = Array.isArray(latest.results) ? latest.results : [];
+    const displayDate = latest.event_date || latest.date;
     const playerCount = new Set(results.map(getPlayer).filter(Boolean)).size || results.length;
     const rounds = roundsFromResults(results, latest.rounds);
     const game = latest.game || "Flesh and Blood";
@@ -371,7 +389,7 @@
         <div>
           <p class="eyebrow">Último Armory</p>
           <h3>${escapeHtml(latest.title || "Resultado Armory")}</h3>
-          <p>${dateLabel(latest.date)}${latest.summary ? " • " + escapeHtml(latest.summary) : ""}</p>
+          <p>${dateLabel(displayDate)}${latest.summary ? " • " + escapeHtml(latest.summary) : ""}</p>
         </div>
       </div>
 
@@ -398,12 +416,110 @@
     initArmoryHeroBadges(target);
   }
 
+  function renderLatestLeague(items) {
+    const target = document.querySelector("#latest-league-card");
+    if (!target) return;
+    const latest = items[0];
+    if (!latest) return;
+
+    const results = Array.isArray(latest.results) ? latest.results : [];
+    const displayDate = latest.event_date || latest.date;
+    const playerCount = new Set(results.map(getPlayer).filter(Boolean)).size || results.length;
+    const rounds = roundsFromResults(results, latest.rounds);
+    const game = latest.game || "Flesh and Blood";
+    const nextLeague = latest.next_league || latest.next_liga || latest.nextLeague || "Domingo • 13:30";
+    const heroes = uniqueHeroes(results);
+
+    const rows = results.slice(0, 12).map((result, index) => {
+      const player = getPlayer(result) || "Jogador";
+      const hero = fullHeroName(getHero(result));
+      const heroName = hero;
+      const record = result.record || result.campanha || result.score || "";
+      const heroIcon = result.hero_icon || result.heroIcon || result.icon || "";
+      const placement = index + 1;
+      const placementIcon = index === 0 ? armoryIcons.depth.champion : armoryIcons.depth.placement;
+      return `
+        <li class="armory-result-row${index === 0 ? " is-champion" : ""}">
+          <span class="armory-rank-badge armory-rank-${placement}" aria-label="${placement}º colocado">
+            ${iconImage(placementIcon, "armory-rank-icon", "")}
+            <strong>${placement}º</strong>
+          </span>
+          <div class="armory-player-cell">
+            ${heroBadge(hero, heroIcon, index === 0 ? "featured" : "normal")}
+            <div>
+              <strong>${escapeHtml(player)}</strong>
+              <small>${escapeHtml(heroName)}</small>
+            </div>
+          </div>
+          <span class="armory-hero-name" title="${escapeHtml(hero)}">${escapeHtml(heroName)}</span>
+          <span class="armory-record">${iconImage(armoryIcons.depth.trophy, "armory-record-icon", "")}${escapeHtml(record || "-")}</span>
+        </li>
+      `;
+    }).join("");
+
+    const statItems = [
+      { icon: armoryIcons.flat.people, label: "Jogadores", value: playerCount || "-" },
+      { icon: armoryIcons.flat.swords, label: "Rodadas", value: rounds || "-" },
+      { icon: armoryIcons.flat.cards, label: "Jogo", value: game },
+      { icon: armoryIcons.flat.calendar, label: "Próxima Liga", value: nextLeague }
+    ].map(item => `
+      <div class="armory-stat-item">
+        ${iconImage(item.icon, "armory-stat-icon", "")}
+        <span>${escapeHtml(item.label)}</span>
+        <strong>${escapeHtml(item.value)}</strong>
+      </div>
+    `).join("");
+
+    const heroList = heroes.map(hero => `
+      <li>
+        ${heroBadge(hero.name, hero.icon, "mini")}
+        <span title="${escapeHtml(hero.name)}">${escapeHtml(hero.shortName)}</span>
+      </li>
+    `).join("");
+
+    target.innerHTML = `
+      <div class="armory-board-glow" aria-hidden="true"></div>
+      <div class="armory-board-heading">
+        <div class="armory-event-badge league-event-badge">${iconImage(armoryIcons.depth.leagueBadge, "armory-event-badge-img", "")}</div>
+        <div>
+          <p class="eyebrow">Última Liga</p>
+          <h3>${escapeHtml(latest.title || "Resultado da Liga")}</h3>
+          <p>${dateLabel(displayDate)}${latest.summary ? " • " + escapeHtml(latest.summary) : ""}</p>
+        </div>
+      </div>
+
+      <div class="armory-board-layout">
+        <div class="armory-results-panel">
+          ${rows ? `<ol class="latest-armory-podium armory-results-list">${rows}</ol>` : `<p class="empty-section">Resultado sem lista de jogadores.</p>`}
+        </div>
+
+        <aside class="armory-board-sidebar" aria-label="Resumo da Liga">
+          <div class="armory-stat-panel">${statItems}</div>
+          <div class="armory-heroes-panel">
+            <div class="armory-panel-title"><span></span><strong>Heróis da liga</strong><span></span></div>
+            ${heroList ? `<ul>${heroList}</ul>` : `<p class="empty-section">Nenhum herói informado.</p>`}
+          </div>
+        </aside>
+      </div>
+
+      <div class="armory-board-actions">
+        ${latest.url ? `<a class="btn armory-btn-primary" href="${latest.url}">${iconImage(armoryIcons.depth.trophy, "armory-btn-icon", "")}Ver resultado completo</a>` : ""}
+        <a class="btn armory-btn-secondary" href="#resultados-ligas">Ver resultados anteriores</a>
+      </div>
+    `;
+
+    initArmoryHeroBadges(target);
+  }
+
   function renderArmoryStats() {
     const allArmories = parseArmoryData();
+    const allLeagues = parseLeagueData();
 
     document.querySelectorAll("#armory-player-month, #armory-hero-month").forEach(el => {
       el.textContent = monthLabel();
     });
+
+    renderLatestLeague(allLeagues);
 
     if (!allArmories.length) return;
 
