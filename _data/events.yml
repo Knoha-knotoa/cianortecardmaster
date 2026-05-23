@@ -1,5 +1,6 @@
 # Agenda fixa / locais de encontro
 # Edite este arquivo para atualizar horários, endereços, imagens e links do Google Maps.
+# A home usa _data/home_agenda.yml, então este arquivo alimenta a página /agenda/.
 
 - title: "Encontro semanal da comunidade"
   game: "Flesh and Blood, Pokémon, Magic, RPG e jogos de tabuleiro"
@@ -9,8 +10,10 @@
   address: "Av. América, 4000 - Zona 6, Cianorte - PR, 87200-000"
   image: "/assets/img/agenda/fachada-centro-cultural.webp"
   maps_url: "https://www.google.com/maps/search/?api=1&query=Av.%20Am%C3%A9rica%2C%204000%20-%20Zona%206%2C%20Cianorte%20-%20PR%2C%2087200-000"
+  directions_url: "https://www.google.com/maps/dir/?api=1&destination=Av.%20Am%C3%A9rica%2C%204000%20-%20Zona%206%2C%20Cianorte%20-%20PR%2C%2087200-000"
+  maps_embed_url: "https://www.google.com/maps?q=Av.%20Am%C3%A9rica%2C%204000%20-%20Zona%206%2C%20Cianorte%20-%20PR%2C%2087200-000&output=embed"
   calendar_note: "Domingo fixo"
-  note: "Aberto para quem já joga e para quem quer aprender."
+  note: "Aberto para quem já joga e para quem quer aprender. Confirme no grupo da comunidade em caso de feriado, evento especial ou mudança de local."
 
 - title: "Loja de cardgame Bazar do Weezing"
   game: "Card games variados"
@@ -20,6 +23,8 @@
   address: "Rua Corumbá, 158 - Cianorte - PR"
   image: "/assets/img/agenda/bazar-do-weezing-fachada.webp"
   maps_url: "https://www.google.com/maps/search/?api=1&query=Rua%20Corumb%C3%A1%20158%20Cianorte%20PR"
+  directions_url: "https://www.google.com/maps/dir/?api=1&destination=Rua%20Corumb%C3%A1%20158%20Cianorte%20PR"
+  maps_embed_url: "https://www.google.com/maps?q=Rua%20Corumb%C3%A1%20158%20Cianorte%20PR&output=embed"
   calendar_note: "Calendário semanal"
   note: "Quarta: Armory Flesh and Blood, 19:00 - 22:30. Quinta: Pokémon, 19:00 - 22:30. Sexta: Friday Night Magic, 19:00 - 22:30. Sábado: eventos, 14:00 - 18:00."
   schedule:

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Agenda da Comunidade"
-description: "Agenda da Cianorte Card Masters com encontros de Flesh and Blood, Pokémon TCG, Magic Commander, RPG, jogos de tabuleiro e card games em Cianorte. Veja horários, locais e rotas no Google Maps."
+description: "Agenda da Cianorte Card Masters com encontros presenciais de Flesh and Blood, Pokémon TCG, Magic Commander, RPG, jogos de tabuleiro e card games em Cianorte. Veja horários, locais e rotas no Google Maps."
 permalink: /agenda/
 ---
 
@@ -12,6 +12,11 @@ permalink: /agenda/
   "name": {{ page.title | jsonify }},
   "description": {{ page.description | jsonify }},
   "url": {{ page.url | absolute_url | jsonify }},
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Cianorte Card Masters",
+    "url": {{ '/' | absolute_url | jsonify }}
+  },
   "about": [
     "card games em Cianorte",
     "Flesh and Blood em Cianorte",
@@ -19,12 +24,7 @@ permalink: /agenda/
     "Magic Commander em Cianorte",
     "RPG em Cianorte",
     "comunidade de card games em Cianorte"
-  ],
-  "isPartOf": {
-    "@type": "WebSite",
-    "name": "Cianorte Card Masters",
-    "url": {{ '/' | absolute_url | jsonify }}
-  }
+  ]
 }
 </script>
 
@@ -33,31 +33,34 @@ permalink: /agenda/
     <p class="eyebrow">Encontros, calendário e rotas</p>
     <h1>Agenda da Comunidade</h1>
     <p>
-      Horários, locais e rotas para quem quer jogar Flesh and Blood, Pokémon TCG,
-      Magic: The Gathering Commander, RPG, jogos de tabuleiro ou participar dos torneios
-      do Cianorte Card Masters. Se você está procurando onde jogar card games em Cianorte,
-      começou pelo lugar certo.
+      Horários, locais e rotas para quem quer jogar, aprender ou participar dos encontros
+      do Cianorte Card Masters. Aqui você encontra Flesh and Blood, Pokémon TCG,
+      Magic: The Gathering Commander, RPG, jogos de tabuleiro e card games em Cianorte.
     </p>
     <div class="btn-row">
-      <a class="btn btn-primary" href="#encontros-da-semana">Ver encontros da semana</a>
-      <a class="btn" href="#mapas-e-rotas">Ver mapas e rotas</a>
+      <a class="btn btn-primary" href="#encontros-da-semana">Ver encontros</a>
       <a class="btn" href="{{ '/comunidade/' | relative_url }}">Ver comunidade</a>
+      <a class="btn" href="{{ '/guias/' | relative_url }}">Guias para iniciantes</a>
+    </div>
+  </div>
+</section>
+
+<section class="section agenda-section">
+  <div class="container">
+    <div class="cta-box">
+      <p class="eyebrow">Card games em Cianorte</p>
+      <h2>Onde jogar com a comunidade</h2>
+      <p>
+        A agenda abaixo reúne os principais pontos de encontro da Cianorte Card Masters.
+        Confira o dia, o horário, o endereço e abra a rota direto no Google Maps antes de sair de casa.
+        Porque perder partida por flood é aceitável; perder o caminho já é crueldade.
+      </p>
     </div>
   </div>
 </section>
 
 <section class="section agenda-section" id="encontros-da-semana">
   <div class="container">
-    <div class="section-title">
-      <p class="eyebrow">Agenda semanal fixa</p>
-      <h2>Encontros presenciais da Cianorte Card Masters</h2>
-      <p>
-        A agenda abaixo reúne os principais pontos de encontro da comunidade. Confira o dia,
-        o horário, o endereço e abra a rota direto no Google Maps antes de sair de casa —
-        porque perder partida por flood é aceitável, perder o caminho já é crueldade.
-      </p>
-    </div>
-
     <div class="events-grid agenda-events-grid">
       {% for event in site.data.events %}
         {% assign directions_url = event.directions_url | default: event.maps_directions_url | default: event.maps_url %}
@@ -96,6 +99,21 @@ permalink: /agenda/
               </div>
             {% endif %}
 
+            {% if event.maps_embed_url %}
+              <div class="agenda-schedule-list" aria-label="Mapa de {{ event.location | escape }}">
+                <iframe
+                  src="{{ event.maps_embed_url }}"
+                  title="Mapa de {{ event.location | escape }}"
+                  width="100%"
+                  height="240"
+                  style="border:0;"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            {% endif %}
+
             <div class="btn-row">
               {% if directions_url %}
                 <a class="btn btn-primary" href="{{ directions_url }}" target="_blank" rel="noopener">Como chegar</a>
@@ -116,59 +134,7 @@ permalink: /agenda/
   </div>
 </section>
 
-<section class="section section-alt" id="mapas-e-rotas">
-  <div class="container">
-    <div class="section-title">
-      <p class="eyebrow">Google Maps</p>
-      <h2>Mapas dos locais da agenda</h2>
-      <p>
-        Use os mapas abaixo para localizar os encontros presenciais. Os botões de rota abrem
-        o Google Maps no celular ou no computador, facilitando a chegada aos eventos da comunidade.
-      </p>
-    </div>
-
-    <div class="events-grid agenda-events-grid">
-      {% for event in site.data.events %}
-        {% assign directions_url = event.directions_url | default: event.maps_directions_url | default: event.maps_url %}
-
-        <article class="event-card agenda-card">
-          <div class="agenda-card-body">
-            <p class="eyebrow">{{ event.day }} • {{ event.time }}</p>
-            <h3>{{ event.location }}</h3>
-            <p><strong>Atividades:</strong> {{ event.game }}</p>
-            <p><strong>Endereço:</strong> {{ event.address }}</p>
-
-            {% if event.maps_embed_url %}
-              <div class="agenda-schedule-list">
-                <iframe
-                  src="{{ event.maps_embed_url }}"
-                  title="Mapa de {{ event.location | escape }}"
-                  width="100%"
-                  height="260"
-                  style="border:0;"
-                  loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"
-                  allowfullscreen>
-                </iframe>
-              </div>
-            {% endif %}
-
-            <div class="btn-row">
-              {% if directions_url %}
-                <a class="btn btn-primary" href="{{ directions_url }}" target="_blank" rel="noopener">Como chegar</a>
-              {% endif %}
-              {% if event.maps_url %}
-                <a class="btn" href="{{ event.maps_url }}" target="_blank" rel="noopener">Ver no mapa</a>
-              {% endif %}
-            </div>
-          </div>
-        </article>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<section class="section agenda-section">
+<section class="section section-alt">
   <div class="container">
     <div class="cta-box">
       <p class="eyebrow">Novos jogadores são bem-vindos</p>
@@ -179,7 +145,7 @@ permalink: /agenda/
         Flesh and Blood, Pokémon TCG, Magic Commander, RPG e outros card games em Cianorte.
       </p>
       <div class="btn-row">
-        <a class="btn btn-primary" href="{{ '/guias/' | relative_url }}">Ver guias para iniciantes</a>
+        <a class="btn btn-primary" href="{{ '/guias/' | relative_url }}">Ver guias</a>
         <a class="btn" href="{{ '/decks/' | relative_url }}">Ver decks</a>
         <a class="btn" href="{{ '/blog/' | relative_url }}">Ver blog</a>
         <a class="btn" href="{{ '/comunidade/' | relative_url }}">Ver comunidade</a>
