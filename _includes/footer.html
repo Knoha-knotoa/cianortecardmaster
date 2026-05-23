@@ -1,30 +1,49 @@
 <footer class="site-footer">
   <div class="container footer-grid">
-    <div>
+    <div class="footer-brand-block">
       <h2>Cianorte Card Masters</h2>
       <p>Comunidade de card games, RPG e jogos de tabuleiro em Cianorte.</p>
+      <p class="footer-note">Flesh and Blood, Magic Commander, Pokémon TCG, RPG e mesa presencial para quem quer aprender, jogar e conhecer a galera.</p>
     </div>
 
-    <div>
+    <nav class="footer-nav" aria-label="Seções do site">
       <h3>Seções</h3>
       <a href="{{ '/' | relative_url }}">Home</a>
       <a href="{{ '/guias/' | relative_url }}">Guias</a>
-      <a href="{{ '/decks/' | relative_url }}">Deck</a>
+      <a href="{{ '/decks/' | relative_url }}">Decks</a>
       <a href="{{ '/blog/' | relative_url }}">Blog</a>
       <a href="{{ '/spikes/' | relative_url }}">Spikes</a>
       <a href="{{ '/comunidade/' | relative_url }}">Comunidade</a>
       <a href="{{ '/agenda/' | relative_url }}">Agenda</a>
       <a href="{{ '/sobre/' | relative_url }}">Sobre</a>
-    </div>
+    </nav>
 
-    <div>
-      <h3>Participe</h3>
-      <p>Quer aprender a jogar ou conhecer a galera? Apareça em um dos encontros da comunidade.</p>
-      <a class="footer-link" href="{{ '/agenda/' | relative_url }}">Ver agenda</a>
-    </div>
+    <nav class="footer-nav" aria-label="Conteúdos da comunidade">
+      <h3>Comunidade</h3>
+      <a href="{{ '/agenda/' | relative_url }}">Encontros da semana</a>
+      <a href="{{ '/comunidade/' | relative_url }}">Fotos e vídeos</a>
+      <a href="{{ '/comunidade/' | relative_url }}">Resultados de Armory</a>
+      <a href="{{ '/comunidade/' | relative_url }}">Resultados da Liga</a>
+      <a class="footer-link" href="{{ '/agenda/' | relative_url }}">Quero participar</a>
+    </nav>
+
+    <nav class="footer-nav" aria-label="Informações importantes">
+      <h3>Informações</h3>
+      <a href="{{ '/privacidade/' | relative_url }}">Política de Privacidade</a>
+      <a href="{{ '/termos-comunidade/' | relative_url }}">Termos da Comunidade</a>
+      <a href="{{ '/uso-de-imagem/' | relative_url }}">Uso de Imagem e Repostagem</a>
+      <a href="{{ '/uso-de-imagem/#solicitar-remocao-de-conteudo' | relative_url }}">Solicitar remoção de conteúdo</a>
+    </nav>
+  </div>
+
+  <div class="container footer-consent">
+    <p>
+      Ao marcar o Cianorte Card Masters em fotos, vídeos ou postagens públicas, você indica que está de acordo com o compartilhamento desse conteúdo nos canais da comunidade, sempre com finalidade comunitária e crédito quando possível. Caso queira remover algum conteúdo, fale com a organização.
+    </p>
   </div>
 
   <div class="container footer-bottom">
     <p>© {{ site.time | date: "%Y" }} Cianorte Card Masters. Feito pela comunidade.</p>
+    <p class="footer-disclaimer">Comunidade independente, sem afiliação oficial com Legend Story Studios, Wizards of the Coast, The Pokémon Company ou demais marcas citadas. Todas as marcas pertencem aos seus respectivos proprietários.</p>
   </div>
 </footer>

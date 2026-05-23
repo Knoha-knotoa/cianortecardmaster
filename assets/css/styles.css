@@ -647,43 +647,211 @@ h3 {
 /* Footer */
 
 .site-footer {
-  border-top: 1px solid rgba(212,175,55,.16);
-  background: #030503;
-  padding: 3rem 0 1rem;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(212,175,55,.22);
+  background:
+    radial-gradient(circle at 16% 0%, rgba(212,175,55,.12), transparent 30rem),
+    radial-gradient(circle at 82% 18%, rgba(31,184,92,.10), transparent 26rem),
+    linear-gradient(180deg, #030503, #010201);
+  padding: 3.3rem 0 1.25rem;
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(212,175,55,.72), rgba(31,184,92,.48), transparent);
+  opacity: .65;
 }
 
 .footer-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
-  grid-template-columns: 1.1fr .7fr 1fr;
-  gap: 2rem;
+  grid-template-columns: minmax(240px, 1.25fr) minmax(150px, .65fr) minmax(190px, .8fr) minmax(220px, .95fr);
+  gap: clamp(1.35rem, 3vw, 3rem);
+  align-items: start;
 }
 
 .footer-grid h2,
 .footer-grid h3 {
   font-family: "Bangers", system-ui, sans-serif;
   letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.footer-grid h2 {
+  max-width: 360px;
+  margin: 0 0 1rem;
+  font-size: clamp(2.55rem, 5vw, 4.15rem);
+  line-height: .86;
+  color: #fff8d7;
+  text-shadow: 0 10px 26px rgba(0,0,0,.55);
+}
+
+.footer-grid h3 {
+  margin: 0 0 .8rem;
+  font-size: clamp(1.55rem, 2.2vw, 2rem);
+  color: #fff2b8;
 }
 
 .footer-grid p,
-.footer-bottom p {
+.footer-bottom p,
+.footer-consent p {
   color: var(--muted);
+}
+
+.footer-brand-block p {
+  max-width: 420px;
+  margin: 0 0 .65rem;
+}
+
+.footer-note {
+  font-size: .95rem;
+  color: rgba(246,241,223,.72) !important;
 }
 
 .footer-grid a {
   display: block;
+  width: fit-content;
   color: var(--white);
   text-decoration: none;
   margin: .28rem 0;
+  transition: color .2s ease, transform .2s ease;
+}
+
+.footer-grid a:hover {
+  color: #fff2b8;
+  transform: translateX(3px);
 }
 
 .footer-link {
   color: var(--gold) !important;
+  font-weight: 700;
+}
+
+.footer-consent {
+  position: relative;
+  z-index: 1;
+  margin-top: 2rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid rgba(212,175,55,.18);
+  border-radius: 18px;
+  background: rgba(212,175,55,.055);
+}
+
+.footer-consent p {
+  margin: 0;
+  font-size: .92rem;
 }
 
 .footer-bottom {
-  margin-top: 2rem;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: 1.4rem;
   padding-top: 1rem;
   border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+.footer-disclaimer {
+  max-width: 660px;
+  text-align: right;
+  font-size: .86rem;
+  color: rgba(246,241,223,.64) !important;
+}
+
+
+/* Páginas legais */
+
+.legal-page {
+  padding: 2.8rem 0 4rem;
+}
+
+.legal-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 330px);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.legal-content,
+.legal-aside-card,
+.legal-callout {
+  border: 1px solid rgba(212,175,55,.18);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.015)),
+    rgba(16,27,19,.78);
+  box-shadow: var(--shadow);
+}
+
+.legal-content {
+  padding: clamp(1.15rem, 3vw, 2rem);
+  border-radius: 24px;
+}
+
+.legal-content h2 {
+  margin-top: 2.2rem;
+  color: #fff2b8;
+}
+
+.legal-content h2:first-child {
+  margin-top: 0;
+}
+
+.legal-content p,
+.legal-content li {
+  color: #eee5cd;
+}
+
+.legal-content a {
+  color: #fff2b8;
+  font-weight: 700;
+}
+
+.legal-callout {
+  margin: 1.25rem 0;
+  padding: 1rem 1.1rem;
+  border-left: 4px solid var(--gold);
+  border-radius: 0 18px 18px 0;
+}
+
+.legal-callout p {
+  margin: 0;
+}
+
+.legal-aside {
+  display: grid;
+  gap: 1rem;
+}
+
+.legal-aside-card {
+  padding: 1rem;
+  border-radius: 20px;
+}
+
+.legal-aside-card h3 {
+  margin-top: 0;
+  color: #fff2b8;
+}
+
+.legal-aside-card a {
+  display: block;
+  margin: .4rem 0;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.legal-aside-card a:hover {
+  color: #fff2b8;
 }
 
 /* Responsive */
@@ -731,8 +899,18 @@ h3 {
   .hero-inner,
   .project-grid,
   .post-hero-grid,
-  .footer-grid {
+  .footer-grid,
+  .legal-wrap {
     grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+  }
+
+  .footer-disclaimer {
+    max-width: none;
+    text-align: left;
   }
 
   .hero-card {
