@@ -242,7 +242,7 @@ h3 {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(5,8,6,.96), rgba(5,8,6,.72) 40%, rgba(5,8,6,.36)),
+    linear-gradient(90deg, rgba(5,8,6,.72), rgba(5,8,6,.42) 40%, rgba(5,8,6,.10)),
     var(--hero-image, none);
   background-size: cover;
   background-position: var(--hero-position, center);
@@ -254,7 +254,7 @@ h3 {
   position: absolute;
   inset: auto 0 0;
   height: 180px;
-  background: linear-gradient(transparent, var(--bg));
+  background: linear-gradient(transparent, rgba(5,8,6,.72));
 }
 
 .hero-inner {
@@ -516,8 +516,8 @@ h3 {
   overflow: hidden;
   border-bottom: 1px solid rgba(212,175,55,.12);
   background:
-    linear-gradient(90deg, rgba(5,8,6,.94), rgba(5,8,6,.74) 42%, rgba(5,8,6,.28)),
-    linear-gradient(180deg, rgba(5,8,6,.10), rgba(5,8,6,.72)),
+    linear-gradient(90deg, rgba(5,8,6,.66), rgba(5,8,6,.42) 42%, rgba(5,8,6,.10)),
+    linear-gradient(180deg, rgba(5,8,6,.00), rgba(5,8,6,.38)),
     var(--page-hero-image, linear-gradient(135deg, #102018, #050806));
   background-size: cover;
   background-position: var(--page-hero-position, center);
@@ -528,7 +528,7 @@ h3 {
   position: absolute;
   inset: auto 0 0;
   height: 120px;
-  background: linear-gradient(transparent, rgba(5,8,6,.94));
+  background: linear-gradient(transparent, rgba(5,8,6,.64));
   pointer-events: none;
 }
 
@@ -540,7 +540,7 @@ h3 {
 .page-hero h1,
 .page-hero p,
 .page-hero .eyebrow {
-  text-shadow: 0 3px 18px rgba(0,0,0,.78);
+  text-shadow: 0 3px 14px rgba(0,0,0,.72), 0 1px 2px rgba(0,0,0,.72);
 }
 
 .page-hero p {
@@ -551,7 +551,7 @@ h3 {
 @media (max-width: 760px) {
   .hero-bg {
     background:
-      linear-gradient(90deg, rgba(5,8,6,.96), rgba(5,8,6,.72) 46%, rgba(5,8,6,.40)),
+      linear-gradient(90deg, rgba(5,8,6,.72), rgba(5,8,6,.50) 46%, rgba(5,8,6,.24)),
       var(--hero-image-mobile, var(--hero-image, none));
     background-size: cover;
     background-position: var(--hero-position-mobile, center);
@@ -560,8 +560,8 @@ h3 {
   .page-hero {
     min-height: clamp(300px, 86vw, 430px);
     background:
-      linear-gradient(90deg, rgba(5,8,6,.96), rgba(5,8,6,.76) 50%, rgba(5,8,6,.42)),
-      linear-gradient(180deg, rgba(5,8,6,.16), rgba(5,8,6,.76)),
+      linear-gradient(90deg, rgba(5,8,6,.70), rgba(5,8,6,.48) 50%, rgba(5,8,6,.24)),
+      linear-gradient(180deg, rgba(5,8,6,.04), rgba(5,8,6,.46)),
       var(--page-hero-image-mobile, var(--page-hero-image, linear-gradient(135deg, #102018, #050806)));
     background-size: cover;
     background-position: var(--page-hero-position-mobile, center);
