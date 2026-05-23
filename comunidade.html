@@ -86,26 +86,6 @@ permalink: /comunidade/
   </div>
 </section>
 
-<section class="section community-dashboard-section armory-feature-section league-feature-section" id="resultado-ultima-liga">
-  <div class="container">
-    <div class="section-title armory-feature-title league-feature-title">
-      <div>
-        <p class="eyebrow">Ligas</p>
-        <h2>Resultados da última liga</h2>
-        <p>Confira aqui o resultado mais recente da nossa liga da comunidade.</p>
-      </div>
-    </div>
-
-    <div class="community-dashboard-grid community-dashboard-single">
-      <article class="latest-armory-card latest-armory-card-wide armory-board league-board" id="latest-league-card">
-        <p class="eyebrow">Última Liga</p>
-        <h3>Nenhum resultado cadastrado</h3>
-        <p>Crie um Markdown em <code>_comunidade/Liga</code> usando o modelo de resultados para preencher esta área.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
 <section class="section section-alt community-social-section">
   <div class="container">
     <div class="community-feed-toolbar">
@@ -170,6 +150,26 @@ permalink: /comunidade/
   </div>
 </section>
 
+<section class="section community-dashboard-section armory-feature-section league-feature-section" id="resultado-ultima-liga">
+  <div class="container">
+    <div class="section-title armory-feature-title league-feature-title">
+      <div>
+        <p class="eyebrow">Ligas</p>
+        <h2>Resultados da última liga</h2>
+        <p>Confira aqui o resultado mais recente da nossa liga da comunidade.</p>
+      </div>
+    </div>
+
+    <div class="community-dashboard-grid community-dashboard-single">
+      <article class="latest-armory-card latest-armory-card-wide armory-board league-board" id="latest-league-card">
+        <p class="eyebrow">Última Liga</p>
+        <h3>Nenhum resultado cadastrado</h3>
+        <p>Crie um Markdown em <code>_comunidade/Liga</code> usando o modelo de resultados para preencher esta área.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
 <section class="section competitive-results-section">
   <div class="container">
     <div class="section-title">
@@ -202,36 +202,7 @@ permalink: /comunidade/
         </div>
         {% if torneio_count == 0 %}<p class="empty-section">Nenhum torneio publicado ainda.</p>{% endif %}
       </section>
-
-      <section class="content-section-block post-style-liga" id="resultados-ligas">
-        <div class="content-section-head">
-          <div>
-            <p class="eyebrow">Ligas</p>
-            <h3>Resultados anteriores de ligas</h3>
-          </div>
-          <span class="section-folder">_comunidade/Liga/</span>
-        </div>
-        <div class="card-grid grid-3">
-          {% assign liga_count = 0 %}
-          {% assign liga_seen = 0 %}
-          {% for post in comunidade_posts %}
-            {% assign post_path = post.path | downcase %}
-            {% assign style_slug = post.content_style | default: post.category_label | default: '' | slugify %}
-            {% if post_path contains '/liga/' or post_path contains '_comunidade/liga/' or style_slug == 'liga' %}
-              {% assign liga_seen = liga_seen | plus: 1 %}
-              {% if liga_seen > 1 and liga_count < 6 %}
-                {% include post-card.html post=post %}
-                {% assign liga_count = liga_count | plus: 1 %}
-              {% endif %}
-            {% endif %}
-          {% endfor %}
-        </div>
-        {% if liga_count == 0 %}<p class="empty-section">Nenhum resultado anterior de liga publicado ainda.</p>{% endif %}
-      </section>
-    </div>
-  </div>
-</section>
-
+      
 <section class="section section-alt armory-history-section" id="armory-historico">
   <div class="container">
     <div class="section-title">
