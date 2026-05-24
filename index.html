@@ -122,75 +122,103 @@ image_alt: "Dragão em arte fantástica representando a comunidade Cianorte Card
 </section>
 
 <section class="section home-social-section" id="siga-a-comunidade" aria-labelledby="home-social-title">
-  <div class="container home-social-grid">
-    <article class="home-social-hero">
-      <picture class="home-social-hero-media">
-        <source media="(max-width: 720px)" srcset="{{ '/assets/img/social/social-bg-mobile.webp' | relative_url }}">
-        <img
-          src="{{ '/assets/img/social/social-bg-desktop.webp' | relative_url }}"
-          alt="Arte de fundo com dragão sombrio, castelo e cartas em um clima épico para a seção de redes sociais do Cianorte Card Masters"
-          loading="lazy"
-          decoding="async"
-          width="1672"
-          height="941">
-      </picture>
+  <div class="container">
+    <div class="home-social-heading" aria-hidden="true">
+      <span>Nos siga nas redes sociais</span>
+    </div>
 
-      <div class="home-social-copy">
-        <p class="eyebrow">Nos siga nas redes sociais</p>
-        <h2 id="home-social-title">A mesa continua depois do evento</h2>
-        <p>
-          Siga a comunidade para ver fotos, vídeos, memes, resultados, chamadas de torneio e avisos rápidos.
-          Quando você marcar o Cianorte Card Masters em conteúdo público, ele pode aparecer na página Comunidade com crédito quando possível.
-        </p>
-        <a class="section-link" href="{{ '/uso-de-imagem/' | relative_url }}">Ver política de uso de imagem e repostagem</a>
+    <div class="home-social-grid">
+      <article class="home-social-hero">
+        <picture class="home-social-hero-media">
+          <source media="(max-width: 720px)" srcset="{{ '/assets/img/social/social-bg-mobile.webp' | relative_url }}">
+          <img
+            src="{{ '/assets/img/social/social-bg-desktop.webp' | relative_url }}"
+            alt="Arte de fundo com dragão sombrio, castelo e cartas em um clima épico para a seção de redes sociais do Cianorte Card Masters"
+            loading="lazy"
+            decoding="async"
+            width="1672"
+            height="941">
+        </picture>
+
+        <div class="home-social-copy">
+          <p class="eyebrow">Nos siga nas redes sociais</p>
+          <h2 id="home-social-title">A aventura continua depois do evento</h2>
+          <p>
+            Aqui a comunidade segue viva! Compartilhamos fotos, reels, gameplays, resultados de eventos,
+            memes e chamados de torneios. Novos jogadores são sempre bem-vindos — comece entrando no grupo do WhatsApp
+            ou seguindo nosso Instagram.
+          </p>
+
+          <div class="home-social-actions">
+            <a class="home-social-cta home-social-cta--whatsapp" href="https://chat.whatsapp.com/HjmzPtLTCIALlwS2mIg55R" target="_blank" rel="noopener noreferrer" aria-label="Entrar no grupo de WhatsApp Encontro de cardgames">
+              <img src="{{ '/assets/img/social/icon-whatsapp.png' | relative_url }}" alt="Logo do WhatsApp" loading="lazy" decoding="async" width="1254" height="1254">
+              <span>Entrar no WhatsApp</span>
+            </a>
+            <a class="home-social-cta home-social-cta--instagram" href="https://www.instagram.com/cianortecardmasters/" target="_blank" rel="me noopener" aria-label="Seguir Instagram do Cianorte Card Masters">
+              <img src="{{ '/assets/img/social/icon-instagram.png' | relative_url }}" alt="Logo do Instagram" loading="lazy" decoding="async" width="1254" height="1254">
+              <span>Seguir no Instagram</span>
+            </a>
+          </div>
+
+          <a class="home-social-newbie" href="https://chat.whatsapp.com/HjmzPtLTCIALlwS2mIg55R" target="_blank" rel="noopener noreferrer">
+            Primeira vez por aqui? Comece pelo WhatsApp.
+          </a>
+
+          <a class="home-social-policy" href="{{ '/uso-de-imagem/' | relative_url }}">Ver política de uso de imagem e repostagem</a>
+        </div>
+      </article>
+
+      <div class="home-social-cards" aria-label="Canais sociais do Cianorte Card Masters">
+        <a class="home-social-card home-social-card--instagram is-featured" href="https://www.instagram.com/cianortecardmasters/" target="_blank" rel="me noopener" aria-label="Abrir Instagram do Cianorte Card Masters">
+          <span class="home-social-icon-wrap">
+            <img class="home-social-icon-image" src="{{ '/assets/img/social/icon-instagram.png' | relative_url }}" alt="Ícone do Instagram" loading="lazy" decoding="async" width="1254" height="1254">
+          </span>
+          <strong>Instagram</strong>
+          <small>@cianortecardmasters</small>
+          <em>Fotos, reels e bastidores da comunidade.</em>
+          <span class="home-social-card-button">Seguir</span>
+        </a>
+
+        <a class="home-social-card home-social-card--whatsapp is-featured" href="https://chat.whatsapp.com/HjmzPtLTCIALlwS2mIg55R" target="_blank" rel="noopener noreferrer" aria-label="Entrar no grupo de WhatsApp Encontro de cardgames">
+          <span class="home-social-icon-wrap">
+            <img class="home-social-icon-image" src="{{ '/assets/img/social/icon-whatsapp.png' | relative_url }}" alt="Ícone do WhatsApp" loading="lazy" decoding="async" width="1254" height="1254">
+          </span>
+          <strong>WhatsApp</strong>
+          <small>Encontro de cardgames</small>
+          <em>Combine mesas, tire dúvidas e conheça a galera.</em>
+          <span class="home-social-card-button">Entrar</span>
+        </a>
+
+        <a class="home-social-card home-social-card--youtube" href="https://youtube.com/@cianortecardmaster?si=L8SyIU_bcRjwXiiU" target="_blank" rel="me noopener noreferrer" aria-label="Abrir YouTube do Cianorte Card Masters">
+          <span class="home-social-icon-wrap">
+            <img class="home-social-icon-image" src="{{ '/assets/img/social/icon-youtube.png' | relative_url }}" alt="Ícone do YouTube" loading="lazy" decoding="async" width="500" height="500">
+          </span>
+          <strong>YouTube</strong>
+          <small>@cianortecardmaster</small>
+          <em>Gameplays, cobertura de eventos e vídeos da comunidade.</em>
+          <span class="home-social-card-button">Assistir</span>
+        </a>
+
+        <a class="home-social-card home-social-card--tiktok" href="https://www.tiktok.com/@ccmasters7?_r=1&_t=ZS-96cT8XFjVyf" target="_blank" rel="me noopener noreferrer" aria-label="Abrir TikTok do Cianorte Card Masters">
+          <span class="home-social-icon-wrap">
+            <img class="home-social-icon-image" src="{{ '/assets/img/social/icon-tiktok.png' | relative_url }}" alt="Ícone do TikTok" loading="lazy" decoding="async" width="500" height="500">
+          </span>
+          <strong>TikTok</strong>
+          <small>@ccmasters7</small>
+          <em>Cortes, humor e momentos da mesa.</em>
+          <span class="home-social-card-button">Ver vídeos</span>
+        </a>
+
+        <a class="home-social-card home-social-card--facebook" href="https://www.facebook.com/p/Cianorte-Card-Masters-61573789171734/" target="_blank" rel="me noopener" aria-label="Abrir Facebook do Cianorte Card Masters">
+          <span class="home-social-icon-wrap">
+            <img class="home-social-icon-image" src="{{ '/assets/img/social/icon-facebook.png' | relative_url }}" alt="Ícone do Facebook" loading="lazy" decoding="async" width="1254" height="1254">
+          </span>
+          <strong>Facebook</strong>
+          <small>Cianorte Card Masters</small>
+          <em>Postagens e registros públicos do grupo.</em>
+          <span class="home-social-card-button">Acompanhar</span>
+        </a>
       </div>
-    </article>
-
-    <div class="home-social-list" aria-label="Canais sociais do Cianorte Card Masters">
-      <a class="home-social-card home-social-card--instagram" href="https://www.instagram.com/cianortecardmasters/" target="_blank" rel="me noopener" aria-label="Abrir Instagram do Cianorte Card Masters">
-        <span class="home-social-icon-wrap">
-          <img class="home-social-icon-image" src="{{ '/assets/img/social/icon-instagram.png' | relative_url }}" alt="Ícone do Instagram" loading="lazy" decoding="async" width="1254" height="1254">
-        </span>
-        <strong>Instagram</strong>
-        <small>@cianortecardmasters</small>
-        <em>Fotos, reels, bastidores e marcações da comunidade.</em>
-      </a>
-
-      <a class="home-social-card home-social-card--facebook" href="https://www.facebook.com/p/Cianorte-Card-Masters-61573789171734/" target="_blank" rel="me noopener" aria-label="Abrir Facebook do Cianorte Card Masters">
-        <span class="home-social-icon-wrap">
-          <img class="home-social-icon-image" src="{{ '/assets/img/social/icon-facebook.png' | relative_url }}" alt="Ícone do Facebook" loading="lazy" decoding="async" width="1254" height="1254">
-        </span>
-        <strong>Facebook</strong>
-        <small>Cianorte Card Masters</small>
-        <em>Postagens, vídeos e registros públicos do grupo.</em>
-      </a>
-
-      <a class="home-social-card home-social-card--youtube" href="https://youtube.com/@cianortecardmaster?si=L8SyIU_bcRjwXiiU" target="_blank" rel="me noopener noreferrer" aria-label="Abrir YouTube do Cianorte Card Masters">
-        <span class="home-social-icon-wrap">
-          <img class="home-social-icon-image" src="{{ '/assets/img/social/icon-youtube.png' | relative_url }}" alt="Ícone do YouTube" loading="lazy" decoding="async" width="500" height="500">
-        </span>
-        <strong>YouTube</strong>
-        <small>@cianortecardmaster</small>
-        <em>Gameplays, cobertura de eventos e vídeos da comunidade.</em>
-      </a>
-
-      <a class="home-social-card home-social-card--tiktok" href="https://www.tiktok.com/@ccmasters7?_r=1&_t=ZS-96cT8XFjVyf" target="_blank" rel="me noopener noreferrer" aria-label="Abrir TikTok do Cianorte Card Masters">
-        <span class="home-social-icon-wrap">
-          <img class="home-social-icon-image" src="{{ '/assets/img/social/icon-tiktok.png' | relative_url }}" alt="Ícone do TikTok" loading="lazy" decoding="async" width="500" height="500">
-        </span>
-        <strong>TikTok</strong>
-        <small>@ccmasters7</small>
-        <em>Cortes, momentos de mesa, humor e bastidores dos encontros.</em>
-      </a>
-
-      <a class="home-social-card home-social-card--whatsapp" href="https://chat.whatsapp.com/HjmzPtLTCIALlwS2mIg55R" target="_blank" rel="noopener noreferrer" aria-label="Entrar no grupo de WhatsApp Encontro de cardgames">
-        <span class="home-social-icon-wrap">
-          <img class="home-social-icon-image" src="{{ '/assets/img/social/icon-whatsapp.png' | relative_url }}" alt="Ícone do WhatsApp" loading="lazy" decoding="async" width="1254" height="1254">
-        </span>
-        <strong>WhatsApp</strong>
-        <small>Encontro de cardgames</small>
-        <em>Grupo para combinar mesas, tirar dúvidas e chegar na comunidade.</em>
-      </a>
     </div>
   </div>
 </section>
