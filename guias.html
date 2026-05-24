@@ -1,26 +1,214 @@
 ---
 layout: default
-title: "Guias"
+title: "Guias de Card Games, Regras e Dúvidas de TCG"
+description: "Guias simples e diretos para aprender card games, tirar dúvidas de regras, entender keywords, cartas, efeitos, interações e formatos de Flesh and Blood, Pokémon TCG, Magic e outros TCGs em Cianorte."
+keywords:
+  - guias de card games
+  - regras TCG
+  - keywords Flesh and Blood
+  - como jogar Flesh and Blood
+  - dúvidas Pokémon TCG
+  - regras Magic Commander
+  - card games Cianorte
+  - Cianorte Card Masters
+image: "/assets/img/banners/banner-guias.webp"
+image_alt: "Personagens de fantasia estudando regras e cartas de card games nos guias do Cianorte Card Masters"
 permalink: /guias/
 ---
 
+{% assign posts_list = site.guias | where_exp: "post", "post.published != false" | sort: "date" | reverse %}
+
 <section class="page-hero guias-page-hero" style="--page-hero-image: url('{{ '/assets/img/banners/banner-guias.webp' | relative_url }}'); --page-hero-image-mobile: url('{{ '/assets/img/banners/banner-guias-mobile.webp' | relative_url }}'); --page-hero-position: center; --page-hero-position-mobile: center;">
   <div class="container">
-    <p class="eyebrow">Aprenda a jogar</p>
-    <h1>Guias</h1>
-    <p>Guias de jogos, regras, conceitos e materiais para aprender e evoluir.</p>
+    <p class="eyebrow">Regras, cartas, keywords e primeiros passos</p>
+    <h1>Guias de Card Games</h1>
+    <p>
+      Conteúdo simples para quem está aprendendo e material de consulta para veteranos quando aparece carta nova,
+      keyword estranha, interação duvidosa ou aquela regra que todo mundo jura que sabe até precisar explicar.
+    </p>
   </div>
 </section>
 
-<section class="listing">
-  <div class="container">
-    <div class="card-grid grid-3">
-      {% assign posts_list = site.guias | sort: "date" | reverse %}
-      {% for post in posts_list %}
-        {% include post-card.html post=post %}
-      {% else %}
-        <p>Nenhum guia publicado ainda.</p>
-      {% endfor %}
+<section class="guide-page-intro" aria-labelledby="guide-page-intro-title">
+  <div class="container guide-page-intro-grid">
+    <div>
+      <p class="eyebrow">Não é Deck Tech. É manual de sobrevivência.</p>
+      <h2 id="guide-page-intro-title">Guias explicam como o jogo funciona</h2>
+      <p>
+        A página de <strong>Guias</strong> reúne explicações sobre regras, keywords, cartas, efeitos,
+        timing, pilha, combat chain, formatos e dúvidas gerais de Flesh and Blood, Pokémon TCG,
+        Magic: The Gathering e outros card games.
+      </p>
+      <p>
+        A diferença para a área de Decks é simples: aqui o foco é entender a regra, a carta e a interação.
+        Deck Tech é para estudar uma lista específica, plano de jogo e pilotagem depois que você já sabe o que as peças fazem.
+      </p>
     </div>
+
+    <aside class="guide-page-method-card" aria-label="Como usar os guias do site">
+      <span>Use quando bater a dúvida</span>
+      <strong>Regra + exemplo + mesa</strong>
+      <p>
+        Um bom guia precisa responder o que a carta faz, quando o efeito acontece, onde entra na sequência do jogo
+        e qual confusão comum ele evita na mesa presencial.
+      </p>
+    </aside>
   </div>
 </section>
+
+<section class="guide-page-pillars" aria-label="Tipos de guias disponíveis">
+  <div class="container guide-pillar-grid">
+    <article class="guide-pillar-card">
+      <span>01</span>
+      <h2>Começar do zero</h2>
+      <p>Explicações simples para quem ainda está aprendendo herói, turno, energia, mana, combate e leitura de carta.</p>
+    </article>
+    <article class="guide-pillar-card">
+      <span>02</span>
+      <h2>Regras e keywords</h2>
+      <p>Textos para entender palavras-chave, timing, prioridade, stack, combat chain, efeitos disparados e substituições.</p>
+    </article>
+    <article class="guide-pillar-card">
+      <span>03</span>
+      <h2>Cartas e interações</h2>
+      <p>Quando uma carta nova aparece e metade da mesa entra em modo advogado, o guia entra para organizar o caos.</p>
+    </article>
+  </div>
+</section>
+
+<section class="listing guide-listing" aria-labelledby="guide-feed-title">
+  <div class="container">
+    <div class="feed-toolbar guide-feed-toolbar">
+      <div>
+        <p class="eyebrow">Biblioteca de dúvidas</p>
+        <h2 id="guide-feed-title">Últimos guias publicados</h2>
+      </div>
+
+      <div class="guide-filter-groups" aria-label="Filtros de guias">
+        <nav class="section-index guide-filter-index" aria-label="Filtrar guias por jogo">
+          <a class="section-chip is-active" href="#todos" data-guide-game-filter="all" aria-current="true">Todos</a>
+          <a class="section-chip post-style-flesh-and-blood" href="#flesh-and-blood" data-guide-game-filter="flesh-and-blood">Flesh and Blood</a>
+          <a class="section-chip post-style-pokemon" href="#pokemon" data-guide-game-filter="pokemon">Pokémon TCG</a>
+          <a class="section-chip post-style-magic" href="#magic" data-guide-game-filter="magic">Magic</a>
+          <a class="section-chip post-style-tcg" href="#outros-tcg" data-guide-game-filter="outros-tcg">Outros TCG</a>
+        </nav>
+
+        <nav class="section-index guide-filter-index" aria-label="Filtrar guias por tipo de dúvida">
+          <a class="section-chip is-active" href="#todos" data-guide-topic-filter="all" aria-current="true">Todas as dúvidas</a>
+          <a class="section-chip" href="#iniciantes" data-guide-topic-filter="iniciantes">Iniciantes</a>
+          <a class="section-chip" href="#regras-keywords" data-guide-topic-filter="regras-keywords">Regras e keywords</a>
+          <a class="section-chip" href="#cartas-interacoes" data-guide-topic-filter="cartas-interacoes">Cartas e interações</a>
+          <a class="section-chip" href="#formatos-fundamentos" data-guide-topic-filter="formatos-fundamentos">Formatos e fundamentos</a>
+        </nav>
+      </div>
+    </div>
+
+    <p class="folder-hint guide-folder-hint">
+      Organização sugerida para novos guias: use <code>guide_game</code>, <code>guide_topic</code>, <code>image_alt</code>, <code>summary</code> e <code>description</code> no front matter.
+      Exemplos de temas: <code>iniciantes</code>, <code>regras-keywords</code>, <code>cartas-interacoes</code> e <code>formatos-fundamentos</code>.
+    </p>
+
+    <div class="card-grid grid-3 guide-feed" id="todos">
+      {% for post in posts_list %}
+        {% assign post_path = post.path | downcase %}
+        {% assign guide_game = post.guide_game | default: post.game | default: post.tcg | default: '' | slugify %}
+        {% assign guide_tags = post.tags | join: ' ' | downcase %}
+        {% if guide_game == '' %}
+          {% if guide_tags contains 'flesh and blood' or post_path contains 'flesh' or post_path contains 'fab' %}{% assign guide_game = 'flesh-and-blood' %}
+          {% elsif guide_tags contains 'pokémon' or guide_tags contains 'pokemon' or post_path contains 'pokemon' %}{% assign guide_game = 'pokemon' %}
+          {% elsif guide_tags contains 'magic' or guide_tags contains 'commander' or guide_tags contains 'mtg' or post_path contains 'magic' %}{% assign guide_game = 'magic' %}
+          {% else %}{% assign guide_game = 'outros-tcg' %}
+          {% endif %}
+        {% endif %}
+
+        {% assign guide_topic = post.guide_topic | default: post.topic | default: 'regras-keywords' | slugify %}
+
+        <div data-guide-feed-item data-guide-game="{{ guide_game }}" data-guide-topic="{{ guide_topic }}">
+          {% include post-card.html post=post %}
+        </div>
+      {% else %}
+        <p class="empty-section">Nenhum guia publicado ainda.</p>
+      {% endfor %}
+    </div>
+
+    <p class="empty-section" data-guide-empty hidden>Nenhum guia encontrado com esses filtros. Talvez a dúvida ainda esteja no stack esperando alguém responder.</p>
+  </div>
+</section>
+
+<section class="ccm-internal-links-card guide-page-links" aria-labelledby="guide-page-links-title">
+  <header class="ccm-internal-links-header">
+    <p class="ccm-internal-links-kicker">Continue estudando</p>
+    <h2 id="guide-page-links-title">Próximos passos depois de entender a regra</h2>
+    <p>
+      Use os guias para aprender o funcionamento das cartas e depois avance para listas, notícias, eventos e resultados da comunidade.
+    </p>
+  </header>
+
+  <div class="ccm-internal-links-grid">
+    <a class="ccm-internal-link-item featured" href="{{ '/decks/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Decks</span>
+      <strong>Transforme regra em plano de jogo</strong>
+      <small>Depois de entender a carta, veja Deck Techs com listas testadas, pilotagem e decisões de mesa.</small>
+    </a>
+
+    <a class="ccm-internal-link-item" href="{{ '/blog/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Blog</span>
+      <strong>Notícias, banimentos e lançamentos</strong>
+      <small>Acompanhe novidades que podem gerar novas dúvidas de regras e interações.</small>
+    </a>
+
+    <a class="ccm-internal-link-item" href="{{ '/agenda/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Agenda</span>
+      <strong>Aprenda jogando presencialmente</strong>
+      <small>Veja os encontros de Flesh and Blood, Pokémon TCG, Magic Commander e outros jogos em Cianorte.</small>
+    </a>
+
+    <a class="ccm-internal-link-item" href="{{ '/comunidade/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Comunidade</span>
+      <strong>Resultados, fotos e vídeos</strong>
+      <small>Acompanhe partidas, eventos, memes e registros da galera.</small>
+    </a>
+
+    <a class="ccm-internal-link-item" href="{{ '/spikes/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Spikes</span>
+      <strong>Cartas chamando atenção</strong>
+      <small>Veja cartas em alta e use os guias para entender se a hype faz sentido ou é só fogo de palha com sleeves.</small>
+    </a>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ page.title | jsonify }},
+  "description": {{ page.description | jsonify }},
+  "url": "{{ page.url | absolute_url }}",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": {{ site.title | jsonify }},
+    "url": "{{ '/' | absolute_url }}"
+  },
+  "about": [
+    { "@type": "Thing", "name": "Guias de card games" },
+    { "@type": "Thing", "name": "Regras de TCG" },
+    { "@type": "Thing", "name": "Keywords" },
+    { "@type": "Thing", "name": "Flesh and Blood" },
+    { "@type": "Thing", "name": "Pokémon TCG" },
+    { "@type": "Thing", "name": "Magic: The Gathering" }
+  ],
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {% for post in posts_list limit: 12 %}
+      {
+        "@type": "ListItem",
+        "position": {{ forloop.index }},
+        "url": "{{ post.url | absolute_url }}",
+        "name": {{ post.title | jsonify }}
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }
+}
+</script>

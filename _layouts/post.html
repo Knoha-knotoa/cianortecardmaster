@@ -106,6 +106,50 @@ layout: default
   {% endcase %}
 {% endif %}
 
+
+{% if page.schema_type %}
+  {% assign structured_image = nil %}
+  {% if hero_image %}
+    {% if api_image_game and api_image_name %}
+      {% assign structured_image = fallback_image | absolute_url %}
+    {% elsif hero_image contains "://" %}
+      {% assign structured_image = hero_image %}
+    {% else %}
+      {% assign structured_image = hero_image | absolute_url %}
+    {% endif %}
+  {% endif %}
+  {% assign structured_keywords = page.keywords | default: page.tags %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": {{ page.schema_type | jsonify }},
+  "headline": {{ page.title | jsonify }},
+  "description": {{ page.description | default: page.summary | default: page.excerpt | strip_html | strip_newlines | jsonify }},
+  {% if structured_image %}"image": {{ structured_image | jsonify }},{% endif %}
+  "author": {
+    "@type": "Person",
+    "name": {{ page.author | default: site.title | jsonify }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ site.title | jsonify }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ site.data.images.logo_menu | absolute_url }}"
+    }
+  },
+  "datePublished": "{{ page.date | date_to_xmlschema }}",
+  "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+  "articleSection": {{ item_label | default: page.collection | jsonify }},
+  {% if structured_keywords %}"keywords": {{ structured_keywords | join: ', ' | jsonify }},{% endif %}
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ page.url | absolute_url }}"
+  }
+}
+</script>
+{% endif %}
+
 <article class="post-page post-style-{{ post_style }}">
   <header class="post-hero">
     <div class="container post-hero-grid">

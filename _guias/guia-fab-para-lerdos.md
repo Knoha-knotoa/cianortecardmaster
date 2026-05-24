@@ -8,7 +8,11 @@ image: "/assets/img/guias/fab-para-lerdos/capa-orc-lerdo.webp"
 image_alt: "Orc lendo cartas em um guia de Flesh and Blood para iniciantes"
 author: "Cianorte Card Masters"
 date: 2026-05-18
-last_modified_at: 2026-05-23
+last_modified_at: 2026-05-24
+schema_type: "BlogPosting"
+guide_game: "flesh-and-blood"
+guide_topic: "iniciantes"
+guide_level: "iniciante"
 keywords:
   - como jogar Flesh and Blood
   - Flesh and Blood para iniciantes

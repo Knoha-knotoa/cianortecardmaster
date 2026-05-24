@@ -1,12 +1,19 @@
 ---
 title: "Como montar um deck Commander até R$ 500: guia para começar no Magic sem vender um rim"
-category_label: "Guia Decks"
-summary: "Aprenda como montar um deck Commander até R$ 500 para jogar Magic casual com estratégia, sinergia e orçamento controlado."
+category_label: "Guia Magic"
+content_style: "magic"
+summary: "Aprenda como montar um deck Commander até R$ 500 para jogar Magic casual com estrutura, sinergia e orçamento controlado."
 description: "Guia prático para montar um deck Commander até R$ 500, com estrutura, orçamento, erros comuns e evolução para mesas casuais."
 slug: "como-montar-deck-commander-ate-500"
 image: "https://res.cloudinary.com/dwbyl8zdn/image/upload/q_auto/f_auto/v1779413596/6fd45899-0c2d-4034-87e1-04cc7537855e_1_xxhxvf.png"
+image_alt: "Mesa de Magic Commander com cartas e clima de jogo presencial para guia budget"
 author: "Neto"
 date: 2026-05-21
+last_modified_at: 2026-05-24
+schema_type: "BlogPosting"
+guide_game: "magic"
+guide_topic: "formatos-fundamentos"
+guide_level: "iniciante-intermediario"
 tags:
   - Magic: The Gathering
   - Commander
@@ -636,7 +643,5 @@ Observe se o deck ganha muito rápido, impede os outros de jogarem ou cria parti
 
 ## Links internos sugeridos
 
-- [Guias do Cianorte Card Masters](/guias/)
-- [Deck Techs da comunidade](/deck-tech/)
-- [Comunidade e encontros presenciais](/comunidade/)
+{% include internal-links-card.html %}
 

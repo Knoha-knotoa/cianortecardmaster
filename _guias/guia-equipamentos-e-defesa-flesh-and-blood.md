@@ -2,9 +2,25 @@
 title: "Guia: Equipamentos e a Fase de Defesa em Flesh and Blood"
 category_label: "Guia"
 summary: "Entenda como equipamentos defendem, quando quebram, como funcionam Blade Break, Battleworn, Temper, Guardwell, escudos, T-Bone, Fragment e interações com heróis."
+description: "Guia de regras de Flesh and Blood sobre equipamentos e defesa: defesa 0, Blade Break, Battleworn, Temper, Guardwell, T-Bone, Fragment, Rampart e combat chain."
+keywords:
+  - equipamentos Flesh and Blood
+  - defesa Flesh and Blood
+  - Blade Break
+  - Battleworn
+  - Temper
+  - T-Bone Flesh and Blood
+  - combat chain
 image: "goagain:Crown of Providence"
+image_alt: "Carta Crown of Providence usada como exemplo em guia de equipamentos e defesa de Flesh and Blood"
 author: "Neto"
 date: 2026-05-18
+last_modified_at: 2026-05-24
+schema_type: "BlogPosting"
+content_style: "flesh-and-blood"
+guide_game: "flesh-and-blood"
+guide_topic: "regras-keywords"
+guide_level: "intermediario"
 tags:
   - Flesh and Blood
   - Guia
@@ -602,3 +618,5 @@ A frase principal do guia é:
 > **Equipamento com defesa 0 pode defender; equipamento sem defesa não pode. E a maioria dos efeitos que desgasta ou quebra equipamento acontece só quando a combat chain fecha.**
 
 Dominando isso, você evita erros contra T-Bone, Meganetic Shockwave, Fragment, Rampart, Crown of Providence, escudos Guardian e interações avançadas com Evos.
+
+{% include internal-links-card.html %}

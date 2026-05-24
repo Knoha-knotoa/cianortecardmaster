@@ -646,6 +646,90 @@
     });
   }
 
+
+  function initGuideFilter() {
+    const items = Array.from(document.querySelectorAll("[data-guide-feed-item]"));
+    const gameFilters = Array.from(document.querySelectorAll("[data-guide-game-filter]"));
+    const topicFilters = Array.from(document.querySelectorAll("[data-guide-topic-filter]"));
+    const emptyState = document.querySelector("[data-guide-empty]");
+    if (!items.length || (!gameFilters.length && !topicFilters.length)) return;
+
+    let activeGame = "all";
+    let activeTopic = "all";
+
+    function setActive(filters, activeValue, datasetKey) {
+      filters.forEach(filter => {
+        const value = filter.dataset[datasetKey] || "all";
+        const isActive = value === activeValue;
+        filter.classList.toggle("is-active", isActive);
+        if (isActive) {
+          filter.setAttribute("aria-current", "true");
+        } else {
+          filter.removeAttribute("aria-current");
+        }
+      });
+    }
+
+    function applyFilters(updateHash = true) {
+      let visibleCount = 0;
+
+      items.forEach(item => {
+        const matchesGame = activeGame === "all" || item.dataset.guideGame === activeGame;
+        const matchesTopic = activeTopic === "all" || item.dataset.guideTopic === activeTopic;
+        const isVisible = matchesGame && matchesTopic;
+        item.hidden = !isVisible;
+        if (isVisible) visibleCount += 1;
+      });
+
+      if (emptyState) emptyState.hidden = visibleCount !== 0;
+
+      setActive(gameFilters, activeGame, "guideGameFilter");
+      setActive(topicFilters, activeTopic, "guideTopicFilter");
+
+      if (updateHash) {
+        const hash = activeGame !== "all" ? activeGame : activeTopic !== "all" ? activeTopic : "todos";
+        history.replaceState(null, "", `#${hash}`);
+      }
+    }
+
+    function activateFromHash() {
+      const hash = window.location.hash.replace("#", "").trim();
+      if (!hash) return applyFilters(false);
+
+      const gameMatch = gameFilters.find(filter => (filter.dataset.guideGameFilter || "") === hash);
+      const topicMatch = topicFilters.find(filter => (filter.dataset.guideTopicFilter || "") === hash);
+
+      if (gameMatch) {
+        activeGame = gameMatch.dataset.guideGameFilter || "all";
+      }
+
+      if (topicMatch) {
+        activeTopic = topicMatch.dataset.guideTopicFilter || "all";
+      }
+
+      applyFilters(false);
+    }
+
+    gameFilters.forEach(filter => {
+      filter.addEventListener("click", event => {
+        event.preventDefault();
+        activeGame = filter.dataset.guideGameFilter || "all";
+        applyFilters(true);
+      });
+    });
+
+    topicFilters.forEach(filter => {
+      filter.addEventListener("click", event => {
+        event.preventDefault();
+        activeTopic = filter.dataset.guideTopicFilter || "all";
+        applyFilters(true);
+      });
+    });
+
+    activateFromHash();
+    window.addEventListener("hashchange", activateFromHash);
+  }
+
   function initDeckFilter() {
     const items = Array.from(document.querySelectorAll("[data-deck-feed-item]"));
     const gameFilters = Array.from(document.querySelectorAll("[data-deck-game-filter]"));
@@ -732,12 +816,14 @@
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => {
       initBlogFilter();
+      initGuideFilter();
       initDeckFilter();
       initCommunityPagination();
       renderArmoryStats();
     });
   } else {
     initBlogFilter();
+    initGuideFilter();
     initDeckFilter();
     initCommunityPagination();
     renderArmoryStats();
