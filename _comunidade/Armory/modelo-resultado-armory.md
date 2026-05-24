@@ -8,6 +8,7 @@ next_armory: "Quarta • 19:00"
 date: 2026-05-19
 author: "Cianorte Card Masters"
 image: "/assets/img/banners/banner-armory-resultado-card.png"
+image_alt: "Modelo visual para resultado de Armory da comunidade Cianorte Card Masters"
 results:
   - player: "Nome do jogador"
     hero: "Nome do herói"

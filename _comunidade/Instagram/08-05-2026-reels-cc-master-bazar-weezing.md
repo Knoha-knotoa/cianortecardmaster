@@ -8,6 +8,7 @@ social_url: "https://www.instagram.com/reel/DYFUvLYO5xQ/"
 post_type: "social"
 video_platform: "instagram"
 summary: "Registro em vídeo de um dos encontros da comunidade Cianorte Card Masters."
+image_alt: "Vídeo incorporado do Instagram mostrando encontro da comunidade Cianorte Card Masters"
 author: "Neto"
 date: 2026-05-19
 tags:

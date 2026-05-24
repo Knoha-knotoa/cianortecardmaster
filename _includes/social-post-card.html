@@ -8,6 +8,8 @@
 {% if social_platform == '' %}{% assign social_platform = 'outros' %}{% endif %}
 
 {% assign platform_label = include.post.category_label | default: social_platform | replace: 'youtube', 'YouTube' | replace: 'instagram', 'Instagram' | replace: 'tiktok', 'TikTok' | replace: 'x', 'X' %}
+{% assign media_alt = include.post.image_alt | default: include.post.alt %}
+{% unless media_alt %}{% assign media_alt = include.post.title | prepend: 'Registro da comunidade Cianorte Card Masters: ' %}{% endunless %}
 
 {% assign fallback_image = site.data.images.post_defaults.comunidade | default: site.data.images.post_default %}
 {% if social_platform == 'instagram' or social_platform == 'fotos' %}
@@ -87,13 +89,15 @@
     {% elsif include.post.gallery %}
       <div class="social-gallery-preview">
         {% for foto in include.post.gallery limit:4 %}
-          <img src="{{ foto | relative_url }}" alt="{{ include.post.title | escape }}" loading="lazy" onerror="this.onerror=null;this.src='{{ fallback_image | relative_url }}';">
+          {% assign foto_src = foto.src | default: foto.url | default: foto.path | default: foto %}
+          {% assign foto_alt = foto.alt | default: foto.title | default: include.post.image_alt | default: include.post.title | append: ' — foto ' | append: forloop.index %}
+          <img src="{{ foto_src | relative_url }}" alt="{{ foto_alt | escape }}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ fallback_image | relative_url }}';">
         {% endfor %}
       </div>
     {% elsif api_image_game and api_image_name %}
-      {% include tcg-card.html game=api_image_game name=api_image_name cover=true fallback=fallback_image fallback_alt=include.post.title %}
+      {% include tcg-card.html game=api_image_game name=api_image_name cover=true fallback=fallback_image fallback_alt=media_alt %}
     {% elsif social_image != '' %}
-      <img src="{{ social_image_src }}" alt="{{ include.post.title | escape }}" loading="lazy" onerror="this.onerror=null;this.src='{{ fallback_image | relative_url }}';">
+      <img src="{{ social_image_src }}" alt="{{ media_alt | escape }}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ fallback_image | relative_url }}';">
     {% else %}
       <div class="social-content-fallback">
         {{ include.post.content }}

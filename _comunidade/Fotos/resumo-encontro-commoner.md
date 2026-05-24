@@ -2,6 +2,7 @@
 title: "Resumo do encontro Commoner"
 summary: "Fotos, partidas e momentos do encontro da comunidade."
 image: "/assets/img/comunidade/encontro-01.jpg"
+image_alt: "Jogadores da comunidade Cianorte Card Masters reunidos em encontro de Flesh and Blood Commoner"
 gallery:
   - "/assets/img/comunidade/encontro-01.jpg"
   - "/assets/img/comunidade/encontro-02.jpg"

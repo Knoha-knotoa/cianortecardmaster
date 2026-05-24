@@ -9,6 +9,7 @@ event_date: 2026-03-01
 next_liga: "Esperando Edital"
 author: "Cianorte Card Masters"
 image: "/assets/img/banners/banner-liga-pokemon-resultado.png"
+image_alt: "Card de resultado da Liga de Pokémon da comunidade Cianorte Card Masters"
 results:
   - player: "Nome do jogador"
     hero: "Nome do herói"

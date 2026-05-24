@@ -9,6 +9,7 @@ event_date: 2026-05-19
 next_liga: "Domingo • 13:30"
 author: "Cianorte Card Masters"
 image: "/assets/img/banners/banner-liga-fab-resultado.png"
+image_alt: "Modelo visual para resultado de liga da comunidade Cianorte Card Masters"
 results:
   - player: "Nome do jogador"
     hero: "Nome do herói"

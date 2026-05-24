@@ -1,20 +1,124 @@
 ---
 layout: default
-title: "Comunidade"
+title: "Comunidade de Card Games em Cianorte"
+description: "Resultados dos últimos jogos, Armory de Flesh and Blood, ligas, fotos, vídeos, memes e postagens da comunidade Cianorte Card Masters."
 permalink: /comunidade/
+image: /assets/img/banners/banner-comunidade.webp
+image_alt: "Mesa de card games da comunidade Cianorte Card Masters com fantasia, tecnologia e jogadores reunidos"
+tags:
+  - comunidade de card games em Cianorte
+  - Flesh and Blood Cianorte
+  - Pokémon TCG Cianorte
+  - Magic Commander Cianorte
+  - RPG Cianorte
 ---
 
 {% assign comunidade_posts = site.comunidade | sort: "date" | reverse %}
 
-<section class="page-hero community-page-hero" style="--page-hero-image: url('{{ '/assets/img/banners/banner-comunidade.webp' | relative_url }}'); --page-hero-image-mobile: url('{{ '/assets/img/banners/banner-comunidade-mobile.webp' | relative_url }}'); --page-hero-position: center; --page-hero-position-mobile: center;">
+<section class="page-hero community-page-hero" style="--page-hero-image: url('{{ '/assets/img/banners/banner-comunidade.webp' | relative_url }}'); --page-hero-image-mobile: url('{{ '/assets/img/banners/banner-comunidade-mobile.webp' | relative_url }}'); --page-hero-position: center; --page-hero-position-mobile: center;" aria-label="{{ page.image_alt | escape }}">
   <div class="container">
-    <p class="eyebrow">Nossa galera</p>
-    <h1>Comunidade</h1>
+    <p class="eyebrow">Cianorte Card Masters</p>
+    <h1>Comunidade de card games em Cianorte</h1>
     <p>
-      Resultados, fotos, vídeos, músicas, memes e histórico competitivo da comunidade em um só lugar.
+      Resultados dos últimos jogos, Armory de Flesh and Blood, ligas, fotos de eventos,
+      vídeos, memes e postagens de quem marcou a comunidade.
     </p>
   </div>
 </section>
+
+<section class="section community-intro-section" aria-labelledby="comunidade-intro-title">
+  <div class="container">
+    <div class="community-intro-grid">
+      <div class="community-intro-copy">
+        <p class="eyebrow">Mesa, ranking e resenha</p>
+        <h2 id="comunidade-intro-title">O ponto de encontro digital da nossa comunidade</h2>
+        <p>
+          Esta página reúne o que acontece nos encontros presenciais do Cianorte Card Masters:
+          partidas de Flesh and Blood, Pokémon TCG, Magic Commander, RPG, board games e registros
+          enviados pela galera nas redes sociais.
+        </p>
+        <p>
+          A ideia é simples: quem quer conhecer o grupo encontra resultados, fotos, vídeos e o clima
+          dos eventos em um só lugar. Quem já joga consegue acompanhar histórico, campeões, heróis,
+          memes internos e próximos encontros.
+        </p>
+      </div>
+
+      <div class="community-intro-cards" aria-label="Conteúdos disponíveis na página Comunidade">
+        <a class="community-intro-card post-style-armory" href="#ultimo-armory">
+          <strong>Resultados</strong>
+          <span>Armory, ligas e torneios da comunidade.</span>
+        </a>
+        <a class="community-intro-card post-style-instagram" href="#postagens">
+          <strong>Fotos e vídeos</strong>
+          <span>Marcações, reels, bastidores e registros de evento.</span>
+        </a>
+        <a class="community-intro-card post-style-meme" href="#postagens">
+          <strong>Memes e social</strong>
+          <span>A parte menos séria, porém indispensável.</span>
+        </a>
+        <a class="community-intro-card post-style-liga" href="#resultado-ultima-liga">
+          <strong>Ligas</strong>
+          <span>Campanhas longas e resultados acumulados.</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ page.title | jsonify }},
+  "description": {{ page.description | jsonify }},
+  "url": "{{ page.url | absolute_url }}",
+  "inLanguage": "{{ site.lang | default: 'pt-BR' }}",
+  "image": {
+    "@type": "ImageObject",
+    "url": "{{ page.image | absolute_url }}",
+    "caption": {{ page.image_alt | jsonify }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Cianorte Card Masters",
+    "url": "{{ '/' | absolute_url }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ site.data.images.logo_menu | default: '/assets/img/logo/ccm-logo.png' | absolute_url }}"
+    }
+  },
+  "about": [
+    { "@type": "Thing", "name": "Card games em Cianorte" },
+    { "@type": "Thing", "name": "Flesh and Blood" },
+    { "@type": "Thing", "name": "Pokémon TCG" },
+    { "@type": "Thing", "name": "Magic: The Gathering Commander" },
+    { "@type": "Thing", "name": "RPG de mesa" }
+  ],
+  "mainEntity": {
+    "@type": "ItemList",
+    "name": "Postagens recentes da comunidade Cianorte Card Masters",
+    "itemListElement": [
+      {% assign schema_posts = comunidade_posts | where_exp: "post", "post.published != false" %}
+      {% for post in schema_posts limit: 12 %}
+        {
+          "@type": "ListItem",
+          "position": {{ forloop.index }},
+          "item": {
+            "@type": "CreativeWork",
+            "name": {{ post.title | jsonify }},
+            "url": "{{ post.url | absolute_url }}",
+            "datePublished": "{{ post.date | date_to_xmlschema }}",
+            "description": {{ post.summary | default: post.excerpt | strip_html | strip | jsonify }}{% assign schema_image = post.image | default: '' | strip %}{% if schema_image != '' %}{% if schema_image contains '://' %},
+            "image": "{{ schema_image }}"{% elsif schema_image contains ':' %}{% else %},
+            "image": "{{ schema_image | absolute_url }}"{% endif %}{% endif %}
+          }
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }
+}
+</script>
 
 <script type="application/json" id="armory-data">
 [
@@ -66,13 +170,13 @@ permalink: /comunidade/
 ]
 </script>
 
-<section class="section community-dashboard-section armory-feature-section">
+<section class="section community-dashboard-section armory-feature-section" id="ultimo-armory" aria-labelledby="ultimo-armory-title">
   <div class="container">
     <div class="section-title armory-feature-title">
       <div>
         <p class="eyebrow">Último Armory</p>
-        <h2>Resultado mais recente</h2>
-        <p>Confira aqui o resultado mais recente do nosso Armory, o torneio semanal da comunidade.</p>
+        <h2 id="ultimo-armory-title">Resultado mais recente</h2>
+        <p>Resultado mais recente do nosso Armory, o torneio semanal de Flesh and Blood da comunidade.</p>
       </div>
     </div>
 
@@ -86,19 +190,19 @@ permalink: /comunidade/
   </div>
 </section>
 
-<section class="section section-alt community-social-section">
+<section class="section section-alt community-social-section" aria-labelledby="feed-comunidade-title">
   <div class="container">
     <div class="community-feed-toolbar">
       <div>
         <p class="eyebrow">Postagens da comunidade</p>
-        <h2>Feed social incorporado</h2>
-        <p>Instagram, YouTube, TikTok, X e outros compartilhamentos aparecem direto na página, com identidade visual por rede.</p>
+        <h2 id="feed-comunidade-title">Feed social incorporado</h2>
+        <p>Instagram, YouTube, TikTok, X, fotos de evento, memes e outros compartilhamentos aparecem direto na página.</p>
       </div>
 
       <div class="community-feed-controls">
         <label>
           Mostrar
-          <select id="community-page-size">
+          <select id="community-page-size" aria-label="Quantidade de postagens por página">
             <option value="6" selected>6 por página</option>
             <option value="12">12 por página</option>
             <option value="24">24 por página</option>
@@ -150,13 +254,13 @@ permalink: /comunidade/
   </div>
 </section>
 
-<section class="section community-dashboard-section armory-feature-section league-feature-section" id="resultado-ultima-liga">
+<section class="section community-dashboard-section armory-feature-section league-feature-section" id="resultado-ultima-liga" aria-labelledby="resultado-liga-title">
   <div class="container">
     <div class="section-title armory-feature-title league-feature-title">
       <div>
         <p class="eyebrow">Ligas</p>
-        <h2>Resultados da última liga</h2>
-        <p>Confira aqui o resultado mais recente da nossa liga da comunidade.</p>
+        <h2 id="resultado-liga-title">Resultados da última liga</h2>
+        <p>Resultado mais recente das ligas da comunidade, incluindo Pokémon, Flesh and Blood e outros card games.</p>
       </div>
     </div>
 
@@ -170,22 +274,22 @@ permalink: /comunidade/
   </div>
 </section>
 
-<section class="section competitive-results-section">
+<section class="section competitive-results-section" id="resultados-ligas" aria-labelledby="competitivo-title">
   <div class="container">
     <div class="section-title">
       <div>
         <p class="eyebrow">Competitivo</p>
-        <h2>Torneios e ligas</h2>
-        <p>Resultados e relatos maiores ficam separados dos posts sociais.</p>
+        <h2 id="competitivo-title">Torneios e ligas</h2>
+        <p>Resultados e relatos maiores ficam separados dos posts sociais para facilitar a consulta.</p>
       </div>
     </div>
 
     <div class="results-columns">
-      <section class="content-section-block post-style-torneio">
+      <section class="content-section-block post-style-torneio" aria-labelledby="torneios-title">
         <div class="content-section-head">
           <div>
             <p class="eyebrow">Torneios</p>
-            <h3>Resultados de torneios</h3>
+            <h3 id="torneios-title">Resultados de torneios</h3>
           </div>
           <span class="section-folder">_comunidade/Torneio/</span>
         </div>
@@ -202,14 +306,39 @@ permalink: /comunidade/
         </div>
         {% if torneio_count == 0 %}<p class="empty-section">Nenhum torneio publicado ainda.</p>{% endif %}
       </section>
-      
-<section class="section section-alt armory-history-section" id="armory-historico">
+
+      <section class="content-section-block post-style-liga" aria-labelledby="ligas-title">
+        <div class="content-section-head">
+          <div>
+            <p class="eyebrow">Ligas</p>
+            <h3 id="ligas-title">Resultados anteriores de ligas</h3>
+          </div>
+          <span class="section-folder">_comunidade/Liga/</span>
+        </div>
+        <div class="card-grid grid-3">
+          {% assign liga_count = 0 %}
+          {% for post in comunidade_posts %}
+            {% assign post_path = post.path | downcase %}
+            {% assign style_slug = post.content_style | default: post.category_label | default: '' | slugify %}
+            {% if post_path contains '/liga/' or post_path contains '_comunidade/liga/' or style_slug == 'liga' %}
+              {% if liga_count < 6 %}{% include post-card.html post=post %}{% endif %}
+              {% assign liga_count = liga_count | plus: 1 %}
+            {% endif %}
+          {% endfor %}
+        </div>
+        {% if liga_count == 0 %}<p class="empty-section">Nenhuma liga publicada ainda.</p>{% endif %}
+      </section>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt armory-history-section" id="armory-historico" aria-labelledby="armory-historico-title">
   <div class="container">
     <div class="section-title">
       <div>
         <p class="eyebrow">Histórico Armory</p>
-        <h2>Estatísticas e resultados</h2>
-        <p>Lista dos Armory cadastrados e resumo acumulado calculado no navegador.</p>
+        <h2 id="armory-historico-title">Estatísticas e resultados</h2>
+        <p>Lista dos Armory cadastrados e resumo acumulado do mês vigente.</p>
       </div>
     </div>
 
@@ -223,6 +352,28 @@ permalink: /comunidade/
         <p class="eyebrow">Últimos Armory</p>
         <div id="armory-history-list" class="armory-history-list">Sem resultados cadastrados.</div>
       </article>
+    </div>
+  </div>
+</section>
+
+<section class="section community-seo-links-section" aria-labelledby="comunidade-links-title">
+  <div class="container">
+    <div class="community-links-card">
+      <div>
+        <p class="eyebrow">Continue explorando</p>
+        <h2 id="comunidade-links-title">Guias, agenda e conteúdos para novos jogadores</h2>
+        <p>
+          Chegou agora? Veja onde jogar, aprenda o básico dos card games e acompanhe os próximos encontros presenciais.
+        </p>
+      </div>
+      <div class="community-links-grid">
+        <a href="{{ '/agenda/' | relative_url }}">Agenda da semana</a>
+        <a href="{{ '/guias/' | relative_url }}">Guias para começar</a>
+        <a href="{{ '/decks/' | relative_url }}">Deck techs</a>
+        <a href="{{ '/blog/' | relative_url }}">Notícias e posts</a>
+        <a href="{{ '/onde-jogar/' | relative_url }}">Onde jogar em Cianorte</a>
+        <a href="{{ '/termos-comunidade/' | relative_url }}">Termos da comunidade</a>
+      </div>
     </div>
   </div>
 </section>
