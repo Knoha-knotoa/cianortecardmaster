@@ -6,8 +6,8 @@
   {% if include.set %}data-set="{{ include.set | escape }}"{% endif %}
   {% if include.number %}data-number="{{ include.number | escape }}"{% endif %}
   {% if include.fallback %}data-fallback-src="{{ include.fallback | relative_url | escape }}"{% endif %}
+  {% if include.alt or include.fallback_alt %}data-alt="{{ include.alt | default: include.fallback_alt | escape }}"{% endif %}
   {% if include.fallback_alt %}data-fallback-alt="{{ include.fallback_alt | escape }}"{% endif %}
-  {% if include.alt %}data-alt="{{ include.alt | escape }}"{% endif %}
 >
   <span class="tcg-card-loading">Carregando {{ include.name }}...</span>
 </div>

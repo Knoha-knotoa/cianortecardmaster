@@ -1,12 +1,17 @@
 ---
 title: "Deck Tech Dash I/O: La Bombita, BIOS Update e Granadas no Talo"
 category_label: "Deck Tech"
+deck_game: "Flesh and Blood"
+deck_format: "Classic Constructed"
+deck_archetype: "Mechanologist Aggro Midrange"
+schema_type: "BlogPosting"
 summary: "Deck Tech Dash I/O La Bombita: lista Mechanologist explosiva com Bios Update, Boom Grenade, itens e pressão constante para Flesh and Blood."
 description: "Deck Tech Dash I/O La Bombita: lista Mechanologist explosiva com Bios Update, Boom Grenade, itens e pressão constante para Flesh and Blood."
 image: "goagain:Dash I/O"
 image_alt: "Dash I/O de Flesh and Blood em uma Deck Tech Mechanologist chamada La Bombita, com foco em granadas, itens e pressão explosiva."
 author: "Neto"
 date: 2026-05-22
+last_modified_at: 2026-05-24
 permalink: /deck/deck-tech-dash-io-la-bombita/
 tags:
   - Flesh and Blood

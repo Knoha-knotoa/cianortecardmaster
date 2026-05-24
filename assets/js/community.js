@@ -634,51 +634,99 @@
     const filters = Array.from(document.querySelectorAll("[data-blog-filter]"));
     if (!items.length || !filters.length) return;
 
-    function applyBlogFilter(active) {
-      const wanted = active || "all";
-      filters.forEach(item => {
-        const isCurrent = (item.dataset.blogFilter || "all") === wanted;
-        item.classList.toggle("is-active", isCurrent);
-        if (isCurrent) item.setAttribute("aria-current", "true");
-        else item.removeAttribute("aria-current");
-      });
-
-      items.forEach(item => {
-        item.hidden = wanted !== "all" && item.dataset.blogCategory !== wanted;
-      });
-    }
-
     filters.forEach(filter => {
       filter.addEventListener("click", event => {
         event.preventDefault();
         const active = filter.dataset.blogFilter || "all";
-        applyBlogFilter(active);
-
-        const targetHash = active === "all" ? "#todos" : `#${active}`;
-        if (history.replaceState) history.replaceState(null, "", targetHash);
+        filters.forEach(item => item.classList.toggle("is-active", item === filter));
+        items.forEach(item => {
+          item.hidden = active !== "all" && item.dataset.blogCategory !== active;
+        });
       });
     });
-
-    const initialFilter = window.location.hash ? window.location.hash.replace("#", "") : "all";
-    const hasInitialFilter = filters.some(filter => filter.dataset.blogFilter === initialFilter);
-    applyBlogFilter(hasInitialFilter ? initialFilter : "all");
   }
 
   function initDeckFilter() {
     const items = Array.from(document.querySelectorAll("[data-deck-feed-item]"));
-    const filters = Array.from(document.querySelectorAll("[data-deck-filter]"));
-    if (!items.length || !filters.length) return;
+    const gameFilters = Array.from(document.querySelectorAll("[data-deck-game-filter]"));
+    const formatFilters = Array.from(document.querySelectorAll("[data-deck-format-filter], [data-deck-filter]"));
+    const emptyState = document.querySelector("[data-deck-empty]");
+    if (!items.length || (!gameFilters.length && !formatFilters.length)) return;
 
-    filters.forEach(filter => {
+    let activeGame = "all";
+    let activeFormat = "all";
+
+    function setActive(filters, activeValue, datasetKey) {
+      filters.forEach(filter => {
+        const value = filter.dataset[datasetKey] || filter.dataset.deckFilter || "all";
+        const isActive = value === activeValue;
+        filter.classList.toggle("is-active", isActive);
+        if (isActive) {
+          filter.setAttribute("aria-current", "true");
+        } else {
+          filter.removeAttribute("aria-current");
+        }
+      });
+    }
+
+    function applyFilters(updateHash = true) {
+      let visibleCount = 0;
+
+      items.forEach(item => {
+        const matchesGame = activeGame === "all" || item.dataset.deckGame === activeGame;
+        const matchesFormat = activeFormat === "all" || item.dataset.deckFormat === activeFormat;
+        const isVisible = matchesGame && matchesFormat;
+        item.hidden = !isVisible;
+        if (isVisible) visibleCount += 1;
+      });
+
+      if (emptyState) emptyState.hidden = visibleCount !== 0;
+
+      setActive(gameFilters, activeGame, "deckGameFilter");
+      setActive(formatFilters, activeFormat, "deckFormatFilter");
+
+      if (updateHash) {
+        const hash = activeGame !== "all" ? activeGame : activeFormat !== "all" ? activeFormat : "todos";
+        history.replaceState(null, "", `#${hash}`);
+      }
+    }
+
+    function activateFromHash() {
+      const hash = window.location.hash.replace("#", "").trim();
+      if (!hash) return applyFilters(false);
+
+      const gameMatch = gameFilters.find(filter => (filter.dataset.deckGameFilter || "") === hash);
+      const formatMatch = formatFilters.find(filter => ((filter.dataset.deckFormatFilter || filter.dataset.deckFilter || "") === hash));
+
+      if (gameMatch) {
+        activeGame = gameMatch.dataset.deckGameFilter || "all";
+      }
+
+      if (formatMatch) {
+        activeFormat = formatMatch.dataset.deckFormatFilter || formatMatch.dataset.deckFilter || "all";
+      }
+
+      applyFilters(false);
+    }
+
+    gameFilters.forEach(filter => {
       filter.addEventListener("click", event => {
         event.preventDefault();
-        const active = filter.dataset.deckFilter || "all";
-        filters.forEach(item => item.classList.toggle("is-active", item === filter));
-        items.forEach(item => {
-          item.hidden = active !== "all" && item.dataset.deckFormat !== active;
-        });
+        activeGame = filter.dataset.deckGameFilter || "all";
+        applyFilters(true);
       });
     });
+
+    formatFilters.forEach(filter => {
+      filter.addEventListener("click", event => {
+        event.preventDefault();
+        activeFormat = filter.dataset.deckFormatFilter || filter.dataset.deckFilter || "all";
+        applyFilters(true);
+      });
+    });
+
+    activateFromHash();
+    window.addEventListener("hashchange", activateFromHash);
   }
 
   if (document.readyState === "loading") {

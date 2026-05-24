@@ -1635,113 +1635,6 @@ h3 {
   --category-line: rgba(212, 175, 55, .36);
 }
 
-
-/* ==========================================
-   Comunidade: cards de entrada / editorias
-========================================== */
-
-.community-intro-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, .9fr);
-  gap: clamp(1.2rem, 4vw, 2.4rem);
-  align-items: center;
-}
-
-.community-intro-copy p {
-  max-width: 760px;
-  color: var(--muted);
-}
-
-.community-intro-cards {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: .85rem;
-}
-
-.community-intro-card {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 148px;
-  padding: 1rem;
-  border: 1px solid var(--category-line, rgba(212, 175, 55, .22));
-  border-radius: 24px;
-  background:
-    radial-gradient(circle at top right, var(--category-soft, rgba(212, 175, 55, .12)), transparent 48%),
-    linear-gradient(180deg, rgba(16, 27, 19, .92), rgba(8, 13, 9, .98));
-  color: var(--white);
-  text-decoration: none;
-  box-shadow: 0 18px 38px rgba(0, 0, 0, .24);
-  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
-}
-
-.community-intro-card::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 4px;
-  background: linear-gradient(90deg, var(--category-accent, var(--gold)), transparent);
-}
-
-.community-intro-card::after {
-  content: "";
-  position: absolute;
-  right: -22px;
-  bottom: -22px;
-  width: 88px;
-  height: 88px;
-  border-radius: 999px;
-  border: 1px solid var(--category-line, rgba(212, 175, 55, .18));
-  background: var(--category-soft, rgba(212, 175, 55, .08));
-  opacity: .55;
-}
-
-.community-intro-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--category-accent, var(--gold));
-  box-shadow: 0 24px 48px rgba(0, 0, 0, .32);
-}
-
-.community-intro-card strong,
-.community-intro-card span {
-  position: relative;
-  z-index: 1;
-}
-
-.community-intro-card strong {
-  display: block;
-  margin-bottom: .5rem;
-  color: #fff2b8;
-  font-family: "Fugaz One", system-ui, sans-serif;
-  font-size: 1.02rem;
-  line-height: 1.25;
-}
-
-.community-intro-card span {
-  display: block;
-  color: var(--muted);
-  font-size: .95rem;
-  line-height: 1.35;
-}
-
-@media (max-width: 920px) {
-  .community-intro-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 560px) {
-  .community-intro-cards {
-    grid-template-columns: 1fr;
-  }
-
-  .community-intro-card {
-    min-height: 118px;
-  }
-}
-
 @media (max-width: 900px) {
   .content-section-head {
     grid-template-columns: 1fr;
@@ -4981,4 +4874,186 @@ h3 {
 .spike-modal-image img,
 .spike-modal-image.spike-card-image-direct img {
   max-height: 360px;
+}
+
+/* =========================================================
+   Decks e Deck Techs — página hub
+========================================================= */
+.deck-page-intro,
+.deck-page-pillars {
+  padding: clamp(2.2rem, 6vw, 4.25rem) 0;
+}
+
+.deck-page-intro {
+  border-bottom: 1px solid rgba(212, 175, 55, .12);
+  background:
+    radial-gradient(circle at top right, rgba(31, 184, 92, .12), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, .02), rgba(255, 255, 255, 0));
+}
+
+.deck-page-intro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(280px, .75fr);
+  gap: clamp(1.25rem, 4vw, 2rem);
+  align-items: stretch;
+}
+
+.deck-page-intro h2,
+.deck-pillar-card h2,
+.deck-feed-toolbar h2 {
+  margin-bottom: .45rem;
+}
+
+.deck-page-intro p {
+  max-width: 850px;
+  color: var(--muted);
+}
+
+.deck-page-method-card,
+.deck-pillar-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(212, 175, 55, .18);
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at top left, rgba(212, 175, 55, .16), transparent 40%),
+    linear-gradient(145deg, rgba(16, 27, 19, .94), rgba(6, 10, 7, .98));
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .24);
+}
+
+.deck-page-method-card {
+  display: grid;
+  align-content: center;
+  gap: .7rem;
+  min-height: 260px;
+  padding: clamp(1.2rem, 4vw, 1.8rem);
+}
+
+.deck-page-method-card span,
+.deck-pillar-card span {
+  width: fit-content;
+  color: #ffe9a3;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: .78rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.deck-page-method-card strong {
+  color: #fff;
+  font-family: "Bangers", system-ui, sans-serif;
+  font-size: clamp(2.1rem, 5vw, 3.25rem);
+  line-height: .95;
+  letter-spacing: .03em;
+}
+
+.deck-page-method-card p,
+.deck-pillar-card p,
+.deck-folder-hint {
+  color: rgba(246, 241, 223, .78);
+}
+
+.deck-pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.deck-pillar-card {
+  min-height: 210px;
+  padding: 1.15rem;
+}
+
+.deck-pillar-card::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--category-accent, var(--gold)), transparent);
+}
+
+.deck-feed-toolbar {
+  display: grid;
+  grid-template-columns: minmax(220px, .75fr) minmax(0, 1.25fr);
+  gap: 1rem;
+  align-items: start;
+  margin-bottom: 1.35rem;
+}
+
+.deck-filter-groups {
+  display: grid;
+  gap: .65rem;
+}
+
+.deck-filter-index {
+  margin: 0;
+  justify-content: flex-end;
+}
+
+.deck-filter-index + .deck-filter-index {
+  padding-top: .65rem;
+  border-top: 1px solid rgba(212, 175, 55, .12);
+}
+
+.deck-folder-hint {
+  margin: 0 0 1.35rem;
+  line-height: 1.6;
+}
+
+.deck-feed > [data-deck-feed-item] {
+  min-width: 0;
+}
+
+.deck-page-links {
+  width: min(100% - 32px, var(--container));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.post-style-commander {
+  --category-accent: #c084fc;
+  --category-soft: rgba(192, 132, 252, .14);
+  --category-line: rgba(192, 132, 252, .32);
+}
+
+.post-style-standard {
+  --category-accent: #60a5fa;
+  --category-soft: rgba(96, 165, 250, .13);
+  --category-line: rgba(96, 165, 250, .3);
+}
+
+@media (max-width: 900px) {
+  .deck-page-intro-grid,
+  .deck-pillar-grid,
+  .deck-feed-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .deck-filter-index {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 620px) {
+  .deck-page-intro,
+  .deck-page-pillars {
+    padding: 2rem 0;
+  }
+
+  .deck-page-method-card,
+  .deck-pillar-card {
+    border-radius: 20px;
+  }
+
+  .deck-filter-groups {
+    gap: .8rem;
+  }
+
+  .deck-filter-index {
+    gap: .45rem;
+  }
+
+  .deck-folder-hint code {
+    white-space: normal;
+  }
 }

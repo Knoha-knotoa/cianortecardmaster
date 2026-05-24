@@ -1,36 +1,117 @@
 ---
 layout: default
-title: "Deck"
+title: "Decks e Deck Techs"
+description: "Decks, deck techs e estudos de listas testadas para Flesh and Blood, Pokémon TCG, Magic Commander e outros card games em Cianorte. Veja planos de jogo, pilotagem, formatos e análises práticas."
+keywords:
+  - decks TCG
+  - deck tech
+  - Flesh and Blood deck tech
+  - Pokémon TCG decks
+  - Magic Commander decks
+  - card games Cianorte
+  - Cianorte Card Masters
+image: "/assets/img/banners/banner-decktech.webp"
+image_alt: "Personagens de fantasia e ficção científica estudando decks de card games em uma mesa do Cianorte Card Masters"
 permalink: /decks/
 ---
 
-{% assign posts_list = site.decks | sort: "date" | reverse %}
+{% assign posts_list = site.decks | where_exp: "post", "post.published != false" | sort: "date" | reverse %}
 
 <section class="page-hero decks-page-hero" style="--page-hero-image: url('{{ '/assets/img/banners/banner-decktech.webp' | relative_url }}'); --page-hero-image-mobile: url('{{ '/assets/img/banners/banner-decktech-mobile.webp' | relative_url }}'); --page-hero-position: center; --page-hero-position-mobile: center;">
   <div class="container">
-    <p class="eyebrow">Listas e estratégias</p>
-    <h1>Deck</h1>
-    <p>Deck lists, deck techs, relatos de torneio e análises de listas da comunidade, agora organizados por formato.</p>
+    <p class="eyebrow">Listas testadas, pilotagem e estratégia</p>
+    <h1>Decks e Deck Techs</h1>
+    <p>
+      Estudos de decks para Flesh and Blood, Pokémon TCG, Magic Commander e outros card games:
+      listas jogadas na mesa, planos de jogo, decisões de pilotagem, matchups e ajustes depois de teste real.
+    </p>
   </div>
 </section>
 
-<section class="listing decks-listing">
-  <div class="container">
-    <nav class="section-index deck-filter-index" aria-label="Filtros de decks">
-      <a class="section-chip is-active" href="#decks" data-deck-filter="all">Todos</a>
-      <a class="section-chip post-style-silver-age" href="#silver-age" data-deck-filter="silver-age">Silver Age</a>
-      <a class="section-chip post-style-classic-constructed" href="#classic-constructed" data-deck-filter="classic-constructed">Classic Constructed</a>
-      <a class="section-chip post-style-sealed" href="#sealed" data-deck-filter="sealed">Sealed</a>
-      <a class="section-chip post-style-living-legend" href="#living-legend" data-deck-filter="living-legend">Living Legend</a>
-      <a class="section-chip post-style-blitz" href="#blitz" data-deck-filter="blitz">Blitz</a>
-      <a class="section-chip post-style-upf" href="#upf" data-deck-filter="upf">UPF</a>
-    </nav>
+<section class="deck-page-intro" aria-labelledby="deck-page-intro-title">
+  <div class="container deck-page-intro-grid">
+    <div>
+      <p class="eyebrow">Aqui não é só lista jogada no ventilador</p>
+      <h2 id="deck-page-intro-title">Deck Tech é estudo de campo</h2>
+      <p>
+        A página de <strong>Decks</strong> reúne conteúdos mais práticos e validados: como o deck vence,
+        quais cartas sustentam o plano, quando acelerar, quando bloquear, como adaptar a lista e quais erros
+        fazem o piloto entregar a partida de bandeja.
+      </p>
+      <p>
+        Para regras, conceitos, jogadas e explicações mais gerais, use a página de Guias. Aqui o foco é lista,
+        teste, pilotagem e análise de jogo.
+      </p>
+    </div>
 
-    <p class="folder-hint">
-      Para organizar as postagens, salve os arquivos em <code>_decks/Silver-Age</code>, <code>_decks/Classic-Constructed</code>, <code>_decks/Sealed</code>, <code>_decks/Living-Legend</code>, <code>_decks/Blitz</code> ou <code>_decks/UPF</code>.
+    <div class="deck-page-method-card" aria-label="Critérios editoriais das Deck Techs">
+      <span>Critério do conteúdo</span>
+      <strong>Lista + plano + teste</strong>
+      <p>
+        Uma boa Deck Tech precisa explicar o motivo das escolhas, não apenas despejar 60, 80 ou 100 cartas na tela
+        e fingir que o leitor nasceu sabendo pilotar.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="deck-page-pillars" aria-label="O que você encontra nas Deck Techs">
+  <div class="container deck-pillar-grid">
+    <article class="deck-pillar-card">
+      <span>01</span>
+      <h2>Plano de jogo</h2>
+      <p>Como o deck tenta vencer, quais turnos importam e quando trocar agressão por controle.</p>
+    </article>
+    <article class="deck-pillar-card">
+      <span>02</span>
+      <h2>Cartas-chave</h2>
+      <p>Peças centrais, sinergias, cartas flexíveis e cortes que doem, mas às vezes salvam a lista.</p>
+    </article>
+    <article class="deck-pillar-card">
+      <span>03</span>
+      <h2>Pilotagem</h2>
+      <p>Linhas de jogo, erros comuns, matchups e decisões que separam deck bom de piloto em combustão.</p>
+    </article>
+  </div>
+</section>
+
+<section class="listing decks-listing" aria-labelledby="deck-feed-title">
+  <div class="container">
+    <div class="feed-toolbar deck-feed-toolbar">
+      <div>
+        <p class="eyebrow">Arquivo de estudos</p>
+        <h2 id="deck-feed-title">Últimas Deck Techs</h2>
+      </div>
+
+      <div class="deck-filter-groups" aria-label="Filtros de decks">
+        <nav class="section-index deck-filter-index" aria-label="Filtrar Deck Techs por jogo">
+          <a class="section-chip is-active" href="#todos" data-deck-game-filter="all" aria-current="true">Todos</a>
+          <a class="section-chip post-style-flesh-and-blood" href="#flesh-and-blood" data-deck-game-filter="flesh-and-blood">Flesh and Blood</a>
+          <a class="section-chip post-style-pokemon" href="#pokemon" data-deck-game-filter="pokemon">Pokémon TCG</a>
+          <a class="section-chip post-style-magic" href="#magic" data-deck-game-filter="magic">Magic</a>
+          <a class="section-chip post-style-tcg" href="#outros-tcg" data-deck-game-filter="outros-tcg">Outros TCG</a>
+        </nav>
+
+        <nav class="section-index deck-filter-index" aria-label="Filtrar Deck Techs por formato">
+          <a class="section-chip is-active" href="#todos" data-deck-format-filter="all" aria-current="true">Todos os formatos</a>
+          <a class="section-chip post-style-silver-age" href="#silver-age" data-deck-format-filter="silver-age">Silver Age</a>
+          <a class="section-chip post-style-classic-constructed" href="#classic-constructed" data-deck-format-filter="classic-constructed">Classic Constructed</a>
+          <a class="section-chip post-style-commander" href="#commander" data-deck-format-filter="commander">Commander</a>
+          <a class="section-chip post-style-standard" href="#standard" data-deck-format-filter="standard">Standard</a>
+          <a class="section-chip post-style-blitz" href="#blitz" data-deck-format-filter="blitz">Blitz</a>
+          <a class="section-chip post-style-sealed" href="#sealed" data-deck-format-filter="sealed">Sealed</a>
+          <a class="section-chip post-style-living-legend" href="#living-legend" data-deck-format-filter="living-legend">Living Legend</a>
+          <a class="section-chip post-style-upf" href="#upf" data-deck-format-filter="upf">UPF</a>
+        </nav>
+      </div>
+    </div>
+
+    <p class="folder-hint deck-folder-hint">
+      Organização sugerida: use <code>deck_game</code>, <code>deck_format</code>, <code>image_alt</code>, <code>summary</code> e <code>description</code> no front matter de cada Deck Tech.
+      As subpastas continuam úteis, como <code>_decks/Classic-Constructed</code>, <code>_decks/Silver-Age</code> e futuras pastas para Pokémon ou Magic.
     </p>
 
-    <div class="card-grid grid-3 deck-feed" id="decks">
+    <div class="card-grid grid-3 deck-feed" id="todos">
       {% for post in posts_list %}
         {% assign post_path = post.path | downcase %}
         {% assign deck_format = post.deck_format | default: post.format | default: post.category_label | default: 'deck' | slugify %}
@@ -41,12 +122,102 @@ permalink: /decks/
         {% elsif post_path contains '_decks/blitz/' %}{% assign deck_format = 'blitz' %}
         {% elsif post_path contains '_decks/upf/' %}{% assign deck_format = 'upf' %}
         {% endif %}
-        <div data-deck-feed-item data-deck-format="{{ deck_format }}">
+
+        {% assign deck_game = post.deck_game | default: post.game | default: post.tcg | default: '' | slugify %}
+        {% assign deck_tags = post.tags | join: ' ' | downcase %}
+        {% if deck_game == '' %}
+          {% if deck_tags contains 'flesh and blood' or post_path contains 'flesh' or post_path contains 'fab' %}{% assign deck_game = 'flesh-and-blood' %}
+          {% elsif deck_tags contains 'pokémon' or deck_tags contains 'pokemon' or post_path contains 'pokemon' %}{% assign deck_game = 'pokemon' %}
+          {% elsif deck_tags contains 'magic' or deck_tags contains 'commander' or deck_tags contains 'mtg' or post_path contains 'magic' %}{% assign deck_game = 'magic' %}
+          {% else %}{% assign deck_game = 'outros-tcg' %}
+          {% endif %}
+        {% endif %}
+
+        <div data-deck-feed-item data-deck-game="{{ deck_game }}" data-deck-format="{{ deck_format }}">
           {% include post-card.html post=post %}
         </div>
       {% else %}
-        <p>Nenhum deck publicado ainda.</p>
+        <p class="empty-section">Nenhuma Deck Tech publicada ainda.</p>
       {% endfor %}
     </div>
+
+    <p class="empty-section" data-deck-empty hidden>Nenhuma Deck Tech encontrada com esses filtros. A lista pode estar em testes, no sideboard da vida real ou esperando alguém escrever sem enrolar.</p>
   </div>
 </section>
+
+<section class="ccm-internal-links-card deck-page-links" aria-labelledby="deck-page-links-title">
+  <header class="ccm-internal-links-header">
+    <p class="ccm-internal-links-kicker">Continue estudando</p>
+    <h2 id="deck-page-links-title">Mais caminhos para evoluir no jogo</h2>
+    <p>
+      Depois de escolher uma lista, veja regras, agenda da comunidade, notícias e resultados para entender melhor o ambiente de jogo em Cianorte.
+    </p>
+  </header>
+
+  <div class="ccm-internal-links-grid">
+    <a class="ccm-internal-link-item featured" href="{{ '/guias/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Guias</span>
+      <strong>Aprenda regras e conceitos</strong>
+      <small>Use os guias para entender cartas, jogadas, formatos e fundamentos antes de copiar lista igual goblin ansioso.</small>
+    </a>
+
+    <a class="ccm-internal-link-item" href="{{ '/blog/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Blog</span>
+      <strong>Notícias e análises de TCG</strong>
+      <small>Lançamentos, banimentos, regras, opiniões e novidades que podem mudar o meta.</small>
+    </a>
+
+    <a class="ccm-internal-link-item" href="{{ '/spikes/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Spikes</span>
+      <strong>Cartas em alta</strong>
+      <small>Uma área curiosa para ver movimentações de preço e cartas chamando atenção.</small>
+    </a>
+
+    <a class="ccm-internal-link-item" href="{{ '/agenda/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Agenda</span>
+      <strong>Teste o deck presencialmente</strong>
+      <small>Veja os próximos encontros, Armory, Commander, Pokémon e eventos da comunidade.</small>
+    </a>
+
+    <a class="ccm-internal-link-item" href="{{ '/comunidade/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Comunidade</span>
+      <strong>Resultados e bastidores</strong>
+      <small>Acompanhe jogos, fotos, vídeos, memes e resultados recentes do grupo.</small>
+    </a>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ page.title | jsonify }},
+  "description": {{ page.description | jsonify }},
+  "url": "{{ page.url | absolute_url }}",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": {{ site.title | jsonify }},
+    "url": "{{ '/' | absolute_url }}"
+  },
+  "about": [
+    { "@type": "Thing", "name": "Deck Tech" },
+    { "@type": "Thing", "name": "Trading Card Games" },
+    { "@type": "Thing", "name": "Flesh and Blood" },
+    { "@type": "Thing", "name": "Pokémon TCG" },
+    { "@type": "Thing", "name": "Magic: The Gathering" }
+  ],
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {% for post in posts_list limit: 12 %}
+      {
+        "@type": "ListItem",
+        "position": {{ forloop.index }},
+        "url": "{{ post.url | absolute_url }}",
+        "name": {{ post.title | jsonify }}
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }
+}
+</script>

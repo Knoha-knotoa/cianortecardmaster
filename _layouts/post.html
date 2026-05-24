@@ -11,7 +11,7 @@ layout: default
   {% elsif page_path contains "_blog/magic/" %}{% assign item_label = "Magic" %}{% assign inferred_style = "magic" %}
   {% elsif page_path contains "_blog/tcg/" %}{% assign item_label = "TCG" %}{% assign inferred_style = "tcg" %}
   {% elsif page_path contains "_blog/rpg/" %}{% assign item_label = "RPG" %}{% assign inferred_style = "rpg" %}
-  {% elsif page_path contains "_blog/cianorte-card-master/" %}{% assign item_label = "Cianorte Card Masters" %}{% assign inferred_style = "cianorte-card-master" %}
+  {% elsif page_path contains "_blog/cianorte-card-master/" %}{% assign item_label = "Cianorte Card Master" %}{% assign inferred_style = "cianorte-card-master" %}
   {% endif %}
 {% elsif page.collection == "comunidade" %}
   {% if page_path contains "_comunidade/fanservice/" %}{% assign item_label = "Fanservice" %}{% assign inferred_style = "fanservice" %}
@@ -61,6 +61,7 @@ layout: default
   {% when "comunidade" %}{% assign fallback_image = site.data.images.post_defaults.comunidade %}
 {% endcase %}
 
+{% assign hero_alt_text = page.image_alt | default: page.title %}
 {% assign explicit_image = page.image | default: "" | strip %}
 {% if explicit_image == "" %}
   {% assign hero_image = fallback_image %}
@@ -132,13 +133,12 @@ layout: default
       </div>
 
       {% if hero_image %}
-        {% assign hero_image_alt = page.image_alt | default: page.title %}
         {% if api_image_game and api_image_name %}
-          <div class="post-main-image post-main-card-image" aria-label="{{ hero_image_alt | escape }}">
-            {% include tcg-card.html game=api_image_game name=api_image_name cover=true fallback=fallback_image fallback_alt=hero_image_alt alt=hero_image_alt %}
+          <div class="post-main-image post-main-card-image" aria-label="Carta {{ api_image_name | escape }}">
+            {% include tcg-card.html game=api_image_game name=api_image_name cover=true fallback=fallback_image alt=hero_alt_text fallback_alt=hero_alt_text %}
           </div>
         {% else %}
-          <img class="post-main-image" src="{{ hero_image_src }}" alt="{{ hero_image_alt | escape }}" loading="eager" decoding="async" fetchpriority="high" onerror="this.onerror=null;this.src='{{ fallback_image | relative_url }}';">
+          <img class="post-main-image" src="{{ hero_image_src }}" alt="{{ page.image_alt | default: page.title | escape }}" loading="eager" decoding="async" fetchpriority="high" onerror="this.onerror=null;this.src='{{ fallback_image | relative_url }}';">
         {% endif %}
       {% endif %}
     </div>
