@@ -168,31 +168,42 @@
   }
 
   function directImageUrl(item) {
-    return item.imageUrl || item.image_url || item.image || item.imageSmall || item.imageLarge || item.sources?.justtcg?.imageUrl || "";
+    return item.imageUrl || item.image_url || item.image || item.imageSmall || item.imageLarge || item.sources?.justtcg?.imageUrl || item.sources?.tcgplayer?.imageUrl || "";
+  }
+
+  function cardAltText(item, game) {
+    const pieces = [
+      `Carta ${item.name || "sem nome"}`,
+      game?.label ? `de ${game.label}` : "",
+      item.set ? `do set ${item.set}` : "",
+      "listada nos spikes de preço das últimas 24 horas"
+    ].filter(Boolean);
+
+    return pieces.join(" ");
+  }
+
+  function cardDataAttributes(item, game) {
+    const apiGame = gameToImageApi(game.code);
+    return `data-game="${apiGame}" data-name="${escapeHtml(fallbackCardName(item, game))}" data-pitch="${escapeHtml(fallbackPitch(item, game))}" data-set="${escapeHtml(item.set || "")}" data-number="${escapeHtml(item.number || "")}" data-alt="${escapeHtml(cardAltText(item, game))}"`;
   }
 
   function cardImageTemplate(item, game, extraClass = "") {
-    const apiGame = gameToImageApi(game.code);
     const imageUrl = directImageUrl(item);
     const className = `spike-card-image ${extraClass}`.trim();
+    const dataAttributes = cardDataAttributes(item, game);
+    const alt = cardAltText(item, game);
 
     if (imageUrl) {
       return `
-        <div class="${className} spike-card-image-direct">
-          <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(item.name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.dataset.imageError='true'; this.remove();">
-          <span class="tcg-card-loading">Imagem indisponível</span>
+        <div class="${className} spike-card-image-direct" ${dataAttributes}>
+          <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(alt)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove(); this.parentElement.classList.remove('spike-card-image-direct'); this.parentElement.classList.add('tcg-card-image'); this.parentElement.dataset.imageError='api-fallback'; window.CCMCardApis && window.CCMCardApis.load(this.parentElement);">
+          <span class="tcg-card-loading">Imagem</span>
         </div>
       `;
     }
 
     return `
-      <div
-        class="tcg-card-image ${className}"
-        data-game="${apiGame}"
-        data-name="${escapeHtml(fallbackCardName(item, game))}"
-        data-pitch="${escapeHtml(fallbackPitch(item, game))}"
-        data-set="${escapeHtml(item.set || "")}"
-        data-number="${escapeHtml(item.number || "")}">
+      <div class="tcg-card-image ${className}" ${dataAttributes}>
         <span class="tcg-card-loading">Imagem</span>
       </div>
     `;

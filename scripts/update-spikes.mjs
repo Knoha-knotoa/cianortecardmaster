@@ -21,6 +21,12 @@ const TCGCSV_FAB_CATEGORY_FALLBACK = 62;
 const TCGCSV_WAIT_MS = Number(process.env.TCGCSV_WAIT_MS || 180);
 const TCGCSV_USER_AGENT = process.env.TCGCSV_USER_AGENT || "CianorteCardMasters/1.0 (+https://github.com/Knoha-knotoa/cianortecardmaster)";
 
+// Imagens de Pokémon: a JustTCG nem sempre entrega URL de imagem.
+// Enriquecemos o JSON estático com Pokémon TCG API e TCGdex como fallback.
+const POKEMON_TCG_API = "https://api.pokemontcg.io/v2";
+const TCGDEX_API = "https://api.tcgdex.net/v2/en";
+const POKEMON_API_WAIT_MS = Number(process.env.POKEMON_API_WAIT_MS || 250);
+
 const targets = [
   { code: "fab", label: "Flesh and Blood", match: /flesh\s*(and|&)\s*blood/i },
   { code: "mtg", label: "Magic: The Gathering", match: /magic/i },
@@ -43,7 +49,9 @@ let lastRequestAt = 0;
 let lastTcgcsvRequestAt = 0;
 let cachedFabCategoryId = null;
 let cachedFabGroups = null;
+let lastPokemonRequestAt = 0;
 const tcgcsvGroupDataCache = new Map();
+const pokemonImageCache = new Map();
 
 async function loadPreviousData() {
   try {
@@ -91,6 +99,14 @@ async function waitBeforeTcgcsvRequest() {
     await sleep(TCGCSV_WAIT_MS - elapsed);
   }
   lastTcgcsvRequestAt = Date.now();
+}
+
+async function waitBeforePokemonRequest() {
+  const elapsed = Date.now() - lastPokemonRequestAt;
+  if (lastPokemonRequestAt && elapsed < POKEMON_API_WAIT_MS) {
+    await sleep(POKEMON_API_WAIT_MS - elapsed);
+  }
+  lastPokemonRequestAt = Date.now();
 }
 
 async function justtcg(path, options = {}) {
@@ -141,6 +157,24 @@ async function tcgcsv(path) {
   if (!response.ok) {
     const text = await response.text().catch(() => "");
     throw new Error(`TCGCSV ${response.status}: ${text}`);
+  }
+
+  return response.json();
+}
+
+async function pokemonJson(url) {
+  await waitBeforePokemonRequest();
+
+  const response = await fetch(url, {
+    headers: {
+      "accept": "application/json",
+      "user-agent": TCGCSV_USER_AGENT
+    }
+  });
+
+  if (!response.ok) {
+    const text = await response.text().catch(() => "");
+    throw new Error(`Pokémon image API ${response.status}: ${text}`);
   }
 
   return response.json();
@@ -484,6 +518,191 @@ function normalizeCardNumber(value) {
     .trim()
     .toUpperCase()
     .replace(/[^A-Z0-9]+/g, "");
+}
+
+function pokemonNameCandidates(name) {
+  const raw = String(name || "").trim();
+  const withoutPromoSuffix = raw.replace(/\s+-\s+[A-Z]{1,6}\d+[A-Z]?$/i, "").trim();
+  const withoutCollectorSuffix = raw.replace(/\s+#?\d+\/?\d*$/i, "").trim();
+
+  return Array.from(new Set([raw, withoutPromoSuffix, withoutCollectorSuffix]
+    .map(value => value.trim())
+    .filter(Boolean)));
+}
+
+function pokemonSetCandidates(set) {
+  const raw = String(set || "").trim();
+  const withoutCodePrefix = raw.replace(/^[A-Z]{1,8}\d{0,3}(?:\.[0-9]+)?:\s*/i, "").trim();
+  const withoutParentheses = withoutCodePrefix.replace(/\s*\([^)]*\)\s*$/g, "").trim();
+
+  return Array.from(new Set([raw, withoutCodePrefix, withoutParentheses]
+    .map(value => value.trim())
+    .filter(Boolean)));
+}
+
+function pokemonNumberCandidates(number, name) {
+  const rawNumber = String(number || "").trim();
+  const localNumber = rawNumber.split("/")[0].trim();
+  const namePromo = String(name || "").match(/\b[A-Z]{1,6}\d+[A-Z]?\b/);
+
+  return Array.from(new Set([rawNumber, localNumber, namePromo?.[0] || ""]
+    .map(value => value.trim())
+    .filter(Boolean)));
+}
+
+function escapePokemonQuery(value) {
+  return String(value || "").replace(/[\\"]/g, "\\$&");
+}
+
+function pokemonSearchQueries(item) {
+  const names = pokemonNameCandidates(item.name).slice(0, 3);
+  const sets = pokemonSetCandidates(item.set).slice(0, 2);
+  const numbers = pokemonNumberCandidates(item.number, item.name).slice(0, 2);
+  const queries = [];
+
+  for (const name of names) {
+    for (const number of numbers) {
+      queries.push(`name:"${escapePokemonQuery(name)}" number:"${escapePokemonQuery(number)}"`);
+    }
+
+    for (const set of sets) {
+      queries.push(`name:"${escapePokemonQuery(name)}" set.name:"${escapePokemonQuery(set)}"`);
+    }
+
+    queries.push(`name:"${escapePokemonQuery(name)}"`);
+  }
+
+  return Array.from(new Set(queries)).filter(Boolean);
+}
+
+function scorePokemonApiCard(card, item) {
+  const wantedNames = pokemonNameCandidates(item.name).map(normalizeText);
+  const wantedSets = pokemonSetCandidates(item.set).map(normalizeText);
+  const wantedNumbers = pokemonNumberCandidates(item.number, item.name).map(normalizeText);
+  const cardName = normalizeText(card?.name);
+  const cardSet = normalizeText(card?.set?.name || card?.setName);
+  const cardNumber = normalizeText(card?.number || card?.localId);
+  let score = 0;
+
+  if (wantedNames.includes(cardName)) score += 80;
+  else if (wantedNames.some(value => value && cardName.includes(value))) score += 42;
+  else if (wantedNames.some(value => value && value.includes(cardName))) score += 24;
+
+  if (wantedNumbers.includes(cardNumber)) score += 55;
+  else if (wantedNumbers.length && cardNumber) score -= 10;
+
+  if (wantedSets.includes(cardSet)) score += 35;
+  else if (wantedSets.some(value => value && (cardSet.includes(value) || value.includes(cardSet)))) score += 18;
+
+  if (card?.images?.large || card?.images?.small || card?.image) score += 8;
+  return score;
+}
+
+function tcgdexImageUrl(card, quality = "low") {
+  const image = validImageUrl(card?.image || "");
+  if (!image) return "";
+  return `${image}/${quality}.webp`;
+}
+
+function pokemonApiImageUrl(card) {
+  return validImageUrl(card?.images?.large) || validImageUrl(card?.images?.small) || tcgdexImageUrl(card, "low");
+}
+
+async function findPokemonTcgApiImage(item) {
+  for (const q of pokemonSearchQueries(item)) {
+    try {
+      const url = `${POKEMON_TCG_API}/cards?q=${encodeURIComponent(q)}&pageSize=24&select=id,name,set,number,images`;
+      const payload = await pokemonJson(url);
+      const cards = Array.isArray(payload.data) ? payload.data : [];
+      if (!cards.length) continue;
+
+      const selected = cards
+        .slice()
+        .sort((a, b) => scorePokemonApiCard(b, item) - scorePokemonApiCard(a, item))[0];
+      const imageUrl = pokemonApiImageUrl(selected);
+      if (imageUrl) return { imageUrl, source: "Pokémon TCG API", card: selected };
+    } catch (error) {
+      console.warn(`Pokémon TCG API: falha ao buscar imagem de ${item.name}:`, error.message);
+    }
+  }
+
+  return null;
+}
+
+async function findPokemonTcgdexImage(item) {
+  for (const name of pokemonNameCandidates(item.name).slice(0, 3)) {
+    try {
+      const url = `${TCGDEX_API}/cards?name=${encodeURIComponent(name)}&pagination:itemsPerPage=24`;
+      const payload = await pokemonJson(url);
+      const cards = Array.isArray(payload) ? payload : [];
+      if (!cards.length) continue;
+
+      const selected = cards
+        .slice()
+        .sort((a, b) => scorePokemonApiCard(b, item) - scorePokemonApiCard(a, item))[0];
+      const imageUrl = pokemonApiImageUrl(selected);
+      if (imageUrl) return { imageUrl, source: "TCGdex", card: selected };
+    } catch (error) {
+      console.warn(`TCGdex: falha ao buscar imagem de ${item.name}:`, error.message);
+    }
+  }
+
+  return null;
+}
+
+async function resolvePokemonImage(item) {
+  const existing = validImageUrl(item.imageUrl);
+  if (existing) return { imageUrl: existing, source: "JustTCG" };
+
+  const cacheKey = `${normalizeText(item.name)}|${normalizeText(item.set)}|${normalizeText(item.number)}`;
+  if (pokemonImageCache.has(cacheKey)) return pokemonImageCache.get(cacheKey);
+
+  const request = (async () => (
+    await findPokemonTcgApiImage(item) ||
+    await findPokemonTcgdexImage(item) ||
+    null
+  ))();
+
+  pokemonImageCache.set(cacheKey, request);
+  return request;
+}
+
+async function enrichPokemonWindowWithImages(items) {
+  if (!Array.isArray(items) || !items.length) return items;
+
+  for (const item of items) {
+    try {
+      const resolved = await resolvePokemonImage(item);
+      if (!resolved?.imageUrl) continue;
+
+      item.imageUrl = resolved.imageUrl;
+      item.sources = item.sources || {};
+      item.sources.pokemonImage = {
+        label: resolved.source,
+        source: resolved.source,
+        imageUrl: resolved.imageUrl,
+        matchedName: resolved.card?.name || "",
+        matchedSet: resolved.card?.set?.name || resolved.card?.setName || "",
+        matchedNumber: resolved.card?.number || resolved.card?.localId || ""
+      };
+    } catch (error) {
+      console.warn(`Imagem Pokémon não encontrada para ${item.name}:`, error.message);
+    }
+  }
+
+  return items;
+}
+
+async function enrichPokemonGameWithImages(gameResult) {
+  if (gameResult.code !== "pokemon") return gameResult;
+
+  for (const windowConfig of windows) {
+    gameResult.windows[windowConfig.key] = await enrichPokemonWindowWithImages(gameResult.windows[windowConfig.key]);
+  }
+
+  gameResult.items = gameResult.windows.daily;
+  gameResult.imageSources = ["Pokémon TCG API", "TCGdex"];
+  return gameResult;
 }
 
 function fabNameCandidates(item) {
@@ -853,7 +1072,10 @@ async function getSpikesForGame(gameId, target) {
 
   // Compatibilidade com componentes antigos do site, como o card do banner hero.
   result.items = result.windows.daily;
-  return enrichFabGameWithTcgcsv(result);
+
+  if (target.code === "fab") return enrichFabGameWithTcgcsv(result);
+  if (target.code === "pokemon") return enrichPokemonGameWithImages(result);
+  return result;
 }
 
 async function main() {
@@ -869,8 +1091,8 @@ async function main() {
 
   const output = {
     updatedAt: new Date().toISOString(),
-    source: "JustTCG + TCGCSV/TCGplayer para FAB",
-    schema: "spikes-daily-v5-tcgcsv-fab",
+    source: "JustTCG + TCGCSV/TCGplayer para FAB + Pokémon TCG API/TCGdex para imagens",
+    schema: "spikes-daily-v6-pokemon-images",
     windows: windows.map(window => window.key),
     requestLimit: Number(API_LIMIT),
     displayLimit: DISPLAY_LIMIT,
@@ -880,6 +1102,10 @@ async function main() {
       enabledFor: ["fab"],
       fabCategoryId: TCGCSV_FAB_CATEGORY_FALLBACK,
       referenceMultipliers: [5, 6, 7]
+    },
+    imageApis: {
+      pokemon: ["Pokémon TCG API", "TCGdex"],
+      note: "Usadas apenas para preencher imageUrl quando a JustTCG não enviar imagem."
     },
     games: []
   };

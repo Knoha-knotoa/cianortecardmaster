@@ -1,16 +1,67 @@
 ---
 layout: default
-title: "Spikes"
+title: "Spikes de Cartas TCG"
+description: "Veja as cartas de Flesh and Blood, Pokémon TCG, Magic e Yu-Gi-Oh! com maior alta de preço nas últimas 24 horas. Página de curiosidade do Cianorte Card Masters."
+image: /assets/img/banners/banner-spikes.webp
+image_alt: "Dragão e cartas colecionáveis em uma página de spikes de preço de card games"
 permalink: /spikes/
+last_modified_at: 2026-05-24
 ---
 
 <section class="page-hero spikes-page-hero" style="--page-hero-image: url('{{ '/assets/img/banners/banner-spikes.webp' | relative_url }}'); --page-hero-image-mobile: url('{{ '/assets/img/banners/banner-spikes-mobile.webp' | relative_url }}'); --page-hero-position: center; --page-hero-position-mobile: center;">
   <div class="container">
-    <p class="eyebrow">Mercado / JustTCG + TCGCSV</p>
-    <h1>Spikes das últimas 24h</h1>
+    <p class="eyebrow">Mercado / JustTCG + APIs de imagens</p>
+    <h1>Spikes de cartas TCG nas últimas 24h</h1>
     <p>
-      Até 9 cartas com maior alta nas últimas 24 horas por jogo. Para Flesh and Blood, os cards também mostram referência TCGplayer via TCGCSV com TCG x5, x6 e x7. Os dados são atualizados pelo GitHub Actions em arquivo estático.
+      Uma página leve de curiosidade para ver quais cartas de Flesh and Blood, Pokémon TCG, Magic: The Gathering e Yu-Gi-Oh! tiveram as maiores altas recentes. Os preços vêm do arquivo estático atualizado pelo GitHub Actions.
     </p>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ page.title | jsonify }},
+  "description": {{ page.description | jsonify }},
+  "url": {{ page.url | absolute_url | jsonify }},
+  "inLanguage": "pt-BR",
+  "image": {{ page.image | absolute_url | jsonify }},
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": {{ site.title | jsonify }},
+    "url": {{ '/' | absolute_url | jsonify }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Cianorte Card Masters",
+    "logo": {
+      "@type": "ImageObject",
+      "url": {{ '/ccm-favicon.png' | absolute_url | jsonify }}
+    }
+  },
+  "about": [
+    { "@type": "Thing", "name": "Flesh and Blood" },
+    { "@type": "Thing", "name": "Pokémon TCG" },
+    { "@type": "Thing", "name": "Magic: The Gathering" },
+    { "@type": "Thing", "name": "Yu-Gi-Oh!" },
+    { "@type": "Thing", "name": "card games" }
+  ]
+}
+</script>
+
+<section class="section section-alt spikes-seo-intro">
+  <div class="container">
+    <article class="info-panel spikes-seo-panel">
+      <p class="eyebrow">Consulta rápida</p>
+      <h2>Altas de preço sem drama financeiro</h2>
+      <p>
+        O painel mostra apenas um recorte de cartas que subiram nas últimas 24 horas. Ele não é recomendação de compra, não prevê o futuro e não substitui pesquisa de mercado. É aquele tipo de página para abrir, bisbilhotar, falar “ué, essa carta subiu?” e voltar para o jogo.
+      </p>
+      <p>
+        As imagens das cartas são carregadas por APIs públicas de cards quando a fonte de preço não fornece imagem direta. Para Pokémon TCG, a página usa a Pokémon TCG API e fallback via TCGdex.
+      </p>
+    </article>
   </div>
 </section>
 
@@ -34,5 +85,44 @@ permalink: /spikes/
     <div id="spikes-sections" class="spikes-sections">
       <p class="spike-loading">Carregando spikes...</p>
     </div>
+  </div>
+</section>
+
+<section class="section spikes-footer-links-section">
+  <div class="container">
+    <aside class="ccm-internal-links-card" aria-labelledby="spikes-links-title">
+      <div class="ccm-internal-links-header">
+        <p class="ccm-internal-links-kicker">Continue explorando</p>
+        <h2 id="spikes-links-title">Links úteis do Cianorte Card Masters</h2>
+        <p>Se uma carta apareceu nos spikes e você ficou curioso, estes links ajudam a entender melhor o jogo, os decks e a comunidade.</p>
+      </div>
+      <div class="ccm-internal-links-grid">
+        <a class="ccm-internal-link-item featured" href="{{ '/guias/' | relative_url }}">
+          <span class="ccm-internal-link-tag">Guias</span>
+          <strong>Aprender os jogos</strong>
+          <small>Conteúdos para começar em Flesh and Blood, Commander e outros card games.</small>
+        </a>
+        <a class="ccm-internal-link-item" href="{{ '/decks/' | relative_url }}">
+          <span class="ccm-internal-link-tag">Decks</span>
+          <strong>Ver deck techs</strong>
+          <small>Ideias de listas, formatos e planos de jogo para mesa presencial.</small>
+        </a>
+        <a class="ccm-internal-link-item" href="{{ '/blog/' | relative_url }}">
+          <span class="ccm-internal-link-tag">Blog</span>
+          <strong>Notícias e opiniões</strong>
+          <small>Atualizações de Flesh and Blood, Pokémon TCG, Magic físico e comunidade.</small>
+        </a>
+        <a class="ccm-internal-link-item" href="{{ '/agenda/' | relative_url }}">
+          <span class="ccm-internal-link-tag">Agenda</span>
+          <strong>Próximos encontros</strong>
+          <small>Veja quando a comunidade se reúne para jogar em Cianorte.</small>
+        </a>
+        <a class="ccm-internal-link-item" href="{{ '/comunidade/' | relative_url }}">
+          <span class="ccm-internal-link-tag">Comunidade</span>
+          <strong>Resultados e fotos</strong>
+          <small>Armory, ligas, vídeos, memes e postagens da galera.</small>
+        </a>
+      </div>
+    </aside>
   </div>
 </section>

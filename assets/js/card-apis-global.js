@@ -18,6 +18,7 @@
     fab: new Map(),
     mtg: new Map(),
     pokemon: new Map(),
+    pokemonTcgdex: new Map(),
     yugioh: new Map()
   };
 
@@ -54,10 +55,13 @@
   function setCardImage(element, imageUrl, altText) {
     const img = document.createElement("img");
     img.src = imageUrl;
-    img.alt = altText || "Carta";
+    img.alt = element.dataset.alt || altText || "Carta";
     img.loading = "lazy";
+    img.decoding = "async";
+    img.referrerPolicy = "no-referrer";
     element.replaceChildren(img);
     element.classList.remove("tcg-card-error");
+    element.classList.add("tcg-card-loaded");
   }
 
   function setCardFallback(element, altText = "Imagem da postagem") {
@@ -173,35 +177,149 @@
 
   /* ================= Pokémon ================= */
 
+  function pokemonNameCandidates(name) {
+    const raw = String(name || "").trim();
+    const withoutPromoSuffix = raw.replace(/\s+-\s+[A-Z]{1,6}\d+[A-Z]?$/i, "").trim();
+    const withoutCollectorSuffix = raw.replace(/\s+#?\d+\/?\d*$/i, "").trim();
+
+    return Array.from(new Set([raw, withoutPromoSuffix, withoutCollectorSuffix]
+      .map(value => value.trim())
+      .filter(Boolean)));
+  }
+
+  function pokemonSetCandidates(set) {
+    const raw = String(set || "").trim();
+    const withoutCodePrefix = raw.replace(/^[A-Z]{1,8}\d{0,3}(?:\.[0-9]+)?:\s*/i, "").trim();
+    const withoutParentheses = withoutCodePrefix.replace(/\s*\([^)]*\)\s*$/g, "").trim();
+
+    return Array.from(new Set([raw, withoutCodePrefix, withoutParentheses]
+      .map(value => value.trim())
+      .filter(Boolean)));
+  }
+
+  function pokemonNumberCandidates(number, name) {
+    const rawNumber = String(number || "").trim();
+    const localNumber = rawNumber.split("/")[0].trim();
+    const namePromo = String(name || "").match(/\b[A-Z]{1,6}\d+[A-Z]?\b/);
+
+    return Array.from(new Set([rawNumber, localNumber, namePromo?.[0] || ""]
+      .map(value => value.trim())
+      .filter(Boolean)));
+  }
+
+  function escapePokemonQuery(value) {
+    return String(value || "").replace(/[\\"]/g, "\\$&");
+  }
+
+  function pokemonSearchQueries(name, set = "", number = "") {
+    const names = pokemonNameCandidates(name);
+    const sets = pokemonSetCandidates(set);
+    const numbers = pokemonNumberCandidates(number, name);
+    const queries = [];
+
+    for (const cardName of names.slice(0, 3)) {
+      for (const cardNumber of numbers.slice(0, 2)) {
+        queries.push(`name:"${escapePokemonQuery(cardName)}" number:"${escapePokemonQuery(cardNumber)}"`);
+      }
+
+      for (const setName of sets.slice(0, 2)) {
+        queries.push(`name:"${escapePokemonQuery(cardName)}" set.name:"${escapePokemonQuery(setName)}"`);
+      }
+
+      queries.push(`name:"${escapePokemonQuery(cardName)}"`);
+    }
+
+    return Array.from(new Set(queries)).filter(Boolean);
+  }
+
+  function scorePokemonCard(card, name, set = "", number = "") {
+    const wantedNames = pokemonNameCandidates(name).map(normalizeText);
+    const wantedSets = pokemonSetCandidates(set).map(normalizeText);
+    const wantedNumbers = pokemonNumberCandidates(number, name).map(normalizeText);
+    const cardName = normalizeText(card?.name);
+    const cardSet = normalizeText(card?.set?.name || card?.setName);
+    const cardNumber = normalizeText(card?.number);
+    let score = 0;
+
+    if (wantedNames.includes(cardName)) score += 80;
+    else if (wantedNames.some(value => value && cardName.includes(value))) score += 42;
+    else if (wantedNames.some(value => value && value.includes(cardName))) score += 24;
+
+    if (wantedNumbers.includes(cardNumber)) score += 55;
+    else if (wantedNumbers.length && cardNumber) score -= 10;
+
+    if (wantedSets.includes(cardSet)) score += 35;
+    else if (wantedSets.some(value => value && (cardSet.includes(value) || value.includes(cardSet)))) score += 18;
+
+    if (card?.images?.large || card?.images?.small) score += 8;
+    return score;
+  }
+
   async function fetchPokemonCard(name, set = "", number = "") {
     const cacheKey = `${normalizeText(name)}|${normalizeText(set)}|${normalizeText(number)}`;
     if (caches.pokemon.has(cacheKey)) return caches.pokemon.get(cacheKey);
 
-    const terms = [`name:"${name}"`];
-    if (set) terms.push(`set.name:"${set}"`);
-    if (number) terms.push(`number:${number}`);
-    const q = terms.join(" ");
+    const request = (async () => {
+      const queries = pokemonSearchQueries(name, set, number);
 
-    const request = jsonFetch(`https://api.pokemontcg.io/v2/cards?q=${encodeURIComponent(q)}&pageSize=12`)
-      .then(payload => {
-        const cards = Array.isArray(payload.data) ? payload.data : [];
-        const wanted = normalizeText(name);
-        return (
-          cards.find(card => normalizeText(card.name) === wanted) ||
-          cards.find(card => normalizeText(card.name).includes(wanted)) ||
-          cards[0] ||
-          null
-        );
-      });
+      for (const q of queries) {
+        try {
+          const payload = await jsonFetch(`https://api.pokemontcg.io/v2/cards?q=${encodeURIComponent(q)}&pageSize=24&select=id,name,set,number,images`);
+          const cards = Array.isArray(payload.data) ? payload.data : [];
+          if (!cards.length) continue;
+
+          return cards
+            .slice()
+            .sort((a, b) => scorePokemonCard(b, name, set, number) - scorePokemonCard(a, name, set, number))[0];
+        } catch (error) {
+          console.warn("Pokémon TCG API falhou para", q, error);
+        }
+      }
+
+      return null;
+    })();
 
     caches.pokemon.set(cacheKey, request);
     return request;
+  }
+
+  async function fetchPokemonTcgdexCard(name, set = "", number = "") {
+    const cacheKey = `${normalizeText(name)}|${normalizeText(set)}|${normalizeText(number)}`;
+    if (caches.pokemonTcgdex.has(cacheKey)) return caches.pokemonTcgdex.get(cacheKey);
+
+    const request = (async () => {
+      for (const cardName of pokemonNameCandidates(name).slice(0, 3)) {
+        try {
+          const payload = await jsonFetch(`https://api.tcgdex.net/v2/en/cards?name=${encodeURIComponent(cardName)}&pagination:itemsPerPage=24`);
+          const cards = Array.isArray(payload) ? payload : [];
+          if (!cards.length) continue;
+
+          return cards
+            .slice()
+            .sort((a, b) => scorePokemonCard(b, name, set, number) - scorePokemonCard(a, name, set, number))[0];
+        } catch (error) {
+          console.warn("TCGdex falhou para", cardName, error);
+        }
+      }
+
+      return null;
+    })();
+
+    caches.pokemonTcgdex.set(cacheKey, request);
+    return request;
+  }
+
+  function tcgdexImageUrl(card, quality = "low") {
+    const image = card?.image || "";
+    if (!image) return "";
+    return `${image}/${quality}.webp`;
   }
 
   function pokemonImageUrl(card) {
     if (!card) return "";
     if (card.images?.large) return card.images.large;
     if (card.images?.small) return card.images.small;
+    if (card.image) return tcgdexImageUrl(card, "low");
     return findDeepImageUrl(card);
   }
 
@@ -256,6 +374,11 @@
       } else if (game === "pokemon" || game === "pkm") {
         card = await fetchPokemonCard(name, set, number);
         imageUrl = pokemonImageUrl(card);
+
+        if (!imageUrl) {
+          card = await fetchPokemonTcgdexCard(name, set, number);
+          imageUrl = pokemonImageUrl(card);
+        }
       } else if (game === "yugioh" || game === "ygo") {
         card = await fetchYugiohCard(name);
         imageUrl = yugiohImageUrl(card);
@@ -290,6 +413,10 @@
 
     if (normalizedGame === "pokemon" || normalizedGame === "pkm") {
       card = await fetchPokemonCard(name, options.set || "", options.number || "");
+      let imageUrl = pokemonImageUrl(card);
+      if (imageUrl) return imageUrl;
+
+      card = await fetchPokemonTcgdexCard(name, options.set || "", options.number || "");
       return pokemonImageUrl(card);
     }
 
