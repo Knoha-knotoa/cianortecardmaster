@@ -21,8 +21,6 @@ image_alt: "Dragão em arte fantástica representando a comunidade Cianorte Card
 {% assign comunidade_posts = site.comunidade %}
 {% assign armory_posts = comunidade_posts | where_exp: "post", "post.content_style == 'armory'" | sort: "date" | reverse %}
 {% assign latest_armory = armory_posts | first %}
-{% assign social_links = site.data.social_links %}
-{% assign active_social_links = social_links | where_exp: "item", "item.url and item.url != ''" %}
 
 <section class="hero home-hero" aria-labelledby="home-title">
   <div class="hero-bg" style="--hero-image: url('{{ site.data.images.hero_background | relative_url }}'); --hero-image-mobile: url('{{ site.data.images.hero_background_mobile | default: site.data.images.hero_background | relative_url }}');"></div>
@@ -119,6 +117,57 @@ image_alt: "Dragão em arte fantástica representando a comunidade Cianorte Card
           {% include post-card.html post=post %}
         {% endif %}
       {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section home-social-section" id="siga-a-comunidade" aria-labelledby="home-social-title">
+  <div class="container home-social-grid">
+    <div class="home-social-copy">
+      <p class="eyebrow">Nos siga nas redes sociais</p>
+      <h2 id="home-social-title">A mesa continua depois do evento</h2>
+      <p>
+        Siga a comunidade para ver fotos, vídeos, memes, resultados, chamadas de torneio e avisos rápidos.
+        Quando você marcar o Cianorte Card Masters em conteúdo público, ele pode aparecer na página Comunidade com crédito quando possível.
+      </p>
+      <a class="section-link" href="{{ '/uso-de-imagem/' | relative_url }}">Ver política de uso de imagem e repostagem</a>
+    </div>
+
+    <div class="home-social-list" aria-label="Canais sociais do Cianorte Card Masters">
+      <a class="home-social-card" href="https://www.instagram.com/cianortecardmasters/" target="_blank" rel="me noopener">
+        <span class="home-social-icon" aria-hidden="true">IG</span>
+        <strong>Instagram</strong>
+        <small>@cianortecardmasters</small>
+        <em>Fotos, reels, bastidores e marcações da comunidade.</em>
+      </a>
+
+      <a class="home-social-card" href="https://www.facebook.com/p/Cianorte-Card-Masters-61573789171734/" target="_blank" rel="me noopener">
+        <span class="home-social-icon" aria-hidden="true">FB</span>
+        <strong>Facebook</strong>
+        <small>Cianorte Card Masters</small>
+        <em>Postagens, vídeos e registros públicos do grupo.</em>
+      </a>
+
+      <a class="home-social-card" href="https://youtube.com/@cianortecardmaster?si=L8SyIU_bcRjwXiiU" target="_blank" rel="me noopener noreferrer">
+        <span class="home-social-icon" aria-hidden="true">YT</span>
+        <strong>YouTube</strong>
+        <small>@cianortecardmaster</small>
+        <em>Gameplays, cobertura de eventos e vídeos da comunidade.</em>
+      </a>
+
+      <a class="home-social-card" href="https://www.tiktok.com/@ccmasters7?_r=1&_t=ZS-96cT8XFjVyf" target="_blank" rel="me noopener noreferrer">
+        <span class="home-social-icon" aria-hidden="true">TK</span>
+        <strong>TikTok</strong>
+        <small>@ccmasters7</small>
+        <em>Cortes, momentos de mesa, humor e bastidores dos encontros.</em>
+      </a>
+
+      <a class="home-social-card" href="https://chat.whatsapp.com/HjmzPtLTCIALlwS2mIg55R" target="_blank" rel="noopener noreferrer">
+        <span class="home-social-icon" aria-hidden="true">WA</span>
+        <strong>WhatsApp</strong>
+        <small>Encontro de cardgames</small>
+        <em>Grupo para combinar mesas, tirar dúvidas e chegar na comunidade.</em>
+      </a>
     </div>
   </div>
 </section>
@@ -294,39 +343,7 @@ image_alt: "Dragão em arte fantástica representando a comunidade Cianorte Card
   </div>
 </section>
 
-<section class="section home-social-section" id="siga-a-comunidade" aria-labelledby="home-social-title">
-  <div class="container home-social-grid">
-    <div class="home-social-copy">
-      <p class="eyebrow">Nos siga nas redes sociais</p>
-      <h2 id="home-social-title">A mesa continua depois do evento</h2>
-      <p>
-        Siga a comunidade para ver fotos, vídeos, memes, resultados, chamadas de torneio e avisos rápidos.
-        Quando você marcar o Cianorte Card Masters em conteúdo público, ele pode aparecer na página Comunidade com crédito quando possível.
-      </p>
-      <a class="section-link" href="{{ '/uso-de-imagem/' | relative_url }}">Ver política de uso de imagem e repostagem</a>
-    </div>
 
-    <div class="home-social-list" aria-label="Canais sociais do Cianorte Card Masters">
-      {% for item in social_links %}
-        {% if item.url and item.url != '' %}
-          <a class="home-social-card" href="{{ item.url }}" target="_blank" rel="me noopener">
-            <span class="home-social-icon" aria-hidden="true">{{ item.icon }}</span>
-            <strong>{{ item.name }}</strong>
-            <small>{{ item.label }}</small>
-            <em>{{ item.description }}</em>
-          </a>
-        {% else %}
-          <span class="home-social-card is-disabled" aria-disabled="true">
-            <span class="home-social-icon" aria-hidden="true">{{ item.icon }}</span>
-            <strong>{{ item.name }}</strong>
-            <small>{{ item.label }} • em breve</small>
-            <em>{{ item.description }}</em>
-          </span>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-</section>
 
 <script type="application/ld+json">
 {
@@ -346,9 +363,10 @@ image_alt: "Dragão em arte fantástica representando a comunidade Cianorte Card
       "url": "{{ site.data.images.logo_menu | default: '/assets/img/logo/ccm-logo.png' | absolute_url }}"
     },
     "sameAs": [
-      {% for item in active_social_links %}
-        {{ item.url | jsonify }}{% unless forloop.last %},{% endunless %}
-      {% endfor %}
+      "https://www.instagram.com/cianortecardmasters/",
+      "https://www.facebook.com/p/Cianorte-Card-Masters-61573789171734/",
+      "https://youtube.com/@cianortecardmaster",
+      "https://www.tiktok.com/@ccmasters7"
     ]
   },
   "about": [

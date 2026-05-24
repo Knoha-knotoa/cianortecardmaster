@@ -1,6 +1,5 @@
-# Links oficiais e canais sociais exibidos na Home.
-# Preencha os campos vazios quando o canal estiver pronto.
-# O template exibe canais sem URL como "em breve", sem criar link quebrado.
+# Links sociais oficiais/úteis do Cianorte Card Masters.
+# A Home também mantém o bloco fixo no index.html para evitar que a seção suma se este arquivo não for publicado.
 
 - name: "Instagram"
   label: "@cianortecardmasters"
@@ -15,25 +14,19 @@
   description: "Postagens, vídeos e registros públicos do grupo."
 
 - name: "YouTube"
-  label: "Canal de vídeos"
-  url: ""
+  label: "@cianortecardmaster"
+  url: "https://youtube.com/@cianortecardmaster?si=L8SyIU_bcRjwXiiU"
   icon: "YT"
   description: "Gameplays, cobertura de eventos e vídeos da comunidade."
 
 - name: "TikTok"
-  label: "Vídeos curtos"
-  url: ""
-  icon: "TT"
-  description: "Clipes rápidos, memes e momentos das mesas."
-
-- name: "X"
-  label: "Atualizações rápidas"
-  url: ""
-  icon: "X"
-  description: "Comentários curtos, novidades e repostagens."
+  label: "@ccmasters7"
+  url: "https://www.tiktok.com/@ccmasters7?_r=1&_t=ZS-96cT8XFjVyf"
+  icon: "TK"
+  description: "Cortes, momentos de mesa, humor e bastidores dos encontros."
 
 - name: "WhatsApp"
-  label: "Grupo da comunidade"
-  url: ""
+  label: "Encontro de cardgames"
+  url: "https://chat.whatsapp.com/HjmzPtLTCIALlwS2mIg55R"
   icon: "WA"
-  description: "Canal para combinar mesas, tirar dúvidas e chegar no grupo."
+  description: "Grupo para combinar mesas, tirar dúvidas e chegar na comunidade."
