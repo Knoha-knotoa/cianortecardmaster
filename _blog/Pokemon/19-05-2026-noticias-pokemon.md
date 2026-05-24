@@ -2,9 +2,12 @@
 title: "Pokémon TCG: Megaevolução, Mega Greninja ex e as novidades mais recentes"
 category_label: "Pokémon"
 summary: "A nova fase do Pokémon Estampas Ilustradas traz Megaevoluções, Mega Greninja ex, novas artes especiais e expansões já anunciadas."
-image: ""
+description: "Resumo das novidades recentes de Pokémon TCG, incluindo Megaevolução, Mega Greninja ex, novas artes especiais e expansão Caos Ascendente."
+image: "pokemon:Mega Greninja ex"
+image_alt: "Mega Greninja ex como destaque das novidades recentes de Pokémon TCG"
 author: "Cianorte Card Masters"
 date: 2026-05-19
+last_modified_at: 2026-05-23
 tags:
   - Pokémon TCG
   - Pokémon Estampas Ilustradas
@@ -100,3 +103,5 @@ Para colecionadores, as artes especiais seguem sendo um grande atrativo. A sequ�
 Para jogadores, o desafio será descobrir quais Megaevoluções realmente compensam o risco de entregar três cartas de Prêmio.
 
 Com **Caos Ascendente** chegando em maio e **Escuridão Absoluta** já marcada para julho, o Pokémon TCG promete meses bem movimentados. Para comunidades de card games, como a nossa, esse é um ótimo momento para apresentar Pokémon Estampas Ilustradas para novos jogadores, organizar mesas casuais e acompanhar quais cartas vão se destacar.
+
+{% include internal-links-card.html %}

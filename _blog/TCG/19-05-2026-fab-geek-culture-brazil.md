@@ -2,9 +2,12 @@
 title: "Geek Culture Brazil chega ao Flesh and Blood: o que muda para o Brasil?"
 category_label: "TCG"
 summary: "A LSS confirmou uma nova opção de distribuição para Flesh and Blood no Brasil. Entenda por que isso pode ser importante para lojas, jogadores e comunidades locais."
-image: ""
+description: "Análise sobre a chegada da Geek Culture Brazil como distribuidora de Flesh and Blood no Brasil e o possível impacto para lojas, eventos e comunidades."
+image: "/assets/img/banners/default-tcg.webp"
+image_alt: "Cartas e acessórios de card games representando distribuição de Flesh and Blood no Brasil"
 author: "Cianorte Card Masters"
 date: 2026-05-19
+last_modified_at: 2026-05-23
 tags:
   - Flesh and Blood
   - Brasil
@@ -89,3 +92,5 @@ Para o Brasil, que já mostrou paixão enorme por Flesh and Blood, essa pode ser
 Agora é acompanhar os próximos meses, cobrar boa comunicação, apoiar as lojas locais e continuar fazendo aquilo que a comunidade brasileira faz melhor:
 
 sentar à mesa, apresentar o jogo para mais gente e batalhar em Rathe.
+
+{% include internal-links-card.html %}

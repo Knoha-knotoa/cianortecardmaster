@@ -1,10 +1,14 @@
 ---
 title: "Atualização de Regras: entenda a Attack Queue em Flesh and Blood"
-category_label: "flesh-and-blood"
+category_label: "Flesh and Blood"
 category: "flesh-and-blood"
 summary: "A nova atualização de regras da LSS organiza melhor os ataques criados por efeitos e explica como eles entram na corrente de combate."
+image: "goagain:Beckon Steel"
+image_alt: "Carta Beckon Steel representando a atualização de regras da Attack Queue em Flesh and Blood"
+description: "Entenda a atualização de regras da Attack Queue em Flesh and Blood, com exemplos práticos, impacto no go again e leitura para jogadores iniciantes e intermediários."
 author: "Neto"
 date: 2026-05-19
+last_modified_at: 2026-05-23
 tags:
   - Flesh and Blood
   - Regras
@@ -147,3 +151,4 @@ E, principalmente:
 
 > **Nem todo ataque que continua a corrente precisa de go again. Alguns continuam porque um efeito mandou criar esse ataque.**
 
+{% include internal-links-card.html %}

@@ -132,7 +132,7 @@ defaults:
       path: "_blog/cianorte-card-master"
       type: "blog"
     values:
-      category_label: "Cianorte Card Master"
+      category_label: "Cianorte Card Masters"
       content_style: "cianorte-card-master"
 
   # Comunidade: subpastas com rótulo automático

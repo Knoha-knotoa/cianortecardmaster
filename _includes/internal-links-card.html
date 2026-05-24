@@ -9,7 +9,11 @@
 {% endfor %}
 
 {% assign current_content_label = "este conteúdo" %}
-{% if page.collection == "guias" %}
+{% if page.url == "/blog/" %}
+  {% assign current_content_label = "esta página do Blog" %}
+{% elsif page.url == "/comunidade/" %}
+  {% assign current_content_label = "esta página da Comunidade" %}
+{% elsif page.collection == "guias" %}
   {% assign current_content_label = "este guia" %}
 {% elsif page.collection == "decks" %}
   {% assign current_content_label = "esta Deck Tech" %}

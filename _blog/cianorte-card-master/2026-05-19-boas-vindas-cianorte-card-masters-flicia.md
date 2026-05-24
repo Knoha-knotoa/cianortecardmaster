@@ -1,10 +1,13 @@
 ---
 title: "Boas-vindas à comunidade Cianorte Card Masters"
-category_label: "Cianorte Card Master"
+category_label: "Cianorte Card Masters"
 summary: "A FLICIA 2026 terá Arena Geek no Centro Cultural, com card games, RPG, oficinas, trocas de cartas e a premiação da nossa liga."
+description: "Boas-vindas ao Cianorte Card Masters, com destaque para a Arena Geek da FLICIA 2026, card games, RPG, oficinas e comunidade local."
 image: "https://res.cloudinary.com/dwbyl8zdn/image/upload/q_auto/f_auto/v1779216140/flicia-arena-geek-2026_e1yypi.png"
+image_alt: "Arte da Arena Geek da FLICIA 2026 divulgando card games, RPG e cultura geek em Cianorte"
 author: "Cianorte Card Masters"
 date: 2026-05-19
+last_modified_at: 2026-05-23
 tags:
   - Cianorte Card Masters
   - FLICIA
@@ -47,3 +50,5 @@ Nosso objetivo é criar um espaço acolhedor para novos jogadores, colecionadore
 Apareça na FLICIA, conheça a Arena Geek e venha fazer parte da comunidade **Cianorte Card Masters**.
 
 Nos vemos nas mesas!
+
+{% include internal-links-card.html %}

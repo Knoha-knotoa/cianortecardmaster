@@ -95,7 +95,7 @@
         {% endfor %}
       </div>
     {% elsif api_image_game and api_image_name %}
-      {% include tcg-card.html game=api_image_game name=api_image_name cover=true fallback=fallback_image fallback_alt=media_alt %}
+      {% include tcg-card.html game=api_image_game name=api_image_name cover=true fallback=fallback_image fallback_alt=media_alt alt=media_alt %}
     {% elsif social_image != '' %}
       <img src="{{ social_image_src }}" alt="{{ media_alt | escape }}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ fallback_image | relative_url }}';">
     {% else %}

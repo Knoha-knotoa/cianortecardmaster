@@ -20,9 +20,9 @@ blog:
     description: "Conteúdos de RPG, mesas, relatos, ideias de campanha e comunidade."
     empty: "Nenhum post de RPG publicado ainda."
   - folder: "Cianorte-card-master"
-    label: "Cianorte Card Master"
+    label: "Cianorte Card Masters"
     description: "Novidades, bastidores, avisos e textos institucionais do grupo."
-    empty: "Nenhum post do Cianorte Card Master publicado ainda."
+    empty: "Nenhum post do Cianorte Card Masters publicado ainda."
 
 comunidade:
   - folder: "Fanservice"

@@ -2,9 +2,12 @@
 title: "Novidades de Magic físico: Commander, Marvel e Goblins agitam as mesas"
 category_label: "Magic"
 summary: "Magic: The Gathering segue forte no jogo físico com novos produtos de Commander, Secret Lair e coleções especiais para quem gosta de jogar na mesa."
+description: "Novidades de Magic: The Gathering físico para Commander casual, produtos especiais, Marvel Super Heroes e ideias para mesas presenciais da comunidade."
 image: "scryfall:Krenko, Mob Boss"
+image_alt: "Carta Krenko, Mob Boss usada como capa para notícia de Magic Commander físico"
 author: "Neto"
 date: 2026-05-19
+last_modified_at: 2026-05-23
 tags:
   - Magic: The Gathering
   - Commander
@@ -116,3 +119,5 @@ Para quem joga presencialmente, os principais pontos para acompanhar são:
 No fim das contas, Magic físico segue vivo, forte e cheio de novidades para quem gosta de jogar de verdade: sentado na mesa, com o deck embaralhado, os amigos por perto e aquela clássica pergunta antes do caos começar:
 
 **“Quem começa?”**
+
+{% include internal-links-card.html %}

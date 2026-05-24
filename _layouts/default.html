@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
-  <meta name="description" content="{{ page.description | default: site.description | escape }}">
+  {% assign meta_description = page.description | default: page.summary | default: page.excerpt | strip_html | strip_newlines | default: site.description %}
+  <meta name="description" content="{{ meta_description | truncate: 165 | escape }}">
   {% if page.keywords %}<meta name="keywords" content="{{ page.keywords | join: ', ' | escape }}">{% endif %}
   {% if page.image_alt %}<meta property="og:image:alt" content="{{ page.image_alt | escape }}">{% endif %}
   <link rel="preconnect" href="https://fonts.googleapis.com">

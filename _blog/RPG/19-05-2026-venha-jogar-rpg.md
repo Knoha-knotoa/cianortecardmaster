@@ -1,9 +1,13 @@
 ---
 title: "Venha jogar RPG com a comunidade!"
-category_label: "Comunidade"
+category_label: "RPG"
 summary: "Mesas de RPG aos sábados na Biblioteca Municipal, com os Mestres Arilson, Yuri e Rafael."
+image: "/assets/img/banners/default-rpg.webp"
+image_alt: "Cena de fantasia representando mesas de RPG presenciais da comunidade Cianorte Card Masters"
+description: "Convite para jogar RPG de mesa com a comunidade Cianorte Card Masters, com encontros presenciais, mestres locais e aventuras para novos jogadores."
 author: "Cianorte Card Masters"
 date: 2026-05-19
+last_modified_at: 2026-05-23
 tags:
   - RPG
   - Comunidade
@@ -39,3 +43,5 @@ Mais do que rolar dados, jogar RPG é sentar com amigos, criar memórias, rir da
 Se você curte fantasia, interpretação, jogos de mesa ou quer conhecer algo novo, apareça para jogar com a gente.
 
 **Chame no grupo, confira a programação da semana e venha viver sua próxima aventura!**
+
+{% include internal-links-card.html %}

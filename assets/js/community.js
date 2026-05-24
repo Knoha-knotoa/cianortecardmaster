@@ -634,16 +634,34 @@
     const filters = Array.from(document.querySelectorAll("[data-blog-filter]"));
     if (!items.length || !filters.length) return;
 
+    function applyBlogFilter(active) {
+      const wanted = active || "all";
+      filters.forEach(item => {
+        const isCurrent = (item.dataset.blogFilter || "all") === wanted;
+        item.classList.toggle("is-active", isCurrent);
+        if (isCurrent) item.setAttribute("aria-current", "true");
+        else item.removeAttribute("aria-current");
+      });
+
+      items.forEach(item => {
+        item.hidden = wanted !== "all" && item.dataset.blogCategory !== wanted;
+      });
+    }
+
     filters.forEach(filter => {
       filter.addEventListener("click", event => {
         event.preventDefault();
         const active = filter.dataset.blogFilter || "all";
-        filters.forEach(item => item.classList.toggle("is-active", item === filter));
-        items.forEach(item => {
-          item.hidden = active !== "all" && item.dataset.blogCategory !== active;
-        });
+        applyBlogFilter(active);
+
+        const targetHash = active === "all" ? "#todos" : `#${active}`;
+        if (history.replaceState) history.replaceState(null, "", targetHash);
       });
     });
+
+    const initialFilter = window.location.hash ? window.location.hash.replace("#", "") : "all";
+    const hasInitialFilter = filters.some(filter => filter.dataset.blogFilter === initialFilter);
+    applyBlogFilter(hasInitialFilter ? initialFilter : "all");
   }
 
   function initDeckFilter() {
