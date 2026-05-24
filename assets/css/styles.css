@@ -5344,3 +5344,243 @@ h3 {
     white-space: normal;
   }
 }
+
+/* ==========================================
+   Home: SEO, onboarding, Armory e redes sociais
+========================================== */
+.home-newcomer-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.home-newcomer-section::before,
+.home-social-section::before,
+.home-armory-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(212,175,55,.13), transparent 26rem),
+    radial-gradient(circle at 86% 24%, rgba(31,184,92,.10), transparent 28rem);
+  opacity: .9;
+}
+
+.home-newcomer-grid,
+.home-armory-grid,
+.home-social-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+  gap: clamp(1rem, 3vw, 1.6rem);
+  align-items: stretch;
+}
+
+.home-newcomer-copy,
+.home-armory-copy,
+.home-social-copy {
+  border: 1px solid rgba(212,175,55,.18);
+  border-radius: 28px;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background:
+    radial-gradient(circle at top left, rgba(212,175,55,.10), transparent 34%),
+    linear-gradient(180deg, rgba(16,27,19,.88), rgba(8,13,9,.96));
+  box-shadow: 0 16px 34px rgba(0,0,0,.22);
+}
+
+.home-newcomer-copy p,
+.home-armory-copy p,
+.home-social-copy p,
+.home-trust-card span,
+.home-social-card em {
+  color: var(--muted);
+}
+
+.home-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .85rem;
+}
+
+.home-trust-card,
+.home-armory-card,
+.home-social-card {
+  border: 1px solid rgba(212,175,55,.18);
+  border-radius: 24px;
+  background:
+    linear-gradient(145deg, rgba(212,175,55,.08), rgba(31,184,92,.035)),
+    rgba(255,255,255,.035);
+  box-shadow: 0 14px 28px rgba(0,0,0,.20);
+}
+
+.home-trust-card {
+  display: grid;
+  gap: .4rem;
+  min-height: 150px;
+  padding: 1.1rem;
+}
+
+.home-trust-card strong,
+.home-social-card strong {
+  color: #fff2b8;
+  font-family: "Fugaz One", system-ui, sans-serif;
+}
+
+.home-trust-card span {
+  line-height: 1.55;
+}
+
+.home-armory-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.home-armory-card {
+  padding: clamp(1.25rem, 3vw, 2rem);
+  align-self: stretch;
+}
+
+.home-armory-card h3 {
+  margin-bottom: 1rem;
+}
+
+.home-armory-podium {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: .65rem;
+}
+
+.home-armory-podium li {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: .15rem .8rem;
+  align-items: center;
+  padding: .85rem;
+  border-radius: 18px;
+  border: 1px solid rgba(212,175,55,.18);
+  background: rgba(0,0,0,.18);
+}
+
+.home-armory-podium li span {
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: #050806;
+  background: linear-gradient(135deg, var(--gold), #fff2b8);
+  font-family: "Fugaz One", system-ui, sans-serif;
+}
+
+.home-armory-podium strong {
+  color: var(--white);
+}
+
+.home-armory-podium em {
+  color: var(--muted);
+  font-style: normal;
+  line-height: 1.35;
+}
+
+.home-project-highlight {
+  align-content: center;
+}
+
+.home-social-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.home-social-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .85rem;
+}
+
+.home-social-card {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: .12rem .8rem;
+  align-items: center;
+  padding: 1rem;
+  text-decoration: none;
+  min-height: 118px;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.home-social-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(212,175,55,.45);
+  background:
+    linear-gradient(145deg, rgba(212,175,55,.13), rgba(31,184,92,.08)),
+    rgba(255,255,255,.05);
+}
+
+.home-social-card.is-disabled {
+  opacity: .62;
+  filter: saturate(.75);
+}
+
+.home-social-icon {
+  grid-row: span 3;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  border: 1px solid rgba(212,175,55,.26);
+  background: rgba(0,0,0,.22);
+  color: var(--gold);
+  font-family: "Fugaz One", system-ui, sans-serif;
+  letter-spacing: .02em;
+}
+
+.home-social-card small {
+  color: #fff2b8;
+}
+
+.home-social-card em {
+  font-style: normal;
+  line-height: 1.35;
+}
+
+.home-gallery-empty {
+  color: var(--muted);
+}
+
+@media (max-width: 980px) {
+  .home-newcomer-grid,
+  .home-armory-grid,
+  .home-social-grid,
+  .home-project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .home-trust-grid,
+  .home-social-list {
+    grid-template-columns: 1fr;
+  }
+
+  .home-trust-card,
+  .home-social-card,
+  .home-armory-card,
+  .home-newcomer-copy,
+  .home-armory-copy,
+  .home-social-copy {
+    border-radius: 20px;
+  }
+
+  .home-social-card {
+    grid-template-columns: 48px 1fr;
+  }
+
+  .home-armory-podium li {
+    grid-template-columns: 42px 1fr;
+  }
+}

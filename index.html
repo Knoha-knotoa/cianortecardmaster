@@ -1,31 +1,48 @@
 ---
 layout: default
-title: "Início"
+permalink: /
+title: "Card games, RPG e comunidade em Cianorte"
+description: "Conheça o Cianorte Card Masters, grupo de jogadores de card games e RPG em Cianorte. Veja agenda, resultados de Armory, fotos, vídeos, guias, deck techs e redes sociais da comunidade."
+keywords:
+  - card games em Cianorte
+  - Flesh and Blood Cianorte
+  - Pokémon TCG Cianorte
+  - Magic Commander Cianorte
+  - RPG em Cianorte
+  - comunidade geek Cianorte
+  - torneios de card game Cianorte
+image: "/assets/img/banners/banner-home.webp"
+image_alt: "Dragão em arte fantástica representando a comunidade Cianorte Card Masters e os encontros presenciais de card games em Cianorte"
 ---
 
 {% assign all_content = site.guias | concat: site.decks | concat: site.blog | concat: site.comunidade | sort: "date" | reverse %}
 {% assign guias = site.guias %}
 {% assign blog_posts = site.blog %}
 {% assign comunidade_posts = site.comunidade %}
+{% assign armory_posts = comunidade_posts | where_exp: "post", "post.content_style == 'armory'" | sort: "date" | reverse %}
+{% assign latest_armory = armory_posts | first %}
+{% assign social_links = site.data.social_links %}
+{% assign active_social_links = social_links | where_exp: "item", "item.url and item.url != ''" %}
 
-<section class="hero">
+<section class="hero home-hero" aria-labelledby="home-title">
   <div class="hero-bg" style="--hero-image: url('{{ site.data.images.hero_background | relative_url }}'); --hero-image-mobile: url('{{ site.data.images.hero_background_mobile | default: site.data.images.hero_background | relative_url }}');"></div>
 
   <div class="container hero-inner">
     <div>
-      <p class="eyebrow">Comunidade / Card games / RPG</p>
-      <h1>Cianorte Card Masters</h1>
+      <p class="eyebrow">Comunidade de jogadores / Card games / RPG</p>
+      <h1 id="home-title">Cianorte Card Masters</h1>
       <p class="lead">
-        Conteúdo para jogadores de Flesh and Blood, Pokémon, Magic: The Gathering, jogos de tabuleiro e RPG em Cianorte.
-        Guias, deck techs, blog, comunidade e encontros para quem joga ou quer começar.
+        Somos um grupo de jogadores de Cianorte e região, não uma loja nem um endereço comercial.
+        A gente se reúne para jogar, ensinar, trocar ideias, registrar resultados e fortalecer a cena local de
+        Flesh and Blood, Pokémon TCG, Magic Commander, RPG e outros jogos presenciais.
       </p>
       <div class="btn-row">
-        <a class="btn btn-primary" href="{{ '/agenda/' | relative_url }}">Ver agenda</a>
-        <a class="btn btn-secondary" href="{{ '/guias/' | relative_url }}">Ler guias</a>
+        <a class="btn btn-primary" href="{{ '/agenda/' | relative_url }}">Ver quando jogar</a>
+        <a class="btn btn-secondary" href="#siga-a-comunidade">Nos siga nas redes</a>
       </div>
     </div>
 
-    <aside class="hero-card hero-spike-panel">
+    <aside class="hero-card hero-spike-panel" aria-label="Carta em destaque nas últimas 24 horas">
       <p class="eyebrow">Spike das 24h</p>
       <div id="hero-spike-card" class="spike-card spike-card-hero" data-game-filter="fab">
         <span class="spike-loading">Carregando spike 24h de Flesh and Blood...</span>
@@ -35,9 +52,46 @@ title: "Início"
   </div>
 </section>
 
-<section class="section">
+<section class="section home-newcomer-section" aria-labelledby="home-newcomer-title">
+  <div class="container home-newcomer-grid">
+    <div class="home-newcomer-copy">
+      <p class="eyebrow">Achou a gente no Google?</p>
+      <h2 id="home-newcomer-title">Pode chegar: aqui é comunidade, mesa e aprendizado</h2>
+      <p>
+        O Cianorte Card Masters existe para aproximar jogadores. Publicamos agenda, guias, deck techs,
+        fotos, vídeos, memes e resultados dos eventos para quem quer saber onde jogar card games em Cianorte
+        ou simplesmente descobrir se esse hobby é para você.
+      </p>
+      <p>
+        Também divulgamos o projeto da Prefeitura de Cianorte ligado aos encontros e torneios de card game,
+        além dos eventos semanais realizados com apoio de loja parceira, que vende produtos e recebe torneios.
+      </p>
+    </div>
+
+    <div class="home-trust-grid" aria-label="Informações rápidas para novos jogadores">
+      <article class="home-trust-card">
+        <strong>Não somos uma loja</strong>
+        <span>Somos uma comunidade de jogadores. Indicamos locais, eventos e parceiros, mas o grupo é feito pela galera da mesa.</span>
+      </article>
+      <article class="home-trust-card">
+        <strong>Tem projeto na cidade</strong>
+        <span>Os encontros ajudam novos jogadores a aprender card games, participar de torneios e conhecer pessoas em Cianorte.</span>
+      </article>
+      <article class="home-trust-card">
+        <strong>Tem loja parceira</strong>
+        <span>O Bazar do Weezing apoia eventos semanais, torneios e venda de produtos para quem quer montar ou melhorar decks.</span>
+      </article>
+      <article class="home-trust-card">
+        <strong>Iniciante é bem-vindo</strong>
+        <span>Você não precisa ter deck pronto. Apareça, pergunte, jogue partidas de teste e conheça os formatos aos poucos.</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
   <div class="container">
-    {% include section-title.html kicker="Novidades" title="Últimas postagens" text="Os três conteúdos mais recentes do site, independente do assunto." link="/posts/" link_text="Ver mais" %}
+    {% include section-title.html kicker="Novidades" title="Últimas postagens" text="Guias, deck techs, notícias, resultados e registros da comunidade em um só lugar." link="/posts/" link_text="Ver mais" %}
 
     <div class="card-grid grid-3 home-latest-posts">
       {% for post in all_content limit:3 %}
@@ -69,14 +123,55 @@ title: "Início"
   </div>
 </section>
 
-<section class="section cta">
+<section class="section home-armory-section" aria-labelledby="home-armory-title">
+  <div class="container home-armory-grid">
+    <div class="home-armory-copy">
+      <p class="eyebrow">Resultado da comunidade</p>
+      <h2 id="home-armory-title">Último Armory de Flesh and Blood</h2>
+      <p>
+        O Armory é nosso torneio semanal de Flesh and Blood. A Home mostra o resultado mais recente para quem quer acompanhar o cenário local,
+        ver heróis em destaque e descobrir quando aparece a próxima chance de testar o deck.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="{{ '/comunidade/#ultimo-armory' | relative_url }}">Ver resultado completo</a>
+        <a class="btn btn-secondary" href="{{ '/agenda/' | relative_url }}">Próximos eventos</a>
+      </div>
+    </div>
+
+    <article class="home-armory-card" aria-label="Resumo do último resultado de Armory">
+      {% if latest_armory %}
+        <p class="eyebrow">{{ latest_armory.date | date: "%d/%m/%Y" }} • {{ latest_armory.rounds | default: "3" }} rodadas</p>
+        <h3>{{ latest_armory.title }}</h3>
+        {% if latest_armory.results %}
+          <ol class="home-armory-podium">
+            {% for result in latest_armory.results limit:3 %}
+              <li>
+                <span>{{ forloop.index }}º</span>
+                <strong>{{ result.player }}</strong>
+                <em>{{ result.hero }} • {{ result.record }}</em>
+              </li>
+            {% endfor %}
+          </ol>
+        {% else %}
+          <p>Resultado cadastrado, mas sem lista de jogadores no front matter.</p>
+        {% endif %}
+      {% else %}
+        <p class="eyebrow">Armory</p>
+        <h3>Nenhum resultado publicado ainda</h3>
+        <p>Publique resultados em <code>_comunidade/Armory</code> para alimentar este destaque automaticamente.</p>
+      {% endif %}
+    </article>
+  </div>
+</section>
+
+<section class="section cta home-join-cta">
   <div class="container">
     <div class="cta-box">
       <p class="eyebrow">Vem conhecer a galera</p>
       <h2>Quer jogar, aprender ou só trocar ideia sobre jogos?</h2>
       <p>
-        Jogamos Flesh and Blood, Pokémon, Magic: The Gathering, jogos de tabuleiro e RPG.
-        Não precisa ter deck pronto para aparecer. A comunidade ajuda quem está começando.
+        Jogamos Flesh and Blood, Pokémon TCG, Magic: The Gathering, jogos de tabuleiro e RPG.
+        Não precisa ter deck pronto para aparecer: a comunidade ajuda quem está começando e indica a melhor mesa para cada perfil.
       </p>
       <div class="btn-row">
         <a class="btn btn-primary" href="{{ '/agenda/' | relative_url }}">Ver agenda</a>
@@ -88,7 +183,7 @@ title: "Início"
 
 <section class="section section-alt">
   <div class="container">
-    {% include section-title.html kicker="Aprenda" title="Guias para começar e evoluir" text="Conteúdos para aprender regras, entender jogos e melhorar aos poucos." link="/guias/" link_text="Ver todos os guias" %}
+    {% include section-title.html kicker="Aprenda" title="Guias para começar e tirar dúvidas" text="Conteúdos simples para aprender regras, entender cartas, keywords, interações e fundamentos dos jogos." link="/guias/" link_text="Ver todos os guias" %}
 
     <div class="card-grid grid-3">
       {% assign guias_sorted = guias | sort: "date" | reverse %}
@@ -100,30 +195,32 @@ title: "Início"
 </section>
 
 <section class="section">
-  <div class="container project-grid">
-    <div class="project-highlight">
-      <strong>Ensinamos a jogar</strong>
+  <div class="container project-grid home-project-grid">
+    <div class="project-highlight home-project-highlight">
+      <strong>Projeto, parceiros e comunidade</strong>
     </div>
 
     <div class="info-panel">
-      <p class="eyebrow">Projeto na cidade</p>
-      <h2>Domingos no Centro Cultural</h2>
+      <p class="eyebrow">Onde a comunidade acontece</p>
+      <h2>Encontros, torneios e mesas presenciais em Cianorte</h2>
       <p>
-        A comunidade se encontra aos domingos no Centro Cultural de Cianorte.
-        É um espaço para aprender, testar decks, jogar casualmente e participar de torneios.
+        Aos domingos, os encontros da comunidade ajudam novos jogadores a aprender, jogar casualmente, testar decks e participar de torneios.
+        Durante a semana, a loja parceira recebe eventos e produtos para quem quer acompanhar a cena de card games físicos.
       </p>
       <p>
-        Mesmo sem deck, você pode aparecer. A ideia é aproximar novos jogadores e criar um ambiente
-        acolhedor para quem quer conhecer card games, RPG e jogos de mesa.
+        O site organiza tudo isso: agenda, resultados de Armory e ligas, fotos, vídeos, guias, deck techs e notícias para quem quer participar sem depender de boato de grupo fechado.
       </p>
-      <a class="btn btn-primary" href="{{ '/agenda/' | relative_url }}">Ver horários e endereços</a>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="{{ '/onde-jogar/' | relative_url }}">Onde jogar</a>
+        <a class="btn btn-secondary" href="{{ '/sobre/' | relative_url }}">Entender o grupo</a>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="section section-alt">
   <div class="container">
-    {% include section-title.html kicker="Blog" title="Comentários, novidades e opinião" text="Lançamentos, edições, comentários sobre cartas, jogos, vídeos e assuntos gerais." link="/blog/" link_text="Ver blog" %}
+    {% include section-title.html kicker="Blog" title="Notícias, opinião e novidades" text="Lançamentos, atualizações de regras, banimentos, coleções, empresas do setor e notícias locais de card games." link="/blog/" link_text="Ver blog" %}
 
     <div class="card-grid grid-4">
       {% assign blog_sorted = blog_posts | sort: "date" | reverse %}
@@ -136,20 +233,23 @@ title: "Início"
 
 <section class="section">
   <div class="container">
-    {% include section-title.html kicker="Comunidade" title="Últimas imagens da comunidade" text="Fotos e momentos publicados nos posts da comunidade." link="/comunidade/" link_text="Ver comunidade" %}
+    {% include section-title.html kicker="Comunidade" title="Últimas fotos da comunidade" text="Fotos, marcações e momentos publicados nos posts da comunidade." link="/comunidade/" link_text="Ver comunidade" %}
 
     <div class="gallery-grid">
       {% assign comunidade_sorted = comunidade_posts | sort: "date" | reverse %}
       {% for post in comunidade_sorted limit:6 %}
         {% if post.image %}
-          <a class="gallery-item" href="{{ post.url | relative_url }}">
-            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy" onerror="this.onerror=null;this.src='{{ site.data.images.post_default | relative_url }}';">
+          {% assign gallery_alt = post.image_alt | default: post.title | prepend: 'Foto da comunidade Cianorte Card Masters: ' %}
+          <a class="gallery-item" href="{{ post.url | relative_url }}" aria-label="Abrir registro da comunidade: {{ post.title | escape }}">
+            <img src="{{ post.image | relative_url }}" alt="{{ gallery_alt | escape }}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ site.data.images.post_default | relative_url }}';">
           </a>
         {% endif %}
         {% if post.gallery %}
           {% for foto in post.gallery limit:2 %}
-            <a class="gallery-item" href="{{ post.url | relative_url }}">
-              <img src="{{ foto | relative_url }}" alt="{{ post.title }}" loading="lazy" onerror="this.onerror=null;this.src='{{ site.data.images.post_default | relative_url }}';">
+            {% assign foto_src = foto.src | default: foto.url | default: foto.path | default: foto %}
+            {% assign foto_alt = foto.alt | default: foto.title | default: post.image_alt | default: post.title | append: ' — foto ' | append: forloop.index %}
+            <a class="gallery-item" href="{{ post.url | relative_url }}" aria-label="Abrir galeria da comunidade: {{ post.title | escape }}">
+              <img src="{{ foto_src | relative_url }}" alt="{{ foto_alt | escape }}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ site.data.images.post_default | relative_url }}';">
             </a>
           {% endfor %}
         {% endif %}
@@ -158,12 +258,12 @@ title: "Início"
   </div>
 </section>
 
-<section class="section section-alt home-agenda-section">
+<section class="section section-alt home-agenda-section" aria-labelledby="home-agenda-title">
   <div class="container">
     <div class="home-agenda-header">
       <div>
         <p class="eyebrow">Agenda</p>
-        <h2>Agenda da Semana</h2>
+        <h2 id="home-agenda-title">Agenda da Semana</h2>
         <p>Clique em qualquer encontro para ver endereço e detalhes na página de agenda.</p>
       </div>
       <a class="section-link home-agenda-link" href="{{ '/agenda/' | relative_url }}">Ver agenda completa</a>
@@ -176,7 +276,7 @@ title: "Início"
           {% if item.image %}
             {% assign image_kind = item.image_kind | default: "photo" %}
             <span class="home-agenda-media home-agenda-media-{{ image_kind }}">
-              <img src="{{ item.image | relative_url }}" alt="{{ item.image_alt | default: item.title }}" loading="lazy" onerror="this.onerror=null;this.src='{{ site.data.images.post_default | relative_url }}';">
+              <img src="{{ item.image | relative_url }}" alt="{{ item.image_alt | default: item.title | escape }}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ site.data.images.post_default | relative_url }}';">
             </span>
           {% endif %}
           <span class="home-agenda-main">
@@ -193,3 +293,70 @@ title: "Início"
     </p>
   </div>
 </section>
+
+<section class="section home-social-section" id="siga-a-comunidade" aria-labelledby="home-social-title">
+  <div class="container home-social-grid">
+    <div class="home-social-copy">
+      <p class="eyebrow">Nos siga nas redes sociais</p>
+      <h2 id="home-social-title">A mesa continua depois do evento</h2>
+      <p>
+        Siga a comunidade para ver fotos, vídeos, memes, resultados, chamadas de torneio e avisos rápidos.
+        Quando você marcar o Cianorte Card Masters em conteúdo público, ele pode aparecer na página Comunidade com crédito quando possível.
+      </p>
+      <a class="section-link" href="{{ '/uso-de-imagem/' | relative_url }}">Ver política de uso de imagem e repostagem</a>
+    </div>
+
+    <div class="home-social-list" aria-label="Canais sociais do Cianorte Card Masters">
+      {% for item in social_links %}
+        {% if item.url and item.url != '' %}
+          <a class="home-social-card" href="{{ item.url }}" target="_blank" rel="me noopener">
+            <span class="home-social-icon" aria-hidden="true">{{ item.icon }}</span>
+            <strong>{{ item.name }}</strong>
+            <small>{{ item.label }}</small>
+            <em>{{ item.description }}</em>
+          </a>
+        {% else %}
+          <span class="home-social-card is-disabled" aria-disabled="true">
+            <span class="home-social-icon" aria-hidden="true">{{ item.icon }}</span>
+            <strong>{{ item.name }}</strong>
+            <small>{{ item.label }} • em breve</small>
+            <em>{{ item.description }}</em>
+          </span>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ site.title | jsonify }},
+  "alternateName": "CC Master",
+  "description": {{ page.description | jsonify }},
+  "url": "{{ '/' | absolute_url }}",
+  "inLanguage": "{{ site.lang | default: 'pt-BR' }}",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Cianorte Card Masters",
+    "url": "{{ '/' | absolute_url }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ site.data.images.logo_menu | default: '/assets/img/logo/ccm-logo.png' | absolute_url }}"
+    },
+    "sameAs": [
+      {% for item in active_social_links %}
+        {{ item.url | jsonify }}{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  },
+  "about": [
+    { "@type": "Thing", "name": "Card games em Cianorte" },
+    { "@type": "Thing", "name": "Flesh and Blood" },
+    { "@type": "Thing", "name": "Pokémon TCG" },
+    { "@type": "Thing", "name": "Magic: The Gathering Commander" },
+    { "@type": "Thing", "name": "RPG de mesa" }
+  ]
+}
+</script>

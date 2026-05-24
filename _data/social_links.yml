@@ -1,0 +1,39 @@
+# Links oficiais e canais sociais exibidos na Home.
+# Preencha os campos vazios quando o canal estiver pronto.
+# O template exibe canais sem URL como "em breve", sem criar link quebrado.
+
+- name: "Instagram"
+  label: "@cianortecardmasters"
+  url: "https://www.instagram.com/cianortecardmasters/"
+  icon: "IG"
+  description: "Fotos, reels, bastidores e marcações da comunidade."
+
+- name: "Facebook"
+  label: "Cianorte Card Masters"
+  url: "https://www.facebook.com/p/Cianorte-Card-Masters-61573789171734/"
+  icon: "FB"
+  description: "Postagens, vídeos e registros públicos do grupo."
+
+- name: "YouTube"
+  label: "Canal de vídeos"
+  url: ""
+  icon: "YT"
+  description: "Gameplays, cobertura de eventos e vídeos da comunidade."
+
+- name: "TikTok"
+  label: "Vídeos curtos"
+  url: ""
+  icon: "TT"
+  description: "Clipes rápidos, memes e momentos das mesas."
+
+- name: "X"
+  label: "Atualizações rápidas"
+  url: ""
+  icon: "X"
+  description: "Comentários curtos, novidades e repostagens."
+
+- name: "WhatsApp"
+  label: "Grupo da comunidade"
+  url: ""
+  icon: "WA"
+  description: "Canal para combinar mesas, tirar dúvidas e chegar no grupo."
