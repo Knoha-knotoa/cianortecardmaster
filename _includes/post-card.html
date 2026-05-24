@@ -101,7 +101,7 @@
     {% if api_image_game and api_image_name %}
       {% include tcg-card.html game=api_image_game name=api_image_name cover=true fallback=fallback_image fallback_alt=include.post.title %}
     {% else %}
-      <img src="{{ card_image_src }}" alt="{{ include.post.title | escape }}" loading="lazy" onerror="this.onerror=null;this.src='{{ fallback_image | relative_url }}';">
+      <img src="{{ card_image_src }}" alt="{{ include.post.image_alt | default: include.post.title | escape }}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ fallback_image | relative_url }}';">
     {% endif %}
   </a>
 

@@ -1,14 +1,21 @@
 ---
-title: "Flesh and Blood para Lerdos: guia para iniciantes"
+title: "Flesh and Blood para iniciantes: guia para lerdos"
 category_label: "Guia"
 content_style: "flesh-and-blood"
 summary: "Um guia direto, visual e ironicamente misericordioso para começar a jogar Flesh and Blood sem entrar em combustão na primeira partida."
-description: "Guia de Flesh and Blood para iniciantes: entenda herói, mesa, pitch, Go Again, defesa, classes, formatos e primeira partida com humor ácido."
+description: "Aprenda como jogar Flesh and Blood: herói, pitch, defesa, Go Again, classes, formatos e primeira partida. Guia para iniciantes com humor e exemplos visuais."
 image: "/assets/img/guias/fab-para-lerdos/capa-orc-lerdo.webp"
 image_alt: "Orc lendo cartas em um guia de Flesh and Blood para iniciantes"
 author: "Cianorte Card Masters"
 date: 2026-05-18
-last_modified_at: 2026-05-22
+last_modified_at: 2026-05-23
+keywords:
+  - como jogar Flesh and Blood
+  - Flesh and Blood para iniciantes
+  - guia Flesh and Blood
+  - pitch Flesh and Blood
+  - Go Again Flesh and Blood
+  - Cianorte Card Masters
 tags:
   - Flesh and Blood
   - Guia Flesh and Blood
@@ -25,25 +32,31 @@ Este é o **Flesh and Blood para Lerdos**, um guia para quem olhou uma carta che
 A boa notícia: o jogo é mais simples do que parece. A má notícia: ele parece uma declaração de imposto com espadas. A verdade fica no meio: depois que você entende **herói, pitch, defesa, Go Again e arsenal**, o resto começa a encaixar. Lentamente. Como uma armadura enferrujada, mas encaixa.
 
 <figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/jokenpo-carta.webp' | relative_url }}" alt="Carta de pedra, papel e tesoura usada para introduzir Flesh and Blood para iniciantes">
+  <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/jokenpo-carta.webp' | relative_url }}" alt="Carta de pedra, papel e tesoura usada para introduzir Flesh and Blood para iniciantes">
   <figcaption>Antes de parecer xadrez medieval com boleto, todo TCG começa aqui: escolher uma carta e aceitar as consequências.</figcaption>
 </figure>
 
-## Sumário {#sumario}
-
-- [O que é Flesh and Blood?](#o-que-e-flesh-and-blood)
-- [O que vem em uma partida?](#o-que-vem-em-uma-partida)
-- [A mesa de jogo sem invocar o caos](#mesa-de-jogo)
-- [Como ler uma carta sem fingir que leu](#como-ler-uma-carta)
-- [Pitch, custo e recursos](#pitch-custo-e-recursos)
-- [Ataque, defesa e a arte de apanhar menos](#ataque-defesa)
-- [Go Again e ponto de ação](#go-again)
-- [Keywords essenciais](#keywords-essenciais)
-- [Um turno guiado](#turno-guiado)
-- [Classes e estilos de jogo](#classes-e-estilos)
-- [Formatos para começar](#formatos-para-comecar)
-- [Plano para a primeira partida](#primeira-partida)
-- [Perguntas frequentes](#perguntas-frequentes)
+<nav class="ccm-guide-toc" aria-labelledby="sumario">
+  <h2 id="sumario">Sumário</h2>
+  <p>Quer ler tudo? Ótimo. Quer pular direto para a parte em que você está perdido? Mais honesto ainda.</p>
+  <ol>
+    <li><a href="#o-que-e-flesh-and-blood">O que é Flesh and Blood?</a></li>
+    <li><a href="#o-que-vem-em-uma-partida">O que vem em uma partida?</a></li>
+    <li><a href="#mesa-de-jogo">A mesa de jogo sem invocar o caos</a></li>
+    <li><a href="#como-ler-uma-carta">Como ler uma carta sem fingir que leu</a></li>
+    <li><a href="#pitch-custo-e-recursos">Pitch, custo e recursos</a></li>
+    <li><a href="#ataque-defesa">Ataque, defesa e a arte de apanhar menos</a></li>
+    <li><a href="#go-again">Go Again e ponto de ação</a></li>
+    <li><a href="#keywords-essenciais">Keywords essenciais</a></li>
+    <li><a href="#turno-guiado">Um turno guiado</a></li>
+    <li><a href="#classes-e-estilos">Classes e estilos de jogo</a></li>
+    <li><a href="#formatos-para-comecar">Formatos para começar</a></li>
+    <li><a href="#primeira-partida">Plano para a primeira partida</a></li>
+    <li><a href="#erros-comuns">Erros comuns de iniciante</a></li>
+    <li><a href="#como-evoluir">Como evoluir depois do básico</a></li>
+    <li><a href="#perguntas-frequentes">Perguntas frequentes</a></li>
+  </ol>
+</nav>
 
 ## O que é Flesh and Blood? {#o-que-e-flesh-and-blood}
 
@@ -52,7 +65,7 @@ A boa notícia: o jogo é mais simples do que parece. A má notícia: ele parece
 O nome já avisa: é carne, sangue e decisões ruins tomadas com convicção. Cada jogador controla um herói, começa com uma quantidade de vida, compra cartas conforme o intelecto do herói e tenta vencer usando ataques, defesas, reações, equipamentos e aquele clássico “acho que dá” que precede a tragédia.
 
 <figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/hero-intelecto.webp' | relative_url }}" alt="Cartas de herói de Flesh and Blood mostrando vida e intelecto para iniciantes">
+  <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/hero-intelecto.webp' | relative_url }}" alt="Cartas de herói de Flesh and Blood mostrando vida e intelecto para iniciantes">
   <figcaption>O herói define muita coisa: vida, intelecto, classe, estilo de jogo e o tipo de sofrimento que você escolheu chamar de hobby.</figcaption>
 </figure>
 
@@ -90,7 +103,7 @@ Em partidas oficiais, os detalhes mudam conforme o **formato**. Para aprender, p
 A mesa de Flesh and Blood parece cheia de zonas, mas ela é bem lógica. O herói fica no centro, equipamentos ao redor, deck e graveyard de um lado, arsenal perto do herói, pitch zone para recursos e a **combat chain** no meio da pancadaria.
 
 <figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/combat-chain.webp' | relative_url }}" alt="Diagrama da mesa de Flesh and Blood com combat chain, herói, arsenal, equipamentos, deck, graveyard e pitch zone">
+  <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/combat-chain.webp' | relative_url }}" alt="Diagrama da mesa de Flesh and Blood com combat chain, herói, arsenal, equipamentos, deck, graveyard e pitch zone">
   <figcaption>A mesa não está bagunçada. Ela só está expressando visualmente o estado mental de quem está aprendendo.</figcaption>
 </figure>
 
@@ -113,7 +126,7 @@ Regra prática:
 Cartas de Flesh and Blood têm bastante informação, mas quase sempre você precisa olhar para alguns pontos principais:
 
 <figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/anatomia-carta-fantasia.webp' | relative_url }}" alt="Infográfico com anatomia de uma carta de Flesh and Blood mostrando custo, pitch, texto, tipo, ataque e defesa">
+  <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/anatomia-carta-fantasia.webp' | relative_url }}" alt="Infográfico com anatomia de uma carta de Flesh and Blood mostrando custo, pitch, texto, tipo, ataque e defesa">
   <figcaption>Sim, tem número em quase todo canto. Não, isso não é uma ameaça. Ainda.</figcaption>
 </figure>
 
@@ -149,7 +162,7 @@ As cartas têm uma faixa colorida que indica quanto recurso geram:
 | **Azul** | 3 | Paga tudo, bate menos, salva sua economia |
 
 <figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/nimblism-pitch-3-cores.webp' | relative_url }}" alt="Três versões da carta Nimblism em pitch vermelho, amarelo e azul em Flesh and Blood">
+  <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/nimblism-pitch-3-cores.webp' | relative_url }}" alt="Três versões da carta Nimblism em pitch vermelho, amarelo e azul em Flesh and Blood">
   <figcaption>A mesma carta pode existir em vermelho, amarelo e azul. A arte da escolha: bater mais ou pagar o aluguel do turno.</figcaption>
 </figure>
 
@@ -162,7 +175,7 @@ Exemplo simples:
 5. Sobra 1 recurso para usar neste turno.
 
 <figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/fluxo-recursos.webp' | relative_url }}" alt="Fluxo de recursos de Flesh and Blood mostrando carta azul gerando 3 recursos e pagando custo 2">
+  <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/fluxo-recursos.webp' | relative_url }}" alt="Fluxo de recursos de Flesh and Blood mostrando carta azul gerando 3 recursos e pagando custo 2">
   <figcaption>Recurso sobrando no fim do turno some. Sim, o capitalismo de Rathe é cruel.</figcaption>
 </figure>
 
@@ -181,7 +194,7 @@ Em FAB, a carta da sua mão pode ser três coisas:
 No turno do oponente, você pode defender com cartas da mão e equipamentos. Bloquear é importante, mas bloquear demais também é um problema: se você usa a mão inteira para defender, começa seu turno sem cartas e sem dignidade ofensiva.
 
 <figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/sink-below.webp' | relative_url }}" alt="Carta Sink Below usada como exemplo de defesa em Flesh and Blood para iniciantes">
+  <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/sink-below.webp' | relative_url }}" alt="Carta Sink Below usada como exemplo de defesa em Flesh and Blood para iniciantes">
   <figcaption>Sink Below: a carta que diz “eu respeito seu ataque, mas prefiro não morrer agora”.</figcaption>
 </figure>
 
@@ -198,7 +211,7 @@ Não existe resposta perfeita, mas existe bom senso. Use este roteiro:
 | Você está com pouca vida | Pare de bancar o protagonista imortal |
 
 <figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/scar-for-a-scar.webp' | relative_url }}" alt="Carta Scar for a Scar como exemplo de ataque em Flesh and Blood">
+  <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/scar-for-a-scar.webp' | relative_url }}" alt="Carta Scar for a Scar como exemplo de ataque em Flesh and Blood">
   <figcaption>Às vezes a melhor defesa é atacar. Às vezes é só burrice com iniciativa. A diferença aparece no placar.</figcaption>
 </figure>
 
@@ -211,7 +224,7 @@ Algumas cartas não são simplesmente jogadas na fase de ação. Elas entram em 
 - **Instant:** pode ser jogada em janelas permitidas, sem precisar ser no seu turno.
 
 <figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/oasis-respite.webp' | relative_url }}" alt="Carta Oasis Respite como exemplo de instant que previne dano em Flesh and Blood">
+  <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/oasis-respite.webp' | relative_url }}" alt="Carta Oasis Respite como exemplo de instant que previne dano em Flesh and Blood">
   <figcaption>Instant é aquela carta que aparece quando o oponente achou que já tinha feito matemática suficiente. Ingênuo.</figcaption>
 </figure>
 
@@ -222,7 +235,7 @@ No começo do seu turno, você tem **1 ponto de ação**. Normalmente, jogar uma
 Sem Go Again, o turno costuma acabar depois da primeira ação. Com Go Again, você pode fazer sequência. E com sequência demais, você começa a falar “só mais um ataque” como se isso não fosse exatamente o que o vilão diria.
 
 <figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/sequencia-combate.webp' | relative_url }}" alt="Infográfico de Flesh and Blood mostrando ponto de ação, Go Again e sequência de ataques">
+  <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/sequencia-combate.webp' | relative_url }}" alt="Infográfico de Flesh and Blood mostrando ponto de ação, Go Again e sequência de ataques">
   <figcaption>Go Again é o botão de “continuar sofrendo”, mas para o oponente. Quando funciona, é lindo. Quando falta, é silêncio constrangedor.</figcaption>
 </figure>
 
@@ -241,7 +254,7 @@ O segredo é montar turnos em que suas cartas conversam entre si. O pesadelo é 
 Flesh and Blood tem várias palavras-chave. Não tente decorar tudo de uma vez, a menos que você goste de sofrer sem XP. Comece pelas mais comuns.
 
 <figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/math-lady.webp' | relative_url }}" alt="Imagem humorística representando confusão matemática ao aprender keywords de Flesh and Blood">
+  <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/math-lady.webp' | relative_url }}" alt="Imagem humorística representando confusão matemática ao aprender keywords de Flesh and Blood">
   <figcaption>Você, depois de ler a terceira carta com texto pequeno e perceber que o inglês também causa dano arcano.</figcaption>
 </figure>
 
@@ -264,7 +277,7 @@ Flesh and Blood tem várias palavras-chave. Não tente decorar tudo de uma vez, 
 Vamos imaginar uma mão com quatro cartas. Você olha para elas e sente aquele vazio filosófico. Calma. Faça perguntas simples.
 
 <figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/mao-cartas-batalha.webp' | relative_url }}" alt="Jogador segurando cartas em uma arena de fantasia, representando planejamento de turno em Flesh and Blood">
+  <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/mao-cartas-batalha.webp' | relative_url }}" alt="Jogador segurando cartas em uma arena de fantasia, representando planejamento de turno em Flesh and Blood">
   <figcaption>O turno começa na mão. O desespero também.</figcaption>
 </figure>
 
@@ -285,7 +298,7 @@ Se você só tem uma ação, escolha bem. Se tem Go Again, pense na sequência.
 No fim do turno, se seu arsenal estiver vazio, você pode guardar uma carta da mão virada para baixo. Guarde carta útil. Não coloque ali uma bomba impossível de usar só porque ela olhou bonito para você.
 
 <figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/diagrama-estado-turno.webp' | relative_url }}" alt="Diagrama de turno de Flesh and Blood mostrando início, ação, defesa, combat chain e fim de turno">
+  <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/diagrama-estado-turno.webp' | relative_url }}" alt="Diagrama de turno de Flesh and Blood mostrando início, ação, defesa, combat chain e fim de turno">
   <figcaption>Um turno não é só atacar. É administrar recurso, ação, defesa futura e arrependimento preventivo.</figcaption>
 </figure>
 
@@ -294,7 +307,7 @@ No fim do turno, se seu arsenal estiver vazio, você pode guardar uma carta da m
 Cada classe em Flesh and Blood tem uma identidade. Você pode escolher pela estética, pelo estilo de jogo ou pelo método de tortura psicológica que mais combina com sua personalidade. O segredo é simples: **não escolha só pelo meta**. Meta muda. Vergonha estética é para sempre.
 
 <figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/mesa-taverna.webp' | relative_url }}" alt="Mesa com jogadores de card game em cenário de fantasia representando classes de Flesh and Blood">
+  <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/mesa-taverna.webp' | relative_url }}" alt="Mesa com jogadores de card game em cenário de fantasia representando classes de Flesh and Blood">
   <figcaption>Escolher classe é importante. É basicamente decidir qual máscara você vai usar enquanto erra triggers.</figcaption>
 </figure>
 
@@ -331,7 +344,7 @@ Cada classe em Flesh and Blood tem uma identidade. Você pode escolher pela est�
     <div class="ccm-accordion__content" id="painel-classe-guardian">
       <div class="ccm-accordion__inner">
         <div class="ccm-accordion__media">
-          <img src="{{ '/assets/img/guias/fab-para-lerdos/guardian-banner.webp' | relative_url }}" alt="Banner com heróis Guardian de Flesh and Blood">
+          <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/guardian-banner.webp' | relative_url }}" alt="Banner com heróis Guardian de Flesh and Blood">
         </div>
         <div class="ccm-accordion__body">
           <p>Guardian gosta de bloquear bem, gerar valor e bater com ataques grandes. É a classe de quem olha para o oponente e diz: “você pode jogar, mas só depois de preencher este formulário”.</p>
@@ -357,7 +370,7 @@ Cada classe em Flesh and Blood tem uma identidade. Você pode escolher pela est�
     <div class="ccm-accordion__content" id="painel-classe-ninja">
       <div class="ccm-accordion__inner">
         <div class="ccm-accordion__media">
-          <img src="{{ '/assets/img/guias/fab-para-lerdos/ninja-banner.webp' | relative_url }}" alt="Banner com heróis Ninja de Flesh and Blood">
+          <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/ninja-banner.webp' | relative_url }}" alt="Banner com heróis Ninja de Flesh and Blood">
         </div>
         <div class="ccm-accordion__body">
           <p>Ninja faz sequências rápidas, usa Go Again e pressiona com vários ataques pequenos. Parece leve, até você perceber que levou 11 de dano em parcelas sem juros.</p>
@@ -383,7 +396,7 @@ Cada classe em Flesh and Blood tem uma identidade. Você pode escolher pela est�
     <div class="ccm-accordion__content" id="painel-classe-brute">
       <div class="ccm-accordion__inner">
         <div class="ccm-accordion__media">
-          <img src="{{ '/assets/img/guias/fab-para-lerdos/brute-banner.webp' | relative_url }}" alt="Banner com heróis Brute de Flesh and Blood">
+          <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/brute-banner.webp' | relative_url }}" alt="Banner com heróis Brute de Flesh and Blood">
         </div>
         <div class="ccm-accordion__body">
           <p>Brute bate forte, descarta carta, aposta em variância e às vezes parece pilotado por um goblin bêbado com excelente custo-benefício.</p>
@@ -409,7 +422,7 @@ Cada classe em Flesh and Blood tem uma identidade. Você pode escolher pela est�
     <div class="ccm-accordion__content" id="painel-classe-warrior">
       <div class="ccm-accordion__inner">
         <div class="ccm-accordion__media">
-          <img src="{{ '/assets/img/guias/fab-para-lerdos/warrior-banner.webp' | relative_url }}" alt="Banner com heróis Warrior de Flesh and Blood">
+          <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/warrior-banner.webp' | relative_url }}" alt="Banner com heróis Warrior de Flesh and Blood">
         </div>
         <div class="ccm-accordion__body">
           <p>Warrior usa armas, reações e truques para transformar ataques aparentemente honestos em pequenas ações judiciais.</p>
@@ -435,7 +448,7 @@ Cada classe em Flesh and Blood tem uma identidade. Você pode escolher pela est�
     <div class="ccm-accordion__content" id="painel-classe-ranger">
       <div class="ccm-accordion__inner">
         <div class="ccm-accordion__media">
-          <img src="{{ '/assets/img/guias/fab-para-lerdos/ranger-banner.webp' | relative_url }}" alt="Banner com heróis Ranger de Flesh and Blood">
+          <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/ranger-banner.webp' | relative_url }}" alt="Banner com heróis Ranger de Flesh and Blood">
         </div>
         <div class="ccm-accordion__body">
           <p>Ranger usa arco, flechas, arsenal e efeitos desagradáveis. É a classe que transforma planejamento em armadilha e armadilha em trauma.</p>
@@ -461,7 +474,7 @@ Cada classe em Flesh and Blood tem uma identidade. Você pode escolher pela est�
     <div class="ccm-accordion__content" id="painel-classe-mechanologist">
       <div class="ccm-accordion__inner">
         <div class="ccm-accordion__media">
-          <img src="{{ '/assets/img/guias/fab-para-lerdos/mech-banner.webp' | relative_url }}" alt="Banner com heróis Mechanologist de Flesh and Blood">
+          <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/mech-banner.webp' | relative_url }}" alt="Banner com heróis Mechanologist de Flesh and Blood">
         </div>
         <div class="ccm-accordion__body">
           <p>Mechanologist usa itens, boost, armas e máquinas. Quando funciona, parece motor turbo. Quando falha, parece impressora velha engasgando papel.</p>
@@ -487,7 +500,7 @@ Cada classe em Flesh and Blood tem uma identidade. Você pode escolher pela est�
     <div class="ccm-accordion__content" id="painel-classe-wizard">
       <div class="ccm-accordion__inner">
         <div class="ccm-accordion__media">
-          <img src="{{ '/assets/img/guias/fab-para-lerdos/wizard-banner.webp' | relative_url }}" alt="Banner com heróis Wizard de Flesh and Blood">
+          <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/wizard-banner.webp' | relative_url }}" alt="Banner com heróis Wizard de Flesh and Blood">
         </div>
         <div class="ccm-accordion__body">
           <p>Wizard causa dano arcano, joga em momentos estranhos e exige que ambos os jogadores leiam mais do que gostariam.</p>
@@ -513,7 +526,7 @@ Cada classe em Flesh and Blood tem uma identidade. Você pode escolher pela est�
     <div class="ccm-accordion__content" id="painel-classe-runeblade">
       <div class="ccm-accordion__inner">
         <div class="ccm-accordion__media">
-          <img src="{{ '/assets/img/guias/fab-para-lerdos/runeblade-banner.webp' | relative_url }}" alt="Banner com heróis Runeblade de Flesh and Blood">
+          <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/runeblade-banner.webp' | relative_url }}" alt="Banner com heróis Runeblade de Flesh and Blood">
         </div>
         <div class="ccm-accordion__body">
           <p>Runeblade mistura ataque físico com dano arcano. É a classe que olha para duas formas de dano e pensa: “por que não piorar a vida dos dois lados?”.</p>
@@ -539,7 +552,7 @@ Cada classe em Flesh and Blood tem uma identidade. Você pode escolher pela est�
     <div class="ccm-accordion__content" id="painel-classe-illusionist">
       <div class="ccm-accordion__inner">
         <div class="ccm-accordion__media">
-          <img src="{{ '/assets/img/guias/fab-para-lerdos/illusionist-banner.webp' | relative_url }}" alt="Banner com heróis Illusionist de Flesh and Blood">
+          <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/illusionist-banner.webp' | relative_url }}" alt="Banner com heróis Illusionist de Flesh and Blood">
         </div>
         <div class="ccm-accordion__body">
           <p>Illusionist cria ameaças, auras, aliados e ataques que parecem mentira. Às vezes são mesmo, mas ainda machucam.</p>
@@ -565,7 +578,7 @@ Cada classe em Flesh and Blood tem uma identidade. Você pode escolher pela est�
     <div class="ccm-accordion__content" id="painel-classe-assassin">
       <div class="ccm-accordion__inner">
         <div class="ccm-accordion__media">
-          <img src="{{ '/assets/img/guias/fab-para-lerdos/assassin-banner.webp' | relative_url }}" alt="Banner com heróis Assassin de Flesh and Blood">
+          <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/assassin-banner.webp' | relative_url }}" alt="Banner com heróis Assassin de Flesh and Blood">
         </div>
         <div class="ccm-accordion__body">
           <p>Assassin trabalha com stealth, contratos, banish e ataques traiçoeiros. É a classe que vence não só sua vida, mas sua confiança nas pessoas.</p>
@@ -591,7 +604,7 @@ Cada classe em Flesh and Blood tem uma identidade. Você pode escolher pela est�
     <div class="ccm-accordion__content" id="painel-classe-pirate">
       <div class="ccm-accordion__inner">
         <div class="ccm-accordion__media">
-          <img src="{{ '/assets/img/guias/fab-para-lerdos/pirate-banner.webp' | relative_url }}" alt="Banner com heróis Pirate de Flesh and Blood">
+          <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/pirate-banner.webp' | relative_url }}" alt="Banner com heróis Pirate de Flesh and Blood">
         </div>
         <div class="ccm-accordion__body">
           <p>Pirate aparece como tema mais específico e ainda em expansão dentro do jogo. É uma estética forte, com cara de mesa divertida e futuro potencial para gente que gosta de caos com chapéu.</p>
@@ -617,7 +630,7 @@ Cada classe em Flesh and Blood tem uma identidade. Você pode escolher pela est�
     <div class="ccm-accordion__content" id="painel-classe-necromancer">
       <div class="ccm-accordion__inner">
         <div class="ccm-accordion__media">
-          <img src="{{ '/assets/img/guias/fab-para-lerdos/necromancer-banner.webp' | relative_url }}" alt="Banner com heróis Necromancer de Flesh and Blood">
+          <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/necromancer-banner.webp' | relative_url }}" alt="Banner com heróis Necromancer de Flesh and Blood">
         </div>
         <div class="ccm-accordion__body">
           <p>Necromancer chama atenção pela fantasia sombria e pela ideia de explorar morte, recurso e presença recorrente. Tradução honesta: se você gostou da estética, acompanhe. Em card game, o nicho de hoje pode virar a sua próxima crise financeira.</p>
@@ -633,7 +646,7 @@ Cada classe em Flesh and Blood tem uma identidade. Você pode escolher pela est�
 </section>
 
 <figure>
-  <img src="{{ '/assets/img/guias/fab-para-lerdos/heroi-cartas-classe.webp' | relative_url }}" alt="Herói de fantasia cercado por cartas representando classes e estilos de Flesh and Blood">
+  <img loading="lazy" decoding="async" src="{{ '/assets/img/guias/fab-para-lerdos/heroi-cartas-classe.webp' | relative_url }}" alt="Herói de fantasia cercado por cartas representando classes e estilos de Flesh and Blood">
   <figcaption>Escolha classe por estilo, não só por força. Meta muda. Trauma estético é para sempre.</figcaption>
 </figure>
 
@@ -730,11 +743,7 @@ Depois que você entender a primeira camada, evolua em blocos:
 
 No Cianorte Card Masters, a ideia é exatamente essa: jogar, aprender, errar, rir e trazer mais gente para a mesa. O jogo é competitivo, mas comunidade saudável vale mais que ganhar uma partida e espantar três iniciantes.
 
-Veja também:
-
-- [Guias do Cianorte Card Masters]({{ '/guias/' | relative_url }})
-- [Deck Techs e listas da comunidade]({{ '/decks/' | relative_url }})
-- [Postagens da comunidade]({{ '/comunidade/' | relative_url }})
+Para continuar estudando depois deste guia, deixei um card de links úteis no final do post. Sim, com botão bonito, porque até sofrimento organizado merece navegação decente.
 
 ## Perguntas frequentes {#perguntas-frequentes}
 
@@ -772,6 +781,8 @@ No melhor, você descobre um dos card games mais intensos, táticos e divertidos
 
 E, convenhamos: perder com estilo ainda é melhor do que nunca ter dado **Go Again**.
 
+{% include internal-links-card.html %}
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -799,6 +810,22 @@ E, convenhamos: perder com estilo ainda é melhor do que nunca ter dado **Go Aga
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "A ordem recomendada é aprender objetivo do jogo, zonas da mesa, pitch, ponto de ação, Go Again, defesa, arsenal e keywords comuns."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qual classe é melhor para iniciante em Flesh and Blood?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A melhor classe depende do estilo do jogador. Ninja e Warrior ensinam sequência e combate, Guardian ensina defesa, Mechanologist ensina ritmo e Ranger ensina arsenal e planejamento."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Posso aprender Flesh and Blood só lendo guia?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Um guia ajuda a entender o mapa do jogo, mas a evolução vem jogando partidas, perguntando timing e praticando pitch, defesa, arsenal e Go Again na mesa."
       }
     }
   ]

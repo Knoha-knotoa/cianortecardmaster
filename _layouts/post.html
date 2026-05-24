@@ -137,7 +137,7 @@ layout: default
             {% include tcg-card.html game=api_image_game name=api_image_name cover=true fallback=fallback_image fallback_alt=page.title %}
           </div>
         {% else %}
-          <img class="post-main-image" src="{{ hero_image_src }}" alt="{{ page.title | escape }}" onerror="this.onerror=null;this.src='{{ fallback_image | relative_url }}';">
+          <img class="post-main-image" src="{{ hero_image_src }}" alt="{{ page.image_alt | default: page.title | escape }}" loading="eager" decoding="async" fetchpriority="high" onerror="this.onerror=null;this.src='{{ fallback_image | relative_url }}';">
         {% endif %}
       {% endif %}
     </div>

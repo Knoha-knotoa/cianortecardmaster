@@ -8,12 +8,23 @@
   {% endif %}
 {% endfor %}
 
+{% assign current_content_label = "este conteúdo" %}
+{% if page.collection == "guias" %}
+  {% assign current_content_label = "este guia" %}
+{% elsif page.collection == "decks" %}
+  {% assign current_content_label = "esta Deck Tech" %}
+{% elsif page.collection == "blog" %}
+  {% assign current_content_label = "este artigo" %}
+{% elsif page.collection == "comunidade" %}
+  {% assign current_content_label = "esta postagem" %}
+{% endif %}
+
 <section class="ccm-internal-links-card" aria-labelledby="ccm-internal-links-title">
   <header class="ccm-internal-links-header">
     <p class="ccm-internal-links-kicker">Continue navegando</p>
     <h2 id="ccm-internal-links-title">Mais conteúdo do Cianorte Card Masters</h2>
     <p>
-      Se você curtiu esta Deck Tech, esses links ajudam a seguir estudando Flesh and Blood,
+      Se você curtiu {{ current_content_label }}, esses links ajudam a seguir estudando,
       acompanhar a comunidade local e encontrar os próximos encontros presenciais em Cianorte.
     </p>
   </header>
@@ -33,11 +44,19 @@
       </a>
     {% endif %}
 
-    <a class="ccm-internal-link-item" href="{{ '/guias/guia-fab-para-lerdos/' | relative_url }}">
-      <span class="ccm-internal-link-tag">Guia</span>
-      <strong>Flesh and Blood para iniciantes</strong>
-      <small>O guia para começar sem entrar em combustão.</small>
-    </a>
+    {% if page.url == "/guias/guia-fab-para-lerdos/" %}
+      <a class="ccm-internal-link-item" href="{{ '/guias/guia-equipamentos-e-defesa-flesh-and-blood/' | relative_url }}">
+        <span class="ccm-internal-link-tag">Guia</span>
+        <strong>Equipamentos e defesa em FAB</strong>
+        <small>Entenda bloqueio, armaduras e como apanhar menos.</small>
+      </a>
+    {% else %}
+      <a class="ccm-internal-link-item" href="{{ '/guias/guia-fab-para-lerdos/' | relative_url }}">
+        <span class="ccm-internal-link-tag">Guia</span>
+        <strong>Flesh and Blood para iniciantes</strong>
+        <small>O guia para começar sem entrar em combustão.</small>
+      </a>
+    {% endif %}
 
     <a class="ccm-internal-link-item" href="{{ '/decks/' | relative_url }}">
       <span class="ccm-internal-link-tag">Deck Techs</span>
