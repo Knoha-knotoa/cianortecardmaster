@@ -3904,8 +3904,8 @@ h3 {
 
   .home-google-hero {
     background:
-      linear-gradient(180deg, rgba(4,10,8,.95) 0%, rgba(4,10,8,.88) 48%, rgba(4,10,8,.62) 100%),
-      url("../img/home/google/img-reuniao-de-jogadores.png") center / cover no-repeat,
+      linear-gradient(180deg, rgba(4,10,8,.88) 0%, rgba(4,10,8,.80) 48%, rgba(4,10,8,.50) 100%),
+      url("../img/home/google/img-reuniao-de-jogadores.webp") center / cover no-repeat,
       #040a08;
   }
 
@@ -3929,7 +3929,15 @@ h3 {
     font-size: clamp(2.2rem, 10vw, 3.2rem);
   }
 
-  .home-google-highlight {
+  
+  .home-google-hero-emblem {
+    top: 1rem;
+    right: .9rem;
+    width: 92px;
+    opacity: .14;
+  }
+
+.home-google-highlight {
     grid-template-columns: 36px 1fr;
     gap: .7rem;
   }
@@ -3959,17 +3967,63 @@ h3 {
     padding: 1.05rem .95rem 1rem;
   }
 
-  .home-google-card-icon {
-    width: 64px;
-    height: 64px;
-  }
+  
+.home-google-card-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(212,175,55,.12), rgba(0,0,0,0) 70%);
+  filter: drop-shadow(0 0 12px rgba(212,175,55,.20)) drop-shadow(0 10px 18px rgba(0,0,0,.22));
+  isolation: isolate;
+}
 
-  .home-google-card-icon img {
-    width: 28px;
-    height: 28px;
-  }
+.home-google-card-icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(135deg, #fff0a8 0%, #d4af37 38%, #8a651e 68%, #ffe596 100%);
+  -webkit-mask: url("../img/home/google/icone-aureula.png") center / contain no-repeat;
+  mask: url("../img/home/google/icone-aureula.png") center / contain no-repeat;
+  opacity: .96;
+}
 
-  .home-google-card h3 {
+.home-google-card-icon::after {
+  content: "";
+  position: absolute;
+  inset: 24px;
+  z-index: 0;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(212,175,55,.24), rgba(212,175,55,.05) 54%, transparent 76%);
+  box-shadow: 0 0 18px rgba(212,175,55,.18);
+}
+
+.home-google-card--green .home-google-card-icon::before {
+  background: linear-gradient(135deg, #fff0a8 0%, #d4af37 38%, #8a651e 68%, #ffe596 100%);
+}
+
+.home-google-card-icon img {
+  position: relative;
+  z-index: 1;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  filter:
+    brightness(0)
+    saturate(100%)
+    invert(79%)
+    sepia(68%)
+    saturate(610%)
+    hue-rotate(358deg)
+    brightness(96%)
+    contrast(93%)
+    drop-shadow(0 0 8px rgba(212,175,55,.28));
+}
+
+.home-google-card h3 {
     font-size: clamp(1.55rem, 7vw, 2rem);
   }
 }
@@ -5515,12 +5569,12 @@ h3 {
   overflow: hidden;
   border: 1px solid rgba(212,175,55,.34);
   background:
-    linear-gradient(90deg, rgba(4,10,8,.94) 0%, rgba(4,10,8,.90) 44%, rgba(4,10,8,.58) 68%, rgba(4,10,8,.32) 100%),
-    url("../img/home/google/img-reuniao-de-jogadores.png") right center / cover no-repeat,
+    linear-gradient(90deg, rgba(4,10,8,.84) 0%, rgba(4,10,8,.78) 44%, rgba(4,10,8,.42) 68%, rgba(4,10,8,.18) 100%),
+    url("../img/home/google/img-reuniao-de-jogadores.webp") right center / cover no-repeat,
     #040a08;
   box-shadow:
     0 0 0 1px rgba(255,231,170,.05),
-    0 28px 60px rgba(0,0,0,.34),
+    0 22px 44px rgba(0,0,0,.26),
     inset 0 0 0 1px rgba(255,255,255,.03);
 }
 
@@ -5539,8 +5593,8 @@ h3 {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 72% 64%, rgba(255,194,80,.16), transparent 18rem),
-    linear-gradient(180deg, rgba(255,220,156,.04), transparent 22%, transparent 78%, rgba(255,220,156,.03));
+    radial-gradient(circle at 72% 64%, rgba(255,194,80,.12), transparent 18rem),
+    linear-gradient(180deg, rgba(255,220,156,.03), transparent 22%, transparent 78%, rgba(255,220,156,.02));
 }
 
 .home-google-hero-inner {
@@ -5578,12 +5632,28 @@ h3 {
   background: linear-gradient(90deg, rgba(212,175,55,.85), transparent);
 }
 
-.home-google-kicker img,
 .home-google-bottom-link img {
   width: 18px;
   height: 18px;
   object-fit: contain;
   filter: drop-shadow(0 0 8px rgba(212,175,55,.35));
+}
+
+.home-google-hero-emblem {
+  position: absolute;
+  top: clamp(1rem, 2.2vw, 1.45rem);
+  right: clamp(1rem, 5vw, 3.1rem);
+  display: block;
+  width: clamp(112px, 16vw, 180px);
+  opacity: .16;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,.28));
+}
+
+.home-google-hero-emblem img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .home-google-hero h2 {
@@ -5626,7 +5696,7 @@ h3 {
   border-radius: 12px;
   border: 1px solid rgba(212,175,55,.38);
   background: linear-gradient(180deg, rgba(53,34,6,.75), rgba(24,15,4,.88));
-  box-shadow: 0 8px 18px rgba(0,0,0,.24), inset 0 0 0 1px rgba(255,255,255,.04);
+  box-shadow: 0 6px 14px rgba(0,0,0,.18), inset 0 0 0 1px rgba(255,255,255,.04);
 }
 
 .home-google-highlight-icon img {
@@ -5731,7 +5801,7 @@ h3 {
     radial-gradient(circle at 15% 0%, rgba(255,255,255,.035), transparent 32%),
     linear-gradient(180deg, rgba(7,13,10,.84), rgba(4,8,7,.95));
   box-shadow:
-    0 20px 36px rgba(0,0,0,.26),
+    0 14px 24px rgba(0,0,0,.20),
     0 0 0 1px rgba(255,255,255,.02),
     inset 0 0 0 1px rgba(255,255,255,.03);
   transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
@@ -5749,8 +5819,8 @@ h3 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: .18;
-  filter: saturate(.9) contrast(.95) brightness(.7);
+  opacity: .22;
+  filter: saturate(.95) contrast(.98) brightness(.84);
   z-index: -2;
 }
 
@@ -5761,7 +5831,7 @@ h3 {
   z-index: -1;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(3,8,6,.16), rgba(3,8,6,.92)),
+    linear-gradient(180deg, rgba(3,8,6,.10), rgba(3,8,6,.76)),
     radial-gradient(circle at 14% 10%, var(--google-glow), transparent 34%);
 }
 
