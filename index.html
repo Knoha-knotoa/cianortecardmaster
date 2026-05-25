@@ -271,29 +271,45 @@ image_alt: "Dragão em arte fantástica representando a comunidade Cianorte Card
 <section class="section home-armory-section" aria-labelledby="home-armory-title">
   <div class="container home-armory-grid">
     <div class="home-armory-copy">
-      <p class="eyebrow">Resultado da comunidade</p>
-      <h2 id="home-armory-title">Último Armory de Flesh and Blood</h2>
-      <p>
-        O Armory é nosso torneio semanal de Flesh and Blood. A Home mostra o resultado mais recente para quem quer acompanhar o cenário local,
-        ver heróis em destaque e descobrir quando aparece a próxima chance de testar o deck.
-      </p>
-      <div class="btn-row">
-        <a class="btn btn-primary" href="{{ '/comunidade/#ultimo-armory' | relative_url }}">Ver resultado completo</a>
-        <a class="btn btn-secondary" href="{{ '/agenda/' | relative_url }}">Próximos eventos</a>
+      <div class="home-armory-copy-content">
+        <p class="eyebrow">Resultado da comunidade</p>
+        <h2 id="home-armory-title">Último Armory de Flesh and Blood</h2>
+        <p>
+          O Armory é nosso torneio semanal de Flesh and Blood. A Home mostra o resultado mais recente para quem quer acompanhar o cenário local,
+          ver heróis em destaque e descobrir quando aparece a próxima chance de testar o deck.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="{{ '/comunidade/#ultimo-armory' | relative_url }}">Ver resultado completo</a>
+          <a class="btn btn-secondary" href="{{ '/agenda/' | relative_url }}">Próximos eventos</a>
+        </div>
       </div>
     </div>
 
-    <article class="home-armory-card" aria-label="Resumo do último resultado de Armory">
+    <article class="home-armory-card home-armory-card-epic" aria-label="Resumo do último resultado de Armory">
       {% if latest_armory %}
-        <p class="eyebrow">{{ latest_armory.date | date: "%d/%m/%Y" }} • {{ latest_armory.rounds | default: "3" }} rodadas</p>
+        <p class="eyebrow home-armory-meta">{{ latest_armory.date | date: "%d/%m/%Y" }} • {{ latest_armory.rounds | default: "3" }} rodadas</p>
         <h3>{{ latest_armory.title }}</h3>
         {% if latest_armory.results %}
-          <ol class="home-armory-podium">
+          <ol class="home-armory-podium home-armory-podium-epic">
             {% for result in latest_armory.results limit:3 %}
-              <li>
-                <span>{{ forloop.index }}º</span>
-                <strong>{{ result.player }}</strong>
-                <em>{{ result.hero }} • {{ result.record }}</em>
+              {% assign hero_slug = result.hero | slugify %}
+              {% assign hero_image = '/assets/img/fab-heroes/' | append: hero_slug | append: '.webp' %}
+              <li class="home-armory-row home-armory-row-{{ forloop.index }}">
+                <span class="home-armory-rank-badge" aria-hidden="true">
+                  <img class="home-armory-rank-icon" src="{{ '/assets/img/armory-icons/depth/badge-colocacao.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="72" height="72">
+                  <strong>{{ forloop.index }}º</strong>
+                </span>
+
+                <span class="home-armory-hero-badge">
+                  <img src="{{ hero_image | relative_url }}" alt="Badge do herói {{ result.hero }}" loading="lazy" decoding="async" width="96" height="96">
+                </span>
+
+                <span class="home-armory-player-cell">
+                  <strong>{{ result.player }}</strong>
+                  <em>{{ result.hero }}</em>
+                </span>
+
+                <span class="home-armory-record">{{ result.record }}</span>
               </li>
             {% endfor %}
           </ol>
