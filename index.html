@@ -50,39 +50,93 @@ image_alt: "Dragão em arte fantástica representando a comunidade Cianorte Card
   </div>
 </section>
 
-<section class="section home-newcomer-section" aria-labelledby="home-newcomer-title">
-  <div class="container home-newcomer-grid">
-    <div class="home-newcomer-copy">
-      <p class="eyebrow">Achou a gente no Google?</p>
-      <h2 id="home-newcomer-title">Pode chegar: aqui é comunidade, mesa e aprendizado</h2>
-      <p>
-        O Cianorte Card Masters existe para aproximar jogadores. Publicamos agenda, guias, deck techs,
-        fotos, vídeos, memes e resultados dos eventos para quem quer saber onde jogar card games em Cianorte
-        ou simplesmente descobrir se esse hobby é para você.
-      </p>
-      <p>
-        Também divulgamos o projeto da Prefeitura de Cianorte ligado aos encontros e torneios de card game,
-        além dos eventos semanais realizados com apoio de loja parceira, que vende produtos e recebe torneios.
-      </p>
-    </div>
+<section class="section home-google-section" aria-labelledby="home-google-title">
+  <div class="container">
+    <div class="home-google-grid">
+      <article class="home-google-hero">
+        <div class="home-google-hero-inner">
+          <p class="home-google-kicker">
+            <img src="{{ '/assets/img/home/google/icone-aureula.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+            <span>Achou a gente no Google?</span>
+          </p>
 
-    <div class="home-trust-grid" aria-label="Informações rápidas para novos jogadores">
-      <article class="home-trust-card">
-        <strong>Não somos uma loja</strong>
-        <span>Somos uma comunidade de jogadores. Indicamos locais, eventos e parceiros, mas o grupo é feito pela galera da mesa.</span>
+          <h2 id="home-google-title">Pode chegar: aqui é comunidade, mesa e aprendizado</h2>
+
+          <p>
+            O Cianorte Card Masters existe para conectar jogadores de todos os níveis. Publicamos agenda,
+            guias, deck techs, fotos, vídeos, memes e resultados dos eventos para você saber onde jogar
+            card games em Cianorte.
+          </p>
+
+          <div class="home-google-highlight">
+            <span class="home-google-highlight-icon" aria-hidden="true">
+              <img src="{{ '/assets/img/armory-icons/flat/badge-campeao.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+            </span>
+            <p>
+              Não somos uma loja: somos uma comunidade que se reúne para jogar, aprender e fortalecer a cena local.
+              Chegue, participe e faça parte da mesa.
+            </p>
+          </div>
+
+          <div class="home-google-actions">
+            <a class="home-google-btn home-google-btn--agenda" href="{{ '/agenda/' | relative_url }}">
+              <img src="{{ '/assets/img/armory-icons/flat/icon-calendario.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+              <span>Ver agenda</span>
+            </a>
+            <a class="home-google-btn home-google-btn--whatsapp" href="https://chat.whatsapp.com/HjmzPtLTCIALlwS2mIg55R" target="_blank" rel="noopener noreferrer">
+              <img src="{{ '/assets/img/social/icon-whatsapp.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+              <span>Entrar no WhatsApp</span>
+            </a>
+          </div>
+
+          <a class="home-google-bottom-link" href="https://chat.whatsapp.com/HjmzPtLTCIALlwS2mIg55R" target="_blank" rel="noopener noreferrer">
+            <img src="{{ '/assets/img/home/google/icone-aureula.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+            <span>Iniciante? Pode chegar sem deck pronto.</span>
+          </a>
+        </div>
       </article>
-      <article class="home-trust-card">
-        <strong>Tem projeto na cidade</strong>
-        <span>Os encontros ajudam novos jogadores a aprender card games, participar de torneios e conhecer pessoas em Cianorte.</span>
-      </article>
-      <article class="home-trust-card">
-        <strong>Tem loja parceira</strong>
-        <span>O Bazar do Weezing apoia eventos semanais, torneios e venda de produtos para quem quer montar ou melhorar decks.</span>
-      </article>
-      <article class="home-trust-card">
-        <strong>Iniciante é bem-vindo</strong>
-        <span>Você não precisa ter deck pronto. Apareça, pergunte, jogue partidas de teste e conheça os formatos aos poucos.</span>
-      </article>
+
+      <div class="home-google-cards" aria-label="Informações rápidas para novos jogadores">
+        <article class="home-google-card home-google-card--gold">
+          <img class="home-google-card-bg" src="{{ '/assets/img/home/google/img-recem-chegado.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1122" height="1402">
+          <span class="home-google-card-icon">
+            <img src="{{ '/assets/img/armory-icons/flat/icon-pessoas.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+          </span>
+          <h3>Não somos uma loja</h3>
+          <span class="home-google-card-divider" aria-hidden="true"></span>
+          <p>Somos uma comunidade de jogadores. Indicamos locais, eventos e parceiros, mas quem faz o grupo é a galera da mesa.</p>
+        </article>
+
+        <article class="home-google-card home-google-card--green">
+          <img class="home-google-card-bg" src="{{ '/assets/img/home/google/img-cidadela.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1122" height="1402">
+          <span class="home-google-card-icon">
+            <img src="{{ '/assets/img/home/google/icone-cidade.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+          </span>
+          <h3>Tem projeto na cidade</h3>
+          <span class="home-google-card-divider" aria-hidden="true"></span>
+          <p>Os encontros ajudam novos jogadores a aprender card games, participar de torneios e conhecer pessoas em Cianorte.</p>
+        </article>
+
+        <article class="home-google-card home-google-card--gold">
+          <img class="home-google-card-bg" src="{{ '/assets/img/home/google/img-loja-parceira.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1122" height="1402">
+          <span class="home-google-card-icon">
+            <img src="{{ '/assets/img/home/google/icone-parceiros.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+          </span>
+          <h3>Tem loja parceira</h3>
+          <span class="home-google-card-divider" aria-hidden="true"></span>
+          <p>O Bazar do Weezing apoia eventos semanais, torneios e venda de produtos para quem quer montar ou melhorar decks.</p>
+        </article>
+
+        <article class="home-google-card home-google-card--green">
+          <img class="home-google-card-bg" src="{{ '/assets/img/home/google/img-cartas-cidadela.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1122" height="1402">
+          <span class="home-google-card-icon">
+            <img src="{{ '/assets/img/home/google/icone-estudos.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+          </span>
+          <h3>Iniciante é bem-vindo</h3>
+          <span class="home-google-card-divider" aria-hidden="true"></span>
+          <p>Você não precisa de deck pronto. Apareça, pergunte, jogue partidas de teste e conheça os formatos aos poucos.</p>
+        </article>
+      </div>
     </div>
   </div>
 </section>
