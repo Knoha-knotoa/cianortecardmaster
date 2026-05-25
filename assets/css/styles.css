@@ -6413,7 +6413,7 @@ h3 {
 
 .home-google-card {
   --google-accent: rgba(212,175,55,.42);
-  --google-glow: rgba(212,175,55,.08);
+  --google-glow: rgba(212,175,55,.11);
   position: relative;
   overflow: hidden;
   min-height: 285px;
@@ -6425,12 +6425,12 @@ h3 {
   border-radius: 24px;
   border: 1px solid var(--google-accent);
   background:
-    radial-gradient(circle at 15% 0%, rgba(255,255,255,.03), transparent 32%),
-    linear-gradient(180deg, rgba(7,13,10,.76), rgba(4,8,7,.90));
+    radial-gradient(circle at 15% 0%, rgba(255,255,255,.045), transparent 32%),
+    linear-gradient(180deg, rgba(7,13,10,.58), rgba(4,8,7,.78));
   box-shadow:
-    0 12px 22px rgba(0,0,0,.18),
-    0 0 0 1px rgba(255,255,255,.02),
-    inset 0 0 0 1px rgba(255,255,255,.03);
+    0 12px 22px rgba(0,0,0,.16),
+    0 0 0 1px rgba(255,255,255,.025),
+    inset 0 0 0 1px rgba(255,255,255,.035);
   transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
   isolation: isolate;
 }
@@ -6445,8 +6445,8 @@ h3 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: .24;
-  filter: saturate(.95) contrast(.98) brightness(.90);
+  opacity: .39;
+  filter: saturate(1.08) contrast(1.02) brightness(1.08);
   z-index: -2;
 }
 
@@ -6457,16 +6457,27 @@ h3 {
   z-index: -1;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(3,8,6,.08), rgba(3,8,6,.68)),
-    radial-gradient(circle at 14% 10%, var(--google-glow), transparent 34%);
+    linear-gradient(180deg, rgba(3,8,6,.02), rgba(3,8,6,.50)),
+    radial-gradient(circle at 14% 10%, var(--google-glow), transparent 36%);
 }
 
 .home-google-card-icon {
   position: relative;
   display: block;
-  width: 92px;
-  height: 92px;
-  flex: 0 0 92px;
+  width: 102px;
+  height: 102px;
+  flex: 0 0 102px;
+  isolation: isolate;
+}
+
+.home-google-card-icon::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  z-index: 0;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255,222,86,.18), rgba(212,175,55,.08) 46%, transparent 72%);
+  box-shadow: 0 0 22px rgba(212,175,55,.20);
 }
 
 .home-google-card-icon-aureola,
@@ -6478,17 +6489,38 @@ h3 {
 
 .home-google-card-icon-aureola {
   inset: 0;
+  z-index: 1;
   width: 100%;
   height: 100%;
-  filter: brightness(0) saturate(100%) invert(80%) sepia(46%) saturate(703%) hue-rotate(359deg) brightness(101%) contrast(95%) drop-shadow(0 0 16px rgba(212,175,55,.24));
+  filter: brightness(0) saturate(100%) invert(82%) sepia(55%) saturate(809%) hue-rotate(356deg) brightness(104%) contrast(98%) drop-shadow(0 0 18px rgba(212,175,55,.32));
   opacity: .98;
 }
 
+@supports ((-webkit-mask: url("")) or (mask: url(""))) {
+  .home-google-card-icon::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(135deg, #fff0a6 0%, #f8d84e 34%, #d4af37 62%, #8c6418 100%);
+    -webkit-mask: url("../img/home/google/icone-aureula.png") center / contain no-repeat;
+    mask: url("../img/home/google/icone-aureula.png") center / contain no-repeat;
+    filter: drop-shadow(0 0 18px rgba(212,175,55,.34));
+  }
+
+  .home-google-card-icon-aureola {
+    opacity: 0;
+  }
+}
+
 .home-google-card-icon-symbol {
-  inset: 20px;
-  width: calc(100% - 40px);
-  height: calc(100% - 40px);
-  filter: brightness(0) saturate(100%) invert(80%) sepia(46%) saturate(703%) hue-rotate(359deg) brightness(103%) contrast(96%) drop-shadow(0 0 10px rgba(212,175,55,.24));
+  z-index: 2;
+  inset: 24px;
+  width: calc(100% - 48px);
+  height: calc(100% - 48px);
+  filter: brightness(0) saturate(100%) invert(82%) sepia(55%) saturate(809%) hue-rotate(356deg) brightness(106%) contrast(98%) drop-shadow(0 0 10px rgba(212,175,55,.36));
+  opacity: .96;
 }
 
 .home-google-card h3 {
@@ -6567,14 +6599,18 @@ h3 {
   }
 
   .home-google-card-icon {
-    width: 84px;
-    height: 84px;
-    flex-basis: 84px;
+    width: 88px;
+    height: 88px;
+    flex-basis: 88px;
+  }
+
+  .home-google-card-icon::before {
+    inset: 10px;
   }
 
   .home-google-card-icon-symbol {
-    inset: 18px;
-    width: calc(100% - 36px);
-    height: calc(100% - 36px);
+    inset: 21px;
+    width: calc(100% - 42px);
+    height: calc(100% - 42px);
   }
 }
