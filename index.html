@@ -355,13 +355,48 @@ image_alt: "Dragão em arte fantástica representando a comunidade Cianorte Card
   </div>
 </section>
 
-<section class="section">
+<section class="section home-project-section">
   <div class="container project-grid home-project-grid">
-    <div class="project-highlight home-project-highlight">
-      <strong>Projeto, parceiros e comunidade</strong>
-    </div>
+    <article class="project-highlight home-project-highlight home-project-visual" aria-labelledby="home-project-visual-title">
+      <div class="home-project-visual-inner">
+        <div class="home-project-badges" aria-hidden="true">
+          <span class="home-project-badge home-project-badge--left">
+            <img src="{{ '/assets/img/home/google/icone-parceiros.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="44" height="44">
+          </span>
+          <span class="home-project-badge home-project-badge--center">Cianorte<br>Card<br>Masters</span>
+          <span class="home-project-badge home-project-badge--right">
+            <img src="{{ '/assets/img/armory-icons/flat/icon-pessoas.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="44" height="44">
+          </span>
+        </div>
 
-    <div class="info-panel">
+        <div class="home-project-title-panel">
+          <h2 id="home-project-visual-title">Projeto,<br>Parceiros<br><span>e</span><br>Comunidade</h2>
+        </div>
+
+        <div class="home-project-pillars" aria-label="Pilares da comunidade">
+          <div class="home-project-pillar">
+            <span class="home-project-pillar-icon">
+              <img src="{{ '/assets/img/home/project/icon-projeto.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="36" height="36">
+            </span>
+            <small>Projeto</small>
+          </div>
+          <div class="home-project-pillar">
+            <span class="home-project-pillar-icon">
+              <img src="{{ '/assets/img/home/google/icone-parceiros.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="36" height="36">
+            </span>
+            <small>Parceiros</small>
+          </div>
+          <div class="home-project-pillar">
+            <span class="home-project-pillar-icon">
+              <img src="{{ '/assets/img/armory-icons/flat/icon-pessoas.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="36" height="36">
+            </span>
+            <small>Comunidade</small>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <div class="info-panel home-project-info">
       <p class="eyebrow">Onde a comunidade acontece</p>
       <h2>Encontros, torneios e mesas presenciais em Cianorte</h2>
       <p>
@@ -371,9 +406,15 @@ image_alt: "Dragão em arte fantástica representando a comunidade Cianorte Card
       <p>
         O site organiza tudo isso: agenda, resultados de Armory e ligas, fotos, vídeos, guias, deck techs e notícias para quem quer participar sem depender de boato de grupo fechado.
       </p>
-      <div class="btn-row">
-        <a class="btn btn-primary" href="{{ '/onde-jogar/' | relative_url }}">Onde jogar</a>
-        <a class="btn btn-secondary" href="{{ '/sobre/' | relative_url }}">Entender o grupo</a>
+      <div class="btn-row home-project-actions">
+        <a class="btn btn-primary home-project-btn home-project-btn-primary" href="{{ '/agenda/' | relative_url }}">
+          <img src="{{ '/assets/img/home/project/icon-onde-jogar.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="22" height="22">
+          <span>Onde jogar</span>
+        </a>
+        <a class="btn btn-secondary home-project-btn home-project-btn-secondary" href="{{ '/sobre/' | relative_url }}">
+          <img src="{{ '/assets/img/armory-icons/flat/icon-pessoas.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="22" height="22">
+          <span>Entender o grupo</span>
+        </a>
       </div>
     </div>
   </div>
