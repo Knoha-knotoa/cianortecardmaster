@@ -185,6 +185,11 @@ Embora Flesh and Blood seja um dos focos principais, o Cianorte Card Masters tam
       <strong>One Piece Card Game</strong>
       <small>Outra porta de entrada para quem curte anime, líderes e partidas presenciais.</small>
     </a>
+    <a class="ccm-internal-link-item" href="{{ '/jogos/yu-gi-oh-em-cianorte/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Yu-Gi-Oh!</span>
+      <strong>Yu-Gi-Oh! em Cianorte</strong>
+      <small>Nostalgia do anime, combos, banlist e jogo competitivo para Duelistas locais.</small>
+    </a>
     <a class="ccm-internal-link-item" href="{{ '/guias/' | relative_url }}">
       <span class="ccm-internal-link-tag">Como jogar</span>
       <strong>Guias para aprender</strong>

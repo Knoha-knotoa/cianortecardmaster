@@ -139,6 +139,7 @@ Se você veio de outros jogos da comunidade, Pokémon TCG tem uma pegada própri
 - quem joga **[Flesh and Blood]({{ '/jogos/flesh-and-blood-em-cianorte/' | relative_url }})** vai notar que Pokémon é menos focado em combate direto de herói, mas exige muita leitura de turno e preparação;
 - quem joga **[Magic Commander]({{ '/jogos/magic-the-gathering-em-cianorte/' | relative_url }})** pode gostar da montagem de engine, compra de cartas e sinergias;
 - quem acompanha **[One Piece Card Game]({{ '/jogos/one-piece-tcg-em-cianorte/' | relative_url }})** pode curtir o ritmo de ataque, setup e gerenciamento de recursos;
+- quem veio de **[Yu-Gi-Oh!]({{ '/jogos/yu-gi-oh-em-cianorte/' | relative_url }})** pode gostar do lado coleção, torneio local e cartas marcantes;
 - quem vem do colecionismo talvez descubra que “só vou comprar uma cartinha bonita” é uma frase historicamente perigosa.
 
 ## Como começar em Cianorte
@@ -171,6 +172,11 @@ O caminho mais simples é aparecer nos encontros da comunidade, visitar o Bazar 
       <span class="ccm-internal-link-tag">Anime TCG</span>
       <strong>One Piece Card Game</strong>
       <small>Outra opção para quem curte anime, cartas e jogo presencial.</small>
+    </a>
+    <a class="ccm-internal-link-item" href="{{ '/jogos/yu-gi-oh-em-cianorte/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Yu-Gi-Oh!</span>
+      <strong>Yu-Gi-Oh! em Cianorte</strong>
+      <small>Para fãs de anime, nostalgia, combos e jogo competitivo.</small>
     </a>
     <a class="ccm-internal-link-item" href="{{ '/jogos/magic-the-gathering-em-cianorte/' | relative_url }}">
       <span class="ccm-internal-link-tag">Commander</span>

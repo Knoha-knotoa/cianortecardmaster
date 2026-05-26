@@ -74,6 +74,11 @@ Em **Cianorte**, alguns jogadores já têm decks de **One Piece TCG** para jogar
       <strong>Magic em Cianorte</strong>
       <small>Para quem curte mesa multiplayer, decks criativos e política de boteco com dragões.</small>
     </a>
+    <a class="ccm-internal-link-item" href="{{ '/jogos/yu-gi-oh-em-cianorte/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Yu-Gi-Oh!</span>
+      <strong>Yu-Gi-Oh! em Cianorte</strong>
+      <small>Outro TCG de anime, nostalgia, banlist e combos competitivos.</small>
+    </a>
   </div>
 </div>
 
@@ -189,6 +194,7 @@ One Piece Card Game costuma agradar muito:
 - jogadores de TCG que procuram um jogo moderno, direto e com recurso próprio;
 - quem já joga **[Pokémon TCG]({{ '/jogos/pokemon-tcg-em-cianorte/' | relative_url }})** e gosta do lado coleção + jogo;
 - quem joga **[Magic Commander]({{ '/jogos/magic-the-gathering-em-cianorte/' | relative_url }})** e quer outro card game presencial para variar;
+- quem veio de **[Yu-Gi-Oh!]({{ '/jogos/yu-gi-oh-em-cianorte/' | relative_url }})** e gosta de anime, cartas marcantes e jogo competitivo;
 - quem joga **[Flesh and Blood]({{ '/jogos/flesh-and-blood-em-cianorte/' | relative_url }})** e gosta de combate, leitura de turno e decisões táticas;
 - quem assiste anime e quer um motivo socialmente aceitável para falar de personagem favorito em público.
 
@@ -230,6 +236,11 @@ Isso evita o erro clássico: comprar carta solta sem saber líder, formato, cor,
       <span class="ccm-internal-link-tag">Magic</span>
       <strong>Magic em Cianorte</strong>
       <small>Commander, Friday Night Magic e mesas presenciais na região.</small>
+    </a>
+    <a class="ccm-internal-link-item" href="{{ '/jogos/yu-gi-oh-em-cianorte/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Yu-Gi-Oh!</span>
+      <strong>Yu-Gi-Oh! em Cianorte</strong>
+      <small>Para fãs de anime, nostalgia, combos e torneios competitivos.</small>
     </a>
     <a class="ccm-internal-link-item" href="{{ '/jogos/flesh-and-blood-em-cianorte/' | relative_url }}">
       <span class="ccm-internal-link-tag">FAB</span>
