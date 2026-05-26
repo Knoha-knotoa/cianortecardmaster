@@ -37,6 +37,32 @@
     </nav>
   </div>
 
+  <section class="container footer-social-section" aria-labelledby="footer-social-title">
+    <div class="footer-social-copy">
+      <h3 id="footer-social-title">Entre na comunidade</h3>
+      <p>Chame no WhatsApp, acompanhe os encontros e siga o Cianorte Card Masters nas redes sociais.</p>
+    </div>
+
+    <nav class="footer-social-list" aria-label="Links das redes sociais">
+      {% assign footer_social_order = "WhatsApp|Instagram|Facebook|TikTok|YouTube" | split: "|" %}
+      {% for social_name in footer_social_order %}
+        {% assign social = site.data.social_links | where: "name", social_name | first %}
+        {% if social %}
+          {% assign social_slug = social.name | downcase %}
+          <a class="footer-social-link footer-social-link--{{ social_slug }}" href="{{ social.url }}" target="_blank" rel="me noopener noreferrer" aria-label="Abrir {{ social.name }} do Cianorte Card Masters">
+            <span class="footer-social-icon" aria-hidden="true">
+              <img src="{{ '/assets/img/social/icon-' | append: social_slug | append: '.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="28" height="28">
+            </span>
+            <span class="footer-social-text">
+              <strong>{{ social.name }}</strong>
+              <small>{{ social.label }}</small>
+            </span>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </nav>
+  </section>
+
   <div class="container footer-consent">
     <p>
       Ao marcar o Cianorte Card Masters em fotos, vídeos ou postagens públicas, você indica que está de acordo com o compartilhamento desse conteúdo nos canais da comunidade, sempre com finalidade comunitária e crédito quando possível. Caso queira remover algum conteúdo, fale com a organização.

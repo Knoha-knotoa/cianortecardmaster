@@ -10,6 +10,7 @@
       <span></span>
     </button>
 
+    {% assign menu_whatsapp = site.data.social_links | where: "name", "WhatsApp" | first %}
     <nav class="main-nav" aria-label="Menu principal">
       <a href="{{ '/' | relative_url }}">Home</a>
       <a href="{{ '/comunidade/' | relative_url }}">Comunidade</a>
@@ -20,6 +21,10 @@
       <a href="{{ '/blog/' | relative_url }}">Blog</a>
       <a href="{{ '/ferramentas/' | relative_url }}">Ferramentas</a>
       <a href="{{ '/sobre/' | relative_url }}">Sobre</a>
+      <a class="nav-whatsapp-badge" href="{{ menu_whatsapp.url | default: 'https://chat.whatsapp.com/HjmzPtLTCIALlwS2mIg55R' }}" target="_blank" rel="noopener noreferrer" aria-label="Entrar no grupo de WhatsApp do Cianorte Card Masters" title="Entrar no WhatsApp">
+        <img src="{{ '/assets/img/social/icon-whatsapp.png' | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async" width="32" height="32">
+        <span>WhatsApp</span>
+      </a>
     </nav>
   </div>
 </header>
