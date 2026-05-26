@@ -180,7 +180,7 @@ Embora Flesh and Blood seja um dos focos principais, o Cianorte Card Masters tam
       <strong>Magic: The Gathering em Cianorte</strong>
       <small>Commander, Friday Night Magic, Pauper, Standard e mesas presenciais de MTG.</small>
     </a>
-    <a class="ccm-internal-link-item" href="{{ '/jogos/' | relative_url }}#one-piece">
+    <a class="ccm-internal-link-item" href="{{ '/jogos/one-piece-tcg-em-cianorte/' | relative_url }}">
       <span class="ccm-internal-link-tag">One Piece</span>
       <strong>One Piece Card Game</strong>
       <small>Outra porta de entrada para quem curte anime, líderes e partidas presenciais.</small>

@@ -264,7 +264,7 @@ Se você veio de outros jogos da comunidade, Magic conversa bem com vários perf
 
 - quem joga **[Pokémon TCG]({{ '/jogos/pokemon-tcg-em-cianorte/' | relative_url }})** pode gostar da construção de deck, evolução de estratégia e coleção física;
 - quem joga **[Flesh and Blood]({{ '/jogos/flesh-and-blood-em-cianorte/' | relative_url }})** vai encontrar outro tipo de gestão de recursos, combate e leitura de turno;
-- quem joga **One Piece Card Game** pode curtir o ritmo de mesa, ataque, bloqueio e gerenciamento de recursos;
+- quem joga **[One Piece Card Game]({{ '/jogos/one-piece-tcg-em-cianorte/' | relative_url }})** pode curtir o ritmo de mesa, ataque, bloqueio e gerenciamento de recursos;
 - quem joga **RPG** pode se apaixonar pelo lado de Commander, porque cada deck parece um personagem com tema, identidade e defeitos morais próprios.
 
 ## Como começar sem gastar errado
@@ -310,6 +310,11 @@ Para Commander, decks pré-construídos podem ser uma boa porta de entrada. Para
       <span class="ccm-internal-link-tag">Pokémon</span>
       <strong>Pokémon TCG em Cianorte</strong>
       <small>Outra porta de entrada para jogadores, colecionadores e fãs de TCG.</small>
+    </a>
+    <a class="ccm-internal-link-item" href="{{ '/jogos/one-piece-tcg-em-cianorte/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Anime TCG</span>
+      <strong>One Piece Card Game</strong>
+      <small>Para fãs de anime, cartas especiais e jogos presenciais em Cianorte.</small>
     </a>
     <a class="ccm-internal-link-item" href="{{ '/jogos/flesh-and-blood-em-cianorte/' | relative_url }}">
       <span class="ccm-internal-link-tag">FAB</span>
