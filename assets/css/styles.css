@@ -7252,20 +7252,8 @@ h3 {
   opacity: .76;
 }
 
-.game-hub-card {
-  min-height: 320px;
-}
-
 .game-hub-card-linked {
   cursor: pointer;
-  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
-}
-
-.game-hub-card-linked:hover,
-.game-hub-card-linked:focus-within {
-  transform: translateY(-3px);
-  border-color: var(--category-accent, var(--gold));
-  box-shadow: 0 22px 48px rgba(0, 0, 0, .32);
 }
 
 .game-card-main-link {
@@ -7280,9 +7268,18 @@ h3 {
   outline-offset: -6px;
 }
 
-.hub-card .btn-row {
+.game-hub-card-linked .btn-row {
   position: relative;
   z-index: 2;
+}
+
+.game-hub-card-linked .btn {
+  position: relative;
+  z-index: 3;
+}
+
+.game-hub-card {
+  min-height: 320px;
 }
 
 .tool-hub-card {
