@@ -7786,3 +7786,54 @@ h3 {
 .tools-card-grid-expanded {
   grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
 }
+
+/* =========================================================
+   Ferramentas para organização e consulta de preço
+========================================================= */
+.post-style-pricetools {
+  --category-accent: #ff9f43;
+  --category-soft: rgba(255, 159, 67, .14);
+  --category-line: rgba(255, 159, 67, .3);
+}
+
+.pricetool-page-hero {
+  --category-accent: #ff9f43;
+}
+
+.pricetool-lead-card,
+.pricetool-tool-card,
+.pricetool-warning-card {
+  border-color: rgba(255, 159, 67, .22);
+}
+
+.pricetool-lead-card::before,
+.pricetool-tool-card::before,
+.pricetool-warning-card::before {
+  background: linear-gradient(90deg, rgba(255, 159, 67, .78), rgba(255, 202, 58, .55), transparent);
+}
+
+.pricetool-tool-card,
+.pricetool-warning-card {
+  background:
+    radial-gradient(circle at top right, rgba(255, 159, 67, .13), transparent 34%),
+    linear-gradient(145deg, rgba(28, 20, 10, .96), rgba(7, 8, 6, .99));
+}
+
+.pricetool-flow-grid span {
+  background: rgba(255, 159, 67, .16);
+  border-color: rgba(255, 159, 67, .34);
+  color: #ffd6a8;
+}
+
+.pricetool-table td:nth-child(2),
+.pricetool-table td:nth-child(3) {
+  color: rgba(255, 249, 221, .86);
+}
+
+.pricetool-check-grid article {
+  min-height: 165px;
+}
+
+.pricetool-tool-card .btn-secondary {
+  border-color: rgba(255, 159, 67, .35);
+}
