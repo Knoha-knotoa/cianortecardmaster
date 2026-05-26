@@ -175,6 +175,11 @@ Embora Flesh and Blood seja um dos focos principais, o Cianorte Card Masters tam
       <strong>Pokémon TCG em Cianorte</strong>
       <small>Para jogadores novos, colecionadores e quem quer começar por um TCG mais conhecido.</small>
     </a>
+    <a class="ccm-internal-link-item" href="{{ '/jogos/magic-the-gathering-em-cianorte/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Magic</span>
+      <strong>Magic: The Gathering em Cianorte</strong>
+      <small>Commander, Friday Night Magic, Pauper, Standard e mesas presenciais de MTG.</small>
+    </a>
     <a class="ccm-internal-link-item" href="{{ '/jogos/' | relative_url }}#one-piece">
       <span class="ccm-internal-link-tag">One Piece</span>
       <strong>One Piece Card Game</strong>

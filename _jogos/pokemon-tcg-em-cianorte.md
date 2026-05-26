@@ -137,7 +137,7 @@ Para quem está começando, a loja é um ótimo lugar para perguntar sobre decks
 Se você veio de outros jogos da comunidade, Pokémon TCG tem uma pegada própria:
 
 - quem joga **[Flesh and Blood]({{ '/jogos/flesh-and-blood-em-cianorte/' | relative_url }})** vai notar que Pokémon é menos focado em combate direto de herói, mas exige muita leitura de turno e preparação;
-- quem joga **Magic Commander** pode gostar da montagem de engine, compra de cartas e sinergias;
+- quem joga **[Magic Commander]({{ '/jogos/magic-the-gathering-em-cianorte/' | relative_url }})** pode gostar da montagem de engine, compra de cartas e sinergias;
 - quem acompanha **One Piece Card Game** pode curtir o ritmo de ataque, setup e gerenciamento de recursos;
 - quem vem do colecionismo talvez descubra que “só vou comprar uma cartinha bonita” é uma frase historicamente perigosa.
 
@@ -172,7 +172,7 @@ O caminho mais simples é aparecer nos encontros da comunidade, visitar o Bazar 
       <strong>One Piece Card Game</strong>
       <small>Outra opção para quem curte anime, cartas e jogo presencial.</small>
     </a>
-    <a class="ccm-internal-link-item" href="{{ '/jogos/' | relative_url }}#magic">
+    <a class="ccm-internal-link-item" href="{{ '/jogos/magic-the-gathering-em-cianorte/' | relative_url }}">
       <span class="ccm-internal-link-tag">Commander</span>
       <strong>Magic em Cianorte</strong>
       <small>Para quem quer mesa casual, política duvidosa e combos que ninguém assume.</small>
