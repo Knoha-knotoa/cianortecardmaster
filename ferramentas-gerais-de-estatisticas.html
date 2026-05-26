@@ -1,0 +1,559 @@
+---
+layout: default
+title: "Ferramentas gerais de estatísticas para TCG"
+description: "Ferramentas gerais de estatísticas para card games: calculadora hipergeométrica, curva de mana, mão inicial, consistência de deck, análise de meta e resultados para Pokémon, Flesh and Blood, Magic, One Piece e Yu-Gi-Oh!."
+keywords:
+  - estatísticas de deck
+  - ferramentas de estatísticas TCG
+  - calculadora hipergeométrica TCG
+  - probabilidade card game
+  - chance de comprar carta
+  - curva de mana Magic
+  - estatísticas Flesh and Blood
+  - estatísticas Pokémon TCG
+  - estatísticas Yu-Gi-Oh
+  - estatísticas One Piece Card Game
+  - Deckstats
+  - StatTrek hypergeometric calculator
+  - AetherHub hypergeometric calculator
+  - Limitless DrawCalc
+  - Card Game Calculator
+  - Deck-u-lator
+  - Cianorte Card Masters
+image: /assets/img/banners/default-cianorte-card-master.webp
+image_alt: "Jogadores analisando estatísticas, probabilidades e curvas de decks de card games"
+permalink: /ferramentas/ferramentas-gerais-de-estatisticas/
+---
+
+<section class="page-hero stattool-page-hero" style="--page-hero-image: url('{{ '/assets/img/banners/default-cianorte-card-master.webp' | relative_url }}'); --page-hero-image-mobile: url('{{ '/assets/img/banners/default-cianorte-card-master.webp' | relative_url }}'); --page-hero-position: center; --page-hero-position-mobile: center;" aria-label="{{ page.image_alt | escape }}">
+  <div class="container">
+    <p class="eyebrow">Probabilidade, curva e consistência</p>
+    <h1>Ferramentas gerais de estatísticas</h1>
+    <p>
+      Calculadoras, gráficos e sites para entender se o deck realmente funciona ou se ele só parece lindo na teoria — aquela teoria escrita às duas da manhã, com sono, hype e uma perigosa falta de bom senso estatístico.
+    </p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="#ferramentas-estatisticas">Ver ferramentas</a>
+      <a class="btn btn-secondary" href="{{ '/ferramentas/' | relative_url }}">Voltar para Ferramentas</a>
+    </div>
+  </div>
+</section>
+
+<section class="section stattool-intro-section" aria-labelledby="stattool-intro-title">
+  <div class="container deckbuilder-content">
+    <div class="deckbuilder-lead-card stattool-lead-card">
+      <p class="eyebrow">Por que olhar estatísticas?</p>
+      <h2 id="stattool-intro-title">O deck não precisa ser perfeito. Mas ele precisa fazer alguma coisa antes de morrer.</h2>
+      <p>
+        Ferramentas de estatísticas ajudam a responder perguntas que aparecem em praticamente todo card game: qual a chance de comprar uma carta importante na mão inicial? Quantas energias, terrenos, recursos ou cartas azuis o deck precisa? A curva está pesada demais? O deck compra peça de combo com frequência suficiente? A lista tem consistência ou só depende de um milagre embalado em sleeve?
+      </p>
+      <p>
+        Esta página reúne ferramentas úteis para Pokémon TCG, Flesh and Blood, Magic: The Gathering, One Piece Card Game, Yu-Gi-Oh! e card games em geral. Algumas são simples e servem para qualquer jogador; outras são mais avançadas e ajudam quem gosta de refinar deck, preparar torneio, comparar listas ou estudar estatísticas de meta.
+      </p>
+      <p class="deckbuilder-note">
+        Estatística não joga por você. Ela só mostra se o plano do deck aparece com frequência. Depois disso ainda falta pilotagem, matchup, leitura de mesa, decisão difícil e aquele clássico momento humano de esquecer a carta no arsenal, na prize, no grave ou no fundo da mochila.
+      </p>
+    </div>
+
+    <div class="deckbuilder-steps-grid stattool-flow-grid" aria-label="Como usar estatísticas para melhorar um deck">
+      <article>
+        <span>1</span>
+        <strong>Defina a pergunta</strong>
+        <p>Não abra uma calculadora sem objetivo. Pergunte: quero comprar atacante? energia? pitch azul? terreno? peça de combo? defesa?</p>
+      </article>
+      <article>
+        <span>2</span>
+        <strong>Conte os acertos</strong>
+        <p>Marque quantas cartas do deck servem para aquela função. Às vezes não é uma carta específica, mas uma categoria inteira.</p>
+      </article>
+      <article>
+        <span>3</span>
+        <strong>Compare cenários</strong>
+        <p>Teste 8, 10, 12 ou 14 cartas da mesma função e veja se a melhora vale o corte de outras peças importantes.</p>
+      </article>
+      <article>
+        <span>4</span>
+        <strong>Valide jogando</strong>
+        <p>Use estatística para ajustar, depois teste no digital, na mesa e nos encontros. Número bonito não vence sozinho.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt stattool-tools-section" id="ferramentas-estatisticas" aria-labelledby="stattool-tools-title">
+  <div class="container deckbuilder-content">
+    <div class="section-title">
+      <div>
+        <p class="eyebrow">Calculadoras e análises</p>
+        <h2 id="stattool-tools-title">Ferramentas para probabilidade, curva, mão inicial e consistência</h2>
+        <p>Use estas ferramentas para entender o deck antes de gastar dinheiro, imprimir proxy, cadastrar lista em torneio ou culpar o universo por uma mão que o próprio deck foi construído para comprar.</p>
+      </div>
+    </div>
+
+    <div class="deckbuilder-tool-list stattool-tool-list">
+      <article class="deckbuilder-tool-card stattool-tool-card" id="deckstats">
+        <div class="deckbuilder-tool-header">
+          <div>
+            <p class="eyebrow">Deck builder + estatísticas</p>
+            <h2>Deckstats</h2>
+          </div>
+          <a class="btn btn-secondary" href="https://deckstats.net" target="_blank" rel="noopener noreferrer">Abrir Deckstats</a>
+        </div>
+        <p>
+          Deckstats é uma das ferramentas mais diretas para visualizar números de um deck. Embora seja muito associada a Magic, a lógica que ela apresenta é útil para qualquer jogador que quer enxergar curva, distribuição de tipos, proporção de cartas e mãos de teste. Ela ajuda a transformar uma lista de cartas em algo legível: quantas cartas custam pouco, quantas custam muito, quantas são criaturas, mágicas, terrenos, fontes de recurso ou peças específicas.
+        </p>
+        <div class="deckbuilder-tool-columns">
+          <div>
+            <h3>Melhor utilidade</h3>
+            <ul>
+              <li>Ver curva de mana ou curva de custo.</li>
+              <li>Analisar distribuição de tipos de carta.</li>
+              <li>Testar mãos iniciais de forma rápida.</li>
+              <li>Perceber excesso de cartas caras ou lentas.</li>
+              <li>Comparar versões diferentes de uma mesma lista.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Como usar na prática</h3>
+            <ol>
+              <li>Importe ou cole sua decklist.</li>
+              <li>Confira curva, tipo de carta e categorias principais.</li>
+              <li>Faça várias mãos de teste e anote padrões ruins.</li>
+              <li>Reduza cartas que aparecem tarde demais.</li>
+              <li>Depois de alterar a lista, repita a análise.</li>
+            </ol>
+          </div>
+        </div>
+        <p class="deckbuilder-note">Melhor para: Magic e análise visual geral. Ótimo para ensinar iniciante a enxergar que “deck com carta boa” e “deck que funciona” são criaturas completamente diferentes.</p>
+      </article>
+
+      <article class="deckbuilder-tool-card stattool-tool-card" id="stattrek">
+        <div class="deckbuilder-tool-header">
+          <div>
+            <p class="eyebrow">Probabilidade geral</p>
+            <h2>StatTrek Hypergeometric Calculator</h2>
+          </div>
+          <a class="btn btn-secondary" href="https://stattrek.com/online-calculator/hypergeometric" target="_blank" rel="noopener noreferrer">Abrir StatTrek</a>
+        </div>
+        <p>
+          StatTrek é uma calculadora hipergeométrica genérica. Isso parece nome de monstro de RPG que cobra imposto, mas a ideia é simples: ela calcula a chance de comprar determinadas cartas em uma quantidade de compras, sem reposição. Card games usam compra sem reposição: quando uma carta sai do deck, ela não continua no deck. Por isso a hipergeométrica é tão útil.
+        </p>
+        <div class="deckbuilder-tool-columns">
+          <div>
+            <h3>O que cada campo significa</h3>
+            <ul>
+              <li><strong>Population size:</strong> tamanho do deck ou quantidade de cartas restantes.</li>
+              <li><strong>Successes in population:</strong> quantas cartas do deck contam como acerto.</li>
+              <li><strong>Sample size:</strong> quantas cartas você vai comprar ou ver.</li>
+              <li><strong>Successes in sample:</strong> quantos acertos você quer encontrar.</li>
+              <li><strong>P(X ≥ x):</strong> chance de comprar pelo menos aquela quantidade.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Exemplos úteis</h3>
+            <ol>
+              <li>Chance de abrir com pelo menos 1 energia em Pokémon.</li>
+              <li>Chance de ver 1 terreno nas primeiras 7 cartas em Magic.</li>
+              <li>Chance de comprar 2 azuis em uma mão de Flesh and Blood.</li>
+              <li>Chance de achar peça de combo em Yu-Gi-Oh! ou One Piece.</li>
+              <li>Chance de ver defesa, starter, extender ou carta de compra.</li>
+            </ol>
+          </div>
+        </div>
+        <p class="deckbuilder-note">Melhor para: qualquer TCG. É a ferramenta mais universal da lista, mas exige que você saiba transformar o problema do deck em números.</p>
+      </article>
+
+      <article class="deckbuilder-tool-card stattool-tool-card" id="aetherhub">
+        <div class="deckbuilder-tool-header">
+          <div>
+            <p class="eyebrow">Magic · Probabilidade</p>
+            <h2>AetherHub Hypergeometric Calculator</h2>
+          </div>
+          <a class="btn btn-secondary" href="https://aetherhub.com/Apps/HyperGeometric" target="_blank" rel="noopener noreferrer">Abrir AetherHub</a>
+        </div>
+        <p>
+          A calculadora hipergeométrica da AetherHub é voltada para Magic: The Gathering, mas o raciocínio serve para outros jogos. Ela é especialmente boa para responder perguntas de deckbuilding em Magic: quantos terrenos preciso para abrir com dois? Qual a chance de comprar uma remoção até o turno três? Quantas fontes verdes preciso para conjurar uma carta cedo? O deck precisa de mais draw, mais ramp ou só de terapia coletiva?
+        </p>
+        <div class="deckbuilder-tool-columns">
+          <div>
+            <h3>Melhor utilidade</h3>
+            <ul>
+              <li>Calcular chance de comprar terrenos.</li>
+              <li>Ver probabilidade de achar uma carta de resposta.</li>
+              <li>Testar número de cópias em formatos com até 4 cópias.</li>
+              <li>Avaliar consistência de Commander, mesmo com apenas 1 cópia de cada carta.</li>
+              <li>Comparar o efeito de adicionar tutores, cantrips ou cartas redundantes.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Como aplicar em Commander</h3>
+            <ol>
+              <li>Não calcule só uma carta específica; conte efeitos parecidos.</li>
+              <li>Some ramp de custo baixo, draws iniciais ou remoções equivalentes.</li>
+              <li>Use amostra de 7 cartas para mão inicial e 10 a 12 para turnos iniciais.</li>
+              <li>Compare antes e depois de cortes.</li>
+              <li>Evite confiar em combo com peças únicas sem redundância.</li>
+            </ol>
+          </div>
+        </div>
+        <p class="deckbuilder-note">Melhor para: Magic, principalmente Commander e formatos construídos. Ajuda a evitar deck que “funciona quando compra exatamente três cartas específicas”, ou seja, quase nunca.</p>
+      </article>
+
+      <article class="deckbuilder-tool-card stattool-tool-card" id="limitless-drawcalc">
+        <div class="deckbuilder-tool-header">
+          <div>
+            <p class="eyebrow">Pokémon · Mão inicial</p>
+            <h2>Limitless DrawCalc</h2>
+          </div>
+          <a class="btn btn-secondary" href="https://limitlesstcg.com/tools/drawcalc" target="_blank" rel="noopener noreferrer">Abrir DrawCalc</a>
+        </div>
+        <p>
+          O DrawCalc da Limitless é uma ferramenta prática para calcular probabilidades de mão inicial em Pokémon TCG. Ela é muito útil porque Pokémon depende bastante de abrir com Básico, encontrar cartas de busca, comprar energia no momento certo e acessar peças específicas do plano de jogo. Para quem monta deck competitivo ou casual melhorado, é uma forma rápida de perceber se a lista está consistente ou se só funciona no vídeo do youtuber com edição bonita.
+        </p>
+        <div class="deckbuilder-tool-columns">
+          <div>
+            <h3>Melhor utilidade</h3>
+            <ul>
+              <li>Calcular chance de abrir com Pokémon Básico.</li>
+              <li>Ver chance de achar cartas de busca na mão inicial.</li>
+              <li>Testar proporção de energia.</li>
+              <li>Avaliar consistência de engine de compra.</li>
+              <li>Comparar listas parecidas antes de um torneio.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Como usar para Pokémon</h3>
+            <ol>
+              <li>Conte quantas cartas iniciam seu plano de jogo.</li>
+              <li>Inclua cartas de busca que realmente encontram essas peças.</li>
+              <li>Teste chances de abrir com pelo menos 1 Pokémon Básico adequado.</li>
+              <li>Compare versões com mais ou menos energia.</li>
+              <li>Use o resultado junto com testes no Pokémon TCG Live.</li>
+            </ol>
+          </div>
+        </div>
+        <p class="deckbuilder-note">Melhor para: Pokémon TCG. Principalmente para saber se o deck começa jogando ou se começa pedindo desculpas para si mesmo.</p>
+      </article>
+
+      <article class="deckbuilder-tool-card stattool-tool-card" id="card-game-calculator">
+        <div class="deckbuilder-tool-header">
+          <div>
+            <p class="eyebrow">Multi-TCG · Simples</p>
+            <h2>Card Game Calculator</h2>
+          </div>
+          <a class="btn btn-secondary" href="https://cardgamecalculator.com" target="_blank" rel="noopener noreferrer">Abrir Card Game Calculator</a>
+        </div>
+        <p>
+          Card Game Calculator é uma opção direta para calcular chance de compra em card games. A vantagem é que ela já fala a língua de TCG: tamanho do deck, cartas desejadas, cartas compradas e quantidade de acertos. É boa para jogadores que não querem lidar com cara de planilha universitária e preferem uma ferramenta mais amigável para responder perguntas rápidas.
+        </p>
+        <div class="deckbuilder-tool-columns">
+          <div>
+            <h3>Melhor utilidade</h3>
+            <ul>
+              <li>Calcular probabilidade sem precisar entender fórmula.</li>
+              <li>Comparar número de cópias de uma carta-chave.</li>
+              <li>Testar consistência de combo.</li>
+              <li>Avaliar chance de abrir recurso ou starter.</li>
+              <li>Usar em Magic, Pokémon, Yu-Gi-Oh!, One Piece, Flesh and Blood e outros.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Boas perguntas para fazer</h3>
+            <ol>
+              <li>Com 8 starters em 40 cartas, qual a chance de abrir 1?</li>
+              <li>Com 12 energias em 60 cartas, qual a chance de ver 1 na mão?</li>
+              <li>Com 4 cópias de uma carta em 50 cartas, qual a chance até o turno 2?</li>
+              <li>Com 15 cartas azuis em Flesh and Blood, qual a chance de comprar 2?</li>
+              <li>Com 10 respostas no deck, qual a chance de achar uma contra determinado matchup?</li>
+            </ol>
+          </div>
+        </div>
+        <p class="deckbuilder-note">Melhor para: cálculo rápido multi-TCG. Excelente para ensinar a comunidade sem transformar o encontro em aula de estatística com sofrimento opcional.</p>
+      </article>
+
+      <article class="deckbuilder-tool-card stattool-tool-card" id="deckulator">
+        <div class="deckbuilder-tool-header">
+          <div>
+            <p class="eyebrow">Avançado · Combinações</p>
+            <h2>Deck-u-lator</h2>
+          </div>
+          <a class="btn btn-secondary" href="https://deckulator.appspot.com" target="_blank" rel="noopener noreferrer">Abrir Deck-u-lator</a>
+        </div>
+        <p>
+          Deck-u-lator é uma ferramenta mais avançada para calcular combinações de cartas. Ela trabalha melhor quando o problema não é apenas “quero comprar uma carta”, mas “quero comprar uma combinação de categorias”. Por exemplo: uma peça A, uma peça B e qualquer uma entre várias cartas que habilitam a jogada. Isso é muito útil para combos, engines e decks que precisam de grupos específicos de cartas para funcionar.
+        </p>
+        <div class="deckbuilder-tool-columns">
+          <div>
+            <h3>Melhor utilidade</h3>
+            <ul>
+              <li>Calcular chance de combinações com múltiplas categorias.</li>
+              <li>Testar combos com peça A + peça B + recurso.</li>
+              <li>Analisar mãos com mínimos e máximos de certos grupos.</li>
+              <li>Comparar versões de deck com redundância diferente.</li>
+              <li>Estudar listas de Yu-Gi-Oh!, Magic combo, One Piece e outros decks de engine.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Quando vale usar</h3>
+            <ol>
+              <li>Quando uma calculadora simples não responde bem.</li>
+              <li>Quando você precisa de duas ou mais categorias ao mesmo tempo.</li>
+              <li>Quando existem cartas substitutas para a mesma função.</li>
+              <li>Quando quer comparar consistência real de combo.</li>
+              <li>Quando já conhece bem a lista e quer refinar poucos slots.</li>
+            </ol>
+          </div>
+        </div>
+        <p class="deckbuilder-note">Melhor para: jogadores mais avançados. Se a calculadora simples é uma espada curta, o Deck-u-lator é uma planilha arcana com dano mental moderado.</p>
+      </article>
+
+      <article class="deckbuilder-tool-card stattool-tool-card" id="moxfield-archidekt">
+        <div class="deckbuilder-tool-header">
+          <div>
+            <p class="eyebrow">Magic · Gráficos de deck</p>
+            <h2>Moxfield e Archidekt</h2>
+          </div>
+          <div class="btn-row">
+            <a class="btn btn-secondary" href="https://moxfield.com" target="_blank" rel="noopener noreferrer">Moxfield</a>
+            <a class="btn btn-secondary" href="https://archidekt.com" target="_blank" rel="noopener noreferrer">Archidekt</a>
+          </div>
+        </div>
+        <p>
+          Moxfield e Archidekt são deck builders de Magic que também funcionam como ferramentas de estatística visual. Eles ajudam a enxergar curva de mana, identidade de cor, distribuição por tipo, preço, categorias personalizadas, mãos de teste e organização de pacotes dentro do deck. Para Commander, isso é muito importante porque o deck tem 100 cartas e uma única cópia de quase tudo; sem organização, a lista vira uma sopa lendária com sleeves.
+        </p>
+        <div class="deckbuilder-tool-columns">
+          <div>
+            <h3>Melhor utilidade</h3>
+            <ul>
+              <li>Separar cartas por função: ramp, draw, remoção, proteção, finalizador.</li>
+              <li>Visualizar curva e custo médio.</li>
+              <li>Testar mãos iniciais e primeiros turnos.</li>
+              <li>Ver se o deck tem cores suficientes para conjurar as cartas.</li>
+              <li>Comparar upgrades antes de comprar.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Dica para Commander</h3>
+            <ol>
+              <li>Crie categorias além dos tipos oficiais.</li>
+              <li>Marque ramp, draw, remoções pontuais e globais.</li>
+              <li>Confira se o deck tem plano antes, durante e depois do turno 5.</li>
+              <li>Teste várias mãos, não apenas a primeira mão bonita.</li>
+              <li>Use a estatística para cortar cartas “legais” que não fazem o plano andar.</li>
+            </ol>
+          </div>
+        </div>
+        <p class="deckbuilder-note">Melhor para: Magic, especialmente Commander físico. Ajuda a perceber se o deck tem estrutura ou se é apenas uma coleção de cartas que você ama e que se recusam a conversar entre si.</p>
+      </article>
+
+      <article class="deckbuilder-tool-card stattool-tool-card" id="fabrary-stats">
+        <div class="deckbuilder-tool-header">
+          <div>
+            <p class="eyebrow">Flesh and Blood · Pitch e função</p>
+            <h2>Fabrary e estatísticas de Flesh and Blood</h2>
+          </div>
+          <a class="btn btn-secondary" href="https://fabrary.net" target="_blank" rel="noopener noreferrer">Abrir Fabrary</a>
+        </div>
+        <p>
+          Em Flesh and Blood, estatística não é só contar custo. O jogo gira em torno de pitch, breakpoints de dano, cartas que bloqueiam bem, ataques que funcionam com a arma, mão de quatro cartas, arsenal, matchups e plano de sideboard. Fabrary é uma das principais ferramentas da comunidade para montar e organizar listas de Flesh and Blood, e também ajuda a enxergar composição do deck por cor, tipo, classe, equipamento, custos e legalidade.
+        </p>
+        <div class="deckbuilder-tool-columns">
+          <div>
+            <h3>Melhor utilidade</h3>
+            <ul>
+              <li>Ver proporção de vermelhas, amarelas e azuis.</li>
+              <li>Conferir se o deck tem pitch suficiente para o plano.</li>
+              <li>Analisar ataques, non-attacks, defense reactions e equipamentos.</li>
+              <li>Organizar sideboard para Classic Constructed, Blitz ou outros formatos.</li>
+              <li>Exportar lista para teste e cadastro em eventos quando necessário.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Como pensar estatística em FaB</h3>
+            <ol>
+              <li>Conte quantas mãos realmente produzem turno forte.</li>
+              <li>Separe cartas que bloqueiam 3 das que bloqueiam menos.</li>
+              <li>Veja se o pitch azul suporta arma, equipamentos e custos altos.</li>
+              <li>Teste mãos ruins: quatro azuis, quatro non-attacks, sem ataque, sem pitch.</li>
+              <li>Compare a lista contra matchups reais, não contra um boneco imaginário.</li>
+            </ol>
+          </div>
+        </div>
+        <p class="deckbuilder-note">Melhor para: Flesh and Blood. Em FaB, uma carta boa na lista pode ser péssima na mão errada. A estatística ajuda a reduzir essas pequenas tragédias cartonadas.</p>
+      </article>
+
+      <article class="deckbuilder-tool-card stattool-tool-card" id="meta-results">
+        <div class="deckbuilder-tool-header">
+          <div>
+            <p class="eyebrow">Meta e torneios</p>
+            <h2>Limitless, Trainer Hill e dados de resultados</h2>
+          </div>
+          <div class="btn-row">
+            <a class="btn btn-secondary" href="https://limitlesstcg.com" target="_blank" rel="noopener noreferrer">Limitless</a>
+            <a class="btn btn-secondary" href="https://www.trainerhill.com" target="_blank" rel="noopener noreferrer">Trainer Hill</a>
+          </div>
+        </div>
+        <p>
+          Estatística de deck não é apenas a chance de comprar carta. Também existe estatística de meta: quais decks aparecem mais, quais vencem mais, quais matchups são difíceis e quais cartas estão entrando nas listas vencedoras. Para Pokémon TCG, Limitless e Trainer Hill são muito úteis para observar resultados, listas de torneios e tendências competitivas. Em outros jogos, vale procurar bases de torneio, rankings oficiais, canais da comunidade e resultados publicados por lojas e organizadores.
+        </p>
+        <div class="deckbuilder-tool-columns">
+          <div>
+            <h3>Melhor utilidade</h3>
+            <ul>
+              <li>Ver decks mais usados e mais bem colocados.</li>
+              <li>Comparar listas vencedoras com listas casuais.</li>
+              <li>Entender cartas tech contra o meta.</li>
+              <li>Identificar matchups ruins antes do torneio.</li>
+              <li>Evitar gastar carta cara em hype que durou uma semana.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Como usar sem virar refém do meta</h3>
+            <ol>
+              <li>Veja várias listas, não uma lista isolada.</li>
+              <li>Confira data e formato do torneio.</li>
+              <li>Observe se a lista venceu por consistência ou por surpresa.</li>
+              <li>Adapte para sua realidade local.</li>
+              <li>Lembre que o meta de Cianorte pode ser diferente do mundial.</li>
+            </ol>
+          </div>
+        </div>
+        <p class="deckbuilder-note">Melhor para: preparar torneios e entender ambiente competitivo. Meta global ajuda, mas a mesa local é soberana: se todo mundo trouxe dragão, talvez sua tech contra fada não brilhe.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section stattool-examples-section" aria-labelledby="stattool-examples-title">
+  <div class="container deckbuilder-content">
+    <div class="deckbuilder-warning-card stattool-warning-card">
+      <p class="eyebrow">Exemplos por jogo</p>
+      <h2 id="stattool-examples-title">Que pergunta cada jogo costuma fazer?</h2>
+      <p>
+        A mesma ferramenta pode servir para vários card games, mas cada jogo tem suas obsessões particulares. Magic sofre com terreno e curva; Pokémon com Básico, busca e energia; Flesh and Blood com pitch e mãos de quatro cartas; Yu-Gi-Oh! com starters, extenders e bricks; One Piece com curva, DON!! e sequência de turnos.
+      </p>
+      <div class="deckbuilder-table-wrap">
+        <table class="deckbuilder-table stattool-table">
+          <thead>
+            <tr>
+              <th>Jogo</th>
+              <th>O que analisar</th>
+              <th>Ferramentas mais úteis</th>
+              <th>Pergunta prática</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Pokémon TCG</strong></td>
+              <td>Básicos, energia, cartas de busca, engine de compra, cartas-chave por turno.</td>
+              <td>Limitless DrawCalc, StatTrek, Card Game Calculator, Trainer Hill.</td>
+              <td>Qual a chance de abrir com Pokémon Básico e uma carta que busca a engine?</td>
+            </tr>
+            <tr>
+              <td><strong>Flesh and Blood</strong></td>
+              <td>Pitch, cores, bloqueio, custo dos ataques, non-attacks, defense reactions, sideboard.</td>
+              <td>Fabrary, StatTrek, Card Game Calculator, testes no Talishar/Felt Table.</td>
+              <td>Quantas mãos têm pitch suficiente para atacar, ativar arma e ainda bloquear decentemente?</td>
+            </tr>
+            <tr>
+              <td><strong>Magic</strong></td>
+              <td>Terrenos, curva de mana, fontes de cor, ramp, draw, remoção, chance de combo.</td>
+              <td>Deckstats, Moxfield, Archidekt, AetherHub, Deck-u-lator.</td>
+              <td>Com essa base de mana, eu conjuro minhas mágicas importantes no turno certo?</td>
+            </tr>
+            <tr>
+              <td><strong>One Piece</strong></td>
+              <td>Curva por custo, cartas de busca, eventos defensivos, counters, sequência com DON!!.</td>
+              <td>Card Game Calculator, Deck-u-lator, planilha própria e simuladores.</td>
+              <td>Quantas cartas de custo baixo preciso para não passar os primeiros turnos olhando o oponente jogar?</td>
+            </tr>
+            <tr>
+              <td><strong>Yu-Gi-Oh!</strong></td>
+              <td>Starters, extenders, hand traps, bricks, peças de engine, chance de abrir interação.</td>
+              <td>Card Game Calculator, Deck-u-lator, StatTrek e simuladores digitais.</td>
+              <td>Qual a chance de abrir starter + extender sem comprar três cartas mortas e um trauma?</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt stattool-check-section" aria-labelledby="stattool-check-title">
+  <div class="container deckbuilder-content">
+    <div class="section-title">
+      <div>
+        <p class="eyebrow">Checklist de análise</p>
+        <h2 id="stattool-check-title">Antes de dizer que o deck está pronto</h2>
+        <p>Use este checklist para revisar uma lista antes de levar para encontro, liga, Armory, torneio casual ou aquele teste sério que termina com alguém pedindo pizza.</p>
+      </div>
+    </div>
+
+    <div class="deckbuilder-export-grid stattool-check-grid">
+      <article>
+        <strong>Mão inicial</strong>
+        <p>O deck abre com carta jogável com frequência? Ou passa os primeiros turnos interpretando uma pedra decorativa?</p>
+      </article>
+      <article>
+        <strong>Curva</strong>
+        <p>Existe sequência de jogo nos turnos iniciais, médios e finais? Cartas caras demais precisam justificar o aluguel.</p>
+      </article>
+      <article>
+        <strong>Recurso</strong>
+        <p>Terreno, energia, pitch, DON!!, starter, buscador ou mana: o deck tem combustível suficiente para sair do papel?</p>
+      </article>
+      <article>
+        <strong>Redundância</strong>
+        <p>Se não comprar a carta perfeita, existem cartas parecidas que fazem o plano continuar vivo?</p>
+      </article>
+      <article>
+        <strong>Interação</strong>
+        <p>O deck consegue responder o oponente ou só assiste educadamente enquanto perde?</p>
+      </article>
+      <article>
+        <strong>Teste real</strong>
+        <p>Depois dos números, jogue partidas. Estatística mostra tendência; a mesa mostra vergonha, glória e erros de leitura.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section stattool-links-section" aria-labelledby="stattool-links-title">
+  <div class="container">
+    <aside class="ccm-internal-links-card" aria-labelledby="stattool-links-title">
+      <div class="ccm-internal-links-header">
+        <p class="ccm-internal-links-kicker">Continue refinando</p>
+        <h2 id="stattool-links-title">Depois dos números, teste a lista</h2>
+        <p>Use estatística para cortar erro grosseiro, depois passe para deck builders, testes digitais, guias e encontros presenciais.</p>
+      </div>
+      <div class="ccm-internal-links-grid">
+        <a class="ccm-internal-link-item featured" href="{{ '/ferramentas/ferramentas-para-montar-decks/' | relative_url }}">
+          <span class="ccm-internal-link-tag">Deck builders</span>
+          <strong>Monte e exporte listas</strong>
+          <small>Use Limitless, Fabrary, Moxfield, Archidekt e Deckstats.</small>
+        </a>
+        <a class="ccm-internal-link-item" href="{{ '/ferramentas/ferramentas-de-testes-digitais/' | relative_url }}">
+          <span class="ccm-internal-link-tag">Teste online</span>
+          <strong>Jogue antes do encontro</strong>
+          <small>Teste no digital antes de ajustar a lista física.</small>
+        </a>
+        <a class="ccm-internal-link-item" href="{{ '/guias/decks/' | relative_url }}">
+          <span class="ccm-internal-link-tag">Deck Techs</span>
+          <strong>Compare com listas reais</strong>
+          <small>Veja ideias de decks e adapte para seu estilo.</small>
+        </a>
+        <a class="ccm-internal-link-item" href="{{ '/agenda/' | relative_url }}">
+          <span class="ccm-internal-link-tag">Agenda</span>
+          <strong>Teste presencialmente</strong>
+          <small>Nada substitui mesa, oponente e erro ao vivo.</small>
+        </a>
+        <a class="ccm-internal-link-item" href="{{ '/ferramentas/' | relative_url }}">
+          <span class="ccm-internal-link-tag">Ferramentas</span>
+          <strong>Voltar ao hub</strong>
+          <small>Veja todas as ferramentas úteis para card games.</small>
+        </a>
+      </div>
+    </aside>
+  </div>
+</section>

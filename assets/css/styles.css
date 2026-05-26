@@ -7837,3 +7837,74 @@ h3 {
 .pricetool-tool-card .btn-secondary {
   border-color: rgba(255, 159, 67, .35);
 }
+
+/* =========================================================
+   Ferramentas gerais de estatísticas para card games
+========================================================= */
+.post-style-stattools {
+  --category-accent: #ff7b72;
+  --category-soft: rgba(255, 123, 114, .14);
+  --category-line: rgba(255, 123, 114, .3);
+}
+
+.stattool-page-hero {
+  --category-accent: #ff7b72;
+}
+
+.stattool-lead-card,
+.stattool-tool-card,
+.stattool-warning-card {
+  border-color: rgba(255, 123, 114, .22);
+}
+
+.stattool-lead-card::before,
+.stattool-tool-card::before,
+.stattool-warning-card::before {
+  background: linear-gradient(90deg, rgba(255, 123, 114, .78), rgba(121, 192, 255, .55), transparent);
+}
+
+.stattool-tool-card,
+.stattool-warning-card {
+  background:
+    radial-gradient(circle at top right, rgba(255, 123, 114, .13), transparent 34%),
+    linear-gradient(145deg, rgba(26, 14, 13, .96), rgba(7, 8, 8, .99));
+}
+
+.stattool-flow-grid span {
+  background: rgba(255, 123, 114, .16);
+  border-color: rgba(255, 123, 114, .34);
+  color: #ffc3be;
+}
+
+.stattool-table td:nth-child(2),
+.stattool-table td:nth-child(3),
+.stattool-table td:nth-child(4) {
+  color: rgba(255, 249, 221, .86);
+}
+
+.stattool-check-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.stattool-check-grid article {
+  min-height: 165px;
+}
+
+.stattool-tool-card .btn-row {
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.stattool-tool-card .btn-secondary {
+  border-color: rgba(255, 123, 114, .35);
+}
+
+@media (max-width: 980px) {
+  .stattool-check-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stattool-tool-card .btn-row {
+    justify-content: flex-start;
+  }
+}
