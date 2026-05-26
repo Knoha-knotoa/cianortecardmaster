@@ -284,6 +284,11 @@ A dica principal é não sair comprando carta só pela nostalgia. O Dragão Bran
       <strong>Pokémon TCG em Cianorte</strong>
       <small>Outra porta de entrada para coleção, cartas e eventos locais.</small>
     </a>
+    <a class="ccm-internal-link-item" href="{{ '/jogos/outros-card-game-em-cianorte/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Outros TCGs</span>
+      <strong>Outros card games em Cianorte</strong>
+      <small>Lorcana, Riftbound, Star Wars, Digimon, Dragon Ball, Gundam, Sorcery, Éther e mais jogos para conhecer.</small>
+    </a>
   </div>
 </div>
 

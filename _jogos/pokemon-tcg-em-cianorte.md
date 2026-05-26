@@ -183,6 +183,11 @@ O caminho mais simples é aparecer nos encontros da comunidade, visitar o Bazar 
       <strong>Magic em Cianorte</strong>
       <small>Para quem quer mesa casual, política duvidosa e combos que ninguém assume.</small>
     </a>
+    <a class="ccm-internal-link-item" href="{{ '/jogos/outros-card-game-em-cianorte/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Outros TCGs</span>
+      <strong>Outros card games em Cianorte</strong>
+      <small>Lorcana, Riftbound, Star Wars, Digimon, Dragon Ball, Gundam, Sorcery, Éther e mais jogos para conhecer.</small>
+    </a>
   </div>
 </div>
 

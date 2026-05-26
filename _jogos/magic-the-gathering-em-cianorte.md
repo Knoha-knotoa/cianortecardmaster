@@ -327,6 +327,11 @@ Para Commander, decks pré-construídos podem ser uma boa porta de entrada. Para
       <strong>Flesh and Blood em Cianorte</strong>
       <small>O foco competitivo da comunidade, com Armory, ligas e encontros presenciais.</small>
     </a>
+    <a class="ccm-internal-link-item" href="{{ '/jogos/outros-card-game-em-cianorte/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Outros TCGs</span>
+      <strong>Outros card games em Cianorte</strong>
+      <small>Lorcana, Riftbound, Star Wars, Digimon, Dragon Ball, Gundam, Sorcery, Éther e mais jogos para conhecer.</small>
+    </a>
   </div>
 </div>
 

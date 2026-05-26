@@ -234,6 +234,11 @@ Se você é fã de anime, fantasia sombria, investigação paranormal, terror, j
       <strong>One Piece Card Game</strong>
       <small>Para fãs de anime, personagens marcantes e cartas especiais.</small>
     </a>
+    <a class="ccm-internal-link-item" href="{{ '/jogos/outros-card-game-em-cianorte/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Outros TCGs</span>
+      <strong>Outros card games em Cianorte</strong>
+      <small>Lorcana, Riftbound, Star Wars, Digimon, Dragon Ball, Gundam, Sorcery, Éther e mais jogos para conhecer.</small>
+    </a>
   </div>
 </div>
 

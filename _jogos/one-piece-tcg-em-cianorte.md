@@ -247,6 +247,11 @@ Isso evita o erro clássico: comprar carta solta sem saber líder, formato, cor,
       <strong>Flesh and Blood em Cianorte</strong>
       <small>Heróis, Armory, ligas e o foco competitivo da comunidade.</small>
     </a>
+    <a class="ccm-internal-link-item" href="{{ '/jogos/outros-card-game-em-cianorte/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Outros TCGs</span>
+      <strong>Outros card games em Cianorte</strong>
+      <small>Lorcana, Riftbound, Star Wars, Digimon, Dragon Ball, Gundam, Sorcery, Éther e mais jogos para conhecer.</small>
+    </a>
   </div>
 </div>
 

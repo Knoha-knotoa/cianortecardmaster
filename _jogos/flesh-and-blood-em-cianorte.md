@@ -200,6 +200,11 @@ Embora Flesh and Blood seja um dos focos principais, o Cianorte Card Masters tam
       <strong>Armory, ligas e torneios</strong>
       <small>Veja registros competitivos da comunidade e acompanhe a evolução dos jogadores.</small>
     </a>
+    <a class="ccm-internal-link-item" href="{{ '/jogos/outros-card-game-em-cianorte/' | relative_url }}">
+      <span class="ccm-internal-link-tag">Outros TCGs</span>
+      <strong>Outros card games em Cianorte</strong>
+      <small>Lorcana, Riftbound, Star Wars, Digimon, Dragon Ball, Gundam, Sorcery, Éther e mais jogos para conhecer.</small>
+    </a>
   </div>
 </div>
 
