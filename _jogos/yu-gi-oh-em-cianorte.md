@@ -259,10 +259,10 @@ A dica principal é não sair comprando carta só pela nostalgia. O Dragão Bran
       <strong>Agenda da comunidade</strong>
       <small>Veja encontros, torneios e atividades presenciais em Cianorte.</small>
     </a>
-    <a class="ccm-internal-link-item" href="{{ '/comunidade/' | relative_url }}">
-      <span class="ccm-internal-link-tag">Grupo</span>
-      <strong>Conheça a comunidade</strong>
-      <small>Fotos, bastidores, encontros e a cara real das mesas.</small>
+    <a class="ccm-internal-link-item" href="{{ '/jogos/rpg-em-cianorte/' | relative_url }}">
+      <span class="ccm-internal-link-tag">RPG</span>
+      <strong>RPG em Cianorte</strong>
+      <small>Café e Masmorras, fantasia sombria, anime, D&D e Ordem Paranormal.</small>
     </a>
     <a class="ccm-internal-link-item" href="{{ '/jogos/flesh-and-blood-em-cianorte/' | relative_url }}">
       <span class="ccm-internal-link-tag">Competitivo</span>

@@ -190,10 +190,10 @@ Embora Flesh and Blood seja um dos focos principais, o Cianorte Card Masters tam
       <strong>Yu-Gi-Oh! em Cianorte</strong>
       <small>Nostalgia do anime, combos, banlist e jogo competitivo para Duelistas locais.</small>
     </a>
-    <a class="ccm-internal-link-item" href="{{ '/guias/' | relative_url }}">
-      <span class="ccm-internal-link-tag">Como jogar</span>
-      <strong>Guias para aprender</strong>
-      <small>Regras, formatos, fundamentos e conteúdos para não chegar perdido na mesa.</small>
+    <a class="ccm-internal-link-item" href="{{ '/jogos/rpg-em-cianorte/' | relative_url }}">
+      <span class="ccm-internal-link-tag">RPG</span>
+      <strong>RPG em Cianorte</strong>
+      <small>Café e Masmorras, D&D, Ordem Paranormal, boardgames e encontros quinzenais.</small>
     </a>
     <a class="ccm-internal-link-item" href="{{ '/resultados/' | relative_url }}">
       <span class="ccm-internal-link-tag">Resultados</span>

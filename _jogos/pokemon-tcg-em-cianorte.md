@@ -61,10 +61,10 @@ O Pokémon TCG é um **jogo de cartas de duelo** em que cada jogador monta um de
       <strong>Conhecer a comunidade</strong>
       <small>Fotos, bastidores e registros dos encontros presenciais do Cianorte Card Masters.</small>
     </a>
-    <a class="ccm-internal-link-item" href="{{ '/jogos/' | relative_url }}">
-      <span class="ccm-internal-link-tag">Jogos</span>
-      <strong>Ver outros card games</strong>
-      <small>Flesh and Blood, Magic, One Piece, Yu-Gi-Oh!, RPG e outros jogos da galera.</small>
+    <a class="ccm-internal-link-item" href="{{ '/jogos/rpg-em-cianorte/' | relative_url }}">
+      <span class="ccm-internal-link-tag">RPG</span>
+      <strong>RPG em Cianorte</strong>
+      <small>Café e Masmorras, D&D, Ordem Paranormal e boardgames para fãs de aventura.</small>
     </a>
   </div>
 </div>

@@ -181,7 +181,7 @@ Para quem já coleciona produtos de anime, figures, mangás, cards de Pokémon o
 
 A loja parceira **Bazar do Weezing** é um ponto importante para quem quer conhecer card games em Cianorte. Quem tem interesse em **One Piece Card Game** pode aparecer na loja, perguntar sobre produtos, decks, jogadores e disponibilidade de novidades.
 
-Além da loja, a comunidade também se reúne aos **domingos**. Nos encontros, fãs de anime, jogadores de Commander, Pokémon, Flesh and Blood, Magic, RPG e outros card games sempre acabam conversando sobre decks, personagens, coleção e jogos novos. Se você é fã de One Piece e quer ver se o TCG é para você, o caminho mais simples é aparecer, conversar e pedir para ver uma partida.
+Além da loja, a comunidade também se reúne aos **domingos**. Nos encontros, fãs de anime, jogadores de Commander, Pokémon, Flesh and Blood, Magic, **[RPG]({{ '/jogos/rpg-em-cianorte/' | relative_url }})** e outros card games sempre acabam conversando sobre decks, personagens, coleção e jogos novos. Se você é fã de One Piece e quer ver se o TCG é para você, o caminho mais simples é aparecer, conversar e pedir para ver uma partida.
 
 Quando possível, jogadores podem emprestar decks para demonstração. Isso é ótimo para quem está curioso, mas ainda não quer comprar nada antes de entender se o jogo combina com seu estilo.
 

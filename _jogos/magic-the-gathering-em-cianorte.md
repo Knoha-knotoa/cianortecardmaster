@@ -67,10 +67,10 @@ Magic: The Gathering, também conhecido como **Magic** ou **MTG**, é um jogo de
       <strong>Montar deck até R$ 500</strong>
       <small>Guia para começar no Commander casual sem vender um rim foil.</small>
     </a>
-    <a class="ccm-internal-link-item" href="{{ '/jogos/' | relative_url }}">
-      <span class="ccm-internal-link-tag">Jogos</span>
-      <strong>Ver outros card games</strong>
-      <small>Flesh and Blood, Pokémon TCG, One Piece, Yu-Gi-Oh!, RPG e outros jogos da galera.</small>
+    <a class="ccm-internal-link-item" href="{{ '/jogos/rpg-em-cianorte/' | relative_url }}">
+      <span class="ccm-internal-link-tag">RPG</span>
+      <strong>RPG em Cianorte</strong>
+      <small>Café e Masmorras, fantasia, D&D, Ordem Paranormal e boardgames.</small>
     </a>
   </div>
 </div>
@@ -266,7 +266,7 @@ Se você veio de outros jogos da comunidade, Magic conversa bem com vários perf
 - quem joga **[Flesh and Blood]({{ '/jogos/flesh-and-blood-em-cianorte/' | relative_url }})** vai encontrar outro tipo de gestão de recursos, combate e leitura de turno;
 - quem joga **[One Piece Card Game]({{ '/jogos/one-piece-tcg-em-cianorte/' | relative_url }})** pode curtir o ritmo de mesa, ataque, bloqueio e gerenciamento de recursos;
 - quem veio de **[Yu-Gi-Oh!]({{ '/jogos/yu-gi-oh-em-cianorte/' | relative_url }})** pode gostar da construção de deck, banlist, metagame e formatos competitivos;
-- quem joga **RPG** pode se apaixonar pelo lado de Commander, porque cada deck parece um personagem com tema, identidade e defeitos morais próprios.
+- quem joga **[RPG]({{ '/jogos/rpg-em-cianorte/' | relative_url }})** pode se apaixonar pelo lado de Commander, porque cada deck parece um personagem com tema, identidade e defeitos morais próprios.
 
 ## Como começar sem gastar errado
 
