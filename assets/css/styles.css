@@ -7615,3 +7615,123 @@ h3 {
     border-radius: 18px;
   }
 }
+
+/* =========================================================
+   Ferramentas de suporte para cartas e regras
+========================================================= */
+.post-style-supporttools {
+  --category-accent: #79c0ff;
+  --category-soft: rgba(121, 192, 255, .13);
+  --category-line: rgba(121, 192, 255, .28);
+}
+
+.support-page-hero {
+  --category-accent: #79c0ff;
+}
+
+.support-lead-card,
+.support-tool-card,
+.support-judge-card {
+  border-color: rgba(121, 192, 255, .2);
+}
+
+.support-lead-card::before,
+.support-tool-card::before,
+.support-judge-card::before {
+  background: linear-gradient(90deg, rgba(121, 192, 255, .75), rgba(212, 175, 55, .55), transparent);
+}
+
+.support-tool-card {
+  background:
+    radial-gradient(circle at top right, rgba(121, 192, 255, .12), transparent 34%),
+    linear-gradient(145deg, rgba(16, 27, 19, .94), rgba(6, 10, 7, .98));
+}
+
+.support-steps-grid span,
+.support-judge-level-grid span {
+  background: rgba(121, 192, 255, .16);
+  border-color: rgba(121, 192, 255, .34);
+  color: #bfe3ff;
+}
+
+.support-judge-level-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .9rem;
+  margin-top: 1.25rem;
+}
+
+.support-judge-level-grid article,
+.support-checklist-card {
+  padding: 1rem;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, .1);
+  background: rgba(255, 255, 255, .045);
+}
+
+.support-judge-level-grid span {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: .75rem;
+  border-radius: 999px;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: .85rem;
+}
+
+.support-judge-level-grid strong,
+.support-checklist-card h3 {
+  display: block;
+  margin-bottom: .45rem;
+  color: #fff9dd;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  line-height: 1.2;
+}
+
+.support-judge-level-grid p {
+  margin: 0;
+  color: rgba(246, 241, 223, .74);
+  line-height: 1.45;
+}
+
+.support-checklist-card {
+  margin-top: 1rem;
+}
+
+.support-checklist-card ol {
+  margin: .75rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.support-checklist-card li {
+  margin: .42rem 0;
+  color: rgba(246, 241, 223, .78);
+  line-height: 1.5;
+}
+
+.support-tool-card code {
+  padding: .1rem .28rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, .08);
+  color: #fff3b0;
+  font-size: .92em;
+}
+
+@media (max-width: 980px) {
+  .support-judge-level-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .support-judge-level-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .support-judge-level-grid article,
+  .support-checklist-card {
+    border-radius: 18px;
+  }
+}
