@@ -170,7 +170,7 @@ Embora Flesh and Blood seja um dos focos principais, o Cianorte Card Masters tam
     <p>Esses links ajudam o visitante que caiu aqui pelo Google a continuar navegando pelo site e encontrar a mesa certa.</p>
   </div>
   <div class="ccm-internal-links-grid">
-    <a class="ccm-internal-link-item featured" href="{{ '/jogos/' | relative_url }}#pokemon">
+    <a class="ccm-internal-link-item featured" href="{{ '/jogos/pokemon-tcg-em-cianorte/' | relative_url }}">
       <span class="ccm-internal-link-tag">Pokémon</span>
       <strong>Pokémon TCG em Cianorte</strong>
       <small>Para jogadores novos, colecionadores e quem quer começar por um TCG mais conhecido.</small>
