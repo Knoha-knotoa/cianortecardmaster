@@ -8107,3 +8107,211 @@ h3 {
     padding: .95rem;
   }
 }
+
+
+/* ==========================================
+   Home: Bloco Magic: The Gathering
+========================================== */
+.home-magic-welcome-section {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(142, 202, 230, .18), transparent 26rem),
+    radial-gradient(circle at 18% 72%, rgba(95, 111, 255, .12), transparent 28rem),
+    linear-gradient(180deg, rgba(8, 13, 25, .58), rgba(5, 8, 15, .97));
+  border-block: 1px solid rgba(142, 202, 230, .14);
+}
+
+.home-magic-welcome-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(125deg, rgba(73, 34, 134, .20), transparent 44%),
+    radial-gradient(circle at 52% 45%, rgba(255, 255, 255, .055), transparent 18rem);
+}
+
+.home-magic-welcome-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, .82fr) minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 1.6rem);
+  align-items: stretch;
+}
+
+.home-magic-welcome-copy,
+.home-magic-welcome-card {
+  border: 1px solid rgba(142, 202, 230, .22);
+  border-radius: 28px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .26);
+}
+
+.home-magic-welcome-copy {
+  padding: clamp(1.25rem, 3vw, 2.15rem);
+  background:
+    radial-gradient(circle at 92% 0%, rgba(142, 202, 230, .14), transparent 22rem),
+    radial-gradient(circle at 0% 20%, rgba(177, 143, 255, .10), transparent 19rem),
+    linear-gradient(180deg, rgba(10, 17, 34, .90), rgba(6, 10, 18, .98));
+}
+
+.home-magic-welcome-copy h2 {
+  max-width: 13ch;
+  color: #d8f1ff;
+  text-shadow: 0 10px 24px rgba(0, 0, 0, .36);
+}
+
+.home-magic-welcome-copy p {
+  max-width: 47rem;
+  color: var(--muted);
+}
+
+.home-magic-welcome-actions {
+  margin-top: 1.15rem;
+}
+
+.home-magic-welcome-section .btn-primary {
+  background: linear-gradient(135deg, #8ecae6, #b18fff);
+  color: #06101b;
+}
+
+.home-magic-welcome-section .btn-secondary:hover {
+  border-color: rgba(142, 202, 230, .42);
+  background: rgba(142, 202, 230, .12);
+}
+
+.home-magic-welcome-card {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  align-content: start;
+  background:
+    linear-gradient(180deg, rgba(9, 16, 31, .96), rgba(6, 10, 18, .99));
+}
+
+.home-magic-welcome-image {
+  position: relative;
+  min-height: 210px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(142, 202, 230, .18);
+}
+
+.home-magic-welcome-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 34%, rgba(6, 10, 18, .86)),
+    radial-gradient(circle at 68% 18%, rgba(142, 202, 230, .14), transparent 16rem);
+}
+
+.home-magic-welcome-image img {
+  width: 100%;
+  height: 100%;
+  min-height: 210px;
+  object-fit: cover;
+  display: block;
+  filter: saturate(1.08) contrast(1.04);
+}
+
+.home-magic-welcome-list {
+  display: grid;
+  gap: .8rem;
+  padding: clamp(1rem, 2.4vw, 1.35rem);
+}
+
+.home-magic-welcome-list span {
+  display: grid;
+  gap: .25rem;
+  padding: .85rem .95rem;
+  border: 1px solid rgba(142, 202, 230, .15);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, .04);
+}
+
+.home-magic-welcome-list strong {
+  color: #cdefff;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  line-height: 1.2;
+}
+
+.home-magic-welcome-list small {
+  color: var(--muted);
+  line-height: 1.48;
+}
+
+.home-magic-welcome-link {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+  margin: 0 clamp(1rem, 2.4vw, 1.35rem) clamp(1rem, 2.4vw, 1.35rem);
+  padding: .75rem 1rem;
+  border-radius: 999px;
+  background: rgba(142, 202, 230, .12);
+  border: 1px solid rgba(142, 202, 230, .28);
+  color: #d8f1ff;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  text-decoration: none;
+  transition: transform .2s ease, background .2s ease, border-color .2s ease;
+}
+
+.home-magic-welcome-link:hover {
+  transform: translateY(-1px);
+  background: rgba(142, 202, 230, .18);
+  border-color: rgba(142, 202, 230, .48);
+}
+
+@media (max-width: 980px) {
+  .home-magic-welcome-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-magic-welcome-card {
+    order: 2;
+  }
+
+  .home-magic-welcome-copy {
+    order: 1;
+  }
+
+  .home-magic-welcome-copy h2 {
+    max-width: 14ch;
+  }
+}
+
+@media (max-width: 620px) {
+  .home-magic-welcome-copy,
+  .home-magic-welcome-card {
+    border-radius: 20px;
+  }
+
+  .home-magic-welcome-copy {
+    padding: 1.2rem 1rem;
+  }
+
+  .home-magic-welcome-copy h2 {
+    max-width: 11ch;
+    font-size: clamp(2.15rem, 9vw, 3rem);
+  }
+
+  .home-magic-welcome-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .home-magic-welcome-actions .btn {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .home-magic-welcome-image,
+  .home-magic-welcome-image img {
+    min-height: 190px;
+  }
+
+  .home-magic-welcome-list {
+    padding: .95rem;
+  }
+}
