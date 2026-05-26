@@ -7735,3 +7735,54 @@ h3 {
     border-radius: 18px;
   }
 }
+
+/* =========================================================
+   Ferramentas de testes digitais para card games
+========================================================= */
+.post-style-digitaltests {
+  --category-accent: #d2a8ff;
+  --category-soft: rgba(210, 168, 255, .14);
+  --category-line: rgba(210, 168, 255, .3);
+}
+
+.digitaltest-page-hero {
+  --category-accent: #d2a8ff;
+}
+
+.digitaltest-lead-card,
+.digitaltest-tool-card,
+.digitaltest-warning-card {
+  border-color: rgba(210, 168, 255, .2);
+}
+
+.digitaltest-lead-card::before,
+.digitaltest-tool-card::before,
+.digitaltest-warning-card::before {
+  background: linear-gradient(90deg, rgba(210, 168, 255, .75), rgba(126, 231, 135, .52), transparent);
+}
+
+.digitaltest-tool-card,
+.digitaltest-warning-card {
+  background:
+    radial-gradient(circle at top right, rgba(210, 168, 255, .12), transparent 34%),
+    linear-gradient(145deg, rgba(16, 22, 31, .94), rgba(6, 8, 12, .98));
+}
+
+.digitaltest-mode-grid span {
+  background: rgba(210, 168, 255, .16);
+  border-color: rgba(210, 168, 255, .34);
+  color: #ecd8ff;
+}
+
+.digitaltest-table td:nth-child(2),
+.digitaltest-table td:nth-child(3) {
+  color: rgba(255, 249, 221, .86);
+}
+
+.digitaltest-check-grid article {
+  min-height: 165px;
+}
+
+.tools-card-grid-expanded {
+  grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+}
