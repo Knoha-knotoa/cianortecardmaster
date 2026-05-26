@@ -1,0 +1,28 @@
+---
+layout: default
+title: "Decks mudaram para Guias"
+description: "A página de Decks agora fica dentro da área de Guias do Cianorte Card Masters."
+permalink: /decks/
+sitemap: false
+---
+
+<section class="section legacy-redirect-section" aria-labelledby="legacy-decks-title">
+  <div class="container">
+    <article class="info-panel legacy-redirect-card">
+      <p class="eyebrow">Página reorganizada</p>
+      <h1 id="legacy-decks-title">Decks agora fica dentro de Guias</h1>
+      <p>A página de Deck Techs foi movida para a nova estrutura do menu.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="{{ '/guias/decks/' | relative_url }}">Ir para Deck Techs</a>
+        <a class="btn btn-secondary" href="{{ '/guias/' | relative_url }}">Ver Guias</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<script>
+  window.location.replace("{{ '/guias/decks/' | relative_url }}");
+</script>
+<noscript>
+  <meta http-equiv="refresh" content="0; url={{ '/guias/decks/' | relative_url }}">
+</noscript>

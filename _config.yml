@@ -15,7 +15,7 @@ collections:
     permalink: /guias/:name/
   decks:
     output: true
-    permalink: /decks/:name/
+    permalink: /guias/decks/:name/
   blog:
     output: true
     permalink: /blog/:path/

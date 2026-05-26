@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Comunidade de Card Games em Cianorte"
-description: "Resultados dos últimos jogos, Armory de Flesh and Blood, ligas, fotos, vídeos, memes e postagens da comunidade Cianorte Card Masters."
+description: "Fotos, vídeos, memes, postagens sociais e bastidores da comunidade Cianorte Card Masters em Cianorte."
 permalink: /comunidade/
 image: /assets/img/banners/banner-comunidade.webp
 image_alt: "Mesa de card games da comunidade Cianorte Card Masters com fantasia, tecnologia e jogadores reunidos"
@@ -20,8 +20,8 @@ tags:
     <p class="eyebrow">Cianorte Card Masters</p>
     <h1>Comunidade de card games em Cianorte</h1>
     <p>
-      Resultados dos últimos jogos, Armory de Flesh and Blood, ligas, fotos de eventos,
-      vídeos, memes e postagens de quem marcou a comunidade.
+      Fotos de eventos, vídeos, memes, bastidores e postagens de quem marcou a comunidade.
+      Para rankings, Armory e ligas, agora temos uma página dedicada de Resultados.
     </p>
   </div>
 </section>
@@ -30,7 +30,7 @@ tags:
   <div class="container">
     <div class="community-intro-grid">
       <div class="community-intro-copy">
-        <p class="eyebrow">Mesa, ranking e resenha</p>
+        <p class="eyebrow">Mesa, bastidores e resenha</p>
         <h2 id="comunidade-intro-title">O ponto de encontro digital da nossa comunidade</h2>
         <p>
           Esta página reúne o que acontece nos encontros presenciais do Cianorte Card Masters:
@@ -38,17 +38,13 @@ tags:
           enviados pela galera nas redes sociais.
         </p>
         <p>
-          A ideia é simples: quem quer conhecer o grupo encontra resultados, fotos, vídeos e o clima
-          dos eventos em um só lugar. Quem já joga consegue acompanhar histórico, campeões, heróis,
-          memes internos e próximos encontros.
+          A ideia é simples: quem quer conhecer o grupo encontra fotos, vídeos, memes e o clima
+          dos eventos em um só lugar. Resultados, campeões, Armory e ligas ficaram organizados
+          em uma página própria para consulta rápida.
         </p>
       </div>
 
       <div class="community-intro-cards" aria-label="Conteúdos disponíveis na página Comunidade">
-        <a class="community-intro-card post-style-armory" href="#ultimo-armory">
-          <strong>Resultados</strong>
-          <span>Armory, ligas e torneios da comunidade.</span>
-        </a>
         <a class="community-intro-card post-style-instagram" href="#postagens">
           <strong>Fotos e vídeos</strong>
           <span>Marcações, reels, bastidores e registros de evento.</span>
@@ -57,9 +53,13 @@ tags:
           <strong>Memes e social</strong>
           <span>A parte menos séria, porém indispensável.</span>
         </a>
-        <a class="community-intro-card post-style-liga" href="#resultado-ultima-liga">
-          <strong>Ligas</strong>
-          <span>Campanhas longas e resultados acumulados.</span>
+        <a class="community-intro-card post-style-fotos" href="#postagens">
+          <strong>Bastidores</strong>
+          <span>Encontros, mesas, lojas parceiras e momentos da galera.</span>
+        </a>
+        <a class="community-intro-card post-style-armory" href="{{ '/resultados/' | relative_url }}">
+          <strong>Resultados</strong>
+          <span>Armory, ligas, torneios e estatísticas ficaram em página própria.</span>
         </a>
       </div>
     </div>
@@ -120,75 +120,7 @@ tags:
 }
 </script>
 
-<script type="application/json" id="armory-data">
-[
-{% assign first_armory = true %}
-{% for post in comunidade_posts %}
-  {% assign post_path = post.path | downcase %}
-  {% assign style_slug = post.content_style | default: post.category_label | default: '' | slugify %}
-  {% if post_path contains '/armory/' or post_path contains '_comunidade/armory/' or style_slug == 'armory' %}
-    {% unless first_armory %},{% endunless %}
-    {
-      "title": {{ post.title | jsonify }},
-      "url": {{ post.url | relative_url | jsonify }},
-      "date": {{ post.date | date_to_xmlschema | jsonify }},
-      "event_date": {{ post.event_date | default: post.date | date_to_xmlschema | jsonify }},
-      "summary": {{ post.summary | default: post.excerpt | strip_html | strip | jsonify }},
-      "game": {{ post.game | default: "Flesh and Blood" | jsonify }},
-      "rounds": {{ post.rounds | default: "" | jsonify }},
-      "next_armory": {{ post.next_armory | default: "Quarta • 19:00" | jsonify }},
-      "results": {% if post.results %}{{ post.results | jsonify }}{% else %}[]{% endif %}
-    }
-    {% assign first_armory = false %}
-  {% endif %}
-{% endfor %}
-]
-</script>
 
-<script type="application/json" id="league-data">
-[
-{% assign first_league = true %}
-{% for post in comunidade_posts %}
-  {% assign post_path = post.path | downcase %}
-  {% assign style_slug = post.content_style | default: post.category_label | default: '' | slugify %}
-  {% if post_path contains '/liga/' or post_path contains '_comunidade/liga/' or style_slug == 'liga' %}
-    {% unless first_league %},{% endunless %}
-    {
-      "title": {{ post.title | jsonify }},
-      "url": {{ post.url | relative_url | jsonify }},
-      "date": {{ post.date | date_to_xmlschema | jsonify }},
-      "event_date": {{ post.event_date | default: post.date | date_to_xmlschema | jsonify }},
-      "summary": {{ post.summary | default: post.excerpt | strip_html | strip | jsonify }},
-      "game": {{ post.game | default: "Flesh and Blood" | jsonify }},
-      "rounds": {{ post.rounds | default: "" | jsonify }},
-      "next_league": {{ post.next_liga | default: post.next_league | default: "Domingo • 13:30" | jsonify }},
-      "results": {% if post.results %}{{ post.results | jsonify }}{% else %}[]{% endif %}
-    }
-    {% assign first_league = false %}
-  {% endif %}
-{% endfor %}
-]
-</script>
-
-<section class="section community-dashboard-section armory-feature-section" id="ultimo-armory" aria-labelledby="ultimo-armory-title">
-  <div class="container">
-    <div class="section-title armory-feature-title">
-      <div>
-        <p class="eyebrow">Último Armory</p>
-        <h2 id="ultimo-armory-title">Resultado mais recente</h2>
-        <p>Resultado mais recente do nosso Armory, o torneio semanal de Flesh and Blood da comunidade.</p>
-      </div>
-    </div>
-
-    <div class="community-dashboard-grid community-dashboard-single">
-      <article class="latest-armory-card latest-armory-card-wide armory-board" id="latest-armory-card">
-        <p class="eyebrow">Último Armory</p>
-        <h3>Nenhum resultado cadastrado</h3>
-        <p>Crie um Markdown em <code>_comunidade/Armory</code> usando o modelo de resultados para preencher esta área.</p>
-      </article>
-    </div>
-  </div>
-</section>
 
 <section class="section section-alt community-social-section" aria-labelledby="feed-comunidade-title">
   <div class="container">
@@ -254,107 +186,6 @@ tags:
   </div>
 </section>
 
-<section class="section community-dashboard-section armory-feature-section league-feature-section" id="resultado-ultima-liga" aria-labelledby="resultado-liga-title">
-  <div class="container">
-    <div class="section-title armory-feature-title league-feature-title">
-      <div>
-        <p class="eyebrow">Ligas</p>
-        <h2 id="resultado-liga-title">Resultados da última liga</h2>
-        <p>Resultado mais recente das ligas da comunidade, incluindo Pokémon, Flesh and Blood e outros card games.</p>
-      </div>
-    </div>
-
-    <div class="community-dashboard-grid community-dashboard-single">
-      <article class="latest-armory-card latest-armory-card-wide armory-board league-board" id="latest-league-card">
-        <p class="eyebrow">Última Liga</p>
-        <h3>Nenhum resultado cadastrado</h3>
-        <p>Crie um Markdown em <code>_comunidade/Liga</code> usando o modelo de resultados para preencher esta área.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="section competitive-results-section" id="resultados-ligas" aria-labelledby="competitivo-title">
-  <div class="container">
-    <div class="section-title">
-      <div>
-        <p class="eyebrow">Competitivo</p>
-        <h2 id="competitivo-title">Torneios e ligas</h2>
-        <p>Resultados e relatos maiores ficam separados dos posts sociais para facilitar a consulta.</p>
-      </div>
-    </div>
-
-    <div class="results-columns">
-      <section class="content-section-block post-style-torneio" aria-labelledby="torneios-title">
-        <div class="content-section-head">
-          <div>
-            <p class="eyebrow">Torneios</p>
-            <h3 id="torneios-title">Resultados de torneios</h3>
-          </div>
-          <span class="section-folder"></span>
-        </div>
-        <div class="card-grid grid-3">
-          {% assign torneio_count = 0 %}
-          {% for post in comunidade_posts %}
-            {% assign post_path = post.path | downcase %}
-            {% assign style_slug = post.content_style | default: post.category_label | default: '' | slugify %}
-            {% if post_path contains '/torneio/' or post_path contains '_comunidade/torneio/' or style_slug == 'torneio' %}
-              {% if torneio_count < 6 %}{% include post-card.html post=post %}{% endif %}
-              {% assign torneio_count = torneio_count | plus: 1 %}
-            {% endif %}
-          {% endfor %}
-        </div>
-        {% if torneio_count == 0 %}<p class="empty-section">Nenhum torneio publicado ainda.</p>{% endif %}
-      </section>
-
-      <section class="content-section-block post-style-liga" aria-labelledby="ligas-title">
-        <div class="content-section-head">
-          <div>
-            <p class="eyebrow">Ligas</p>
-            <h3 id="ligas-title">Resultados anteriores de ligas</h3>
-          </div>
-          <span class="section-folder"></span>
-        </div>
-        <div class="card-grid grid-3">
-          {% assign liga_count = 0 %}
-          {% for post in comunidade_posts %}
-            {% assign post_path = post.path | downcase %}
-            {% assign style_slug = post.content_style | default: post.category_label | default: '' | slugify %}
-            {% if post_path contains '/liga/' or post_path contains '_comunidade/liga/' or style_slug == 'liga' %}
-              {% if liga_count < 6 %}{% include post-card.html post=post %}{% endif %}
-              {% assign liga_count = liga_count | plus: 1 %}
-            {% endif %}
-          {% endfor %}
-        </div>
-        {% if liga_count == 0 %}<p class="empty-section">Nenhuma liga publicada ainda.</p>{% endif %}
-      </section>
-    </div>
-  </div>
-</section>
-
-<section class="section section-alt armory-history-section" id="armory-historico" aria-labelledby="armory-historico-title">
-  <div class="container">
-    <div class="section-title">
-      <div>
-        <p class="eyebrow">Histórico Armory</p>
-        <h2 id="armory-historico-title">Estatísticas e resultados</h2>
-        <p>Lista dos Armory cadastrados e resumo acumulado do mês vigente.</p>
-      </div>
-    </div>
-
-    <div class="armory-history-grid">
-      <article class="info-panel">
-        <p class="eyebrow">Resumo do mês</p>
-        <div id="armory-month-summary" class="stat-list">Sem dados cadastrados.</div>
-      </article>
-
-      <article class="info-panel">
-        <p class="eyebrow">Últimos Armory</p>
-        <div id="armory-history-list" class="armory-history-list">Sem resultados cadastrados.</div>
-      </article>
-    </div>
-  </div>
-</section>
 
 <section class="section community-seo-links-section" aria-labelledby="comunidade-links-title">
   <div class="container">
@@ -369,9 +200,10 @@ tags:
       <div class="community-links-grid">
         <a href="{{ '/agenda/' | relative_url }}">Agenda da semana</a>
         <a href="{{ '/guias/' | relative_url }}">Guias para começar</a>
-        <a href="{{ '/decks/' | relative_url }}">Deck techs</a>
+        <a href="{{ '/guias/decks/' | relative_url }}">Deck techs</a>
         <a href="{{ '/blog/' | relative_url }}">Notícias e posts</a>
         <a href="{{ '/onde-jogar/' | relative_url }}">Onde jogar em Cianorte</a>
+        <a href="{{ '/resultados/' | relative_url }}">Resultados</a>
         <a href="{{ '/termos-comunidade/' | relative_url }}">Termos da comunidade</a>
       </div>
     </div>
