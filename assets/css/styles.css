@@ -7256,6 +7256,35 @@ h3 {
   min-height: 320px;
 }
 
+.game-hub-card-linked {
+  cursor: pointer;
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+.game-hub-card-linked:hover,
+.game-hub-card-linked:focus-within {
+  transform: translateY(-3px);
+  border-color: var(--category-accent, var(--gold));
+  box-shadow: 0 22px 48px rgba(0, 0, 0, .32);
+}
+
+.game-card-main-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+.game-card-main-link:focus-visible {
+  outline: 3px solid var(--category-accent, var(--gold));
+  outline-offset: -6px;
+}
+
+.hub-card .btn-row {
+  position: relative;
+  z-index: 2;
+}
+
 .tool-hub-card {
   min-height: 290px;
 }

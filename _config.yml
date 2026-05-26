@@ -19,6 +19,9 @@ collections:
   blog:
     output: true
     permalink: /blog/:path/
+  jogos:
+    output: true
+    permalink: /jogos/:name/
   comunidade:
     output: true
     permalink: /comunidade/:path/
@@ -89,6 +92,14 @@ defaults:
       layout: post
       author: "Cianorte Card Masters"
       category_label: "Blog"
+  - scope:
+      path: ""
+      type: "jogos"
+    values:
+      layout: post
+      author: "Cianorte Card Masters"
+      category_label: "Jogos"
+      content_style: "cianorte-card-master"
   - scope:
       path: ""
       type: "comunidade"

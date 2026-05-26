@@ -16,6 +16,7 @@ keywords:
   - Cianorte Card Masters
 image: "/assets/img/banners/default-flesh-and-blood.webp"
 image_alt: "Heróis e cartas de Flesh and Blood em uma mesa de card game presencial"
+permalink: /jogos/flesh-and-blood-em-cianorte/
 author: "Cianorte Card Masters"
 date: 2026-05-26
 last_modified_at: 2026-05-26
