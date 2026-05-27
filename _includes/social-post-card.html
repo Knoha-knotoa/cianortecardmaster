@@ -11,6 +11,19 @@
 {% assign media_alt = include.post.image_alt | default: include.post.alt %}
 {% unless media_alt %}{% assign media_alt = include.post.title | prepend: 'Registro da comunidade Cianorte Card Masters: ' %}{% endunless %}
 
+{% assign tiktok_video_id = include.post.tiktok_video_id | default: include.post.tiktok_id | default: include.post.video_id | default: '' | strip %}
+{% if social_platform == 'tiktok' and tiktok_video_id == '' and include.post.social_url %}
+  {% assign tiktok_url_clean = include.post.social_url | split: '?' | first | split: '#' | first %}
+  {% assign tiktok_url_parts = tiktok_url_clean | split: '/' %}
+  {% assign tiktok_video_id = tiktok_url_parts | last | strip %}
+{% endif %}
+{% if social_platform == 'tiktok' and tiktok_video_id == '' and include.post.social_embed_url %}
+  {% assign tiktok_embed_clean = include.post.social_embed_url | split: '?' | first | split: '#' | first %}
+  {% assign tiktok_embed_candidate = tiktok_embed_clean | remove: '/embed' %}
+  {% assign tiktok_embed_parts = tiktok_embed_candidate | split: '/' %}
+  {% assign tiktok_video_id = tiktok_embed_parts | last | strip %}
+{% endif %}
+
 {% assign fallback_image = site.data.images.post_defaults.comunidade | default: site.data.images.post_default %}
 {% if social_platform == 'instagram' or social_platform == 'fotos' %}
   {% assign fallback_image = site.data.images.post_defaults.comunidade | default: site.data.images.post_default %}
@@ -65,6 +78,14 @@
         loading="lazy"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    {% elsif social_platform == 'tiktok' and tiktok_video_id != '' %}
+      <iframe
+        src="https://www.tiktok.com/player/v1/{{ tiktok_video_id }}?music_info=1&amp;description=1"
+        title="{{ include.post.title | escape }}"
+        loading="lazy"
+        frameborder="0"
+        allow="fullscreen; autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
         allowfullscreen></iframe>
     {% elsif include.post.social_embed_url %}
       <iframe

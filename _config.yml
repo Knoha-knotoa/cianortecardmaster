@@ -169,6 +169,13 @@ defaults:
       content_style: "tiktok"
       social_platform: "tiktok"
   - scope:
+      path: "_comunidade/tiktok"
+      type: "comunidade"
+    values:
+      category_label: "TikTok"
+      content_style: "tiktok"
+      social_platform: "tiktok"
+  - scope:
       path: "_comunidade/X"
       type: "comunidade"
     values:
