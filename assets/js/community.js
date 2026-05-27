@@ -314,7 +314,7 @@
       .split(/\s*\/\s*|\s*,\s*|\s*\+\s*|\s*&\s*/)
       .map(name => name.trim())
       .filter(Boolean)
-      .slice(0, 3);
+      .slice(0, 2);
   }
 
   function pokemonSpriteUrl(name) {
@@ -325,8 +325,11 @@
 
   function pokemonSpriteStack(hero) {
     const names = pokemonNamesFromHero(hero);
-    if (names.length < 2) return "";
     const visibleNames = names.slice(0, 2);
+
+    if (visibleNames.length < 2) {
+      return `<span class="league-pokemon-sprites league-pokemon-sprites-empty" aria-hidden="true"></span>`;
+    }
 
     const icons = visibleNames.map(name => {
       const src = pokemonSpriteUrl(name);
@@ -334,7 +337,7 @@
       return `<img src="${escapeHtml(src)}" alt="${escapeHtml(name)}" loading="lazy" onerror="this.remove()">`;
     }).join("");
 
-    return icons ? `<span class="league-pokemon-sprites" aria-label="Pokémon do deck">${icons}</span>` : "";
+    return icons ? `<span class="league-pokemon-sprites" aria-label="Pokémon do deck">${icons}</span>` : `<span class="league-pokemon-sprites league-pokemon-sprites-empty" aria-hidden="true"></span>`;
   }
 
   function pokemonBadge(hero, size = "normal") {
@@ -518,8 +521,29 @@
       const heroIcon = result.hero_icon || result.heroIcon || result.icon || "";
       const placement = index + 1;
       const placementIcon = index === 0 ? armoryIcons.depth.champion : armoryIcons.depth.placement;
-      const badgeMarkup = isPokemon ? pokemonBadge(hero, index === 0 ? "featured" : "normal") : heroBadge(hero, heroIcon, index === 0 ? "featured" : "normal");
+      const badgeMarkup = isPokemon ? "" : heroBadge(hero, heroIcon, index === 0 ? "featured" : "normal");
       const spriteStack = isPokemon ? pokemonSpriteStack(hero) : "";
+
+      if (isPokemon) {
+        return `
+          <li class="armory-result-row league-pokemon-result-row${index === 0 ? " is-champion" : ""}">
+            <span class="armory-rank-badge armory-rank-${placement}" aria-label="${placement}º colocado">
+              ${iconImage(placementIcon, "armory-rank-icon", "")}
+              <strong>${placement}º</strong>
+            </span>
+            ${spriteStack}
+            <div class="armory-player-cell league-pokemon-player-cell">
+              <div class="armory-player-meta">
+                <strong>${escapeHtml(player)}</strong>
+                <small>${escapeHtml(heroName)}</small>
+              </div>
+            </div>
+            <span class="armory-hero-name league-pokemon-deck-name" title="${escapeHtml(hero)}">${escapeHtml(heroName)}</span>
+            <span class="armory-record">${iconImage(armoryIcons.depth.trophy, "armory-record-icon", "")}${escapeHtml(record || "-")}</span>
+          </li>
+        `;
+      }
+
       return `
         <li class="armory-result-row${index === 0 ? " is-champion" : ""}">
           <span class="armory-rank-badge armory-rank-${placement}" aria-label="${placement}º colocado">
@@ -529,10 +553,7 @@
           <div class="armory-player-cell">
             ${badgeMarkup}
             <div class="armory-player-meta">
-              <div class="armory-player-name-line">
-                ${spriteStack}
-                <strong>${escapeHtml(player)}</strong>
-              </div>
+              <strong>${escapeHtml(player)}</strong>
               <small>${escapeHtml(heroName)}</small>
             </div>
           </div>
