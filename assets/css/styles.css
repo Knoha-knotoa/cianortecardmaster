@@ -19,6 +19,8 @@
   --muted: #c9c2aa;
   --line: rgba(212, 175, 55, .22);
   --shadow: 0 18px 40px rgba(0, 0, 0, .35);
+  --banner-text-shadow: 0 5px 22px rgba(0, 0, 0, .96), 0 2px 6px rgba(0, 0, 0, .94), 0 0 38px rgba(0, 0, 0, .72);
+  --banner-title-shadow: 0 7px 26px rgba(0, 0, 0, .98), 0 3px 8px rgba(0, 0, 0, .96), 0 0 44px rgba(0, 0, 0, .78);
   --radius: 22px;
   --container: 1160px;
 }
@@ -290,6 +292,19 @@ h3 {
   color: var(--muted);
   text-align: center;
   margin: 0;
+}
+
+/* Sombra dos textos em banners/hero para manter leitura sobre imagens escuras */
+.hero-inner > div :where(h1, h2, h3),
+.page-hero :where(h1, h2, h3),
+.post-hero :where(h1, h2, h3) {
+  text-shadow: var(--banner-title-shadow);
+}
+
+.hero-inner > div :where(p, .eyebrow, .lead),
+.page-hero :where(p, .eyebrow, .lead),
+.post-hero :where(p, .eyebrow, .post-summary, .post-meta, .tag-list span) {
+  text-shadow: var(--banner-text-shadow);
 }
 
 /* Sections */
@@ -807,10 +822,11 @@ h3 {
 .page-hero h1,
 .page-hero p,
 .page-hero .eyebrow {
-  text-shadow:
-    0 4px 18px rgba(0,0,0,.92),
-    0 2px 4px rgba(0,0,0,.92),
-    0 0 34px rgba(0,0,0,.72);
+  text-shadow: var(--banner-text-shadow);
+}
+
+.page-hero h1 {
+  text-shadow: var(--banner-title-shadow);
 }
 
 .page-hero p {
