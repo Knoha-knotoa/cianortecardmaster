@@ -11,19 +11,6 @@
 {% assign media_alt = include.post.image_alt | default: include.post.alt %}
 {% unless media_alt %}{% assign media_alt = include.post.title | prepend: 'Registro da comunidade Cianorte Card Masters: ' %}{% endunless %}
 
-{% assign tiktok_video_id = include.post.tiktok_video_id | default: include.post.tiktok_id | default: include.post.video_id | default: '' | strip %}
-{% if social_platform == 'tiktok' and tiktok_video_id == '' and include.post.social_url %}
-  {% assign tiktok_url_clean = include.post.social_url | split: '?' | first | split: '#' | first %}
-  {% assign tiktok_url_parts = tiktok_url_clean | split: '/' %}
-  {% assign tiktok_video_id = tiktok_url_parts | last | strip %}
-{% endif %}
-{% if social_platform == 'tiktok' and tiktok_video_id == '' and include.post.social_embed_url %}
-  {% assign tiktok_embed_clean = include.post.social_embed_url | split: '?' | first | split: '#' | first %}
-  {% assign tiktok_embed_candidate = tiktok_embed_clean | remove: '/embed' %}
-  {% assign tiktok_embed_parts = tiktok_embed_candidate | split: '/' %}
-  {% assign tiktok_video_id = tiktok_embed_parts | last | strip %}
-{% endif %}
-
 {% assign fallback_image = site.data.images.post_defaults.comunidade | default: site.data.images.post_default %}
 {% if social_platform == 'instagram' or social_platform == 'fotos' %}
   {% assign fallback_image = site.data.images.post_defaults.comunidade | default: site.data.images.post_default %}
@@ -36,6 +23,37 @@
   {% assign social_image_src = social_image %}
 {% else %}
   {% assign social_image_src = social_image | relative_url %}
+{% endif %}
+
+{% assign local_video = include.post.video_file | default: include.post.video_src | default: include.post.local_video | default: '' | strip %}
+{% if local_video != '' %}
+  {% if local_video contains '://' %}
+    {% assign local_video_src = local_video %}
+  {% else %}
+    {% assign local_video_src = local_video | relative_url %}
+  {% endif %}
+{% endif %}
+
+{% assign video_poster = include.post.video_poster | default: include.post.poster | default: include.post.thumbnail | default: '' | strip %}
+{% if video_poster != '' %}
+  {% if video_poster contains '://' %}
+    {% assign video_poster_src = video_poster %}
+  {% else %}
+    {% assign video_poster_src = video_poster | relative_url %}
+  {% endif %}
+{% endif %}
+
+{% assign instagram_permalink = include.post.instagram_permalink | default: include.post.social_url | default: include.post.social_embed_url | default: include.post.embed_url | default: '' | strip %}
+{% if social_platform == 'instagram' and instagram_permalink != '' %}
+  {% assign instagram_permalink = instagram_permalink | replace: '/embed/captioned', '/' | replace: '/embed', '/' %}
+{% endif %}
+
+{% assign tiktok_video_id = include.post.tiktok_video_id | default: '' | strip %}
+{% if social_platform == 'tiktok' and tiktok_video_id == '' %}
+  {% assign tiktok_source_url = include.post.social_url | default: include.post.social_embed_url | default: include.post.embed_url | default: '' | strip %}
+  {% if tiktok_source_url contains '/video/' %}
+    {% assign tiktok_video_id = tiktok_source_url | split: '/video/' | last | split: '/' | first | split: '?' | first %}
+  {% endif %}
 {% endif %}
 
 {% assign api_image_game = nil %}
@@ -70,8 +88,18 @@
     {% if include.post.date %}<span>{{ include.post.date | date: "%d/%m/%Y" }}</span>{% endif %}
   </div>
 
-  <div class="social-post-embed social-post-embed-{{ social_platform }}">
-    {% if include.post.youtube_id %}
+  <div class="social-post-embed social-post-embed-{{ social_platform }}{% if local_video != '' %} social-post-embed-native-video{% endif %}">
+    {% if local_video != '' %}
+      <video
+        class="social-post-video"
+        controls
+        playsinline
+        preload="metadata"
+        {% if video_poster != '' %}poster="{{ video_poster_src }}"{% endif %}>
+        <source src="{{ local_video_src }}" type="{{ include.post.video_type | default: 'video/mp4' }}">
+        Seu navegador não conseguiu reproduzir este vídeo. {% if include.post.social_url %}<a href="{{ include.post.social_url }}">Abrir na origem</a>.{% endif %}
+      </video>
+    {% elsif include.post.youtube_id %}
       <iframe
         src="https://www.youtube.com/embed/{{ include.post.youtube_id }}"
         title="{{ include.post.title | escape }}"
@@ -81,12 +109,21 @@
         allowfullscreen></iframe>
     {% elsif social_platform == 'tiktok' and tiktok_video_id != '' %}
       <iframe
-        src="https://www.tiktok.com/player/v1/{{ tiktok_video_id }}?music_info=1&amp;description=1"
+        src="https://www.tiktok.com/player/v1/{{ tiktok_video_id }}?music_info=1&description=1"
         title="{{ include.post.title | escape }}"
         loading="lazy"
         frameborder="0"
-        allow="fullscreen; autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        scrolling="no"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
         allowfullscreen></iframe>
+    {% elsif social_platform == 'instagram' and instagram_permalink != '' %}
+      <blockquote
+        class="instagram-media"
+        data-instgrm-permalink="{{ instagram_permalink }}"
+        data-instgrm-version="14">
+        <a href="{{ instagram_permalink }}">Ver publicação no Instagram</a>
+      </blockquote>
+      <script async src="https://www.instagram.com/embed.js"></script>
     {% elsif include.post.social_embed_url %}
       <iframe
         src="{{ include.post.social_embed_url }}"

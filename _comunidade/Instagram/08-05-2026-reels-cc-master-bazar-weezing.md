@@ -3,7 +3,8 @@ title: "Vídeo da comunidade: Armory na comunidade"
 category_label: "Instagram"
 content_style: "instagram"
 social_platform: "instagram"
-social_embed_url: "https://www.instagram.com/reel/DYFUvLYO5xQ/embed"
+instagram_permalink: "https://www.instagram.com/reel/DYFUvLYO5xQ/"
+social_embed_url: "https://www.instagram.com/reel/DYFUvLYO5xQ/"
 social_url: "https://www.instagram.com/reel/DYFUvLYO5xQ/"
 post_type: "social"
 video_platform: "instagram"
@@ -26,15 +27,13 @@ tags:
   </p>
 
   <div class="instagram-embed-wrapper">
-    <iframe
-      src="https://www.instagram.com/reel/DYFUvLYO5xQ/embed"
-      width="400"
-      height="710"
-      frameborder="0"
-      scrolling="no"
-      allowtransparency="true"
-      allowfullscreen="true">
-    </iframe>
+    <blockquote
+      class="instagram-media"
+      data-instgrm-permalink="https://www.instagram.com/reel/DYFUvLYO5xQ/"
+      data-instgrm-version="14">
+      <a href="https://www.instagram.com/reel/DYFUvLYO5xQ/">Ver publicação no Instagram</a>
+    </blockquote>
+    <script async src="https://www.instagram.com/embed.js"></script>
   </div>
 
   <p>

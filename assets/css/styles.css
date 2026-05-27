@@ -2759,10 +2759,24 @@ h3 {
 }
 
 .social-post-embed iframe,
-.social-post-embed img {
+.social-post-embed img,
+.social-post-embed video {
   display: block;
   width: 100%;
   border: 0;
+}
+
+.social-post-embed video {
+  height: 100%;
+  background: #000;
+  object-fit: cover;
+}
+
+.social-post-embed-native-video {
+  max-width: 440px;
+  margin-inline: auto;
+  aspect-ratio: 9 / 16;
+  min-height: 560px;
 }
 
 .social-post-embed-youtube {
@@ -2782,6 +2796,14 @@ h3 {
 
 .social-post-embed-instagram iframe {
   height: 100%;
+}
+
+.social-post-embed-instagram .instagram-media {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  border-radius: 18px !important;
 }
 
 .social-post-embed-tiktok {
@@ -3371,7 +3393,8 @@ h3 {
 
 @media (max-width: 520px) {
   .social-post-embed-instagram,
-  .social-post-embed-tiktok {
+  .social-post-embed-tiktok,
+  .social-post-embed-native-video {
     min-height: 520px;
   }
 
