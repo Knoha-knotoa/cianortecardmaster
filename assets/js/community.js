@@ -41,6 +41,25 @@
     }
   }
 
+
+  function normalizeGame(value) {
+    return String(value || "")
+      .normalize("NFD")
+      .replace(/[̀-ͯ]/g, "")
+      .toLowerCase()
+      .trim();
+  }
+
+  function isPokemonGame(value) {
+    const game = normalizeGame(value);
+    return game.includes("pokemon") || game === "pkm";
+  }
+
+  function isFleshAndBloodGame(value) {
+    const game = normalizeGame(value);
+    return game.includes("flesh and blood") || game === "fab";
+  }
+
   function dateLabel(value) {
     if (!value) return "Sem data";
     return new Date(value).toLocaleDateString("pt-BR", {
@@ -275,6 +294,65 @@
     return `<img class="${className}" src="${src}" alt="${escapeHtml(alt)}" loading="lazy">`;
   }
 
+  function normalizePokemonSlug(value) {
+    return String(value || "")
+      .normalize("NFD")
+      .replace(/[̀-ͯ]/g, "")
+      .toLowerCase()
+      .replace(/[♀]/g, "-f")
+      .replace(/[♂]/g, "-m")
+      .replace(/['’.:]/g, "")
+      .replace(/\s*\([^)]*\)\s*/g, " ")
+      .replace(/[^a-z0-9\/-]+/g, "-")
+      .replace(/\/+/g, "/")
+      .replace(/^-+|-+$/g, "")
+      .replace(/-+/g, "-");
+  }
+
+  function pokemonNamesFromHero(hero) {
+    return String(hero || "")
+      .split(/\s*\/\s*|\s*,\s*|\s*\+\s*|\s*&\s*/)
+      .map(name => name.trim())
+      .filter(Boolean)
+      .slice(0, 3);
+  }
+
+  function pokemonSpriteUrl(name) {
+    const slug = normalizePokemonSlug(name);
+    if (!slug) return "";
+    return `https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/${encodeURIComponent(slug)}.png`;
+  }
+
+  function pokemonSpriteStack(hero) {
+    const names = pokemonNamesFromHero(hero).slice(0, 2);
+    if (!names.length) return "";
+
+    const icons = names.map(name => {
+      const src = pokemonSpriteUrl(name);
+      if (!src) return "";
+      return `<img src="${escapeHtml(src)}" alt="${escapeHtml(name)}" loading="lazy" onerror="this.remove()">`;
+    }).join("");
+
+    return icons ? `<span class="league-pokemon-sprites" aria-label="Pokémon do deck">${icons}</span>` : "";
+  }
+
+  function pokemonBadge(hero, size = "normal") {
+    const names = pokemonNamesFromHero(hero);
+    const label = names.length ? names.join(" / ") : (hero || "Deck Pokémon");
+    const firstSprite = names.length ? pokemonSpriteUrl(names[0]) : "";
+    const initials = `<span class="armory-hero-initials">${escapeHtml(heroInitials(label))}</span>`;
+    const image = firstSprite
+      ? `<img src="${escapeHtml(firstSprite)}" alt="${escapeHtml(label)}" loading="lazy" onerror="const badge=this.closest('.armory-hero-badge'); if(badge) badge.classList.remove('has-image'); this.remove();">`
+      : "";
+
+    return `
+      <span class="armory-hero-badge armory-hero-badge-${size} league-pokemon-badge${image ? " has-image" : ""}" title="${escapeHtml(label)}">
+        ${image}
+        ${initials}
+      </span>
+    `;
+  }
+
   function heroBadge(hero, icon = "", size = "normal") {
     const clean = canonicalHeroName(hero);
     const label = clean || "Herói não informado";
@@ -416,19 +494,20 @@
     initArmoryHeroBadges(target);
   }
 
-  function renderLatestLeague(items) {
-    const target = document.querySelector("#latest-league-card");
-    if (!target) return;
-    const latest = items[0];
-    if (!latest) return;
+  function renderLeagueCard(selector, latest, options = {}) {
+    const target = document.querySelector(selector);
+    if (!target || !latest) return;
 
     const results = Array.isArray(latest.results) ? latest.results : [];
     const displayDate = latest.event_date || latest.date;
     const playerCount = new Set(results.map(getPlayer).filter(Boolean)).size || results.length;
     const rounds = roundsFromResults(results, latest.rounds);
-    const game = latest.game || "Flesh and Blood";
+    const game = latest.game || (options.variant === "pokemon" ? "Pokemon" : "Flesh and Blood");
     const nextLeague = latest.next_league || latest.next_liga || latest.nextLeague || "Domingo • 13:30";
     const heroes = uniqueHeroes(results);
+    const isPokemon = options.variant === "pokemon" || isPokemonGame(game);
+    const eyebrow = isPokemon ? "Última Liga de Pokémon" : "Última Liga de Flesh and Blood";
+    const sideTitle = isPokemon ? "Pokémon da liga" : "Heróis da liga";
 
     const rows = results.slice(0, 12).map((result, index) => {
       const player = getPlayer(result) || "Jogador";
@@ -438,6 +517,8 @@
       const heroIcon = result.hero_icon || result.heroIcon || result.icon || "";
       const placement = index + 1;
       const placementIcon = index === 0 ? armoryIcons.depth.champion : armoryIcons.depth.placement;
+      const badgeMarkup = isPokemon ? pokemonBadge(hero, index === 0 ? "featured" : "normal") : heroBadge(hero, heroIcon, index === 0 ? "featured" : "normal");
+      const spriteStack = isPokemon ? pokemonSpriteStack(hero) : "";
       return `
         <li class="armory-result-row${index === 0 ? " is-champion" : ""}">
           <span class="armory-rank-badge armory-rank-${placement}" aria-label="${placement}º colocado">
@@ -445,9 +526,12 @@
             <strong>${placement}º</strong>
           </span>
           <div class="armory-player-cell">
-            ${heroBadge(hero, heroIcon, index === 0 ? "featured" : "normal")}
-            <div>
-              <strong>${escapeHtml(player)}</strong>
+            ${badgeMarkup}
+            <div class="armory-player-meta">
+              <div class="armory-player-name-line">
+                ${spriteStack}
+                <strong>${escapeHtml(player)}</strong>
+              </div>
               <small>${escapeHtml(heroName)}</small>
             </div>
           </div>
@@ -472,7 +556,7 @@
 
     const heroList = heroes.map(hero => `
       <li>
-        ${heroBadge(hero.name, hero.icon, "mini")}
+        ${isPokemon ? pokemonBadge(hero.name, "mini") : heroBadge(hero.name, hero.icon, "mini")}
         <span title="${escapeHtml(hero.name)}">${escapeHtml(hero.shortName)}</span>
       </li>
     `).join("");
@@ -482,7 +566,7 @@
       <div class="armory-board-heading">
         <div class="armory-event-badge league-event-badge">${iconImage(armoryIcons.depth.leagueBadge, "armory-event-badge-img", "")}</div>
         <div>
-          <p class="eyebrow">Última Liga</p>
+          <p class="eyebrow">${escapeHtml(eyebrow)}</p>
           <h3>${escapeHtml(latest.title || "Resultado da Liga")}</h3>
           <p>${dateLabel(displayDate)}${latest.summary ? " • " + escapeHtml(latest.summary) : ""}</p>
         </div>
@@ -496,7 +580,7 @@
         <aside class="armory-board-sidebar" aria-label="Resumo da Liga">
           <div class="armory-stat-panel">${statItems}</div>
           <div class="armory-heroes-panel">
-            <div class="armory-panel-title"><span></span><strong>Heróis da liga</strong><span></span></div>
+            <div class="armory-panel-title"><span></span><strong>${escapeHtml(sideTitle)}</strong><span></span></div>
             ${heroList ? `<ul>${heroList}</ul>` : `<p class="empty-section">Nenhum herói informado.</p>`}
           </div>
         </aside>
@@ -519,7 +603,11 @@
       el.textContent = monthLabel();
     });
 
-    renderLatestLeague(allLeagues);
+    const pokemonLeagues = allLeagues.filter(item => isPokemonGame(item.game));
+    const fabLeagues = allLeagues.filter(item => isFleshAndBloodGame(item.game) || !isPokemonGame(item.game));
+
+    renderLeagueCard("#latest-league-fab-card", fabLeagues[0], { variant: "fab" });
+    renderLeagueCard("#latest-league-pokemon-card", pokemonLeagues[0], { variant: "pokemon" });
 
     if (!allArmories.length) return;
 
