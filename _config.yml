@@ -162,6 +162,13 @@ defaults:
       content_style: "youtube"
       social_platform: "youtube"
   - scope:
+      path: "_comunidade/youtube"
+      type: "comunidade"
+    values:
+      category_label: "YouTube"
+      content_style: "youtube"
+      social_platform: "youtube"
+  - scope:
       path: "_comunidade/TikTok"
       type: "comunidade"
     values:
