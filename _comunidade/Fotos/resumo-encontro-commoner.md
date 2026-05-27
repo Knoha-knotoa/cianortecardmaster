@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Resumo do encontro Commoner"
 summary: "Fotos, partidas e momentos do encontro da comunidade."
 image: "/assets/img/comunidade/encontro-01.jpg"
