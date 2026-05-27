@@ -12,7 +12,7 @@ image: "/assets/img/banners/banner-liga-pokemon-resultado.png"
 image_alt: "Card de resultado da Liga de Pokémon da comunidade Cianorte Card Masters"
 results:
   - player: "Hermes Lerdo"
-    hero: "venusaur-mega / meganium"
+    hero: "Ogerpon / meganium"
     record: "17 pts"
     wins: 17
 
