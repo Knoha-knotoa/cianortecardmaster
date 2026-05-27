@@ -328,41 +328,32 @@ image_alt: "Dragão em arte fantástica representando a comunidade Cianorte Card
 <section class="section home-pokemon-welcome-section post-style-pokemon" aria-labelledby="home-pokemon-welcome-title">
   <div class="container home-pokemon-welcome-grid">
     <article class="home-pokemon-welcome-copy">
-      <div class="home-pokemon-welcome-copy-inner">
-        <p class="home-pokemon-kicker">
-          <span class="home-pokemon-kicker-icon">
-            <img src="{{ '/assets/img/home/pokemon/icon-pokebola-flat.svg' | relative_url }}" alt="" loading="lazy" decoding="async" width="18" height="18">
-          </span>
-          <span>Pokémon TCG em Cianorte</span>
-        </p>
+      <span class="home-pokemon-shape home-pokemon-shape-left" aria-hidden="true"></span>
+      <span class="home-pokemon-shape home-pokemon-shape-right" aria-hidden="true"></span>
 
-        <h2 id="home-pokemon-welcome-title">
-          <span class="home-pokemon-title-gold">Treinadores, colecionadores e curiosos</span>
-          <span class="home-pokemon-title-light">também têm lugar na mesa</span>
-        </h2>
-
-        <div class="home-pokemon-copy-body">
-          <p>
-            A comunidade não é só pancadaria de guerreiro e mago mal-humorado: também temos jogadores de Pokémon TCG,
-            treinadores começando agora, colecionadores procurando aquela carta bonita e gente da cidade querendo aprender
-            sem ser atropelada por termos em inglês logo na primeira partida.
-          </p>
-          <p>
-            Se você curte Pokémon, quer montar seu primeiro deck, trocar ideia sobre coleção, entender sleeves, boosters,
-            cartas avulsas ou só descobrir onde encontrar outros treinadores em Cianorte, esse espaço também é seu.
-          </p>
-        </div>
-
-        <div class="btn-row home-pokemon-welcome-actions">
-          <a class="btn home-pokemon-btn home-pokemon-btn-primary" href="{{ '/jogos/pokemon-tcg-em-cianorte/' | relative_url }}">
-            <img src="{{ '/assets/img/home/pokemon/icon-pokebola-flat.svg' | relative_url }}" alt="" loading="lazy" decoding="async" width="20" height="20">
-            <span>Ver Pokémon TCG</span>
-          </a>
-          <a class="btn home-pokemon-btn home-pokemon-btn-secondary" href="{{ '/jogos/#pokemon' | relative_url }}">
-            <img src="{{ '/assets/img/armory-icons/flat/icon-espadas.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="20" height="20">
-            <span>Ir para Jogos</span>
-          </a>
-        </div>
+      <p class="eyebrow home-pokemon-kicker">
+        <span class="home-pokemon-ui-icon home-pokemon-ui-icon--pokeball" aria-hidden="true"></span>
+        Pokémon TCG em Cianorte
+      </p>
+      <h2 id="home-pokemon-welcome-title"><span>Treinadores, colecionadores e curiosos</span> <em>também têm lugar na mesa</em></h2>
+      <p>
+        A comunidade não é só pancadaria de guerreiro e mago mal-humorado: também temos jogadores de Pokémon TCG,
+        treinadores começando agora, colecionadores procurando aquela carta bonita e gente da cidade querendo aprender
+        sem ser atropelada por termos em inglês logo na primeira partida.
+      </p>
+      <p>
+        Se você curte Pokémon, quer montar seu primeiro deck, trocar ideia sobre coleção, entender sleeves, boosters,
+        cartas avulsas ou só descobrir onde encontrar outros treinadores em Cianorte, esse espaço também é seu.
+      </p>
+      <div class="btn-row home-pokemon-welcome-actions">
+        <a class="btn btn-primary" href="{{ '/jogos/pokemon-tcg-em-cianorte/' | relative_url }}">
+          <span class="home-pokemon-ui-icon home-pokemon-ui-icon--pokeball" aria-hidden="true"></span>
+          Ver Pokémon TCG
+        </a>
+        <a class="btn btn-secondary" href="{{ '/jogos/#pokemon' | relative_url }}">
+          <span class="home-pokemon-ui-icon home-pokemon-ui-icon--swords" aria-hidden="true"></span>
+          Ir para Jogos
+        </a>
       </div>
     </article>
 
@@ -370,45 +361,39 @@ image_alt: "Dragão em arte fantástica representando a comunidade Cianorte Card
       <div class="home-pokemon-welcome-image">
         <img src="{{ '/assets/img/banners/default-pokemon.webp' | relative_url }}" alt="Arte temática de Pokémon TCG para jogadores e colecionadores em Cianorte" loading="lazy" decoding="async" width="1880" height="720">
       </div>
-
       <div class="home-pokemon-welcome-list">
-        <span class="home-pokemon-feature">
-          <span class="home-pokemon-feature-icon home-pokemon-feature-icon--flat">
-            <img src="{{ '/assets/img/home/pokemon/icon-pokebola-flat.svg' | relative_url }}" alt="" loading="lazy" decoding="async" width="32" height="32">
+        <article class="home-pokemon-welcome-item">
+          <span class="home-pokemon-card-icon" aria-hidden="true">
+            <img src="{{ '/assets/img/home/icon-pokebola-card-home.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="96" height="96">
           </span>
-          <span class="home-pokemon-feature-copy">
+          <span>
             <strong>Para quem joga</strong>
             <small>Decks, partidas casuais, testes e aprendizado sem cobrança de veterano rabugento.</small>
           </span>
-        </span>
-
-        <span class="home-pokemon-feature">
-          <span class="home-pokemon-feature-icon">
-            <img src="{{ '/assets/img/home/pokemon/icon-coleciona-gold.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="44" height="44">
+        </article>
+        <article class="home-pokemon-welcome-item">
+          <span class="home-pokemon-card-icon" aria-hidden="true">
+            <img src="{{ '/assets/img/home/icon-coleciona-card-home.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="96" height="96">
           </span>
-          <span class="home-pokemon-feature-copy">
+          <span>
             <strong>Para quem coleciona</strong>
             <small>Cartas bonitas, sleeves, playmat, singles e conversa sobre coleção sem julgamento.</small>
           </span>
-        </span>
-
-        <span class="home-pokemon-feature">
-          <span class="home-pokemon-feature-icon">
-            <img src="{{ '/assets/img/home/pokemon/icon-iniciante-gold.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="44" height="44">
+        </article>
+        <article class="home-pokemon-welcome-item">
+          <span class="home-pokemon-card-icon" aria-hidden="true">
+            <img src="{{ '/assets/img/home/icon-bag-card-home.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="96" height="96">
           </span>
-          <span class="home-pokemon-feature-copy">
+          <span>
             <strong>Para quem está começando</strong>
             <small>Pode chegar com dúvida, sem deck pronto e sem saber a diferença entre booster e triple pack.</small>
           </span>
-        </span>
+        </article>
       </div>
-
       <a class="home-pokemon-welcome-link" href="{{ '/agenda/' | relative_url }}">
-        <span class="home-pokemon-link-icon">
-          <img src="{{ '/assets/img/armory-icons/flat/icon-calendario.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="20" height="20">
-        </span>
-        <span>Ver agenda dos encontros</span>
-        <span class="home-pokemon-link-arrow">›</span>
+        <span class="home-pokemon-ui-icon home-pokemon-ui-icon--calendar" aria-hidden="true"></span>
+        Ver agenda dos encontros
+        <span class="home-pokemon-link-arrow" aria-hidden="true"></span>
       </a>
     </aside>
   </div>
