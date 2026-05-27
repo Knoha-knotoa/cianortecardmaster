@@ -324,10 +324,11 @@
   }
 
   function pokemonSpriteStack(hero) {
-    const names = pokemonNamesFromHero(hero).slice(0, 2);
-    if (!names.length) return "";
+    const names = pokemonNamesFromHero(hero);
+    if (names.length < 2) return "";
+    const visibleNames = names.slice(0, 2);
 
-    const icons = names.map(name => {
+    const icons = visibleNames.map(name => {
       const src = pokemonSpriteUrl(name);
       if (!src) return "";
       return `<img src="${escapeHtml(src)}" alt="${escapeHtml(name)}" loading="lazy" onerror="this.remove()">`;
