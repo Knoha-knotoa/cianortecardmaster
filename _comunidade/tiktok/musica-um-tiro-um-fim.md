@@ -22,7 +22,7 @@ tags:
 <div class="community-video-post">
 
   <p>
-    Mais um registro da nossa comunidade reunida para jogar, conversar e fortalecer o hobby em Cianorte.
+    Vídeo incorporado do Tiktok de uma Musica gerada por IA contando a História da Azalea de Flesh and Blood.
   </p>
 
   <div class="instagram-embed-wrapper">
