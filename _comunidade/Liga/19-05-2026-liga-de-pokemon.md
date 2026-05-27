@@ -11,7 +11,7 @@ author: "Cianorte Card Masters"
 image: "/assets/img/banners/banner-liga-pokemon-resultado.png"
 image_alt: "Card de resultado da Liga de Pokémon da comunidade Cianorte Card Masters"
 results:
-  - player: "Natã / Hermes Lerdo"
+  - player: "Hermes Lerdo"
     hero: "venusaur-mega / meganium"
     record: "17 pts"
     wins: 17
