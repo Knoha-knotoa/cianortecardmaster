@@ -52,7 +52,7 @@ results:
     wins: 4
 
   - player: "Caetano"
-    hero: "charizard-mega-y / charizard-mega-x"
+    hero: "charizard / charizard-mega-x"
     record: "3 pts"
     wins: 3
 
