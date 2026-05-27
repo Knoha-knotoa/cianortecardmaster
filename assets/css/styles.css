@@ -2759,24 +2759,10 @@ h3 {
 }
 
 .social-post-embed iframe,
-.social-post-embed img,
-.social-post-embed video {
+.social-post-embed img {
   display: block;
   width: 100%;
   border: 0;
-}
-
-.social-post-embed video {
-  height: 100%;
-  background: #000;
-  object-fit: cover;
-}
-
-.social-post-embed-native-video {
-  max-width: 440px;
-  margin-inline: auto;
-  aspect-ratio: 9 / 16;
-  min-height: 560px;
 }
 
 .social-post-embed-youtube {
@@ -2796,14 +2782,6 @@ h3 {
 
 .social-post-embed-instagram iframe {
   height: 100%;
-}
-
-.social-post-embed-instagram .instagram-media {
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-  margin: 0 auto !important;
-  border-radius: 18px !important;
 }
 
 .social-post-embed-tiktok {
@@ -3393,8 +3371,7 @@ h3 {
 
 @media (max-width: 520px) {
   .social-post-embed-instagram,
-  .social-post-embed-tiktok,
-  .social-post-embed-native-video {
+  .social-post-embed-tiktok {
     min-height: 520px;
   }
 
@@ -8613,5 +8590,89 @@ h3 {
 
   .home-magic-welcome-list {
     padding: .95rem;
+  }
+}
+
+
+/* Página Entre para o Grimório */
+
+.grimorio-page-hero h1 {
+  max-width: 760px;
+}
+
+.grimorio-page-hero p {
+  max-width: 760px;
+}
+
+.grimorio-form-section {
+  background:
+    radial-gradient(circle at 12% 0%, rgba(212,175,55,.13), transparent 28rem),
+    radial-gradient(circle at 88% 16%, rgba(31,184,92,.10), transparent 26rem),
+    linear-gradient(180deg, rgba(3,5,3,.96), rgba(8,12,9,.98));
+}
+
+.grimorio-form-wrap {
+  display: grid;
+  grid-template-columns: minmax(240px, .42fr) minmax(0, 1fr);
+  gap: clamp(1.2rem, 3vw, 2rem);
+  align-items: start;
+}
+
+.grimorio-form-copy,
+.grimorio-form-card {
+  border: 1px solid rgba(212,175,55,.22);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015)),
+    rgba(11,18,13,.82);
+  box-shadow: var(--shadow);
+}
+
+.grimorio-form-copy {
+  position: sticky;
+  top: 96px;
+  padding: clamp(1.15rem, 3vw, 1.6rem);
+  border-radius: 24px;
+}
+
+.grimorio-form-copy h2 {
+  margin-top: 0;
+  color: #fff2b8;
+}
+
+.grimorio-form-copy p {
+  color: #eee5cd;
+}
+
+.grimorio-form-card {
+  min-height: 720px;
+  padding: clamp(.65rem, 2vw, 1rem);
+  border-radius: 28px;
+  overflow: hidden;
+}
+
+.grimorio-form-card iframe {
+  display: block;
+  width: 100%;
+  min-height: 1180px;
+  border: 0;
+  border-radius: 18px;
+  background: transparent;
+}
+
+@media (max-width: 860px) {
+  .grimorio-form-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .grimorio-form-copy {
+    position: static;
+  }
+
+  .grimorio-form-card {
+    min-height: 980px;
+  }
+
+  .grimorio-form-card iframe {
+    min-height: 1240px;
   }
 }
