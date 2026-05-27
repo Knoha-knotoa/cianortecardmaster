@@ -148,8 +148,14 @@
       <div class="social-gallery-preview">
         {% for foto in include.post.gallery limit:4 %}
           {% assign foto_src = foto.src | default: foto.url | default: foto.path | default: foto %}
+          {% assign foto_src = foto_src | strip %}
+          {% if foto_src contains '://' %}
+            {% assign foto_src_final = foto_src %}
+          {% else %}
+            {% assign foto_src_final = foto_src | relative_url %}
+          {% endif %}
           {% assign foto_alt = foto.alt | default: foto.title | default: include.post.image_alt | default: include.post.title | append: ' — foto ' | append: forloop.index %}
-          <img src="{{ foto_src | relative_url }}" alt="{{ foto_alt | escape }}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ fallback_image | relative_url }}';">
+          <img src="{{ foto_src_final }}" alt="{{ foto_alt | escape }}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ fallback_image | relative_url }}';">
         {% endfor %}
       </div>
     {% elsif api_image_game and api_image_name %}
