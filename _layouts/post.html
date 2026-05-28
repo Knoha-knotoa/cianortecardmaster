@@ -190,6 +190,21 @@ layout: default
 </script>
 {% endif %}
 
+{% assign is_fab_result_detail = false %}
+{% assign post_game_down = page.game | default: "" | downcase %}
+{% if page.collection == "comunidade" and page.results %}
+  {% if post_style == "armory" %}
+    {% assign is_fab_result_detail = true %}
+  {% elsif post_style == "liga" %}
+    {% unless post_game_down contains "pokemon" %}
+      {% assign is_fab_result_detail = true %}
+    {% endunless %}
+  {% endif %}
+{% endif %}
+
+{% if is_fab_result_detail %}
+  {% include fab-result-standalone.html %}
+{% else %}
 <article class="post-page post-style-{{ post_style }}">
   <header class="post-hero">
     <div class="container post-hero-grid">
@@ -275,3 +290,4 @@ layout: default
     {% endif %}
   </div>
 </article>
+{% endif %}
