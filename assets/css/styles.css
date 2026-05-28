@@ -956,8 +956,8 @@ h3 {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(240px, 1.25fr) minmax(150px, .65fr) minmax(190px, .8fr) minmax(220px, .95fr);
-  gap: clamp(1.35rem, 3vw, 3rem);
+  grid-template-columns: minmax(240px, 1.22fr) minmax(150px, .62fr) minmax(210px, .8fr) minmax(240px, .92fr);
+  gap: clamp(1.25rem, 2.6vw, 2.6rem);
   align-items: start;
 }
 
@@ -1018,6 +1018,128 @@ h3 {
   font-weight: 700;
 }
 
+.footer-nav--community {
+  position: relative;
+}
+
+.footer-feature-links {
+  display: grid;
+  gap: .7rem;
+  margin: .2rem 0 1rem;
+}
+
+.footer-pill {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 100% !important;
+  min-height: 46px;
+  margin: 0 !important;
+  padding: .72rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(212,175,55,.34);
+  background: rgba(255,255,255,.045);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.04), 0 10px 22px rgba(0,0,0,.16);
+  color: #fff7d7 !important;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: .95rem;
+  line-height: 1.1;
+  text-align: center;
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+
+.footer-pill:hover {
+  transform: translateY(-2px) !important;
+}
+
+.footer-pill--hero {
+  border-color: rgba(212,175,55,.62);
+  background: linear-gradient(180deg, rgba(79,58,14,.58), rgba(29,20,5,.82));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.04), 0 12px 28px rgba(212,175,55,.08);
+}
+
+.footer-pill--cta {
+  border-color: rgba(94,232,129,.46);
+  background: linear-gradient(180deg, rgba(11,74,37,.74), rgba(7,37,20,.92));
+  color: #f0ffe8 !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.04), 0 12px 28px rgba(31,184,92,.08);
+}
+
+.footer-side-stack {
+  display: grid;
+  gap: 1rem;
+}
+
+.footer-social-compact {
+  padding: 1rem 1rem .95rem;
+  border: 1px solid rgba(212,175,55,.18);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(212,175,55,.05), rgba(212,175,55,.03));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+}
+
+.footer-social-title {
+  margin: 0 0 .8rem;
+  color: #fff2b8;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: .94rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.footer-social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .72rem;
+}
+
+.footer-social-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  margin: 0 !important;
+  border: 1px solid rgba(212,175,55,.26);
+  background: linear-gradient(180deg, rgba(9,15,12,.88), rgba(4,9,7,.98));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.035), 0 10px 22px rgba(0,0,0,.22);
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+
+.footer-social-icon-link:hover {
+  transform: translateY(-2px);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.045), 0 12px 26px rgba(0,0,0,.28);
+}
+
+.footer-social-icon-link img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 7px rgba(0,0,0,.25));
+}
+
+.footer-social-icon-link--whatsapp:hover {
+  border-color: rgba(89,233,131,.68);
+}
+
+.footer-social-icon-link--instagram:hover {
+  border-color: rgba(255,109,215,.58);
+}
+
+.footer-social-icon-link--facebook:hover {
+  border-color: rgba(105,153,255,.58);
+}
+
+.footer-social-icon-link--tiktok:hover {
+  border-color: rgba(71,227,255,.58);
+}
+
+.footer-social-icon-link--youtube:hover {
+  border-color: rgba(255,103,103,.58);
+}
+
 .footer-consent {
   position: relative;
   z-index: 1;
@@ -1053,6 +1175,17 @@ h3 {
   text-align: right;
   font-size: .86rem;
   color: rgba(246,241,223,.64) !important;
+}
+
+@media (max-width: 1180px) {
+  .footer-grid {
+    grid-template-columns: minmax(220px, 1.2fr) minmax(150px, .75fr) minmax(200px, .95fr) minmax(220px, 1fr);
+    gap: 1.2rem 1.5rem;
+  }
+
+  .footer-grid h2 {
+    font-size: clamp(2.3rem, 4.2vw, 3.35rem);
+  }
 }
 
 
@@ -1197,6 +1330,18 @@ h3 {
   .footer-disclaimer {
     max-width: none;
     text-align: left;
+  }
+
+  .footer-side-stack {
+    gap: .9rem;
+  }
+
+  .footer-social-compact {
+    padding: .95rem 1rem;
+  }
+
+  .footer-social-icons {
+    justify-content: flex-start;
   }
 
   .hero-card {
@@ -10334,77 +10479,5 @@ tr.is-champion .fab-result-rank::before {
   .league-board-pokemon .armory-result-row.is-pokemon-row .armory-record-icon {
     width: 17px !important;
     height: 17px !important;
-  }
-}
-
-/* Ajuste mobile: bloco "Nos siga nas redes sociais" em linha de ícones */
-@media (max-width: 620px) {
-  .home-social-cards {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: center;
-    gap: .72rem;
-    margin-top: .95rem;
-    padding: .72rem .82rem;
-    border: 1px solid rgba(212,175,55,.18);
-    border-radius: 999px;
-    background: rgba(3, 10, 8, .62);
-    box-shadow:
-      0 14px 28px rgba(0,0,0,.26),
-      inset 0 0 0 1px rgba(255,255,255,.035);
-  }
-
-  .home-social-card,
-  .home-social-card.is-featured,
-  .home-social-card--youtube,
-  .home-social-card--tiktok,
-  .home-social-card--facebook {
-    flex: 0 0 54px;
-    display: grid;
-    place-items: center;
-    width: 54px;
-    height: 54px;
-    min-height: 0;
-    padding: 0;
-    grid-column: auto;
-    gap: 0;
-    border-radius: 999px;
-  }
-
-  .home-social-cards .home-social-card--instagram,
-  .home-social-cards .home-social-card--whatsapp {
-    display: none;
-  }
-
-  .home-social-card::after {
-    display: none;
-  }
-
-  .home-social-icon-wrap {
-    width: 46px;
-    height: 46px;
-    margin: 0;
-  }
-
-  .home-social-icon-wrap::before {
-    inset: 0;
-  }
-
-  .home-social-icon-wrap::after {
-    inset: 12px;
-  }
-
-  .home-social-icon-image {
-    width: 25px;
-    height: 25px;
-  }
-
-  .home-social-card strong,
-  .home-social-card.is-featured strong,
-  .home-social-card small,
-  .home-social-card em,
-  .home-social-card-button {
-    display: none;
   }
 }

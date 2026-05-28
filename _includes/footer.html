@@ -19,50 +19,44 @@
       <a href="{{ '/sobre/' | relative_url }}">Sobre</a>
     </nav>
 
-    <nav class="footer-nav" aria-label="Conteúdos da comunidade">
+    <nav class="footer-nav footer-nav--community" aria-label="Conteúdos da comunidade">
       <h3>Comunidade</h3>
+      <div class="footer-feature-links">
+        <a class="footer-pill footer-pill--hero" href="{{ '/autores/' | relative_url }}">Heróis da comunidade</a>
+        <a class="footer-pill footer-pill--cta" href="{{ '/agenda/' | relative_url }}">Quero participar</a>
+      </div>
       <a href="{{ '/agenda/' | relative_url }}">Encontros da semana</a>
       <a href="{{ '/comunidade/' | relative_url }}">Fotos e vídeos</a>
-      <a href="{{ '/autores/' | relative_url }}">Heróis da comunidade</a>
       <a href="{{ '/resultados/' | relative_url }}">Resultados de Armory</a>
       <a href="{{ '/resultados/' | relative_url }}">Resultados da Liga</a>
-      <a class="footer-link" href="{{ '/agenda/' | relative_url }}">Quero participar</a>
     </nav>
 
-    <nav class="footer-nav" aria-label="Informações importantes">
-      <h3>Informações</h3>
-      <a href="{{ '/privacidade/' | relative_url }}">Política de Privacidade</a>
-      <a href="{{ '/termos-comunidade/' | relative_url }}">Termos da Comunidade</a>
-      <a href="{{ '/uso-de-imagem/' | relative_url }}">Uso de Imagem e Repostagem</a>
-      <a href="{{ '/uso-de-imagem/#solicitar-remocao-de-conteudo' | relative_url }}">Solicitar remoção de conteúdo</a>
-    </nav>
-  </div>
+    <div class="footer-side-stack">
+      <nav class="footer-nav" aria-label="Informações importantes">
+        <h3>Informações</h3>
+        <a href="{{ '/privacidade/' | relative_url }}">Política de Privacidade</a>
+        <a href="{{ '/termos-comunidade/' | relative_url }}">Termos da Comunidade</a>
+        <a href="{{ '/uso-de-imagem/' | relative_url }}">Uso de Imagem e Repostagem</a>
+        <a href="{{ '/uso-de-imagem/#solicitar-remocao-de-conteudo' | relative_url }}">Solicitar remoção de conteúdo</a>
+      </nav>
 
-  <section class="container footer-social-section" aria-labelledby="footer-social-title">
-    <div class="footer-social-copy">
-      <h3 id="footer-social-title">Entre na comunidade</h3>
-      <p>Chame no WhatsApp, acompanhe os encontros e siga o Cianorte Card Masters nas redes sociais.</p>
+      <section class="footer-social-compact" aria-labelledby="footer-social-title">
+        <p class="footer-social-title" id="footer-social-title">Nos chame nas redes sociais</p>
+        <nav class="footer-social-icons" aria-label="Links das redes sociais">
+          {% assign footer_social_order = "WhatsApp|Instagram|Facebook|TikTok|YouTube" | split: "|" %}
+          {% for social_name in footer_social_order %}
+            {% assign social = site.data.social_links | where: "name", social_name | first %}
+            {% if social %}
+              {% assign social_slug = social.name | downcase %}
+              <a class="footer-social-icon-link footer-social-icon-link--{{ social_slug }}" href="{{ social.url }}" target="_blank" rel="me noopener noreferrer" aria-label="Abrir {{ social.name }} do Cianorte Card Masters" title="{{ social.name }}">
+                <img src="{{ '/assets/img/social/icon-' | append: social_slug | append: '.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="26" height="26">
+              </a>
+            {% endif %}
+          {% endfor %}
+        </nav>
+      </section>
     </div>
-
-    <nav class="footer-social-list" aria-label="Links das redes sociais">
-      {% assign footer_social_order = "WhatsApp|Instagram|Facebook|TikTok|YouTube" | split: "|" %}
-      {% for social_name in footer_social_order %}
-        {% assign social = site.data.social_links | where: "name", social_name | first %}
-        {% if social %}
-          {% assign social_slug = social.name | downcase %}
-          <a class="footer-social-link footer-social-link--{{ social_slug }}" href="{{ social.url }}" target="_blank" rel="me noopener noreferrer" aria-label="Abrir {{ social.name }} do Cianorte Card Masters">
-            <span class="footer-social-icon" aria-hidden="true">
-              <img src="{{ '/assets/img/social/icon-' | append: social_slug | append: '.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="28" height="28">
-            </span>
-            <span class="footer-social-text">
-              <strong>{{ social.name }}</strong>
-              <small>{{ social.label }}</small>
-            </span>
-          </a>
-        {% endif %}
-      {% endfor %}
-    </nav>
-  </section>
+  </div>
 
   <div class="container footer-consent">
     <p>
