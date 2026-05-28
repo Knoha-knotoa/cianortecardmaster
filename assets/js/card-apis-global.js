@@ -53,13 +53,30 @@
     return "";
   }
 
-  function setCardImage(element, imageUrl, altText) {
+  function setCardImage(element, imageUrl, altText, isFallback = false) {
     const img = document.createElement("img");
     img.src = imageUrl;
     img.alt = element.dataset.alt || altText || "Carta";
     img.loading = "lazy";
     img.decoding = "async";
     img.referrerPolicy = "no-referrer";
+
+    img.onerror = () => {
+      img.onerror = null;
+      if (!isFallback && setCardFallback(element, altText)) return;
+      const wrapper = document.createElement("span");
+      wrapper.className = "tcg-card-loading";
+      wrapper.append(document.createTextNode("Imagem indisponível"));
+      if (altText) {
+        const small = document.createElement("small");
+        small.textContent = altText;
+        wrapper.append(small);
+      }
+      element.classList.remove("tcg-card-loaded");
+      element.classList.add("tcg-card-error");
+      element.replaceChildren(wrapper);
+    };
+
     element.replaceChildren(img);
     element.classList.remove("tcg-card-error");
     element.classList.add("tcg-card-loaded");
@@ -68,7 +85,7 @@
   function setCardFallback(element, altText = "Imagem da postagem") {
     const fallbackSrc = element.dataset.fallbackSrc || "";
     if (!fallbackSrc) return false;
-    setCardImage(element, fallbackSrc, element.dataset.fallbackAlt || altText);
+    setCardImage(element, fallbackSrc, element.dataset.fallbackAlt || altText, true);
     element.classList.add("tcg-card-fallback");
     return true;
   }
@@ -88,9 +105,20 @@
   }
 
   async function jsonFetch(url, options = {}) {
-    const response = await fetch(url, options);
-    if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
-    return response.json();
+    const { timeoutMs = 7000, ...fetchOptions } = options;
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), Number(timeoutMs));
+
+    try {
+      const response = await fetch(url, {
+        ...fetchOptions,
+        signal: fetchOptions.signal || controller.signal
+      });
+      if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
+      return response.json();
+    } finally {
+      window.clearTimeout(timeout);
+    }
   }
 
   /* ================= FAB / GoAgain ================= */
@@ -235,7 +263,10 @@
 
   function scorePokemonCard(card, name, set = "", number = "") {
     const wantedNames = pokemonNameCandidates(name).map(normalizeText);
-    const wantedSets = pokemonSetCandidates(set).map(normalizeText);
+    const wantedSets = Array.from(new Set([
+      ...pokemonSetCandidates(set),
+      ...tcgdexSetCandidates(set)
+    ])).map(normalizeText);
     const wantedNumbers = pokemonNumberCandidates(number, name).map(normalizeText);
     const cardName = normalizeText(card?.name);
     const cardSet = normalizeText(card?.set?.name || card?.setName || card?.set?.id || card?.id?.split("-")?.[0]);
@@ -287,24 +318,41 @@
   }
 
   function tcgdexLanguages() {
-    return ["pt-br", "en"];
+    // Os nomes da lista estão em inglês; por isso tentamos inglês primeiro.
+    return ["en", "pt-br"];
   }
 
   function tcgdexSetCandidates(set) {
     const raw = String(set || "").trim();
     const normalized = normalizeText(raw).replace(/\s+/g, "");
-    const candidates = [raw, normalized];
 
-    // Códigos comuns usados em listas exportadas. A TCGdex usa ids próprios por coleção.
-    if (normalized === "meg") candidates.push("me01", "meg1", "mega1");
-    if (normalized === "twm") candidates.push("sv6", "sv06", "twilightmasquerade");
-    if (normalized === "sfa") candidates.push("sv6pt5", "sv65", "shroudedfable");
-    if (normalized === "par") candidates.push("sv4", "sv04", "paradoxrift");
-    if (normalized === "pal") candidates.push("sv2", "sv02", "paldeaevolved");
-    if (normalized === "paf") candidates.push("sv4pt5", "sv45", "paldeanfates");
-    if (normalized === "svi") candidates.push("sv1", "sv01", "scarletviolet");
+    const aliases = {
+      svi: ["sv01", "sv1"],
+      pal: ["sv02", "sv2"],
+      par: ["sv04", "sv4"],
+      paf: ["sv04.5", "sv4.5"],
+      twm: ["sv06", "sv6"],
+      sfa: ["sv06.5", "sv6.5"],
+      pre: ["sv08.5", "sv8.5"]
+    };
 
-    return Array.from(new Set(candidates.map(value => String(value || "").trim()).filter(Boolean)));
+    if (aliases[normalized]) return aliases[normalized];
+
+    // Se a lista já vier com um id TCGdex, aceita direto.
+    if (/^(sv|swsh|sm|xy|bw|dp|ex|base|hgss)[a-z0-9.]*$/i.test(normalized)) {
+      return [normalized];
+    }
+
+    // Evita tentar dezenas de URLs desconhecidas em sequência.
+    // Códigos como MEG, quando ainda não mapeados na TCGdex, vão direto para busca por nome.
+    return [];
+  }
+
+  function tcgdexCardsUrl(lang, cardName) {
+    const params = new URLSearchParams();
+    params.set("name", cardName);
+    params.set("pagination:itemsPerPage", "36");
+    return `https://api.tcgdex.net/v2/${lang}/cards?${params.toString()}`;
   }
 
   async function fetchPokemonTcgdexCard(name, set = "", number = "") {
@@ -314,35 +362,39 @@
     const request = (async () => {
       const numbers = pokemonNumberCandidates(number, name);
 
-      // Quando o Markdown informa coleção e número, tenta primeiro o endpoint direto set/localId.
-      if (set && numbers.length) {
-        for (const lang of tcgdexLanguages()) {
-          for (const setId of tcgdexSetCandidates(set).slice(0, 6)) {
-            for (const localId of numbers.slice(0, 2)) {
-              try {
-                const card = await jsonFetch(`https://api.tcgdex.net/v2/${lang}/sets/${encodeURIComponent(setId)}/${encodeURIComponent(localId)}`);
-                if (card?.image) return card;
-              } catch (error) {
-                // Continua para o próximo candidato; códigos de coleção variam entre bases.
-              }
-            }
+      // Primeiro busca por nome. Isso é mais rápido para cartas novas ou coleções ainda sem alias local.
+      for (const lang of tcgdexLanguages()) {
+        for (const cardName of pokemonNameCandidates(name).slice(0, 3)) {
+          try {
+            const payload = await jsonFetch(tcgdexCardsUrl(lang, cardName), { timeoutMs: 6000 });
+            const cards = Array.isArray(payload) ? payload : [];
+            if (!cards.length) continue;
+
+            const sorted = cards
+              .slice()
+              .sort((a, b) => scorePokemonCard(b, name, set, number) - scorePokemonCard(a, name, set, number));
+
+            const best = sorted[0];
+            if (best?.image) return best;
+          } catch (error) {
+            console.warn("TCGdex falhou para", cardName, error);
           }
         }
       }
 
-      // Fallback amplo por nome. A API retorna CardBrief com id, localId, name e image.
-      for (const lang of tcgdexLanguages()) {
-        for (const cardName of pokemonNameCandidates(name).slice(0, 3)) {
-          try {
-            const payload = await jsonFetch(`https://api.tcgdex.net/v2/${lang}/cards?name=${encodeURIComponent(cardName)}&pagination:itemsPerPage=36`);
-            const cards = Array.isArray(payload) ? payload : [];
-            if (!cards.length) continue;
-
-            return cards
-              .slice()
-              .sort((a, b) => scorePokemonCard(b, name, set, number) - scorePokemonCard(a, name, set, number))[0];
-          } catch (error) {
-            console.warn("TCGdex falhou para", cardName, error);
+      // Depois tenta endpoint direto set/localId apenas quando o set tem alias confiável.
+      const setIds = tcgdexSetCandidates(set);
+      if (setIds.length && numbers.length) {
+        for (const lang of tcgdexLanguages()) {
+          for (const setId of setIds.slice(0, 3)) {
+            for (const localId of numbers.slice(0, 2)) {
+              try {
+                const card = await jsonFetch(`https://api.tcgdex.net/v2/${lang}/sets/${encodeURIComponent(setId)}/${encodeURIComponent(localId)}`, { timeoutMs: 3500 });
+                if (card?.image) return card;
+              } catch (error) {
+                // Continua para o próximo candidato.
+              }
+            }
           }
         }
       }
@@ -485,11 +537,20 @@
     document.querySelectorAll(".tcg-card-image[data-game][data-name]").forEach(loadCardElement);
   }
 
+  function failStuckLoaders() {
+    document.querySelectorAll('.tcg-card-image[data-loaded="true"]:not(.tcg-card-loaded):not(.tcg-card-error)').forEach(element => {
+      setCardError(element, "Imagem indisponível", element.dataset.name || "Carta");
+    });
+  }
+
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initGlobalCardApis);
   } else {
     initGlobalCardApis();
   }
+
+  window.setTimeout(initGlobalCardApis, 500);
+  window.setTimeout(failStuckLoaders, 15000);
 
   // API pública opcional para inicializar manualmente conteúdo injetado depois
   window.CCMCardApis = {
