@@ -9,7 +9,7 @@ deck_format: "Standard"
 deck_archetype: "Megapon Grass Toolbox"
 content_style: "pokemon"
 schema_type: "BlogPosting"
-author: "Neto"
+author: "Hermes"
 date: 2026-05-28
 last_modified_at: 2026-05-28
 permalink: /deck/deck-megapon-28-05-2026/
