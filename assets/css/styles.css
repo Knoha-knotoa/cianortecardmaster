@@ -2066,6 +2066,283 @@ h3 {
   --category-line: rgba(212, 175, 55, .36);
 }
 
+
+/* ==========================================
+   Guia FAB para Lerdos: accordion das classes
+========================================== */
+
+.post-style-flesh-and-blood .ccm-accordion-shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  margin: 1.35rem 0 1.65rem;
+  padding: .95rem;
+  border: 1px solid rgba(212, 175, 55, .22);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at top left, rgba(212, 175, 55, .12), transparent 34%),
+    linear-gradient(145deg, rgba(16, 27, 19, .88), rgba(5, 8, 6, .95));
+  box-shadow: 0 16px 34px rgba(0, 0, 0, .22);
+}
+
+.post-style-flesh-and-blood .ccm-accordion-shortcuts a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: .42rem .72rem;
+  border: 1px solid rgba(212, 175, 55, .28);
+  border-radius: 999px;
+  background: rgba(212, 175, 55, .08);
+  color: #fff1b8;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: .78rem;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: transform .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.post-style-flesh-and-blood .ccm-accordion-shortcuts a:hover,
+.post-style-flesh-and-blood .ccm-accordion-shortcuts a:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(212, 175, 55, .62);
+  background: rgba(212, 175, 55, .16);
+  outline: none;
+}
+
+.ccm-accordion--class-guide {
+  display: grid;
+  gap: .85rem;
+  margin: 1.6rem 0 2.5rem;
+}
+
+.ccm-accordion--class-guide .ccm-accordion__intro,
+.ccm-accordion--class-guide .ccm-accordion__item {
+  border: 1px solid rgba(212, 175, 55, .22);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at top right, rgba(212, 175, 55, .10), transparent 34%),
+    linear-gradient(145deg, rgba(16, 27, 19, .92), rgba(5, 8, 6, .97));
+  box-shadow: 0 16px 34px rgba(0, 0, 0, .24);
+}
+
+.ccm-accordion--class-guide .ccm-accordion__intro {
+  padding: 1.15rem 1.2rem;
+}
+
+.ccm-accordion--class-guide .ccm-accordion__intro h3,
+.ccm-accordion--class-guide .ccm-accordion__intro p {
+  margin: 0;
+}
+
+.ccm-accordion--class-guide .ccm-accordion__intro h3 {
+  color: #fff7d5;
+  font-size: clamp(1.55rem, 4vw, 2.25rem);
+  line-height: 1;
+  text-shadow: var(--banner-title-shadow);
+}
+
+.ccm-accordion--class-guide .ccm-accordion__intro p {
+  margin-top: .4rem;
+  color: rgba(246, 241, 223, .78);
+}
+
+.ccm-accordion--class-guide .ccm-accordion__item {
+  overflow: hidden;
+  scroll-margin-top: 100px;
+}
+
+.ccm-accordion--class-guide .ccm-accordion__trigger {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 42px;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 1.05rem;
+  border: 0;
+  border-radius: 0;
+  background:
+    linear-gradient(90deg, rgba(212, 175, 55, .12), rgba(31, 184, 92, .04) 48%, rgba(0, 0, 0, 0));
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ccm-accordion--class-guide .ccm-accordion__trigger:hover,
+.ccm-accordion--class-guide .ccm-accordion__trigger:focus-visible {
+  background:
+    linear-gradient(90deg, rgba(212, 175, 55, .18), rgba(31, 184, 92, .07) 52%, rgba(0, 0, 0, 0));
+  outline: none;
+}
+
+.ccm-accordion--class-guide .ccm-accordion__trigger:focus-visible {
+  box-shadow: inset 0 0 0 2px rgba(255, 233, 163, .55);
+}
+
+.ccm-accordion--class-guide .ccm-accordion__title-wrap {
+  min-width: 0;
+  display: grid;
+  gap: .18rem;
+}
+
+.ccm-accordion--class-guide .ccm-accordion__eyebrow {
+  width: fit-content;
+  color: #ffe9a3;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: .72rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.ccm-accordion--class-guide .ccm-accordion__title {
+  color: #ffffff;
+  font-family: "Bangers", system-ui, sans-serif;
+  font-size: clamp(1.7rem, 4vw, 2.45rem);
+  line-height: .95;
+  letter-spacing: .04em;
+  text-shadow: var(--banner-title-shadow);
+}
+
+.ccm-accordion--class-guide .ccm-accordion__subtitle {
+  color: rgba(246, 241, 223, .78);
+  font-size: .98rem;
+  line-height: 1.35;
+}
+
+.ccm-accordion--class-guide .ccm-accordion__icon {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(212, 175, 55, .34);
+  border-radius: 999px;
+  background: rgba(212, 175, 55, .09);
+  box-shadow: inset 0 0 16px rgba(212, 175, 55, .08);
+}
+
+.ccm-accordion--class-guide .ccm-accordion__icon::before,
+.ccm-accordion--class-guide .ccm-accordion__icon::after {
+  content: "";
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 16px;
+  height: 2px;
+  border-radius: 999px;
+  background: #ffe9a3;
+  transform: translate(-50%, -50%);
+  transition: transform .22s ease, opacity .22s ease;
+}
+
+.ccm-accordion--class-guide .ccm-accordion__icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.ccm-accordion--class-guide .ccm-accordion__item.is-open .ccm-accordion__icon::after {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.ccm-accordion--class-guide .ccm-accordion__content {
+  overflow: hidden;
+  transition: max-height .28s ease;
+}
+
+.ccm-accordion--class-guide .ccm-accordion__inner {
+  display: grid;
+  grid-template-columns: minmax(240px, .95fr) minmax(0, 1.05fr);
+  border-top: 1px solid rgba(212, 175, 55, .16);
+  background: rgba(0, 0, 0, .16);
+}
+
+.ccm-accordion--class-guide .ccm-accordion__media {
+  min-height: 100%;
+  background: #050806;
+}
+
+.ccm-accordion--class-guide .ccm-accordion__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+  max-height: 340px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.ccm-accordion--class-guide .ccm-accordion__body {
+  display: grid;
+  align-content: center;
+  gap: .85rem;
+  padding: clamp(1rem, 3vw, 1.35rem);
+}
+
+.ccm-accordion--class-guide .ccm-accordion__body p {
+  margin: 0;
+  color: #f3ead3;
+}
+
+.ccm-accordion--class-guide .ccm-accordion__facts {
+  display: grid;
+  gap: .55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ccm-accordion--class-guide .ccm-accordion__facts li {
+  margin: 0;
+  padding: .65rem .75rem;
+  border: 1px solid rgba(212, 175, 55, .16);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .035);
+  color: rgba(246, 241, 223, .84);
+}
+
+.ccm-accordion--class-guide .ccm-accordion__facts strong {
+  color: #ffe9a3;
+}
+
+@media (max-width: 760px) {
+  .post-style-flesh-and-blood .ccm-accordion-shortcuts {
+    padding: .75rem;
+    gap: .45rem;
+  }
+
+  .post-style-flesh-and-blood .ccm-accordion-shortcuts a {
+    flex: 1 1 calc(50% - .45rem);
+    min-height: 36px;
+    padding: .38rem .55rem;
+    font-size: .72rem;
+  }
+
+  .ccm-accordion--class-guide {
+    gap: .7rem;
+  }
+
+  .ccm-accordion--class-guide .ccm-accordion__trigger {
+    grid-template-columns: minmax(0, 1fr) 36px;
+    padding: .9rem .85rem;
+  }
+
+  .ccm-accordion--class-guide .ccm-accordion__subtitle {
+    font-size: .9rem;
+  }
+
+  .ccm-accordion--class-guide .ccm-accordion__icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .ccm-accordion--class-guide .ccm-accordion__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .ccm-accordion--class-guide .ccm-accordion__media img {
+    min-height: 180px;
+    max-height: 220px;
+  }
+}
+
 @media (max-width: 900px) {
   .content-section-head {
     grid-template-columns: 1fr;
