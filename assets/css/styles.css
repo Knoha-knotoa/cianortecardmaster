@@ -7514,7 +7514,7 @@ h3 {
   --game-text-left: 13%;
   --game-text-top: 40%;
   --game-text-width: 58%;
-  --game-text-align: justify;
+  --game-text-align: left;
   --game-buttons-left: 12%;
   --game-buttons-bottom: 8.5%;
   --game-buttons-width: 62%;
@@ -7555,11 +7555,10 @@ h3 {
   width: var(--game-text-width);
   max-width: calc(100% - var(--game-text-left) - 6%);
   color: #fff3bf;
-  font-size: clamp(.6rem, .76vw, .86rem);
-  line-height: 1.31;
+  font-size: var(--game-text-font-size, clamp(.6rem, .76vw, .86rem));
+  line-height: var(--game-text-line-height, 1.31);
   letter-spacing: .01em;
   text-align: var(--game-text-align);
-  text-wrap: balance;
   text-shadow: 0 2px 2px rgba(0, 0, 0, .88), 0 0 8px rgba(0, 0, 0, .65);
 }
 
@@ -7607,10 +7606,12 @@ h3 {
 .game-cartridge-card-fab {
   --game-card-image: url("../img/jogos/img-card-fab-retro.png");
   --game-card-ratio: 579 / 431;
-  --game-text-left: 15%;
+  --game-text-left: 16%;
   --game-text-top: 39%;
-  --game-text-width: 59%;
-  --game-text-align: justify;
+  --game-text-width: 66%;
+  --game-text-align: left;
+  --game-text-font-size: clamp(.68rem, .84vw, .98rem);
+  --game-text-line-height: 1.28;
   --game-buttons-left: 13%;
   --game-buttons-bottom: 8%;
   --game-buttons-width: 62%;
@@ -7623,10 +7624,11 @@ h3 {
 .game-cartridge-card-pkm {
   --game-card-image: url("../img/jogos/img-card-pkm-retro.png");
   --game-card-ratio: 559 / 446;
-  --game-text-left: 14%;
-  --game-text-top: 42%;
-  --game-text-width: 57%;
-  --game-text-align: justify;
+  --game-text-left: 11%;
+  --game-text-top: 42.5%;
+  --game-text-width: 71%;
+  --game-text-align: center;
+  --game-text-line-height: 1.3;
   --game-buttons-left: 12%;
   --game-buttons-bottom: 8%;
   --game-buttons-width: 66%;
@@ -7644,10 +7646,11 @@ h3 {
 .game-cartridge-card-mtg {
   --game-card-image: url("../img/jogos/img-card-mtg-retro.png");
   --game-card-ratio: 596 / 419;
-  --game-text-left: 13%;
-  --game-text-top: 41%;
-  --game-text-width: 63%;
-  --game-text-align: justify;
+  --game-text-left: 12%;
+  --game-text-top: 41.5%;
+  --game-text-width: 67%;
+  --game-text-align: left;
+  --game-text-line-height: 1.3;
   --game-buttons-left: 11%;
   --game-buttons-bottom: 8%;
   --game-buttons-width: 68%;
@@ -7660,10 +7663,11 @@ h3 {
 .game-cartridge-card-op {
   --game-card-image: url("../img/jogos/img-card-op-retro.png");
   --game-card-ratio: 616 / 405;
-  --game-text-left: 13%;
-  --game-text-top: 42%;
-  --game-text-width: 58%;
-  --game-text-align: justify;
+  --game-text-left: 12%;
+  --game-text-top: 42.5%;
+  --game-text-width: 66%;
+  --game-text-align: left;
+  --game-text-line-height: 1.3;
   --game-buttons-left: 11%;
   --game-buttons-bottom: 8.5%;
   --game-buttons-width: 62%;
@@ -7676,10 +7680,10 @@ h3 {
 .game-cartridge-card-ygo {
   --game-card-image: url("../img/jogos/img-card-ygo-retro.png");
   --game-card-ratio: 604 / 413;
-  --game-text-left: 11%;
+  --game-text-left: 8%;
   --game-text-top: 42.5%;
-  --game-text-width: 59%;
-  --game-text-align: justify;
+  --game-text-width: 63%;
+  --game-text-align: left;
   --game-buttons-left: 10%;
   --game-buttons-bottom: 8%;
   --game-buttons-width: 62%;
@@ -7692,10 +7696,11 @@ h3 {
 .game-cartridge-card-rpg {
   --game-card-image: url("../img/jogos/img-card-rpg-retro.png");
   --game-card-ratio: 609 / 409;
-  --game-text-left: 13%;
-  --game-text-top: 42%;
-  --game-text-width: 61%;
-  --game-text-align: justify;
+  --game-text-left: 12%;
+  --game-text-top: 42.5%;
+  --game-text-width: 68%;
+  --game-text-align: center;
+  --game-text-line-height: 1.3;
   --game-buttons-left: 11%;
   --game-buttons-bottom: 8%;
   --game-buttons-width: 70%;
@@ -7714,10 +7719,10 @@ h3 {
 .game-cartridge-card-mais {
   --game-card-image: url("../img/jogos/img-card-mais-retro.png");
   --game-card-ratio: 959 / 260;
-  --game-text-left: 11%;
+  --game-text-left: 8%;
   --game-text-top: 45%;
-  --game-text-width: 58%;
-  --game-text-align: justify;
+  --game-text-width: 63%;
+  --game-text-align: left;
   --game-buttons-left: 8%;
   --game-buttons-bottom: 8%;
   --game-buttons-width: 50%;
