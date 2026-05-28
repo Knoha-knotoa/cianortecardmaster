@@ -41,10 +41,10 @@ O **Deck Megapon** parece, pelo nome, um deck de **Ogerpon + Meganium**. Na prá
 A ideia central é simples de entender e difícil de ignorar na mesa: colocar vários **Teal Mask Ogerpon ex** em jogo, puxar energias com a habilidade deles, comprar cartas, evoluir a linha de Bulbasaur até **Mega Venusaur ex** e usar **Meganium** para dobrar a eficiência das energias de Grama.
 
 <div class="tcg-card-grid" aria-label="Cartas principais do Deck Megapon">
-  {% include tcg-card.html game="tcgdex" name="Mega Venusaur ex" set="MEG" number="3" %}
-  {% include tcg-card.html game="tcgdex" name="Teal Mask Ogerpon ex" set="TWM" number="25" %}
-  {% include tcg-card.html game="tcgdex" name="Meganium" set="MEG" number="10" %}
-  {% include tcg-card.html game="tcgdex" name="Fezandipiti ex" set="SFA" number="38" %}
+  {% include tcg-card.html game="tcgdex" lang="pt-br" name="Mega Venusaur ex" set="MEG" number="3" %}
+  {% include tcg-card.html game="tcgdex" lang="pt-br" name="Teal Mask Ogerpon ex" set="TWM" number="25" %}
+  {% include tcg-card.html game="tcgdex" lang="pt-br" name="Meganium" set="MEG" number="10" %}
+  {% include tcg-card.html game="tcgdex" lang="pt-br" name="Fezandipiti ex" set="SFA" number="38" %}
 </div>
 
 ## O que o Deck Megapon quer fazer
@@ -76,10 +76,10 @@ Muitas vezes, o melhor ataque é usar o próprio Ogerpon para aproveitar o acúm
 Essa é a beleza do Megapon: o deck não fica preso em uma única condição de vitória. Quando o oponente prepara um alvo grande, Ogerpon pode virar o atacante. Quando a partida pede resistência, Mega Venusaur ex assume a frente. Quando falta apenas um prêmio no banco, Fezandipiti ex entra para resolver.
 
 <div class="tcg-card-grid" aria-label="Cartas de consistência e evolução do Deck Megapon">
-  {% include tcg-card.html game="tcgdex" name="Bug Catching Set" set="PRE" number="102" %}
-  {% include tcg-card.html game="tcgdex" name="Forest of Vitality" set="MEG" number="117" %}
-  {% include tcg-card.html game="tcgdex" name="Lillie's Determination" set="MEG" number="184" %}
-  {% include tcg-card.html game="tcgdex" name="Iono" set="PAL" number="185" %}
+  {% include tcg-card.html game="tcgdex" lang="pt-br" name="Bug Catching Set" set="PRE" number="102" %}
+  {% include tcg-card.html game="tcgdex" lang="pt-br" name="Forest of Vitality" set="MEG" number="117" %}
+  {% include tcg-card.html game="tcgdex" lang="pt-br" name="Lillie's Determination" set="MEG" number="184" %}
+  {% include tcg-card.html game="tcgdex" lang="pt-br" name="Iono" set="PAL" number="185" %}
 </div>
 
 ## Sequência ideal de jogo

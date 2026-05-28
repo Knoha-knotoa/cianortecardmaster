@@ -56,6 +56,8 @@ image: "https://site.com/imagem.jpg"
 
 Para posts futuros, o mais simples é usar sempre o campo `image:` com prefixo da API. Para Pokémon recente, prefira `tcgdex:` ou use `game="tcgdex"` nos includes dentro do texto.
 
+Para Pokémon, o carregador tenta imagens em **português do Brasil (`pt-br`) primeiro** pela TCGdex e cai para inglês quando a carta ainda não tem imagem/dados em português. A TCGdex é multilíngue, mas cada idioma tem níveis diferentes de completude, então cartas muito recentes podem aparecer em inglês até a base receber a versão brasileira.
+
 ### Exemplo de post de Magic
 ```yaml
 ---
@@ -76,6 +78,11 @@ image: "pokemon:Charizard"
 author: "Neto"
 date: 2026-05-20
 ---
+```
+
+### Exemplo de imagem de carta Pokémon dentro do texto
+```liquid
+{% include tcg-card.html game="tcgdex" name="Mega Venusaur ex" set="MEG" number="3" lang="pt-br" %}
 ```
 
 ### Exemplo de post de Flesh and Blood

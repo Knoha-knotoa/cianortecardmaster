@@ -317,9 +317,20 @@
     return request;
   }
 
-  function tcgdexLanguages() {
-    // Os nomes da lista estão em inglês; por isso tentamos inglês primeiro.
-    return ["en", "pt-br"];
+  function tcgdexFallbackLanguages(preferredLang = "pt-br") {
+    const lang = String(preferredLang || "pt-br").toLowerCase().trim();
+    const supported = ["pt-br", "pt", "en", "es", "fr", "it", "de", "ja", "zh-tw", "id", "th"];
+    const normalized = supported.includes(lang) ? lang : "pt-br";
+
+    // Preferimos português do Brasil no site, mas mantemos inglês como fallback
+    // porque alguns cards recentes podem ainda não ter imagem/dados em pt-br.
+    return Array.from(new Set([normalized, "pt-br", "pt", "en"]));
+  }
+
+  function tcgdexSearchLanguages(preferredLang = "pt-br") {
+    // Os nomes das decklists geralmente vêm em inglês. Buscamos primeiro em inglês
+    // para localizar o ID global da carta e depois tentamos abrir a imagem em pt-br.
+    return Array.from(new Set(["en", ...tcgdexFallbackLanguages(preferredLang)]));
   }
 
   function tcgdexSetCandidates(set) {
@@ -355,15 +366,64 @@
     return `https://api.tcgdex.net/v2/${lang}/cards?${params.toString()}`;
   }
 
-  async function fetchPokemonTcgdexCard(name, set = "", number = "") {
-    const cacheKey = `${normalizeText(name)}|${normalizeText(set)}|${normalizeText(number)}`;
+  function tcgdexCardUrl(lang, cardId) {
+    return `https://api.tcgdex.net/v2/${lang}/cards/${encodeURIComponent(cardId)}`;
+  }
+
+  function tcgdexSetCardUrl(lang, setId, localId) {
+    return `https://api.tcgdex.net/v2/${lang}/sets/${encodeURIComponent(setId)}/${encodeURIComponent(localId)}`;
+  }
+
+  async function tryTcgdexCardById(cardId, preferredLang = "pt-br") {
+    if (!cardId) return null;
+
+    for (const lang of tcgdexFallbackLanguages(preferredLang)) {
+      try {
+        const card = await jsonFetch(tcgdexCardUrl(lang, cardId), { timeoutMs: 4500 });
+        if (card?.image) return card;
+      } catch (error) {
+        // Continua para o próximo idioma.
+      }
+    }
+
+    return null;
+  }
+
+  async function tryTcgdexCardBySetNumber(setIds, numbers, preferredLang = "pt-br") {
+    if (!setIds.length || !numbers.length) return null;
+
+    for (const lang of tcgdexFallbackLanguages(preferredLang)) {
+      for (const setId of setIds.slice(0, 3)) {
+        for (const localId of numbers.slice(0, 2)) {
+          try {
+            const card = await jsonFetch(tcgdexSetCardUrl(lang, setId, localId), { timeoutMs: 3500 });
+            if (card?.image) return card;
+          } catch (error) {
+            // Continua para o próximo candidato.
+          }
+        }
+      }
+    }
+
+    return null;
+  }
+
+  async function fetchPokemonTcgdexCard(name, set = "", number = "", preferredLang = "pt-br") {
+    const cacheKey = `${normalizeText(name)}|${normalizeText(set)}|${normalizeText(number)}|${normalizeText(preferredLang)}`;
     if (caches.pokemonTcgdex.has(cacheKey)) return caches.pokemonTcgdex.get(cacheKey);
 
     const request = (async () => {
       const numbers = pokemonNumberCandidates(number, name);
+      const setIds = tcgdexSetCandidates(set);
 
-      // Primeiro busca por nome. Isso é mais rápido para cartas novas ou coleções ainda sem alias local.
-      for (const lang of tcgdexLanguages()) {
+      // Se existir set/localId confiável, tenta direto em português primeiro.
+      // Isso ajuda a puxar a imagem PT-BR sem depender do nome traduzido da carta.
+      const directCard = await tryTcgdexCardBySetNumber(setIds, numbers, preferredLang);
+      if (directCard?.image) return directCard;
+
+      // Depois busca por nome. Como as listas de deck normalmente vêm em inglês,
+      // a busca começa em inglês para achar o ID global e então tenta reabrir em pt-br.
+      for (const lang of tcgdexSearchLanguages(preferredLang)) {
         for (const cardName of pokemonNameCandidates(name).slice(0, 3)) {
           try {
             const payload = await jsonFetch(tcgdexCardsUrl(lang, cardName), { timeoutMs: 6000 });
@@ -375,26 +435,15 @@
               .sort((a, b) => scorePokemonCard(b, name, set, number) - scorePokemonCard(a, name, set, number));
 
             const best = sorted[0];
-            if (best?.image) return best;
+            if (!best?.image) continue;
+
+            const localizedCard = await tryTcgdexCardById(best.id, preferredLang);
+            if (localizedCard?.image) return localizedCard;
+
+            // Último fallback: usa o card encontrado no idioma da busca.
+            return best;
           } catch (error) {
             console.warn("TCGdex falhou para", cardName, error);
-          }
-        }
-      }
-
-      // Depois tenta endpoint direto set/localId apenas quando o set tem alias confiável.
-      const setIds = tcgdexSetCandidates(set);
-      if (setIds.length && numbers.length) {
-        for (const lang of tcgdexLanguages()) {
-          for (const setId of setIds.slice(0, 3)) {
-            for (const localId of numbers.slice(0, 2)) {
-              try {
-                const card = await jsonFetch(`https://api.tcgdex.net/v2/${lang}/sets/${encodeURIComponent(setId)}/${encodeURIComponent(localId)}`, { timeoutMs: 3500 });
-                if (card?.image) return card;
-              } catch (error) {
-                // Continua para o próximo candidato.
-              }
-            }
           }
         }
       }
@@ -452,6 +501,7 @@
     const pitch = element.dataset.pitch || "";
     const set = element.dataset.set || "";
     const number = element.dataset.number || "";
+    const lang = element.dataset.lang || "pt-br";
 
     if (!game || !name) {
       setCardError(element, "Carta inválida");
@@ -473,11 +523,11 @@
         imageUrl = pokemonImageUrl(card);
 
         if (!imageUrl) {
-          card = await fetchPokemonTcgdexCard(name, set, number);
+          card = await fetchPokemonTcgdexCard(name, set, number, lang);
           imageUrl = pokemonImageUrl(card);
         }
       } else if (game === "tcgdex" || game === "pokemon tcgdex") {
-        card = await fetchPokemonTcgdexCard(name, set, number);
+        card = await fetchPokemonTcgdexCard(name, set, number, lang);
         imageUrl = pokemonImageUrl(card);
       } else if (game === "yugioh" || game === "ygo") {
         card = await fetchYugiohCard(name);
@@ -516,12 +566,12 @@
       let imageUrl = pokemonImageUrl(card);
       if (imageUrl) return imageUrl;
 
-      card = await fetchPokemonTcgdexCard(name, options.set || "", options.number || "");
+      card = await fetchPokemonTcgdexCard(name, options.set || "", options.number || "", options.lang || "pt-br");
       return pokemonImageUrl(card);
     }
 
     if (normalizedGame === "tcgdex" || normalizedGame === "pokemon tcgdex") {
-      card = await fetchPokemonTcgdexCard(name, options.set || "", options.number || "");
+      card = await fetchPokemonTcgdexCard(name, options.set || "", options.number || "", options.lang || "pt-br");
       return pokemonImageUrl(card);
     }
 
