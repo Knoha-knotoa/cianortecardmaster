@@ -46,8 +46,7 @@
         {% endif %}
       </div>
 
-      <div class="fab-result-meta-bar" aria-label="Informações do evento">
-        <span><strong>✓</strong> Resultado cadastrado</span>
+      <div class="fab-result-meta-bar" aria-label="Informações do evento">        
         <span><strong>♟</strong> {{ total_players }} jogadores</span>
         <span><strong>⚔</strong> Formato: {{ event_format }}</span>
         {% if page.event_date or page.date %}<span><strong>▣</strong> {{ page.event_date | default: page.date | date: "%d/%m/%Y" }}</span>{% endif %}
