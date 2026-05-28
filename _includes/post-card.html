@@ -57,7 +57,16 @@
   {% when "comunidade" %}{% assign fallback_image = site.data.images.post_defaults.comunidade %}
 {% endcase %}
 
-{% assign explicit_image = include.post.image | default: "" | strip %}
+{% if card_style == "liga" %}
+  {% assign post_game = include.post.game | default: include.post.format | default: "" | downcase %}
+  {% if post_game contains "pokemon" or post_game contains "pokémon" %}
+    {% assign fallback_image = site.data.images.post_defaults.pokemon | default: fallback_image %}
+  {% elsif post_game contains "flesh" or post_game contains "fab" or post_game contains "classic" %}
+    {% assign fallback_image = "/assets/img/banners/banner-liga-fab-resultado.png" %}
+  {% endif %}
+{% endif %}
+
+{% assign explicit_image = include.post.image | default: include.post.cover | default: include.post.thumbnail | default: include.post.card_image | default: include.post.hero_image | default: include.post.banner | default: "" | strip %}
 {% if explicit_image == "" %}
   {% assign card_image = fallback_image %}
 {% else %}
