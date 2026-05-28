@@ -314,8 +314,10 @@
       .split(/\s*\/\s*|\s*,\s*|\s*\+\s*|\s*&\s*/)
       .map(name => name.trim())
       .filter(Boolean)
-      .slice(0, 2);
+      .slice(0, 3);
   }
+
+  const pokemonSpriteFallbackCache = new Map();
 
   function pokemonSpriteUrl(name) {
     const slug = normalizePokemonSlug(name);
@@ -323,35 +325,79 @@
     return `https://raw.githubusercontent.com/msikma/pokesprite/master/icons/pokemon/regular/${encodeURIComponent(slug)}.png`;
   }
 
-  function pokemonSpriteStack(hero) {
-    const names = pokemonNamesFromHero(hero);
-    const visibleNames = names.slice(0, 2);
+  async function fetchPokemonFallbackSprite(slug) {
+    const cleanSlug = normalizePokemonSlug(slug);
+    if (!cleanSlug) return "";
 
-    if (visibleNames.length < 2) {
-      return `<span class="league-pokemon-sprites league-pokemon-sprites-empty" aria-hidden="true"></span>`;
+    if (pokemonSpriteFallbackCache.has(cleanSlug)) {
+      return pokemonSpriteFallbackCache.get(cleanSlug);
     }
 
-    const icons = visibleNames.map(name => {
-      const src = pokemonSpriteUrl(name);
-      if (!src) return "";
-      return `<img src="${escapeHtml(src)}" alt="${escapeHtml(name)}" loading="lazy" onerror="this.remove()">`;
-    }).join("");
+    const request = fetch(`https://pokeapi.co/api/v2/pokemon/${encodeURIComponent(cleanSlug)}`)
+      .then(response => response.ok ? response.json() : null)
+      .then(data => data?.sprites?.front_default || "")
+      .catch(() => "");
 
-    return icons ? `<span class="league-pokemon-sprites" aria-label="Pokémon do deck">${icons}</span>` : `<span class="league-pokemon-sprites league-pokemon-sprites-empty" aria-hidden="true"></span>`;
+    pokemonSpriteFallbackCache.set(cleanSlug, request);
+    return request;
+  }
+
+  function removeBrokenPokemonImage(img) {
+    if (!img) return;
+    const badge = img.closest?.(".armory-hero-badge");
+    if (badge) badge.classList.remove("has-image");
+    img.remove();
+  }
+
+  window.CCMCommunityPokemonFallback = async function CCMCommunityPokemonFallback(img) {
+    if (!img || img.dataset.pokeapiFallbackTried === "true") {
+      removeBrokenPokemonImage(img);
+      return;
+    }
+
+    img.dataset.pokeapiFallbackTried = "true";
+    img.removeAttribute("onerror");
+
+    const slug = img.dataset.pokemonSlug || img.dataset.pokemonName || img.alt || "";
+    const fallbackSrc = await fetchPokemonFallbackSprite(slug);
+
+    if (!fallbackSrc) {
+      removeBrokenPokemonImage(img);
+      return;
+    }
+
+    img.addEventListener("error", () => removeBrokenPokemonImage(img), { once: true });
+    img.src = fallbackSrc;
+  };
+
+  function pokemonSpriteImg(name, className = "") {
+    const src = pokemonSpriteUrl(name);
+    const slug = normalizePokemonSlug(name);
+    if (!src || !slug) return "";
+
+    const classAttr = className ? ` class="${escapeHtml(className)}"` : "";
+    return `<img${classAttr} src="${escapeHtml(src)}" alt="${escapeHtml(name)}" loading="lazy" data-pokemon-name="${escapeHtml(name)}" data-pokemon-slug="${escapeHtml(slug)}" onerror="window.CCMCommunityPokemonFallback&&window.CCMCommunityPokemonFallback(this)">`;
+  }
+
+  function pokemonSpriteStack(hero) {
+    const names = pokemonNamesFromHero(hero);
+    if (names.length < 2) return "";
+    const visibleNames = names.slice(0, 2);
+
+    const icons = visibleNames.map(name => pokemonSpriteImg(name, "league-pokemon-sprite")).join("");
+
+    return icons ? `<span class="league-pokemon-sprites" aria-label="Pokémon do deck">${icons}</span>` : "";
   }
 
   function pokemonBadge(hero, size = "normal") {
     const names = pokemonNamesFromHero(hero);
     const label = names.length ? names.join(" / ") : (hero || "Deck Pokémon");
-    const firstSprite = names.length ? pokemonSpriteUrl(names[0]) : "";
+    const firstSprite = names.length ? pokemonSpriteImg(names[0]) : "";
     const initials = `<span class="armory-hero-initials">${escapeHtml(heroInitials(label))}</span>`;
-    const image = firstSprite
-      ? `<img src="${escapeHtml(firstSprite)}" alt="${escapeHtml(label)}" loading="lazy" onerror="const badge=this.closest('.armory-hero-badge'); if(badge) badge.classList.remove('has-image'); this.remove();">`
-      : "";
 
     return `
-      <span class="armory-hero-badge armory-hero-badge-${size} league-pokemon-badge${image ? " has-image" : ""}" title="${escapeHtml(label)}">
-        ${image}
+      <span class="armory-hero-badge armory-hero-badge-${size} league-pokemon-badge${firstSprite ? " has-image" : ""}" title="${escapeHtml(label)}">
+        ${firstSprite}
         ${initials}
       </span>
     `;
@@ -521,31 +567,9 @@
       const heroIcon = result.hero_icon || result.heroIcon || result.icon || "";
       const placement = index + 1;
       const placementIcon = index === 0 ? armoryIcons.depth.champion : armoryIcons.depth.placement;
-      const badgeMarkup = isPokemon ? "" : heroBadge(hero, heroIcon, index === 0 ? "featured" : "normal");
-      const spriteStack = isPokemon ? pokemonSpriteStack(hero) : "";
-
-      if (isPokemon) {
-        return `
-          <li class="armory-result-row league-pokemon-result-row${index === 0 ? " is-champion" : ""}">
-            <span class="armory-rank-badge armory-rank-${placement}" aria-label="${placement}º colocado">
-              ${iconImage(placementIcon, "armory-rank-icon", "")}
-              <strong>${placement}º</strong>
-            </span>
-            ${spriteStack}
-            <div class="armory-player-cell league-pokemon-player-cell">
-              <div class="armory-player-meta">
-                <strong>${escapeHtml(player)}</strong>
-                <small>${escapeHtml(heroName)}</small>
-              </div>
-            </div>
-            <span class="armory-hero-name league-pokemon-deck-name" title="${escapeHtml(hero)}">${escapeHtml(heroName)}</span>
-            <span class="armory-record">${iconImage(armoryIcons.depth.trophy, "armory-record-icon", "")}${escapeHtml(record || "-")}</span>
-          </li>
-        `;
-      }
-
+      const badgeMarkup = isPokemon ? pokemonSpriteStack(hero) : heroBadge(hero, heroIcon, index === 0 ? "featured" : "normal");
       return `
-        <li class="armory-result-row${index === 0 ? " is-champion" : ""}">
+        <li class="armory-result-row${index === 0 ? " is-champion" : ""}${isPokemon ? " is-pokemon-row" : ""}">
           <span class="armory-rank-badge armory-rank-${placement}" aria-label="${placement}º colocado">
             ${iconImage(placementIcon, "armory-rank-icon", "")}
             <strong>${placement}º</strong>
@@ -553,7 +577,9 @@
           <div class="armory-player-cell">
             ${badgeMarkup}
             <div class="armory-player-meta">
-              <strong>${escapeHtml(player)}</strong>
+              <div class="armory-player-name-line">
+                <strong>${escapeHtml(player)}</strong>
+              </div>
               <small>${escapeHtml(heroName)}</small>
             </div>
           </div>

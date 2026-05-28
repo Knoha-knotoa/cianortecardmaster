@@ -8757,204 +8757,100 @@ h3 {
   }
 }
 
-/* Ajuste 27/05/2026 — Resultados: Liga de Pokémon responsiva
-   Desktop: colocação | até 2 Pokémon | jogador | deck | pontos.
-   Mobile: colocação | 2 Pokémon empilhados | jogador | pontos. */
-.league-board-pokemon .league-pokemon-result-row {
-  grid-template-columns: 60px 70px minmax(165px, .9fr) minmax(210px, 1.08fr) 82px !important;
-  align-items: center !important;
-}
-
-.league-board-pokemon .league-pokemon-result-row::after {
-  inset: 8px 92px 8px auto !important;
-}
-
-.league-board-pokemon .league-pokemon-result-row .league-pokemon-sprites {
+/* Ajuste responsivo da Última Liga de Pokémon: sprites sem sobrepor nomes e fallback visual da PokéAPI. */
+.league-board-pokemon .armory-result-row.is-pokemon-row .armory-player-cell {
   display: flex !important;
   align-items: center !important;
+  gap: .66rem !important;
+  min-width: 0 !important;
+}
+
+.league-board-pokemon .armory-result-row.is-pokemon-row .league-pokemon-sprites {
+  display: inline-flex !important;
+  align-items: center !important;
   justify-content: center !important;
-  gap: .15rem !important;
-  width: 62px !important;
-  min-width: 62px !important;
-  height: 46px !important;
-  justify-self: center !important;
-  overflow: visible !important;
+  gap: .18rem !important;
+  flex: 0 0 auto !important;
   white-space: nowrap !important;
 }
 
-.league-board-pokemon .league-pokemon-result-row .league-pokemon-sprites img {
-  width: 31px !important;
-  height: 31px !important;
-  object-fit: contain !important;
-  image-rendering: pixelated;
-  border-radius: 999px;
-  padding: 2px;
-  background:
-    radial-gradient(circle at 35% 25%, rgba(255,255,255,.22), transparent 36%),
-    rgba(5, 8, 12, .72);
-  border: 1px solid rgba(255, 217, 94, .55);
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.28), 0 4px 10px rgba(0,0,0,.36);
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,.45));
-}
-
-.league-board-pokemon .league-pokemon-result-row .league-pokemon-sprites img:nth-child(n + 3) {
-  display: none !important;
-}
-
-.league-board-pokemon .league-pokemon-result-row .league-pokemon-sprites-empty {
-  opacity: .35;
-}
-
-.league-board-pokemon .league-pokemon-player-cell {
-  gap: 0 !important;
-  min-width: 0 !important;
-}
-
-.league-board-pokemon .league-pokemon-player-cell .armory-player-meta {
-  min-width: 0 !important;
-  width: 100% !important;
-}
-
-.league-board-pokemon .league-pokemon-player-cell strong {
+.league-board-pokemon .armory-result-row.is-pokemon-row .league-pokemon-sprite,
+.league-board-pokemon .armory-result-row.is-pokemon-row .league-pokemon-sprites img {
+  width: 28px !important;
+  height: 28px !important;
   display: block !important;
-  max-width: 100% !important;
+  object-fit: contain !important;
+  padding: 2px !important;
+  border: 1px solid rgba(255, 217, 94, .54) !important;
+  border-radius: 999px !important;
+  background:
+    radial-gradient(circle at 35% 25%, rgba(255,255,255,.18), transparent 36%),
+    rgba(5, 8, 6, .66) !important;
+  image-rendering: auto !important;
+  filter: drop-shadow(0 3px 7px rgba(0,0,0,.48)) !important;
+}
+
+.league-board-pokemon .armory-result-row.is-pokemon-row .armory-player-name-line {
+  display: block !important;
   min-width: 0 !important;
 }
 
-.league-board-pokemon .league-pokemon-deck-name {
-  font-family: "Fugaz One", system-ui, sans-serif;
-  font-size: .84rem !important;
-  line-height: 1.2;
+.league-board-pokemon .armory-result-row.is-pokemon-row .armory-player-name-line strong {
+  min-width: 0 !important;
 }
 
 @media (max-width: 760px) {
-  .league-board-pokemon.latest-armory-card-wide.armory-board {
-    padding: 1rem .75rem !important;
-  }
-
-  .league-board-pokemon .armory-board-heading {
-    grid-template-columns: 1fr !important;
-    gap: .45rem !important;
-    text-align: center;
-    margin-bottom: 1rem !important;
-  }
-
-  .league-board-pokemon .armory-event-badge {
-    margin: 0 auto;
-  }
-
-  .league-board-pokemon .armory-board-heading h3 {
-    font-size: clamp(1.35rem, 8vw, 2.15rem);
-    line-height: 1.08;
-  }
-
-  .league-board-pokemon .armory-board-heading p {
-    max-width: 32rem;
-    margin-inline: auto;
-  }
-
-  .league-board-pokemon .latest-armory-podium.armory-results-list {
-    gap: .62rem !important;
-  }
-
-  .league-board-pokemon .latest-armory-podium.armory-results-list .league-pokemon-result-row,
-  .league-board-pokemon .league-pokemon-result-row {
-    grid-template-columns: 48px 44px minmax(0, 1fr) auto !important;
+  .league-board-pokemon .armory-result-row.is-pokemon-row {
+    grid-template-columns: 48px minmax(0, 1fr) auto !important;
+    gap: .48rem !important;
     min-height: 74px !important;
-    gap: .5rem !important;
-    padding: .52rem .56rem !important;
+    padding: .54rem .56rem !important;
+  }
+
+  .league-board-pokemon .armory-result-row.is-pokemon-row .armory-player-cell {
+    display: grid !important;
+    grid-template-columns: 42px minmax(0, 1fr) !important;
+    gap: .56rem !important;
     align-items: center !important;
   }
 
-  .league-board-pokemon .league-pokemon-result-row::after {
-    inset: 10px 74px 10px auto !important;
-  }
-
-  .league-board-pokemon .latest-armory-podium.armory-results-list .league-pokemon-result-row .armory-rank-badge,
-  .league-board-pokemon .league-pokemon-result-row .armory-rank-badge {
-    width: 43px !important;
-    height: 43px !important;
-    justify-self: center !important;
-  }
-
-  .league-board-pokemon .league-pokemon-result-row .league-pokemon-sprites {
+  .league-board-pokemon .armory-result-row.is-pokemon-row .league-pokemon-sprites {
+    width: 42px !important;
+    min-height: 52px !important;
     flex-direction: column !important;
-    gap: .05rem !important;
-    width: 40px !important;
-    min-width: 40px !important;
-    height: 60px !important;
+    gap: 0 !important;
     align-self: center !important;
   }
 
-  .league-board-pokemon .league-pokemon-result-row .league-pokemon-sprites img {
-    width: 30px !important;
-    height: 30px !important;
-    padding: 2px;
+  .league-board-pokemon .armory-result-row.is-pokemon-row .league-pokemon-sprite,
+  .league-board-pokemon .armory-result-row.is-pokemon-row .league-pokemon-sprites img {
+    width: 29px !important;
+    height: 29px !important;
+    padding: 2px !important;
+    margin: -1px 0 !important;
   }
 
-  .league-board-pokemon .league-pokemon-player-cell strong {
-    white-space: normal !important;
-    overflow: visible !important;
-    text-overflow: clip !important;
-    font-size: clamp(.98rem, 4.9vw, 1.28rem) !important;
-    line-height: 1.12 !important;
-    text-wrap: balance;
-  }
-
-  .league-board-pokemon .league-pokemon-player-cell small,
-  .league-board-pokemon .league-pokemon-deck-name,
-  .league-board-pokemon .latest-armory-podium.armory-results-list .league-pokemon-deck-name {
+  .league-board-pokemon .armory-result-row.is-pokemon-row .armory-player-cell small {
     display: none !important;
   }
 
-  .league-board-pokemon .league-pokemon-result-row .armory-record {
-    min-width: 62px;
-    justify-content: flex-end !important;
+  .league-board-pokemon .armory-result-row.is-pokemon-row .armory-player-name-line strong {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    line-height: 1.12 !important;
+    font-size: clamp(.92rem, 4.15vw, 1.08rem) !important;
+  }
+
+  .league-board-pokemon .armory-result-row.is-pokemon-row .armory-record {
+    min-width: 66px !important;
     white-space: nowrap !important;
-    font-size: 1rem !important;
+    justify-content: flex-end !important;
+    font-size: .98rem !important;
   }
 
-  .league-board-pokemon .league-pokemon-result-row .armory-record-icon {
-    width: 16px !important;
-    height: 16px !important;
-  }
-}
-
-@media (max-width: 420px) {
-  .league-board-pokemon .latest-armory-podium.armory-results-list .league-pokemon-result-row,
-  .league-board-pokemon .league-pokemon-result-row {
-    grid-template-columns: 42px 38px minmax(0, 1fr) auto !important;
-    gap: .42rem !important;
-    padding-inline: .46rem !important;
-  }
-
-  .league-board-pokemon .latest-armory-podium.armory-results-list .league-pokemon-result-row .armory-rank-badge,
-  .league-board-pokemon .league-pokemon-result-row .armory-rank-badge {
-    width: 38px !important;
-    height: 38px !important;
-  }
-
-  .league-board-pokemon .league-pokemon-result-row .league-pokemon-sprites {
-    width: 36px !important;
-    min-width: 36px !important;
-  }
-
-  .league-board-pokemon .league-pokemon-result-row .league-pokemon-sprites img {
-    width: 27px !important;
-    height: 27px !important;
-  }
-
-  .league-board-pokemon .league-pokemon-player-cell strong {
-    font-size: clamp(.92rem, 4.7vw, 1.12rem) !important;
-  }
-
-  .league-board-pokemon .league-pokemon-result-row .armory-record {
-    min-width: 56px;
-    font-size: .88rem !important;
-    gap: .2rem !important;
-  }
-
-  .league-board-pokemon .league-pokemon-result-row::after {
-    right: 66px !important;
+  .league-board-pokemon .armory-result-row.is-pokemon-row .armory-record-icon {
+    width: 17px !important;
+    height: 17px !important;
   }
 }
