@@ -48,7 +48,7 @@ results:
     wins: 6
 
   - player: "Rayan"
-    hero: "Mega Gengar EX "
+    hero: "Mega Gengar EX /"
     record: "4 pts"
     wins: 4
 
