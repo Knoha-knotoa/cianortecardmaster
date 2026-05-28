@@ -27,6 +27,7 @@
   {% assign total_wins = total_wins | plus: row_wins %}
 {% endfor %}
 {% assign placeholder_photo = '/assets/img/resultados/fab/player-placeholder.svg' %}
+{% assign event_location = page.local | default: page.location | default: page.venue | default: page.local_evento | default: "Cianorte Card Masters" %}
 
 <article class="fab-result-page fab-result-page-{{ post_style }}">
   <section class="fab-result-top" aria-labelledby="fab-result-title">
@@ -50,7 +51,7 @@
         <span><strong>♟</strong> {{ total_players }} jogadores</span>
         <span><strong>⚔</strong> Formato: {{ event_format }}</span>
         {% if page.event_date or page.date %}<span><strong>▣</strong> {{ page.event_date | default: page.date | date: "%d/%m/%Y" }}</span>{% endif %}
-        <span><strong>⬟</strong> Cianorte Card Masters</span>
+        <span><strong>⬟</strong> {{ event_location }}</span>
       </div>
 
       <div class="fab-result-podium" aria-label="Pódio do resultado">
