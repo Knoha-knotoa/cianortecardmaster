@@ -8761,7 +8761,7 @@ h3 {
 .league-board-pokemon .armory-result-row.is-pokemon-row .armory-player-cell {
   display: flex !important;
   align-items: center !important;
-  gap: .66rem !important;
+  gap: .76rem !important;
   min-width: 0 !important;
 }
 
@@ -8769,25 +8769,25 @@ h3 {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: .18rem !important;
+  gap: .24rem !important;
   flex: 0 0 auto !important;
   white-space: nowrap !important;
 }
 
 .league-board-pokemon .armory-result-row.is-pokemon-row .league-pokemon-sprite,
 .league-board-pokemon .armory-result-row.is-pokemon-row .league-pokemon-sprites img {
-  width: 28px !important;
-  height: 28px !important;
+  width: 38px !important;
+  height: 38px !important;
   display: block !important;
   object-fit: contain !important;
-  padding: 2px !important;
-  border: 1px solid rgba(255, 217, 94, .54) !important;
+  padding: 3px !important;
+  border: 1px solid rgba(255, 217, 94, .62) !important;
   border-radius: 999px !important;
   background:
     radial-gradient(circle at 35% 25%, rgba(255,255,255,.18), transparent 36%),
     rgba(5, 8, 6, .66) !important;
   image-rendering: auto !important;
-  filter: drop-shadow(0 3px 7px rgba(0,0,0,.48)) !important;
+  filter: drop-shadow(0 4px 9px rgba(0,0,0,.52)) !important;
 }
 
 .league-board-pokemon .armory-result-row.is-pokemon-row .armory-player-name-line {
@@ -8797,6 +8797,12 @@ h3 {
 
 .league-board-pokemon .armory-result-row.is-pokemon-row .armory-player-name-line strong {
   min-width: 0 !important;
+}
+
+@media (min-width: 761px) {
+  .league-board-pokemon .armory-result-row.is-pokemon-row {
+    min-height: 76px !important;
+  }
 }
 
 @media (max-width: 760px) {
