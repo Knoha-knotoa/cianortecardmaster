@@ -6707,40 +6707,62 @@ h3 {
     display: none;
   }
 
+  .home-social-cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .75rem;
+    flex-wrap: nowrap;
+    margin-top: .15rem;
+  }
+
+  .home-social-card--instagram,
+  .home-social-card--whatsapp {
+    display: none;
+  }
+
   .home-social-card,
   .home-social-card.is-featured,
-  .home-social-card--instagram,
-  .home-social-card--whatsapp,
   .home-social-card--youtube,
   .home-social-card--tiktok,
   .home-social-card--facebook {
     grid-column: auto;
-    min-height: 236px;
-    padding: 1.1rem .9rem .95rem;
+    flex: 0 0 64px;
+    width: 64px;
+    height: 64px;
+    min-height: 0;
+    display: grid;
+    place-items: center;
+    gap: 0;
+    padding: 0;
+    border-radius: 999px;
+  }
+
+  .home-social-card::before {
+    border-radius: inherit;
+  }
+
+  .home-social-card::after,
+  .home-social-card strong,
+  .home-social-card small,
+  .home-social-card em,
+  .home-social-card-button {
+    display: none;
   }
 
   .home-social-icon-wrap {
-    width: 76px;
-    height: 76px;
+    width: 58px;
+    height: 58px;
+    margin: 0;
+  }
+
+  .home-social-icon-wrap::after {
+    inset: 14px;
   }
 
   .home-social-icon-image {
-    width: 34px;
-    height: 34px;
-  }
-
-  .home-social-card strong,
-  .home-social-card.is-featured strong {
-    font-size: 1.5rem;
-  }
-
-  .home-social-card small {
-    font-size: .9rem;
-  }
-
-  .home-social-card-button {
-    min-height: 44px;
-    font-size: .96rem;
+    width: 30px;
+    height: 30px;
   }
 
   .home-project-badges {
