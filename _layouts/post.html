@@ -106,10 +106,23 @@ layout: default
   {% endcase %}
 {% endif %}
 
-{% assign page_author_key = page.autor | default: page.autor_slug | default: page.author | default: '' | strip %}
+
+
+{% comment %}
+  Autor personalizado da comunidade.
+  Usa somente autor/autor_slug do front matter, ou author quando ele NÃO for o padrão "Cianorte Card Masters".
+  Isso evita mexer nos posts antigos e nas páginas de resultado que usam o author padrão do site.
+{% endcomment %}
+{% assign page_author_key = page.autor | default: page.autor_slug | default: '' | strip %}
+{% if page_author_key == '' and page.author %}
+  {% assign raw_page_author_down = page.author | downcase | strip %}
+  {% unless raw_page_author_down == 'cianorte card masters' %}
+    {% assign page_author_key = page.author | strip %}
+  {% endunless %}
+{% endif %}
 {% assign page_author_key_down = page_author_key | downcase | strip %}
 {% assign page_autor = nil %}
-{% if page_author_key_down != '' %}
+{% if page_author_key_down != '' and site.autores %}
   {% for autor in site.autores %}
     {% assign autor_slug_key = autor.slug | default: autor.basename | downcase | strip %}
     {% assign autor_name_key = autor.nome_aventureiro | default: autor.title | downcase | strip %}
@@ -128,6 +141,10 @@ layout: default
     {% endif %}
     {% if page_autor %}{% break %}{% endif %}
   {% endfor %}
+{% endif %}
+{% assign structured_author_name = page.author | default: site.title %}
+{% if page_autor %}
+  {% assign structured_author_name = page_autor.nome_aventureiro | default: page_autor.title %}
 {% endif %}
 
 {% if page.schema_type %}
@@ -151,7 +168,7 @@ layout: default
   {% if structured_image %}"image": {{ structured_image | jsonify }},{% endif %}
   "author": {
     "@type": "Person",
-    "name": {{ page_autor.nome_aventureiro | default: page.author | default: site.title | jsonify }}
+    "name": {{ structured_author_name | jsonify }}
   },
   "publisher": {
     "@type": "Organization",
@@ -192,6 +209,9 @@ layout: default
         {% endif %}
 
         <div class="post-meta">
+          {% unless page_autor %}
+            {% if page.author %}<span>Por {{ page.author }}</span>{% endif %}
+          {% endunless %}
           {% if page.date %}<span>{{ page.date | date: "%d/%m/%Y" }}</span>{% endif %}
         </div>
 
