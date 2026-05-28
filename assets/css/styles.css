@@ -7788,7 +7788,8 @@ h3 {
   }
 
   .game-cartridge-card-mais .btn-row {
-    left: 8%;
+    left: auto;
+    right: 8%;
     bottom: 10%;
     width: 28%;
     grid-template-columns: 1fr;
