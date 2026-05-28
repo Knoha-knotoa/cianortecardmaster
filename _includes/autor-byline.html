@@ -23,6 +23,10 @@
 {% endif %}
 
 {% assign byline_mode = include.mode | default: 'inline' %}
+{% assign show_role = false %}
+{% if include.show_role == true or include.show_role == 'true' %}{% assign show_role = true %}{% endif %}
+{% assign show_games = true %}
+{% if include.show_games == false or include.show_games == 'false' %}{% assign show_games = false %}{% endif %}
 {% if matched_autor %}
   {% assign autor_avatar = matched_autor.avatar | default: site.data.images.logo_menu %}
   {% if autor_avatar contains '://' %}
@@ -34,7 +38,10 @@
     <img class="author-chip-avatar" src="{{ autor_avatar_src }}" alt="{{ matched_autor.avatar_alt | default: matched_autor.nome_aventureiro | escape }}" loading="lazy" decoding="async">
     <span class="author-chip-copy">
       <strong>{{ matched_autor.nome_aventureiro | default: matched_autor.title }}</strong>
-      {% if include.show_games != false %}
+      {% if show_role and matched_autor.classe %}
+        <small>{{ matched_autor.classe }}</small>
+      {% endif %}
+      {% if show_games %}
         <small>
           {% if matched_autor.jogo_principal %}Jogo principal: {{ matched_autor.jogo_principal }}{% endif %}
           {% if matched_autor.jogos and matched_autor.jogos.size > 0 %}

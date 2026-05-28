@@ -181,12 +181,17 @@ layout: default
 
         <h1>{{ page.title }}</h1>
 
+        {% if page_autor %}
+          <div class="post-title-author">
+            {% include autor-byline.html autor=page_author_key mode="title" show_role=true show_games=false %}
+          </div>
+        {% endif %}
+
         {% if page.summary %}
           <p class="post-summary">{{ page.summary }}</p>
         {% endif %}
 
-        <div class="post-meta post-meta-author">
-          {% include autor-byline.html autor=page_author_key fallback=page.author mode="hero" show_games=true %}
+        <div class="post-meta">
           {% if page.date %}<span>{{ page.date | date: "%d/%m/%Y" }}</span>{% endif %}
         </div>
 
@@ -243,6 +248,10 @@ layout: default
           </table>
         </div>
       </section>
+    {% endif %}
+
+    {% if page_autor %}
+      {% include autor-post-footer.html autor=page_author_key %}
     {% endif %}
   </div>
 </article>
