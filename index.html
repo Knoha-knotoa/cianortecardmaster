@@ -499,45 +499,66 @@ image_alt: "Dragão em arte fantástica representando a comunidade Cianorte Card
 </section>
 
 <section class="section home-magic-welcome-section post-style-magic" aria-labelledby="home-magic-welcome-title">
-  <div class="container home-magic-welcome-grid">
-    <aside class="home-magic-welcome-card" aria-label="Convite para jogadores de Magic: The Gathering em Cianorte">
-      <div class="home-magic-welcome-image">
-        <img src="{{ '/assets/img/banners/default-magic.jpg' | relative_url }}" alt="Arte temática de Magic: The Gathering para jogadores de Commander em Cianorte" loading="lazy" decoding="async" width="1350" height="450">
-      </div>
-      <div class="home-magic-welcome-list">
-        <span>
-          <strong>Commander presencial</strong>
-          <small>Mesas casuais, política duvidosa, alianças temporárias e aquele pacto que nunca acaba bem.</small>
-        </span>
-        <span>
-          <strong>Deckbuilding e orçamento</strong>
-          <small>Ajuda para montar lista, melhorar mana base, escolher upgrades e jogar sem vender o rim.</small>
-        </span>
-        <span>
-          <strong>Jogadores novos</strong>
-          <small>Pode chegar com deck pronto, precon, cartas antigas ou só curiosidade para aprender Magic.</small>
-        </span>
-      </div>
-      <a class="home-magic-welcome-link" href="{{ '/guias/como-montar-deck-commander-ate-500/' | relative_url }}">Ver guia de Commander</a>
-    </aside>
+  <div class="container">
+    <div class="home-magic-welcome-grid">
+      <aside class="home-magic-welcome-card" aria-label="Convite para jogadores de Magic: The Gathering em Cianorte">
+        <div class="home-magic-welcome-image">
+          <img src="{{ '/assets/img/banners/default-magic.jpg' | relative_url }}" alt="Arte temática de Magic: The Gathering para jogadores de Commander em Cianorte" loading="lazy" decoding="async" width="1350" height="450">
+        </div>
 
-    <article class="home-magic-welcome-copy">
-      <p class="eyebrow">Magic: The Gathering em Cianorte</p>
-      <h2 id="home-magic-welcome-title">Planeswalkers, comandantes e colecionadores também têm cadeira na mesa</h2>
-      <p>
-        Também temos jogadores de Magic: The Gathering em Cianorte, com foco em jogo físico, Commander casual,
-        troca de ideias sobre decks, cartas avulsas, coleção e aquela conversa inevitável sobre qual remoção deveria ter entrado na lista.
-      </p>
-      <p>
-        Se você joga Commander, está voltando para o Magic depois de anos, comprou um precon ou só quer entender por que quatro pessoas
-        brigam por duas horas e ainda chamam isso de diversão, a comunidade é um bom ponto de partida.
-      </p>
-      <div class="btn-row home-magic-welcome-actions">
-        <a class="btn btn-primary" href="{{ '/jogos/magic-the-gathering-em-cianorte/' | relative_url }}">Ver Magic</a>
-        <a class="btn btn-secondary" href="{{ '/jogos/#magic' | relative_url }}">Ir para Jogos</a>
-        <a class="btn btn-secondary" href="{{ '/agenda/' | relative_url }}">Ver agenda</a>
-      </div>
-    </article>
+        <div class="home-magic-welcome-list">
+          <article class="home-magic-feature-item">
+            <img class="home-magic-feature-icon" src="{{ '/assets/img/home/magic/icone-magic-home.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="54" height="54">
+            <div>
+              <strong>Commander presencial</strong>
+              <small>Mesas casuais, política duvidosa, alianças temporárias e aquele pacto que nunca acaba bem.</small>
+            </div>
+          </article>
+
+          <article class="home-magic-feature-item">
+            <img class="home-magic-feature-icon" src="{{ '/assets/img/home/magic/icone-castle-home.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="54" height="54">
+            <div>
+              <strong>Deckbuilding e orçamento</strong>
+              <small>Ajuda para montar lista, melhorar mana base, escolher upgrades e jogar sem vender o rim.</small>
+            </div>
+          </article>
+
+          <article class="home-magic-feature-item">
+            <img class="home-magic-feature-icon" src="{{ '/assets/img/home/magic/icone-card-purple-home.png' | relative_url }}" alt="" loading="lazy" decoding="async" width="54" height="54">
+            <div>
+              <strong>Jogadores novos</strong>
+              <small>Pode chegar com deck pronto, precon, cartas antigas ou só curiosidade para aprender Magic.</small>
+            </div>
+          </article>
+        </div>
+
+        <a class="home-magic-cta home-magic-cta-guide" href="{{ '/guias/como-montar-deck-commander-ate-500/' | relative_url }}">
+          <span>Ver guia de Commander</span>
+        </a>
+      </aside>
+
+      <article class="home-magic-welcome-copy">
+        <p class="eyebrow home-magic-eyebrow">Magic: The Gathering em Cianorte</p>
+        <h2 id="home-magic-welcome-title">
+          <span class="home-magic-title-line home-magic-title-line-light">Planeswalkers,</span>
+          <span class="home-magic-title-line home-magic-title-line-gold">comandantes e colecionadores</span>
+          <span class="home-magic-title-line home-magic-title-line-light">também têm cadeira na mesa</span>
+        </h2>
+        <p>
+          Também temos jogadores de Magic: The Gathering em Cianorte, com foco em jogo físico, Commander casual,
+          troca de ideias sobre decks, cartas avulsas, coleção e aquela conversa inevitável sobre qual remoção deveria ter entrado na lista.
+        </p>
+        <p>
+          Se você joga Commander, está voltando para o Magic depois de anos, comprou um precon ou só quer entender por que quatro pessoas
+          brigam por duas horas e ainda chamam isso de diversão, a comunidade é um bom ponto de partida.
+        </p>
+        <div class="btn-row home-magic-welcome-actions">
+          <a class="home-magic-cta home-magic-cta-blue" href="{{ '/jogos/magic-the-gathering-em-cianorte/' | relative_url }}">Ver Magic</a>
+          <a class="home-magic-cta home-magic-cta-gold" href="{{ '/jogos/#magic' | relative_url }}">Ir para Jogos</a>
+          <a class="home-magic-cta home-magic-cta-purple" href="{{ '/agenda/' | relative_url }}">Ver agenda</a>
+        </div>
+      </article>
+    </div>
   </div>
 </section>
 
