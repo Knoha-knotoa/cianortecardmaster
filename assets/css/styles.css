@@ -7766,8 +7766,8 @@ h3 {
   }
 
   .game-cartridge-card > small {
-    font-size: clamp(.48rem, 2.3vw, .66rem);
-    line-height: 1.24;
+    font-size: clamp(.66rem, 3.2vw, .96rem);
+    line-height: 1.32;
   }
 
   .game-cartridge-card .btn {
