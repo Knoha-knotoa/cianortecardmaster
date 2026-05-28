@@ -294,27 +294,211 @@
     return `<img class="${className}" src="${src}" alt="${escapeHtml(alt)}" loading="lazy">`;
   }
 
-  function normalizePokemonSlug(value) {
+  function splitPokemonValue(value) {
+    if (Array.isArray(value)) {
+      return value.flatMap(item => splitPokemonValue(item));
+    }
+
+    if (value && typeof value === "object") {
+      return [value];
+    }
+
     return String(value || "")
+      .split(/\s*\/\s*|\s*,\s*|\s*\+\s*|\s*&\s*/)
+      .map(name => name.trim())
+      .filter(Boolean);
+  }
+
+  function getFirstDefined(...values) {
+    return values.find(value => {
+      if (Array.isArray(value)) return value.length;
+      if (value && typeof value === "object") return Object.keys(value).length;
+      return String(value || "").trim();
+    });
+  }
+
+  function pokemonEntryDisplayName(entry) {
+    if (entry && typeof entry === "object") {
+      return getFirstDefined(entry.label, entry.display, entry.display_name, entry.displayName, entry.name, entry.pokemon, entry.hero) || "";
+    }
+
+    return String(entry || "").trim();
+  }
+
+  function pokemonEntryLookupName(entry) {
+    if (entry && typeof entry === "object") {
+      return getFirstDefined(
+        entry.api,
+        entry.api_name,
+        entry.apiName,
+        entry.sprite,
+        entry.sprite_name,
+        entry.spriteName,
+        entry.slug,
+        entry.lookup,
+        entry.lookup_name,
+        entry.lookupName,
+        entry.name,
+        entry.pokemon,
+        entry.hero
+      ) || "";
+    }
+
+    return String(entry || "").trim();
+  }
+
+  function pokemonEntriesFromSource(source) {
+    if (source && typeof source === "object" && !Array.isArray(source)) {
+      const value = getFirstDefined(
+        source.pokemon,
+        source.pokemons,
+        source.pokemon_names,
+        source.pokemonNames,
+        source.pokemon_label,
+        source.pokemonLabel,
+        source.hero,
+        source.deck,
+        source.deque
+      );
+      return splitPokemonValue(value).slice(0, 3);
+    }
+
+    return splitPokemonValue(source).slice(0, 3);
+  }
+
+  function pokemonLookupEntriesFromSource(source, displayEntries = []) {
+    if (source && typeof source === "object" && !Array.isArray(source)) {
+      const explicit = getFirstDefined(
+        source.pokemon_api,
+        source.pokemonApi,
+        source.pokemon_sprites,
+        source.pokemonSprites,
+        source.pokemon_slugs,
+        source.pokemonSlugs,
+        source.sprite_names,
+        source.spriteNames,
+        source.sprite_slugs,
+        source.spriteSlugs
+      );
+
+      const explicitEntries = splitPokemonValue(explicit);
+      if (explicitEntries.length) {
+        return explicitEntries.slice(0, 3).map(pokemonEntryLookupName);
+      }
+    }
+
+    return displayEntries.map(entry => pokemonEntryLookupName(entry));
+  }
+
+  function pokemonTitleCase(value) {
+    return String(value || "")
+      .replace(/[-_]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+      .split(" ")
+      .filter(Boolean)
+      .map(word => {
+        const lower = word.toLowerCase();
+        if (["ex", "gx", "v", "vmax", "vstar", "x", "y"].includes(lower)) return lower.toUpperCase();
+        if (lower === "mr") return "Mr.";
+        if (lower === "mime") return "Mime";
+        if (lower === "nidoran-f") return "Nidoran♀";
+        if (lower === "nidoran-m") return "Nidoran♂";
+        return lower.charAt(0).toUpperCase() + lower.slice(1);
+      })
+      .join(" ");
+  }
+
+  function formatPokemonCardName(value) {
+    const raw = String(value || "").trim();
+    if (!raw) return "";
+
+    const normalized = raw
+      .replace(/_/g, " ")
+      .replace(/-/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    const startsWithMega = normalized.match(/^mega\s+(.+?)(?:\s+(x|y))?(?:\s+ex)?$/i);
+    if (startsWithMega) {
+      const base = pokemonTitleCase(startsWithMega[1]);
+      const variant = startsWithMega[2] ? ` ${startsWithMega[2].toUpperCase()}` : "";
+      const suffix = /\bex\b$/i.test(normalized) ? " EX" : "";
+      return `Mega ${base}${variant}${suffix}`;
+    }
+
+    const endsWithMega = normalized.match(/^(.+?)\s+mega(?:\s+(x|y))?(?:\s+ex)?$/i);
+    if (endsWithMega) {
+      const base = pokemonTitleCase(endsWithMega[1]);
+      const variant = endsWithMega[2] ? ` ${endsWithMega[2].toUpperCase()}` : "";
+      return `Mega ${base}${variant} EX`;
+    }
+
+    return pokemonTitleCase(normalized);
+  }
+
+  function pokemonDisplayNamesFromSource(source) {
+    return pokemonEntriesFromSource(source)
+      .map(entry => formatPokemonCardName(pokemonEntryDisplayName(entry)))
+      .filter(Boolean);
+  }
+
+  function pokemonDisplayLabel(source) {
+    const names = pokemonDisplayNamesFromSource(source);
+    return names.length ? names.join(" / ") : (getHero(source) || String(source || "") || "Deck Pokémon");
+  }
+
+  function pokemonLookupName(value) {
+    let text = String(value || "")
       .normalize("NFD")
-      .replace(/[̀-ͯ]/g, "")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/[♀]/g, " nidoran f ")
+      .replace(/[♂]/g, " nidoran m ")
+      .replace(/[’'.:]/g, "")
+      .replace(/[_-]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    text = text
+      .replace(/\b(pokemon|pokémon)\b/g, "")
+      .replace(/\b(tag team|v union|vunion|ex|gx|vmax|vstar|v|break|prime|radiant|shiny)\b/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    const startsWithMega = text.match(/^mega\s+(.+?)(?:\s+(x|y))?$/i);
+    if (startsWithMega) {
+      const base = startsWithMega[1].trim();
+      const variant = startsWithMega[2] ? `-${startsWithMega[2].toLowerCase()}` : "";
+      return `${base}-mega${variant}`;
+    }
+
+    const endsWithMega = text.match(/^(.+?)\s+mega(?:\s+(x|y))?$/i);
+    if (endsWithMega) {
+      const base = endsWithMega[1].trim();
+      const variant = endsWithMega[2] ? `-${endsWithMega[2].toLowerCase()}` : "";
+      return `${base}-mega${variant}`;
+    }
+
+    return text;
+  }
+
+  function normalizePokemonSlug(value) {
+    return pokemonLookupName(value)
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
       .toLowerCase()
       .replace(/[♀]/g, "-f")
       .replace(/[♂]/g, "-m")
       .replace(/['’.:]/g, "")
       .replace(/\s*\([^)]*\)\s*/g, " ")
-      .replace(/[^a-z0-9\/-]+/g, "-")
-      .replace(/\/+/g, "/")
+      .replace(/[^a-z0-9-]+/g, "-")
       .replace(/^-+|-+$/g, "")
       .replace(/-+/g, "-");
   }
 
   function pokemonNamesFromHero(hero) {
-    return String(hero || "")
-      .split(/\s*\/\s*|\s*,\s*|\s*\+\s*|\s*&\s*/)
-      .map(name => name.trim())
-      .filter(Boolean)
-      .slice(0, 3);
+    return pokemonDisplayNamesFromSource(hero);
   }
 
   const pokemonSpriteFallbackCache = new Map();
@@ -358,7 +542,7 @@
     img.dataset.pokeapiFallbackTried = "true";
     img.removeAttribute("onerror");
 
-    const slug = img.dataset.pokemonSlug || img.dataset.pokemonName || img.alt || "";
+    const slug = img.dataset.pokemonSlug || img.dataset.pokemonApi || img.dataset.pokemonName || img.alt || "";
     const fallbackSrc = await fetchPokemonFallbackSprite(slug);
 
     if (!fallbackSrc) {
@@ -370,29 +554,36 @@
     img.src = fallbackSrc;
   };
 
-  function pokemonSpriteImg(name, className = "") {
+  function pokemonSpriteImg(name, className = "", altName = "") {
     const src = pokemonSpriteUrl(name);
     const slug = normalizePokemonSlug(name);
+    const alt = altName || formatPokemonCardName(name) || name;
     if (!src || !slug) return "";
 
     const classAttr = className ? ` class="${escapeHtml(className)}"` : "";
-    return `<img${classAttr} src="${escapeHtml(src)}" alt="${escapeHtml(name)}" loading="lazy" data-pokemon-name="${escapeHtml(name)}" data-pokemon-slug="${escapeHtml(slug)}" onerror="window.CCMCommunityPokemonFallback&&window.CCMCommunityPokemonFallback(this)">`;
+    return `<img${classAttr} src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" loading="lazy" data-pokemon-name="${escapeHtml(alt)}" data-pokemon-api="${escapeHtml(name)}" data-pokemon-slug="${escapeHtml(slug)}" onerror="window.CCMCommunityPokemonFallback&&window.CCMCommunityPokemonFallback(this)">`;
   }
 
-  function pokemonSpriteStack(hero) {
-    const names = pokemonNamesFromHero(hero);
-    if (names.length < 2) return "";
-    const visibleNames = names.slice(0, 2);
+  function pokemonSpriteStack(source) {
+    const entries = pokemonEntriesFromSource(source);
+    if (entries.length < 2) return "";
 
-    const icons = visibleNames.map(name => pokemonSpriteImg(name, "league-pokemon-sprite")).join("");
+    const lookupNames = pokemonLookupEntriesFromSource(source, entries);
+    const icons = entries.slice(0, 2).map((entry, index) => {
+      const display = formatPokemonCardName(pokemonEntryDisplayName(entry));
+      const lookup = lookupNames[index] || pokemonEntryLookupName(entry) || display;
+      return pokemonSpriteImg(lookup, "league-pokemon-sprite", display);
+    }).join("");
 
     return icons ? `<span class="league-pokemon-sprites" aria-label="Pokémon do deck">${icons}</span>` : "";
   }
 
-  function pokemonBadge(hero, size = "normal") {
-    const names = pokemonNamesFromHero(hero);
-    const label = names.length ? names.join(" / ") : (hero || "Deck Pokémon");
-    const firstSprite = names.length ? pokemonSpriteImg(names[0]) : "";
+  function pokemonBadge(source, size = "normal") {
+    const entries = pokemonEntriesFromSource(source);
+    const lookupNames = pokemonLookupEntriesFromSource(source, entries);
+    const label = pokemonDisplayLabel(source);
+    const firstLookup = entries.length ? (lookupNames[0] || pokemonEntryLookupName(entries[0]) || pokemonEntryDisplayName(entries[0])) : "";
+    const firstSprite = firstLookup ? pokemonSpriteImg(firstLookup, "", formatPokemonCardName(pokemonEntryDisplayName(entries[0]))) : "";
     const initials = `<span class="armory-hero-initials">${escapeHtml(heroInitials(label))}</span>`;
 
     return `
@@ -401,6 +592,19 @@
         ${initials}
       </span>
     `;
+  }
+
+  function uniquePokemonDecks(results) {
+    const map = new Map();
+    results.forEach(result => {
+      const label = pokemonDisplayLabel(result);
+      if (!label) return;
+      const key = label.toLowerCase();
+      if (!map.has(key)) {
+        map.set(key, { name: label, shortName: label, source: result });
+      }
+    });
+    return Array.from(map.values());
   }
 
   function heroBadge(hero, icon = "", size = "normal") {
@@ -484,7 +688,7 @@
               <small>${escapeHtml(heroName)}</small>
             </div>
           </div>
-          <span class="armory-hero-name" title="${escapeHtml(hero)}">${escapeHtml(heroName)}</span>
+          <span class="armory-hero-name" title="${escapeHtml(heroName)}">${escapeHtml(heroName)}</span>
           <span class="armory-record">${iconImage(armoryIcons.depth.trophy, "armory-record-icon", "")}${escapeHtml(record || "-")}</span>
         </li>
       `;
@@ -554,20 +758,21 @@
     const rounds = roundsFromResults(results, latest.rounds);
     const game = latest.game || (options.variant === "pokemon" ? "Pokemon" : "Flesh and Blood");
     const nextLeague = latest.next_league || latest.next_liga || latest.nextLeague || "Domingo • 13:30";
-    const heroes = uniqueHeroes(results);
     const isPokemon = options.variant === "pokemon" || isPokemonGame(game);
+    const heroes = isPokemon ? uniquePokemonDecks(results) : uniqueHeroes(results);
     const eyebrow = isPokemon ? "Última Liga de Pokémon" : "Última Liga de Flesh and Blood";
     const sideTitle = isPokemon ? "Pokémon da liga" : "Heróis da liga";
 
     const rows = results.slice(0, 12).map((result, index) => {
       const player = getPlayer(result) || "Jogador";
       const hero = fullHeroName(getHero(result));
-      const heroName = hero;
+      const pokemonLabel = isPokemon ? pokemonDisplayLabel(result) : "";
+      const heroName = isPokemon ? pokemonLabel : hero;
       const record = result.record || result.campanha || result.score || "";
       const heroIcon = result.hero_icon || result.heroIcon || result.icon || "";
       const placement = index + 1;
       const placementIcon = index === 0 ? armoryIcons.depth.champion : armoryIcons.depth.placement;
-      const badgeMarkup = isPokemon ? pokemonSpriteStack(hero) : heroBadge(hero, heroIcon, index === 0 ? "featured" : "normal");
+      const badgeMarkup = isPokemon ? pokemonSpriteStack(result) : heroBadge(hero, heroIcon, index === 0 ? "featured" : "normal");
       return `
         <li class="armory-result-row${index === 0 ? " is-champion" : ""}${isPokemon ? " is-pokemon-row" : ""}">
           <span class="armory-rank-badge armory-rank-${placement}" aria-label="${placement}º colocado">
@@ -583,7 +788,7 @@
               <small>${escapeHtml(heroName)}</small>
             </div>
           </div>
-          <span class="armory-hero-name" title="${escapeHtml(hero)}">${escapeHtml(heroName)}</span>
+          <span class="armory-hero-name" title="${escapeHtml(heroName)}">${escapeHtml(heroName)}</span>
           <span class="armory-record">${iconImage(armoryIcons.depth.trophy, "armory-record-icon", "")}${escapeHtml(record || "-")}</span>
         </li>
       `;
@@ -604,7 +809,7 @@
 
     const heroList = heroes.map(hero => `
       <li>
-        ${isPokemon ? pokemonBadge(hero.name, "mini") : heroBadge(hero.name, hero.icon, "mini")}
+        ${isPokemon ? pokemonBadge(hero.source || hero.name, "mini") : heroBadge(hero.name, hero.icon, "mini")}
         <span title="${escapeHtml(hero.name)}">${escapeHtml(hero.shortName)}</span>
       </li>
     `).join("");

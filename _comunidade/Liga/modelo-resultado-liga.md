@@ -31,6 +31,30 @@ results:
     hero: "Nome do herói 4"
     record: "0-3"
     wins: 0
+
+
+# Modelo para Liga de Pokémon
+# Para Pokémon, você pode escrever o nome como aparece na carta:
+# hero: "Mega Absol EX / Mega Gengar EX"
+# O site remove automaticamente EX, V, VMAX etc. para buscar a imagem na PokeSprite/PokeAPI.
+# Quando a API precisar de um nome diferente, informe o campo opcional pokemon_api:
+# results:
+#   - player: "Nome do treinador"
+#     hero: "Mega Charizard X EX / Ogerpon EX"
+#     pokemon_api: "charizard-mega-x / ogerpon"
+#     record: "10 pts"
+#     wins: 10
+#
+# Também é possível usar objetos se quiser deixar display e busca bem separados:
+#   - player: "Nome do treinador"
+#     pokemon:
+#       - name: "Mega Absol EX"
+#         api: "absol-mega"
+#       - name: "Mega Gengar EX"
+#         api: "gengar-mega"
+#     record: "8 pts"
+#     wins: 8
+
 ---
 
 Resultado padronizado da Liga.

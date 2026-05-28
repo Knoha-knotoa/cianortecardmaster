@@ -12,52 +12,52 @@ image: "/assets/img/banners/banner-liga-pokemon-resultado.png"
 image_alt: "Card de resultado da Liga de Pokémon da comunidade Cianorte Card Masters"
 results:
   - player: "Hermes Lerdo"
-    hero: "Ogerpon / meganium"
+    hero: "Ogerpon EX / Meganium"
     record: "17 pts"
     wins: 17
 
   - player: "Marcelo Goularte"
-    hero: "sharpedo-mega / absol-mega"
+    hero: "Mega Sharpedo EX / Mega Absol EX"
     record: "13 pts"
     wins: 13
 
   - player: "Gustavo Scopel"
-    hero: "absol-mega / kangaskhan-mega"
+    hero: "Mega Absol EX / Mega Kangaskhan EX"
     record: "13 pts"
     wins: 13
 
   - player: "Brayan"
-    hero: "gengar-mega / grimmsnarl"
+    hero: "Mega Gengar EX / Grimmsnarl"
     record: "13 pts"
     wins: 13
 
   - player: "Matheus Ardenghi"
-    hero: "grimmsnarl / gengar-mega"
+    hero: "Grimmsnarl / Mega Gengar EX"
     record: "11 pts"
     wins: 11
 
   - player: "Artur"
-    hero: "heracross-mega / kangaskhan-mega"
+    hero: "Mega Heracross EX / Mega Kangaskhan EX"
     record: "7 pts"
     wins: 7
 
   - player: "Eric Fox"
-    hero: "mewtwo / gardevoir"
+    hero: "Mewtwo EX / Gardevoir"
     record: "6 pts"
     wins: 6
 
   - player: "Rayan"
-    hero: "gengar-mega / gengar-mega"
+    hero: "Mega Gengar EX / Mega Gengar EX"
     record: "4 pts"
     wins: 4
 
   - player: "Caetano"
-    hero: "charizard / charizard-mega-x"
+    hero: "Charizard / Mega Charizard X EX"
     record: "3 pts"
     wins: 3
 
   - player: "Henry"
-    hero: "absol-mega / grimmsnarl"
+    hero: "Mega Absol EX / Grimmsnarl"
     record: "3 pts"
     wins: 3
 ---
