@@ -7,6 +7,7 @@ rounds: 20
 date: 2026-05-19
 event_date: 2026-05-03
 next_liga: "Esperando Edital"
+local: "Centro Cultural"
 author: "Cianorte Card Masters"
 image: "/assets/img/banners/banner-liga-pokemon-resultado.png"
 image_alt: "Card de resultado da Liga de Pokémon da comunidade Cianorte Card Masters"
