@@ -10336,3 +10336,75 @@ tr.is-champion .fab-result-rank::before {
     height: 17px !important;
   }
 }
+
+/* Ajuste mobile: bloco "Nos siga nas redes sociais" em linha de ícones */
+@media (max-width: 620px) {
+  .home-social-cards {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: .72rem;
+    margin-top: .95rem;
+    padding: .72rem .82rem;
+    border: 1px solid rgba(212,175,55,.18);
+    border-radius: 999px;
+    background: rgba(3, 10, 8, .62);
+    box-shadow:
+      0 14px 28px rgba(0,0,0,.26),
+      inset 0 0 0 1px rgba(255,255,255,.035);
+  }
+
+  .home-social-card,
+  .home-social-card.is-featured,
+  .home-social-card--youtube,
+  .home-social-card--tiktok,
+  .home-social-card--facebook {
+    flex: 0 0 54px;
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    min-height: 0;
+    padding: 0;
+    grid-column: auto;
+    gap: 0;
+    border-radius: 999px;
+  }
+
+  .home-social-cards .home-social-card--instagram,
+  .home-social-cards .home-social-card--whatsapp {
+    display: none;
+  }
+
+  .home-social-card::after {
+    display: none;
+  }
+
+  .home-social-icon-wrap {
+    width: 46px;
+    height: 46px;
+    margin: 0;
+  }
+
+  .home-social-icon-wrap::before {
+    inset: 0;
+  }
+
+  .home-social-icon-wrap::after {
+    inset: 12px;
+  }
+
+  .home-social-icon-image {
+    width: 25px;
+    height: 25px;
+  }
+
+  .home-social-card strong,
+  .home-social-card.is-featured strong,
+  .home-social-card small,
+  .home-social-card em,
+  .home-social-card-button {
+    display: none;
+  }
+}
