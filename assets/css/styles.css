@@ -9082,7 +9082,7 @@ h3 {
 }
 
 .fab-result-card-image {
-  inset: 5.9% 6.7% 5.8%;
+  inset: 5.9% 6.4% 4.6%;
   overflow: hidden;
   border-radius: 6px;
   background: #090e0a;
@@ -9112,20 +9112,20 @@ h3 {
 .fab-result-card-image .tcg-card-image img {
   height: 100%;
   width: 100%;
-  object-fit: contain;
-  object-position: center center;
+  object-fit: cover;
+  object-position: center top;
   background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.12));
   border-radius: 0;
 }
 
 .fab-result-podium-caption {
-  left: 9%;
-  right: 9%;
-  bottom: 8.2%;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 4;
-  padding: 3.8rem .9rem .72rem;
+  padding: 6.2rem 1.2rem 1rem;
   text-align: center;
-  background: linear-gradient(180deg, transparent, rgba(0,0,0,.86) 42%, rgba(0,0,0,.96));
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.22) 12%, rgba(0,0,0,.82) 36%, rgba(0,0,0,.96) 100%);
   text-shadow: 0 3px 8px rgba(0,0,0,.95);
 }
 
