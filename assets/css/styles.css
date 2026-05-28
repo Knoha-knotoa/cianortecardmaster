@@ -7054,8 +7054,8 @@ h3 {
 }
 
 .home-google-bottom-link img {
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   object-fit: contain;
   filter: brightness(0) saturate(100%) invert(80%) sepia(46%) saturate(703%) hue-rotate(359deg) brightness(101%) contrast(95%) drop-shadow(0 0 8px rgba(212,175,55,.35));
 }
@@ -9798,8 +9798,8 @@ tr.is-champion .fab-result-rank::before {
 .fab-result-pill-icon,
 .fab-result-wins-icon {
   display: inline-block;
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   object-fit: contain;
   flex: 0 0 auto;
   filter: drop-shadow(0 4px 8px rgba(0,0,0,.42));
@@ -9807,8 +9807,8 @@ tr.is-champion .fab-result-rank::before {
 
 .fab-result-pill-icon,
 .fab-result-wins-icon {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
 }
 
 .fab-result-inline-icon.is-green {
@@ -9848,17 +9848,32 @@ tr.is-champion .fab-result-rank::before {
   line-height: 1.15;
 }
 
+.fab-result-stat-label .fab-result-inline-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.fab-result-meta-bar .fab-result-inline-icon {
+  width: 20px;
+  height: 20px;
+}
+
 .fab-result-stat-card strong {
   margin-top: .5rem;
 }
 
 .fab-result-action-icon {
-  width: 32px;
-  height: 32px;
+  width: 42px;
+  height: 42px;
   justify-content: center;
   border-radius: 999px;
   background: radial-gradient(circle at 50% 42%, rgba(255,255,255,.08), rgba(255,255,255,0) 68%), rgba(6,10,7,.46);
   box-shadow: inset 0 0 0 1px rgba(248,216,117,.14);
+}
+
+.fab-result-action-icon .fab-result-inline-icon {
+  width: 22px;
+  height: 22px;
 }
 
 .fab-result-action-grid span {
@@ -9919,14 +9934,24 @@ tr.is-champion .fab-result-rank::before {
   }
 
   .fab-result-action-icon {
-    width: 28px;
-    height: 28px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .fab-result-action-icon .fab-result-inline-icon {
+    width: 19px;
+    height: 19px;
   }
 
   .fab-result-inline-icon,
   .fab-result-pill-icon,
   .fab-result-wins-icon {
-    width: 15px;
-    height: 15px;
+    width: 17px;
+    height: 17px;
+  }
+
+  .fab-result-stat-label .fab-result-inline-icon {
+    width: 20px;
+    height: 20px;
   }
 }
