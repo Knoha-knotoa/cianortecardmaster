@@ -1,0 +1,92 @@
+---
+layout: default
+title: "Heróis da Comunidade"
+description: "Conheça os jogadores, autores, colecionadores, deckbuilders e organizadores que ajudam a construir a cena de card games, RPG e cultura geek em Cianorte."
+keywords:
+  - heróis da comunidade
+  - autores Cianorte Card Masters
+  - jogadores de card game Cianorte
+  - Flesh and Blood Cianorte
+  - Pokémon TCG Cianorte
+  - RPG Cianorte
+image: /assets/img/banners/banner-comunidade.webp
+image_alt: "Heróis da comunidade Cianorte Card Masters reunidos em encontros de card games e RPG"
+permalink: /autores/
+---
+
+{% assign autores_list = site.autores | sort: 'title' %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ page.title | jsonify }},
+  "description": {{ page.description | jsonify }},
+  "url": "{{ page.url | absolute_url }}",
+  "inLanguage": "pt-BR",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": {{ site.title | jsonify }},
+    "url": "{{ '/' | absolute_url }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ site.title | jsonify }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ site.data.images.logo_menu | absolute_url }}"
+    }
+  }
+}
+</script>
+
+<section class="page-hero authors-page-hero" style="--page-hero-image: url('{{ '/assets/img/banners/banner-comunidade.webp' | relative_url }}'); --page-hero-image-mobile: url('{{ '/assets/img/banners/banner-comunidade-mobile.webp' | relative_url }}'); --page-hero-position: center; --page-hero-position-mobile: center;">
+  <div class="container">
+    <p class="eyebrow">Jogadores, autores e aliados da mesa</p>
+    <h1>Heróis da Comunidade</h1>
+    <p>
+      Conheça os aventureiros que ajudam a movimentar o Cianorte Card Masters: jogadores, colecionadores,
+      deckbuilders, criadores de conteúdo, mestres de RPG e organizadores que fazem a cena local acontecer.
+    </p>
+  </div>
+</section>
+
+<section class="authors-listing listing" aria-labelledby="authors-list-title">
+  <div class="container">
+    <div class="section-title">
+      <div>
+        <p class="eyebrow">Grimório aberto</p>
+        <h2 id="authors-list-title">Perfis cadastrados</h2>
+        <p>Clique em um herói para ver bio, jogos, estilo de mesa, decks favoritos e publicações vinculadas.</p>
+      </div>
+      <a class="section-link" href="{{ '/entre-para-o-grimorio-do-cianorte-card-masters/' | relative_url }}">Entrar para o Grimório</a>
+    </div>
+
+    <div class="card-grid grid-3 authors-grid">
+      {% for autor in autores_list %}
+        {% assign autor_avatar = autor.avatar | default: site.data.images.logo_menu %}
+        {% if autor_avatar contains '://' %}
+          {% assign autor_avatar_src = autor_avatar %}
+        {% else %}
+          {% assign autor_avatar_src = autor_avatar | relative_url %}
+        {% endif %}
+        <article class="author-card">
+          <a class="author-card-avatar-link" href="{{ autor.url | relative_url }}" aria-label="Abrir perfil de {{ autor.nome_aventureiro | default: autor.title | escape }}">
+            <img class="author-card-avatar" src="{{ autor_avatar_src }}" alt="{{ autor.avatar_alt | default: autor.nome_aventureiro | escape }}" loading="lazy" decoding="async">
+          </a>
+          <div class="author-card-content">
+            <p class="eyebrow">{{ autor.classe | default: 'Aventureiro da comunidade' }}</p>
+            <h2><a href="{{ autor.url | relative_url }}">{{ autor.nome_aventureiro | default: autor.title }}</a></h2>
+            {% if autor.bio_curta %}<p>{{ autor.bio_curta }}</p>{% endif %}
+            <div class="author-card-meta">
+              {% if autor.jogo_principal %}<span>Principal: {{ autor.jogo_principal }}</span>{% endif %}
+              {% if autor.jogos and autor.jogos.size > 0 %}<span>{{ autor.jogos | join: ', ' }}</span>{% endif %}
+            </div>
+          </div>
+        </article>
+      {% else %}
+        <p class="empty-section">Nenhum herói cadastrado ainda.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>

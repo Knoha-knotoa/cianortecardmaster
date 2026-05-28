@@ -25,6 +25,9 @@ collections:
   comunidade:
     output: true
     permalink: /comunidade/:path/
+  autores:
+    output: true
+    permalink: /autores/:name/
 
 defaults:
   - scope:
@@ -107,6 +110,12 @@ defaults:
       layout: post
       author: "Cianorte Card Masters"
       category_label: "Comunidade"
+  - scope:
+      path: ""
+      type: "autores"
+    values:
+      layout: autor
+      category_label: "Herói da Comunidade"
 
   # Blog: subpastas com rótulo automático
   - scope:
@@ -162,21 +171,7 @@ defaults:
       content_style: "youtube"
       social_platform: "youtube"
   - scope:
-      path: "_comunidade/youtube"
-      type: "comunidade"
-    values:
-      category_label: "YouTube"
-      content_style: "youtube"
-      social_platform: "youtube"
-  - scope:
       path: "_comunidade/TikTok"
-      type: "comunidade"
-    values:
-      category_label: "TikTok"
-      content_style: "tiktok"
-      social_platform: "tiktok"
-  - scope:
-      path: "_comunidade/tiktok"
       type: "comunidade"
     values:
       category_label: "TikTok"

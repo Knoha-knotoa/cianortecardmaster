@@ -119,8 +119,12 @@
       <p>{{ include.post.excerpt | strip_html | truncate: 130 }}</p>
     {% endif %}
 
+    {% assign post_author_key = include.post.autor | default: include.post.autor_slug | default: include.post.author | default: "" %}
+    <div class="post-card-author-wrap">
+      {% include autor-byline.html autor=post_author_key fallback=include.post.author mode="card" show_games=true %}
+    </div>
+
     <div class="post-card-meta">
-      {% if include.post.author %}<span>{{ include.post.author }}</span>{% endif %}
       {% if include.post.date %}<span>{{ include.post.date | date: "%d/%m/%Y" }}</span>{% endif %}
     </div>
   </div>

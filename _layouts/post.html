@@ -106,6 +106,29 @@ layout: default
   {% endcase %}
 {% endif %}
 
+{% assign page_author_key = page.autor | default: page.autor_slug | default: page.author | default: '' | strip %}
+{% assign page_author_key_down = page_author_key | downcase | strip %}
+{% assign page_autor = nil %}
+{% if page_author_key_down != '' %}
+  {% for autor in site.autores %}
+    {% assign autor_slug_key = autor.slug | default: autor.basename | downcase | strip %}
+    {% assign autor_name_key = autor.nome_aventureiro | default: autor.title | downcase | strip %}
+    {% if page_author_key_down == autor_slug_key or page_author_key_down == autor_name_key %}
+      {% assign page_autor = autor %}
+      {% break %}
+    {% endif %}
+    {% if autor.aliases %}
+      {% for alias in autor.aliases %}
+        {% assign alias_key = alias | downcase | strip %}
+        {% if page_author_key_down == alias_key %}
+          {% assign page_autor = autor %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    {% if page_autor %}{% break %}{% endif %}
+  {% endfor %}
+{% endif %}
 
 {% if page.schema_type %}
   {% assign structured_image = nil %}
@@ -128,7 +151,7 @@ layout: default
   {% if structured_image %}"image": {{ structured_image | jsonify }},{% endif %}
   "author": {
     "@type": "Person",
-    "name": {{ page.author | default: site.title | jsonify }}
+    "name": {{ page_autor.nome_aventureiro | default: page.author | default: site.title | jsonify }}
   },
   "publisher": {
     "@type": "Organization",
@@ -150,22 +173,6 @@ layout: default
 </script>
 {% endif %}
 
-
-{% assign is_fab_result_detail = false %}
-{% assign post_game_down = page.game | default: "" | downcase %}
-{% if page.collection == "comunidade" and page.results %}
-  {% if post_style == "armory" %}
-    {% assign is_fab_result_detail = true %}
-  {% elsif post_style == "liga" %}
-    {% unless post_game_down contains "pokemon" %}
-      {% assign is_fab_result_detail = true %}
-    {% endunless %}
-  {% endif %}
-{% endif %}
-
-{% if is_fab_result_detail %}
-  {% include fab-result-standalone.html %}
-{% else %}
 <article class="post-page post-style-{{ post_style }}">
   <header class="post-hero">
     <div class="container post-hero-grid">
@@ -178,8 +185,8 @@ layout: default
           <p class="post-summary">{{ page.summary }}</p>
         {% endif %}
 
-        <div class="post-meta">
-          {% if page.author %}<span>Por {{ page.author }}</span>{% endif %}
+        <div class="post-meta post-meta-author">
+          {% include autor-byline.html autor=page_author_key fallback=page.author mode="hero" show_games=true %}
           {% if page.date %}<span>{{ page.date | date: "%d/%m/%Y" }}</span>{% endif %}
         </div>
 
@@ -239,4 +246,3 @@ layout: default
     {% endif %}
   </div>
 </article>
-{% endif %}

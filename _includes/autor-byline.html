@@ -1,0 +1,49 @@
+{% assign autor_key = include.autor | default: include.autor_slug | default: include.fallback | default: '' | strip %}
+{% assign autor_key_down = autor_key | downcase | strip %}
+{% assign matched_autor = nil %}
+{% if autor_key_down != '' %}
+  {% for autor in site.autores %}
+    {% assign autor_slug_key = autor.slug | default: autor.basename | downcase | strip %}
+    {% assign autor_name_key = autor.nome_aventureiro | default: autor.title | downcase | strip %}
+    {% if autor_key_down == autor_slug_key or autor_key_down == autor_name_key %}
+      {% assign matched_autor = autor %}
+      {% break %}
+    {% endif %}
+    {% if autor.aliases %}
+      {% for alias in autor.aliases %}
+        {% assign alias_key = alias | downcase | strip %}
+        {% if autor_key_down == alias_key %}
+          {% assign matched_autor = autor %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    {% if matched_autor %}{% break %}{% endif %}
+  {% endfor %}
+{% endif %}
+
+{% assign byline_mode = include.mode | default: 'inline' %}
+{% if matched_autor %}
+  {% assign autor_avatar = matched_autor.avatar | default: site.data.images.logo_menu %}
+  {% if autor_avatar contains '://' %}
+    {% assign autor_avatar_src = autor_avatar %}
+  {% else %}
+    {% assign autor_avatar_src = autor_avatar | relative_url %}
+  {% endif %}
+  <a class="author-chip author-chip--{{ byline_mode }}" href="{{ matched_autor.url | relative_url }}" aria-label="Abrir perfil de {{ matched_autor.nome_aventureiro | default: matched_autor.title | escape }}">
+    <img class="author-chip-avatar" src="{{ autor_avatar_src }}" alt="{{ matched_autor.avatar_alt | default: matched_autor.nome_aventureiro | escape }}" loading="lazy" decoding="async">
+    <span class="author-chip-copy">
+      <strong>{{ matched_autor.nome_aventureiro | default: matched_autor.title }}</strong>
+      {% if include.show_games != false %}
+        <small>
+          {% if matched_autor.jogo_principal %}Jogo principal: {{ matched_autor.jogo_principal }}{% endif %}
+          {% if matched_autor.jogos and matched_autor.jogos.size > 0 %}
+            {% if matched_autor.jogo_principal %} • {% endif %}Acompanha: {{ matched_autor.jogos | join: ', ' }}
+          {% endif %}
+        </small>
+      {% endif %}
+    </span>
+  </a>
+{% elsif include.fallback %}
+  <span class="author-fallback">{{ include.fallback }}</span>
+{% endif %}

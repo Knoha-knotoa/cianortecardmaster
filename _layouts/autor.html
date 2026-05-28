@@ -1,0 +1,134 @@
+---
+layout: default
+---
+
+{% assign autor_avatar = page.avatar | default: site.data.images.logo_menu %}
+{% if autor_avatar contains '://' %}
+  {% assign autor_avatar_src = autor_avatar %}
+{% else %}
+  {% assign autor_avatar_src = autor_avatar | relative_url %}
+{% endif %}
+{% assign autor_collections = site.blog | concat: site.decks | concat: site.guias | concat: site.comunidade | sort: 'date' | reverse %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "name": {{ page.nome_aventureiro | default: page.title | jsonify }},
+  "description": {{ page.bio_curta | default: page.description | jsonify }},
+  "url": "{{ page.url | absolute_url }}",
+  "about": {
+    "@type": "Person",
+    "name": {{ page.nome_aventureiro | default: page.title | jsonify }}
+  },
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": {{ site.title | jsonify }},
+    "url": "{{ '/' | absolute_url }}"
+  }
+}
+</script>
+
+<article class="author-profile-page">
+  <header class="author-hero page-hero" style="--page-hero-image: url('{{ '/assets/img/banners/banner-comunidade.webp' | relative_url }}'); --page-hero-image-mobile: url('{{ '/assets/img/banners/banner-comunidade-mobile.webp' | relative_url }}'); --page-hero-position: center; --page-hero-position-mobile: center;">
+    <div class="container author-hero-grid">
+      <div class="author-hero-copy">
+        <p class="eyebrow">Herói da Comunidade</p>
+        <h1>{{ page.nome_aventureiro | default: page.title }}</h1>
+        {% if page.bio_curta %}<p class="post-summary">{{ page.bio_curta }}</p>{% endif %}
+        <div class="author-hero-tags">
+          {% if page.classe %}<span>{{ page.classe }}</span>{% endif %}
+          {% if page.cidade %}<span>{{ page.cidade }}</span>{% endif %}
+          {% if page.jogo_principal %}<span>Jogo principal: {{ page.jogo_principal }}</span>{% endif %}
+        </div>
+      </div>
+      <div class="author-hero-card">
+        <img src="{{ autor_avatar_src }}" alt="{{ page.avatar_alt | default: page.nome_aventureiro | escape }}" loading="eager" decoding="async" fetchpriority="high">
+      </div>
+    </div>
+  </header>
+
+  <section class="author-profile-body">
+    <div class="container author-profile-grid">
+      <div class="author-profile-main">
+        <section class="author-panel">
+          <p class="eyebrow">História na comunidade</p>
+          <h2>Sobre {{ page.nome_aventureiro | default: page.title }}</h2>
+          {% if page.bio_completa %}
+            <p>{{ page.bio_completa | newline_to_br }}</p>
+          {% else %}
+            <p>{{ page.bio_curta }}</p>
+          {% endif %}
+          {{ content }}
+        </section>
+
+        <section class="author-panel">
+          <p class="eyebrow">Conteúdo publicado</p>
+          <h2>Posts, decks e guias</h2>
+          <div class="card-grid grid-3 author-post-grid">
+            {% assign author_slug_key = page.slug | downcase | strip %}
+            {% assign author_name_key = page.nome_aventureiro | default: page.title | downcase | strip %}
+            {% assign matched_count = 0 %}
+            {% for post in autor_collections %}
+              {% assign post_author_key = post.autor | default: post.autor_slug | default: post.author | default: '' | downcase | strip %}
+              {% assign author_match = false %}
+              {% if post_author_key == author_slug_key or post_author_key == author_name_key %}
+                {% assign author_match = true %}
+              {% endif %}
+              {% if author_match == false and page.aliases %}
+                {% for alias in page.aliases %}
+                  {% assign alias_key = alias | downcase | strip %}
+                  {% if post_author_key == alias_key %}
+                    {% assign author_match = true %}
+                    {% break %}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+              {% if author_match %}
+                {% assign matched_count = matched_count | plus: 1 %}
+                {% include post-card.html post=post %}
+              {% endif %}
+            {% endfor %}
+          </div>
+          {% if matched_count == 0 %}
+            <p class="empty-section">Nenhuma publicação vinculada ainda. Quando um post usar <code>autor: {{ page.slug }}</code>, ele aparece aqui automaticamente.</p>
+          {% endif %}
+        </section>
+      </div>
+
+      <aside class="author-profile-sidebar" aria-label="Informações de {{ page.nome_aventureiro | default: page.title }}">
+        <section class="author-panel author-facts-card">
+          <p class="eyebrow">Ficha do aventureiro</p>
+          <dl class="author-facts-list">
+            {% if page.cidade %}<div><dt>Cidade</dt><dd>{{ page.cidade }}</dd></div>{% endif %}
+            {% if page.classe %}<div><dt>Aparece como</dt><dd>{{ page.classe }}</dd></div>{% endif %}
+            {% if page.jogo_principal %}<div><dt>Jogo principal</dt><dd>{{ page.jogo_principal }}</dd></div>{% endif %}
+            {% if page.jogos and page.jogos.size > 0 %}<div><dt>Jogos que acompanha</dt><dd>{{ page.jogos | join: ', ' }}</dd></div>{% endif %}
+            {% if page.estilo and page.estilo.size > 0 %}<div><dt>Estilo de jogador</dt><dd>{{ page.estilo | join: ', ' }}</dd></div>{% endif %}
+            {% if page.decks_atuais %}<div><dt>Decks atuais</dt><dd>{{ page.decks_atuais | newline_to_br }}</dd></div>{% endif %}
+            {% if page.favoritos %}<div><dt>Favoritos</dt><dd>{{ page.favoritos | newline_to_br }}</dd></div>{% endif %}
+            {% if page.carta_representa %}<div><dt>Deck ou carta que representa</dt><dd>{{ page.carta_representa }}</dd></div>{% endif %}
+            {% if page.conteudos and page.conteudos.size > 0 %}<div><dt>Conteúdos que pretende postar</dt><dd>{{ page.conteudos | join: ', ' }}</dd></div>{% endif %}
+            {% if page.links_decks %}<div><dt>Links de decks/listas</dt><dd><a href="{{ page.links_decks }}" target="_blank" rel="noopener noreferrer">Abrir link</a></dd></div>{% endif %}
+          </dl>
+        </section>
+
+        {% assign has_social = false %}
+        {% if page.redes.instagram or page.redes.youtube or page.redes.tiktok or page.redes.facebook or page.redes.outro %}{% assign has_social = true %}{% endif %}
+        {% if has_social %}
+          <section class="author-panel author-social-card">
+            <p class="eyebrow">Links</p>
+            <h2>Onde encontrar</h2>
+            <div class="author-social-links">
+              {% if page.redes.instagram %}<a href="{{ page.redes.instagram }}" target="_blank" rel="noopener noreferrer">Instagram</a>{% endif %}
+              {% if page.redes.youtube %}<a href="{{ page.redes.youtube }}" target="_blank" rel="noopener noreferrer">YouTube</a>{% endif %}
+              {% if page.redes.tiktok %}<a href="{{ page.redes.tiktok }}" target="_blank" rel="noopener noreferrer">TikTok</a>{% endif %}
+              {% if page.redes.facebook %}<a href="{{ page.redes.facebook }}" target="_blank" rel="noopener noreferrer">Facebook</a>{% endif %}
+              {% if page.redes.outro %}<a href="{{ page.redes.outro }}" target="_blank" rel="noopener noreferrer">Outro link</a>{% endif %}
+            </div>
+          </section>
+        {% endif %}
+      </aside>
+    </div>
+  </section>
+</article>
