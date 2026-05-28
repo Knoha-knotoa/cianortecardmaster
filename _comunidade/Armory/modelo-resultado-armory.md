@@ -3,6 +3,7 @@ published: false
 title: "Armory - DD/MM/AAAA"
 summary: "Resultado do Armory de Flesh and Blood."
 game: "Flesh and Blood"
+format: "Blitz"
 rounds: 3
 next_armory: "Quarta • 19:00"
 date: 2026-05-19
@@ -12,6 +13,8 @@ image_alt: "Modelo visual para resultado de Armory da comunidade Cianorte Card M
 results:
   - player: "Nome do jogador"
     hero: "Nome do herói"
+    # Opcional: informe uma foto do jogador para aparecer no hexágono do pódio da página completa.
+    # player_image: "/assets/img/jogadores/nome-do-jogador.webp"
     # Opcional: use uma imagem local do herói. Se não informar, o site tenta buscar pela API GoAgain.
     # hero_icon: "/assets/img/fab-heroes/nome-do-heroi.webp"
     # Se existir um arquivo local com o nome do herói em assets/img/fab-heroes/, o site carrega o badge automaticamente.

@@ -3,6 +3,7 @@ published: false
 title: "Liga - Inicio DD/MM/AAAA Término DD/MM/AAAA"
 summary: "Resultado do da liga de Classic Constructed."
 game: "Flesh and Blood"
+format: "Classic Constructed"
 rounds: 20
 date: 2026-05-19
 event_date: 2026-05-19
@@ -13,6 +14,8 @@ image_alt: "Modelo visual para resultado de liga da comunidade Cianorte Card Mas
 results:
   - player: "Nome do jogador"
     hero: "Nome do herói"
+    # Opcional: informe uma foto do jogador para aparecer no hexágono do pódio da página completa.
+    # player_image: "/assets/img/jogadores/nome-do-jogador.webp"
     # Opcional: use uma imagem local do herói. Se não informar, o site tenta buscar pela API GoAgain.
     # hero_icon: "/assets/img/fab-heroes/nome-do-heroi.webp"
     # Se existir um arquivo local com o nome do herói em assets/img/fab-heroes/, o site carrega o badge automaticamente.

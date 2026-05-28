@@ -8875,3 +8875,870 @@ h3 {
   }
 }
 
+
+/* ==========================================
+   Resultado completo FAB: Armory e Liga
+   Isolado das páginas de listagem em /resultados
+========================================== */
+.fab-result-page {
+  --fab-gold: #f8d875;
+  --fab-gold-strong: #ffd45e;
+  --fab-green: #9cff3d;
+  --fab-bronze: #c47a31;
+  --fab-panel: rgba(5, 8, 6, .82);
+  --fab-line: rgba(248, 216, 117, .34);
+  color: #fff2d2;
+  background: #020403;
+  overflow: hidden;
+}
+
+.fab-result-shell {
+  position: relative;
+  z-index: 1;
+}
+
+.fab-result-top,
+.fab-result-mid,
+.fab-result-bottom {
+  position: relative;
+  isolation: isolate;
+}
+
+.fab-result-top {
+  min-height: 760px;
+  padding: clamp(2.25rem, 4vw, 4.5rem) 0 clamp(3rem, 5vw, 4.5rem);
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.58) 82%, #020403 100%),
+    url("../img/resultados/fab/img-background-resultados-fab-sup.webp") center top / cover no-repeat;
+}
+
+.fab-result-top::before,
+.fab-result-bottom::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 50% 8%, rgba(255, 224, 112, .18), transparent 22rem),
+    radial-gradient(circle at 12% 70%, rgba(90, 255, 34, .12), transparent 22rem),
+    radial-gradient(circle at 88% 66%, rgba(90, 255, 34, .10), transparent 22rem);
+}
+
+.fab-result-kicker,
+.fab-result-subtitle,
+.fab-result-meta-bar,
+.fab-result-section-heading .eyebrow {
+  font-family: "Fugaz One", system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+
+.fab-result-kicker {
+  margin: 0 0 .35rem;
+  text-align: center;
+  color: var(--fab-green);
+  font-size: clamp(.72rem, 1.1vw, .92rem);
+  text-shadow: 0 0 18px rgba(156, 255, 61, .32), 0 3px 8px rgba(0,0,0,.72);
+}
+
+.fab-result-kicker::before,
+.fab-result-kicker::after {
+  content: "";
+  display: inline-block;
+  width: 58px;
+  height: 1px;
+  margin: 0 .8rem .24rem;
+  background: linear-gradient(90deg, transparent, var(--fab-green));
+  opacity: .72;
+}
+
+.fab-result-kicker::after {
+  background: linear-gradient(90deg, var(--fab-green), transparent);
+}
+
+.fab-result-page h1 {
+  margin: 0;
+  text-align: center;
+  color: var(--fab-gold);
+  font-family: "Bangers", "Fugaz One", system-ui, sans-serif;
+  font-size: clamp(3.4rem, 8vw, 7.6rem);
+  line-height: .9;
+  letter-spacing: .04em;
+  text-shadow:
+    0 4px 0 rgba(43, 24, 4, .92),
+    0 0 24px rgba(255, 212, 94, .34),
+    0 18px 34px rgba(0,0,0,.68);
+}
+
+.fab-result-subtitle {
+  margin: .55rem 0 1.35rem;
+  text-align: center;
+  color: #fff5cf;
+  font-size: clamp(.9rem, 2vw, 1.35rem);
+  text-shadow: 0 3px 10px rgba(0,0,0,.86);
+}
+
+.fab-result-meta-bar {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  width: min(100%, 1040px);
+  margin: 0 auto 2rem;
+  border: 1px solid rgba(248, 216, 117, .46);
+  border-radius: 999px;
+  background: rgba(3, 6, 4, .72);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.035), 0 12px 32px rgba(0,0,0,.36);
+  overflow: hidden;
+  backdrop-filter: blur(4px);
+}
+
+.fab-result-meta-bar span {
+  display: inline-flex;
+  align-items: center;
+  gap: .42rem;
+  min-height: 44px;
+  padding: .62rem 1rem;
+  color: #fff0bf;
+  font-size: clamp(.65rem, 1vw, .82rem);
+  border-right: 1px solid rgba(248, 216, 117, .20);
+  text-shadow: 0 2px 7px rgba(0,0,0,.72);
+}
+
+.fab-result-meta-bar span:last-child {
+  border-right: 0;
+}
+
+.fab-result-meta-bar strong {
+  color: var(--fab-green);
+  font-weight: 800;
+}
+
+.fab-result-podium {
+  display: grid;
+  grid-template-columns: minmax(230px, .9fr) minmax(290px, 1.08fr) minmax(230px, .9fr);
+  align-items: end;
+  gap: clamp(.7rem, 2vw, 1.4rem);
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.fab-result-podium-card {
+  position: relative;
+  min-width: 0;
+  transform: translateZ(0);
+}
+
+.fab-result-podium-card-champion {
+  z-index: 3;
+}
+
+.fab-result-podium-card-side {
+  z-index: 2;
+  margin-bottom: .55rem;
+}
+
+.fab-result-card-art {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1086 / 1448;
+  border-radius: 8px;
+  filter: drop-shadow(0 22px 34px rgba(0,0,0,.58));
+}
+
+.fab-result-podium-card-champion .fab-result-card-art {
+  filter: drop-shadow(0 0 24px rgba(255, 212, 94, .18)) drop-shadow(0 26px 42px rgba(0,0,0,.62));
+}
+
+.fab-result-card-image,
+.fab-result-card-frame,
+.fab-result-podium-caption {
+  position: absolute;
+}
+
+.fab-result-card-image {
+  inset: 5.8% 6.1% 5.2%;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #090e0a;
+}
+
+.fab-result-card-frame {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.fab-result-card-image .tcg-card-image {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: radial-gradient(circle at top, rgba(248,216,117,.12), #070b08 68%);
+  box-shadow: none;
+}
+
+.fab-result-card-image .tcg-card-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center 12%;
+  border-radius: 0;
+}
+
+.fab-result-podium-caption {
+  left: 9%;
+  right: 9%;
+  bottom: 8.2%;
+  z-index: 4;
+  padding: 3.8rem .9rem .72rem;
+  text-align: center;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,.86) 42%, rgba(0,0,0,.96));
+  text-shadow: 0 3px 8px rgba(0,0,0,.95);
+}
+
+.fab-result-podium-caption strong {
+  display: block;
+  color: #fff0c2;
+  font-family: "Bangers", "Fugaz One", system-ui, sans-serif;
+  font-size: clamp(1.75rem, 3vw, 3rem);
+  line-height: .92;
+  letter-spacing: .04em;
+}
+
+.fab-result-podium-card-side .fab-result-podium-caption strong {
+  font-size: clamp(1.35rem, 2.5vw, 2.15rem);
+}
+
+.fab-result-podium-caption span {
+  display: block;
+  margin-top: .28rem;
+  color: var(--fab-green);
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: clamp(.72rem, 1.2vw, .98rem);
+  line-height: 1.22;
+  text-transform: uppercase;
+}
+
+.fab-result-podium-caption div {
+  display: flex;
+  justify-content: center;
+  gap: .65rem;
+  margin-top: .72rem;
+}
+
+.fab-result-podium-caption em,
+.fab-result-podium-caption b {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  padding: .28rem .7rem;
+  border: 1px solid rgba(248, 216, 117, .46);
+  border-radius: 9px;
+  background: rgba(1, 4, 3, .74);
+  color: #ffe596;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-style: normal;
+  font-size: clamp(.78rem, 1.3vw, 1.08rem);
+}
+
+.fab-result-podium-caption b::before,
+.fab-result-wins::before {
+  content: "🏆";
+  margin-right: .28rem;
+  font-size: .9em;
+}
+
+.fab-result-winner-hex {
+  position: absolute;
+  top: -9%;
+  left: 50%;
+  z-index: 8;
+  width: clamp(70px, 9.2vw, 118px);
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  display: grid;
+  place-items: center;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.48));
+}
+
+.fab-result-podium-card-side .fab-result-winner-hex {
+  width: clamp(58px, 7.6vw, 92px);
+}
+
+.fab-result-winner-frame,
+.fab-result-player-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.fab-result-player-photo {
+  inset: 18%;
+  width: 64%;
+  height: 64%;
+  object-fit: cover;
+  clip-path: polygon(25% 7%, 75% 7%, 100% 50%, 75% 93%, 25% 93%, 0 50%);
+  z-index: 1;
+}
+
+.fab-result-winner-frame {
+  z-index: 2;
+}
+
+.fab-result-winner-hex strong {
+  position: relative;
+  z-index: 3;
+  color: #fff2c6;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: clamp(1.1rem, 2.9vw, 2.25rem);
+  text-shadow: 0 2px 4px rgba(0,0,0,.76);
+  transform: translateY(-1px);
+}
+
+.fab-result-mid {
+  padding: clamp(2rem, 4vw, 3.5rem) 0;
+  background:
+    radial-gradient(circle at 50% 0, rgba(97, 255, 32, .10), transparent 28rem),
+    linear-gradient(180deg, #020403, #06100a 48%, #020403);
+}
+
+.fab-result-summary-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 1.45fr) repeat(4, minmax(120px, .55fr));
+  gap: 0;
+  border: 1px solid var(--fab-line);
+  border-radius: 18px;
+  background:
+    linear-gradient(90deg, rgba(248,216,117,.045), transparent),
+    rgba(4, 8, 5, .84);
+  box-shadow: 0 18px 38px rgba(0,0,0,.38), inset 0 0 0 1px rgba(255,255,255,.035);
+  overflow: hidden;
+}
+
+.fab-result-story-card {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.1rem 1.25rem;
+  border-right: 1px solid rgba(248,216,117,.22);
+}
+
+.fab-result-story-card img {
+  width: 58px;
+  max-height: 84px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,.44));
+}
+
+.fab-result-story-card p {
+  margin: 0;
+  color: #d9d1ba;
+  line-height: 1.55;
+}
+
+.fab-result-story-card strong {
+  color: #ffe596;
+}
+
+.fab-result-stat-card {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  min-height: 128px;
+  padding: .9rem;
+  text-align: center;
+  border-right: 1px solid rgba(248,216,117,.18);
+}
+
+.fab-result-stat-card:last-child {
+  border-right: 0;
+}
+
+.fab-result-stat-card span,
+.fab-result-stat-card small {
+  color: #c9bfa4;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: .7rem;
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.fab-result-stat-card strong {
+  max-width: 100%;
+  color: var(--fab-gold-strong);
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: clamp(1.25rem, 2.3vw, 2.25rem);
+  line-height: 1.03;
+  overflow-wrap: anywhere;
+  text-shadow: 0 0 18px rgba(248,216,117,.18);
+}
+
+.fab-result-section-heading {
+  margin: 2.4rem 0 1rem;
+}
+
+.fab-result-section-heading-center {
+  text-align: center;
+}
+
+.fab-result-section-heading .eyebrow {
+  margin-bottom: .2rem;
+  color: var(--fab-green);
+}
+
+.fab-result-section-heading h2 {
+  margin: 0;
+  color: #ffe596;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: clamp(1.3rem, 3vw, 2.1rem);
+  text-shadow: 0 3px 12px rgba(0,0,0,.58);
+}
+
+.fab-result-hero-list-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .72rem;
+}
+
+.fab-result-hero-chip {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  min-width: 0;
+  padding: .55rem .65rem;
+  border: 1px solid rgba(248,216,117,.20);
+  border-radius: 16px;
+  background: rgba(3, 7, 4, .70);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.025);
+}
+
+.fab-result-hero-chip > span:last-child {
+  min-width: 0;
+}
+
+.fab-result-hero-chip strong,
+.fab-result-hero-chip small {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fab-result-hero-chip strong {
+  color: #fff1c9;
+  font-size: .95rem;
+}
+
+.fab-result-hero-chip small {
+  color: #bdb397;
+  font-size: .78rem;
+}
+
+.fab-result-hero-avatar {
+  position: relative;
+  flex: 0 0 auto;
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(248,216,117,.14), rgba(0,0,0,.86));
+  color: var(--fab-gold);
+  font-family: "Fugaz One", system-ui, sans-serif;
+  isolation: isolate;
+}
+
+.fab-result-hero-avatar::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  z-index: 4;
+  background: url("../img/resultados/fab/icon-img-borda-hero.png") center / contain no-repeat;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 9px rgba(0,0,0,.42));
+}
+
+.fab-result-hero-avatar img {
+  position: absolute;
+  inset: 8%;
+  width: 84%;
+  height: 84%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.fab-result-hero-avatar > span {
+  position: relative;
+  z-index: 1;
+  transform: translateY(-1px);
+}
+
+.fab-result-hero-avatar:not(.is-missing) > span {
+  opacity: 0;
+}
+
+.fab-result-hero-avatar-sm {
+  width: 42px;
+  height: 42px;
+}
+
+.fab-result-hero-avatar-sm::after {
+  inset: -8px;
+}
+
+.fab-result-standings {
+  margin-top: 2rem;
+  border: 1px solid rgba(248,216,117,.34);
+  border-radius: 18px;
+  background: rgba(3, 7, 4, .82);
+  box-shadow: 0 18px 42px rgba(0,0,0,.34), inset 0 0 0 1px rgba(255,255,255,.025);
+  overflow: hidden;
+}
+
+.fab-result-standings .fab-result-section-heading {
+  margin: 0;
+  padding: 1.1rem 1rem .35rem;
+}
+
+.fab-result-table-scroll {
+  overflow-x: auto;
+}
+
+.fab-result-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+}
+
+.fab-result-table th,
+.fab-result-table td {
+  padding: .68rem 1rem;
+  border-bottom: 1px solid rgba(248,216,117,.16);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.fab-result-table th {
+  color: #ffe596;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: .76rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.fab-result-table td {
+  color: #f2ead6;
+  font-size: .96rem;
+}
+
+.fab-result-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.fab-result-table tbody tr {
+  background: linear-gradient(90deg, transparent, rgba(248,216,117,.025), transparent);
+}
+
+.fab-result-table tbody tr:hover {
+  background: rgba(248,216,117,.055);
+}
+
+.fab-result-table tr.is-champion {
+  background: linear-gradient(90deg, rgba(255,212,94,.12), rgba(156,255,61,.05), transparent);
+}
+
+.fab-result-rank {
+  display: inline-grid;
+  place-items: center;
+  min-width: 46px;
+  min-height: 36px;
+  border-radius: 10px;
+  color: #fff3c9;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: 1.12rem;
+}
+
+tr.is-champion .fab-result-rank::before {
+  content: "♛";
+  margin-right: .22rem;
+  color: var(--fab-gold-strong);
+}
+
+.fab-result-table-hero {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  min-width: 0;
+}
+
+.fab-result-table-hero > span:last-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fab-result-record-pill {
+  display: inline-flex;
+  min-width: 74px;
+  justify-content: center;
+  padding: .28rem .72rem;
+  border: 1px solid rgba(156,255,61,.32);
+  border-radius: 999px;
+  color: var(--fab-green);
+  font-family: "Fugaz One", system-ui, sans-serif;
+  background: rgba(11, 22, 8, .78);
+}
+
+.fab-result-wins {
+  color: var(--fab-green);
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: 1.1rem;
+}
+
+.fab-result-notes {
+  max-width: 920px;
+  margin: 1.2rem auto 0;
+  padding: 1rem 1.15rem;
+  border: 1px solid rgba(248,216,117,.18);
+  border-radius: 16px;
+  color: #d9d1ba;
+  background: rgba(0,0,0,.22);
+}
+
+.fab-result-notes > :first-child {
+  margin-top: 0;
+}
+
+.fab-result-notes > :last-child {
+  margin-bottom: 0;
+}
+
+.fab-result-bottom {
+  min-height: 330px;
+  padding: clamp(2.2rem, 4vw, 3.3rem) 0 2.2rem;
+  background:
+    linear-gradient(180deg, #020403 0%, rgba(2,4,3,.64) 18%, rgba(0,0,0,.08) 100%),
+    url("../img/resultados/fab/img-background-resultados-fab-inf.webp") center bottom / cover no-repeat;
+}
+
+.fab-result-action-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.fab-result-action-grid a {
+  position: relative;
+  min-height: 82px;
+  display: flex;
+  align-items: center;
+  gap: .78rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(248,216,117,.38);
+  border-radius: 12px;
+  color: #fff1c8;
+  background: rgba(3, 7, 4, .76);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.025), 0 16px 30px rgba(0,0,0,.34);
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.fab-result-action-grid a::before,
+.fab-result-action-grid a::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.fab-result-action-grid a::before {
+  inset: 6px;
+  border: 1px solid rgba(248,216,117,.12);
+  border-radius: 9px;
+}
+
+.fab-result-action-grid a::after {
+  inset: auto 0 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(156,255,61,.58), transparent);
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+.fab-result-action-grid a:hover {
+  transform: translateY(-2px);
+  border-color: rgba(248,216,117,.68);
+  box-shadow: 0 0 22px rgba(248,216,117,.13), 0 18px 34px rgba(0,0,0,.40);
+}
+
+.fab-result-action-grid a:hover::after {
+  opacity: 1;
+}
+
+.fab-result-action-grid span {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  color: var(--fab-gold-strong);
+  font-size: 1.45rem;
+  filter: drop-shadow(0 5px 8px rgba(0,0,0,.45));
+}
+
+.fab-result-action-grid strong {
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: .92rem;
+  line-height: 1.18;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.fab-result-game-logo {
+  display: block;
+  width: min(220px, 48vw);
+  height: auto;
+  margin: 1rem auto 0;
+  filter: drop-shadow(0 0 22px rgba(156,255,61,.28)) drop-shadow(0 12px 22px rgba(0,0,0,.58));
+}
+
+@media (max-width: 1080px) {
+  .fab-result-podium {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr) minmax(0, 1fr);
+  }
+
+  .fab-result-summary-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .fab-result-story-card {
+    grid-column: 1 / -1;
+    border-right: 0;
+    border-bottom: 1px solid rgba(248,216,117,.18);
+  }
+
+  .fab-result-hero-list-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 820px) {
+  .fab-result-top {
+    min-height: auto;
+    padding-top: 2.2rem;
+  }
+
+  .fab-result-kicker::before,
+  .fab-result-kicker::after {
+    width: 28px;
+    margin-left: .38rem;
+    margin-right: .38rem;
+  }
+
+  .fab-result-meta-bar {
+    border-radius: 18px;
+  }
+
+  .fab-result-meta-bar span {
+    width: 50%;
+    justify-content: center;
+    border-bottom: 1px solid rgba(248,216,117,.15);
+  }
+
+  .fab-result-podium {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 420px;
+    gap: 2rem;
+  }
+
+  .fab-result-podium-card-champion {
+    order: 1;
+  }
+
+  .fab-result-podium-card.is-rank-2 {
+    order: 2;
+  }
+
+  .fab-result-podium-card.is-rank-3 {
+    order: 3;
+  }
+
+  .fab-result-podium-card-side {
+    margin-bottom: 0;
+  }
+
+  .fab-result-action-grid,
+  .fab-result-hero-list-grid,
+  .fab-result-summary-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .fab-result-story-card {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 560px) {
+  .fab-result-page h1 {
+    font-size: clamp(3rem, 18vw, 4.6rem);
+  }
+
+  .fab-result-subtitle {
+    font-size: .9rem;
+  }
+
+  .fab-result-meta-bar span,
+  .fab-result-action-grid,
+  .fab-result-hero-list-grid,
+  .fab-result-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fab-result-meta-bar span {
+    width: 100%;
+    border-right: 0;
+  }
+
+  .fab-result-story-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .fab-result-story-card img {
+    margin: 0 auto;
+  }
+
+  .fab-result-stat-card {
+    min-height: 92px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(248,216,117,.16);
+  }
+
+  .fab-result-stat-card:last-child {
+    border-bottom: 0;
+  }
+
+  .fab-result-podium-caption div {
+    flex-direction: column;
+    align-items: center;
+    gap: .35rem;
+  }
+
+  .fab-result-action-grid a {
+    min-height: 74px;
+  }
+}
