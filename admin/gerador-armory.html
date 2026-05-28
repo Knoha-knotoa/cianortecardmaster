@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gerador de Markdown - Armory Cianorte Card Masters</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --panel: #151b24;
+      --panel-2: #1d2633;
+      --text: #f4f1e8;
+      --muted: #b7ad99;
+      --line: rgba(255, 255, 255, .12);
+      --gold: #d6a84f;
+      --gold-2: #f5d27a;
+      --green: #67d391;
+      --danger: #ff6b6b;
+      --input: #0f1520;
+      --shadow: 0 20px 60px rgba(0, 0, 0, .35);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(214, 168, 79, .18), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(103, 211, 145, .13), transparent 30%),
+        var(--bg);
+      padding: 28px;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1;
+      margin-bottom: 10px;
+      letter-spacing: .02em;
+    }
+
+    h2 {
+      font-size: 1.1rem;
+      color: var(--gold-2);
+      margin-bottom: 14px;
+    }
+
+    .app {
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(21, 27, 36, .92), rgba(29, 38, 51, .82));
+      border-radius: 26px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 860px;
+      margin-bottom: 0;
+      font-size: 1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      background: rgba(21, 27, 36, .9);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .section + .section { margin-top: 18px; }
+
+    .fixed-box {
+      display: grid;
+      gap: 8px;
+      padding: 14px;
+      border: 1px solid rgba(214, 168, 79, .22);
+      border-radius: 16px;
+      background: rgba(214, 168, 79, .065);
+      color: var(--muted);
+      font-size: .92rem;
+      margin-bottom: 16px;
+    }
+
+    .fixed-box strong {
+      color: var(--gold-2);
+    }
+
+    .fields {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      display: block;
+      font-size: .82rem;
+      color: var(--muted);
+      margin-bottom: 7px;
+      font-weight: 650;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 13px;
+      background: var(--input);
+      color: var(--text);
+      padding: 12px 13px;
+      font: inherit;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: rgba(214, 168, 79, .7);
+      box-shadow: 0 0 0 4px rgba(214, 168, 79, .13);
+    }
+
+    .players-header {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .players-header h2 { margin: 0; }
+
+    .player-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .player-row {
+      display: grid;
+      grid-template-columns: 1.2fr 1.25fr .55fr auto;
+      gap: 10px;
+      align-items: end;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px;
+      background: rgba(255,255,255,.035);
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 11px 15px;
+      font-weight: 800;
+      cursor: pointer;
+      color: #121212;
+      background: linear-gradient(135deg, var(--gold), var(--gold-2));
+      transition: transform .15s, filter .15s;
+    }
+
+    button:hover { transform: translateY(-1px); filter: brightness(1.05); }
+    button:active { transform: translateY(0); }
+
+    button.secondary {
+      color: var(--text);
+      background: rgba(255,255,255,.09);
+      border: 1px solid rgba(255,255,255,.13);
+    }
+
+    button.danger {
+      color: #fff;
+      background: rgba(255, 107, 107, .2);
+      border: 1px solid rgba(255, 107, 107, .36);
+    }
+
+    button.success {
+      background: linear-gradient(135deg, #55c77d, var(--green));
+    }
+
+    .output-card {
+      position: sticky;
+      top: 22px;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    pre {
+      margin: 0;
+      min-height: 680px;
+      max-height: 78vh;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      border: 1px solid rgba(255,255,255,.12);
+      background: #090d13;
+      color: #f8efd7;
+      border-radius: 16px;
+      padding: 18px;
+      line-height: 1.55;
+      font-size: .92rem;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: .88rem;
+      margin-bottom: 12px;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%) translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      background: rgba(9, 13, 19, .95);
+      color: var(--text);
+      border: 1px solid rgba(214, 168, 79, .45);
+      border-radius: 999px;
+      padding: 12px 18px;
+      box-shadow: var(--shadow);
+      transition: .2s ease;
+      z-index: 20;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 980px) {
+      body { padding: 16px; }
+      .grid { grid-template-columns: 1fr; }
+      .output-card { position: static; }
+      pre { min-height: 420px; max-height: none; }
+    }
+
+    @media (max-width: 760px) {
+      .hero, .card { padding: 18px; }
+      .fields { grid-template-columns: 1fr; }
+      .player-row { grid-template-columns: 1fr; }
+      .players-header { align-items: stretch; flex-direction: column; }
+      button { width: 100%; }
+      .toolbar button { width: auto; flex: 1 1 160px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <h1>Gerador de Markdown do Armory</h1>
+      <p>Preencha somente o que muda em cada Armory: data, publicação, rodadas, jogador, herói e vitórias. Os campos fixos saem sempre padronizados no modelo do site.</p>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <div class="section">
+          <h2>Dados do evento</h2>
+
+          <div class="fixed-box">
+            <div><strong>Campos fixos:</strong> summary, game, format, next_armory, local, image e image_alt.</div>
+            <div>O <strong>title</strong> é gerado como “Armory - DD/MM/AAAA”.</div>
+            <div>O <strong>image_alt</strong> usa a data em texto, exemplo: “20 de maio de 2026”.</div>
+          </div>
+
+          <div class="fields">
+            <div>
+              <label for="published">Publicado?</label>
+              <select id="published">
+                <option value="True">True</option>
+                <option value="False">False</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="date">Data do Armory</label>
+              <input id="date" type="date" />
+            </div>
+
+            <div>
+              <label for="rounds">Rodadas</label>
+              <input id="rounds" type="number" min="1" max="12" value="3" />
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="players-header">
+            <h2>Resultados dos jogadores</h2>
+            <button type="button" id="addPlayer">+ Adicionar jogador</button>
+          </div>
+          <p class="hint">O record é calculado automaticamente. Exemplo: 3 rodadas e 2 vitórias vira 2-1. Em caso de empate nas vitórias, a ordem fica pelo nome do jogador.</p>
+          <div id="playerList" class="player-list"></div>
+        </div>
+      </section>
+
+      <aside class="card output-card">
+        <h2>Markdown gerado</h2>
+        <div class="toolbar">
+          <button type="button" class="success" id="copyMarkdown">Copiar Markdown</button>
+          <button type="button" class="secondary" id="downloadMarkdown">Baixar .md</button>
+          <button type="button" class="secondary" id="resetForm">Limpar</button>
+        </div>
+        <pre id="output" aria-live="polite"></pre>
+      </aside>
+    </div>
+  </main>
+
+  <div id="toast" class="toast">Markdown copiado!</div>
+
+  <script>
+    const FIXED = {
+      summary: 'Resultado do Armory de Flesh and Blood.',
+      game: 'Flesh and Blood',
+      format: 'Classic Constructed',
+      nextArmory: 'Quarta • 19:00',
+      local: 'Bazar do Weezing',
+      image: '/assets/img/banners/banner-armory-resultado-card.png'
+    };
+
+    const monthNames = [
+      'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
+      'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+    ];
+
+    const playerList = document.querySelector('#playerList');
+    const output = document.querySelector('#output');
+    const toast = document.querySelector('#toast');
+
+    function todayISO() {
+      const now = new Date();
+      const offset = now.getTimezoneOffset();
+      const local = new Date(now.getTime() - offset * 60 * 1000);
+      return local.toISOString().slice(0, 10);
+    }
+
+    function formatDateBR(isoDate) {
+      if (!isoDate) return 'DD/MM/AAAA';
+      const [year, month, day] = isoDate.split('-');
+      return `${day}/${month}/${year}`;
+    }
+
+    function formatDateLongBR(isoDate) {
+      if (!isoDate) return 'DD de mês de AAAA';
+      const [year, month, day] = isoDate.split('-').map(Number);
+      return `${day} de ${monthNames[month - 1]} de ${year}`;
+    }
+
+    function slugify(text) {
+      return String(text || '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '') || 'armory';
+    }
+
+    function yamlQuote(value) {
+      return String(value ?? '')
+        .replace(/\\/g, '\\\\')
+        .replace(/"/g, '\\"');
+    }
+
+    function getValue(id) {
+      return document.querySelector(`#${id}`).value.trim();
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      window.clearTimeout(showToast.timer);
+      showToast.timer = window.setTimeout(() => toast.classList.remove('show'), 1800);
+    }
+
+    function createPlayerRow(data = {}) {
+      const row = document.createElement('div');
+      row.className = 'player-row';
+      row.innerHTML = `
+        <div>
+          <label>Nome do jogador</label>
+          <input class="player-name" placeholder="Ex: Akira" value="${yamlQuote(data.player || '')}" />
+        </div>
+        <div>
+          <label>Herói</label>
+          <input class="hero-name" placeholder="Ex: Ser Boltyn, Breaker of Dawn" value="${yamlQuote(data.hero || '')}" />
+        </div>
+        <div>
+          <label>Vitórias</label>
+          <input class="wins" type="number" min="0" value="${Number.isFinite(data.wins) ? data.wins : 0}" />
+        </div>
+        <button type="button" class="danger remove-player">Remover</button>
+      `;
+
+      row.querySelectorAll('input').forEach(input => input.addEventListener('input', generateMarkdown));
+
+      row.querySelector('.remove-player').addEventListener('click', () => {
+        row.remove();
+        generateMarkdown();
+      });
+
+      playerList.appendChild(row);
+      generateMarkdown();
+    }
+
+    function readPlayers() {
+      return [...document.querySelectorAll('.player-row')]
+        .map(row => {
+          const player = row.querySelector('.player-name').value.trim();
+          const hero = row.querySelector('.hero-name').value.trim();
+          const wins = Number(row.querySelector('.wins').value || 0);
+          return { player, hero, wins };
+        })
+        .filter(item => item.player || item.hero);
+    }
+
+    function generateMarkdown() {
+      const date = getValue('date');
+      const rounds = Math.max(1, Number(getValue('rounds') || 3));
+      const title = `Armory - ${formatDateBR(date)}`;
+      const imageAlt = `Card de resultado do Armory de Flesh and Blood da comunidade Cianorte Card Masters em ${formatDateLongBR(date)}`;
+      const players = readPlayers();
+
+      const lines = [
+        '---',
+        `published: ${getValue('published')}`,
+        `title: "${yamlQuote(title)}"`,
+        `summary: "${yamlQuote(FIXED.summary)}"`,
+        `game: "${yamlQuote(FIXED.game)}"`,
+        `format: "${yamlQuote(FIXED.format)}"`,
+        `rounds: ${rounds}`,
+        `next_armory: "${yamlQuote(FIXED.nextArmory)}"`,
+        `date: ${date || 'AAAA-MM-DD'}`,
+        `local: "${yamlQuote(FIXED.local)}"`,
+        `image: "${yamlQuote(FIXED.image)}"`,
+        `image_alt: "${yamlQuote(imageAlt)}"`,
+        'results:'
+      ];
+
+      if (players.length === 0) {
+        lines.push('  - player: "Nome do jogador"');
+        lines.push('    hero: "Nome do herói"');
+        lines.push(`    record: "0-${rounds}"`);
+        lines.push('    wins: 0');
+      } else {
+        players
+          .sort((a, b) => b.wins - a.wins || a.player.localeCompare(b.player, 'pt-BR'))
+          .forEach(item => {
+            const wins = Math.max(0, Math.min(rounds, Number(item.wins || 0)));
+            const losses = Math.max(0, rounds - wins);
+            lines.push(`  - player: "${yamlQuote(item.player)}"`);
+            lines.push(`    hero: "${yamlQuote(item.hero)}"`);
+            lines.push(`    record: "${wins}-${losses}"`);
+            lines.push(`    wins: ${wins}`);
+          });
+      }
+
+      lines.push('---');
+
+      output.textContent = lines.join('\n');
+      saveDraft();
+    }
+
+    function copyMarkdown() {
+      navigator.clipboard.writeText(output.textContent)
+        .then(() => showToast('Markdown copiado!'))
+        .catch(() => showToast('Não consegui copiar. Selecione o texto manualmente.'));
+    }
+
+    function downloadMarkdown() {
+      const date = getValue('date') || todayISO();
+      const filename = `${date}-armory-flesh-and-blood.md`;
+      const blob = new Blob([output.textContent], { type: 'text/markdown;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+      showToast('Arquivo .md gerado!');
+    }
+
+    function saveDraft() {
+      const data = {
+        published: getValue('published'),
+        date: getValue('date'),
+        rounds: getValue('rounds'),
+        players: readPlayers()
+      };
+      localStorage.setItem('armoryMarkdownGeneratorFixed', JSON.stringify(data));
+    }
+
+    function loadDraft() {
+      const saved = localStorage.getItem('armoryMarkdownGeneratorFixed');
+      if (!saved) return false;
+
+      try {
+        const data = JSON.parse(saved);
+        document.querySelector('#published').value = data.published || 'True';
+        document.querySelector('#date').value = data.date || todayISO();
+        document.querySelector('#rounds').value = data.rounds || '3';
+        playerList.innerHTML = '';
+        if (Array.isArray(data.players) && data.players.length) {
+          data.players.forEach(player => createPlayerRow(player));
+        }
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function resetForm() {
+      localStorage.removeItem('armoryMarkdownGeneratorFixed');
+      document.querySelector('#published').value = 'True';
+      document.querySelector('#date').value = todayISO();
+      document.querySelector('#rounds').value = '3';
+      playerList.innerHTML = '';
+      createPlayerRow({ player: 'Akira', hero: 'Ser Boltyn, Breaker of Dawn', wins: 3 });
+      createPlayerRow({ player: 'Scopel', hero: 'Prism, Awakener of Sol', wins: 2 });
+      createPlayerRow({ player: 'Erick Jadiel', hero: 'Ira, Scarlet Revenger', wins: 2 });
+      createPlayerRow({ player: 'Hermes', hero: 'Pleiades, Superstar', wins: 1 });
+      createPlayerRow({ player: 'Marcelo Goularte', hero: 'Arakni, Marionette', wins: 1 });
+      createPlayerRow({ player: 'Neto', hero: 'Teklovossen, Esteemed Magnate', wins: 0 });
+      showToast('Formulário limpo!');
+      generateMarkdown();
+    }
+
+    document.querySelector('#addPlayer').addEventListener('click', () => createPlayerRow({ wins: 0 }));
+    document.querySelector('#copyMarkdown').addEventListener('click', copyMarkdown);
+    document.querySelector('#downloadMarkdown').addEventListener('click', downloadMarkdown);
+    document.querySelector('#resetForm').addEventListener('click', resetForm);
+
+    ['published', 'date', 'rounds'].forEach(id => {
+      document.querySelector(`#${id}`).addEventListener('input', generateMarkdown);
+      document.querySelector(`#${id}`).addEventListener('change', generateMarkdown);
+    });
+
+    document.querySelector('#date').value = todayISO();
+
+    if (!loadDraft()) {
+      resetForm();
+    }
+
+    generateMarkdown();
+  </script>
+</body>
+</html>
