@@ -7555,8 +7555,8 @@ h3 {
   width: var(--game-text-width);
   max-width: calc(100% - var(--game-text-left) - 6%);
   color: #fff3bf;
-  font-size: clamp(.6rem, .78vw, .86rem);
-  line-height: 1.34;
+  font-size: clamp(.6rem, .76vw, .86rem);
+  line-height: 1.31;
   letter-spacing: .01em;
   text-align: var(--game-text-align);
   text-shadow: 0 2px 2px rgba(0, 0, 0, .88), 0 0 8px rgba(0, 0, 0, .65);
@@ -7606,13 +7606,13 @@ h3 {
 .game-cartridge-card-fab {
   --game-card-image: url("../img/jogos/img-card-fab-retro.png");
   --game-card-ratio: 579 / 431;
-  --game-text-left: 17%;
+  --game-text-left: 13%;
   --game-text-top: 39%;
-  --game-text-width: 54%;
+  --game-text-width: 63%;
   --game-text-align: left;
-  --game-buttons-left: 14%;
-  --game-buttons-bottom: 8.5%;
-  --game-buttons-width: 60%;
+  --game-buttons-left: 13%;
+  --game-buttons-bottom: 8%;
+  --game-buttons-width: 62%;
   --game-button-bg: linear-gradient(180deg, #c8331f, #7e160d);
   --game-button-border: rgba(255, 187, 62, .78);
   --game-secondary-bg: rgba(46, 21, 7, .92);
@@ -7622,9 +7622,9 @@ h3 {
 .game-cartridge-card-pkm {
   --game-card-image: url("../img/jogos/img-card-pkm-retro.png");
   --game-card-ratio: 559 / 446;
-  --game-text-left: 13%;
-  --game-text-top: 43%;
-  --game-text-width: 53%;
+  --game-text-left: 11%;
+  --game-text-top: 42%;
+  --game-text-width: 60%;
   --game-text-align: center;
   --game-buttons-left: 12%;
   --game-buttons-bottom: 8%;
@@ -7643,13 +7643,13 @@ h3 {
 .game-cartridge-card-mtg {
   --game-card-image: url("../img/jogos/img-card-mtg-retro.png");
   --game-card-ratio: 596 / 419;
-  --game-text-left: 12%;
-  --game-text-top: 42%;
-  --game-text-width: 60%;
+  --game-text-left: 10%;
+  --game-text-top: 41%;
+  --game-text-width: 68%;
   --game-text-align: left;
-  --game-buttons-left: 12%;
+  --game-buttons-left: 11%;
   --game-buttons-bottom: 8%;
-  --game-buttons-width: 66%;
+  --game-buttons-width: 68%;
   --game-button-bg: linear-gradient(180deg, #7f4ec8, #422575);
   --game-button-border: rgba(210, 171, 255, .7);
   --game-secondary-bg: rgba(19, 14, 26, .9);
@@ -7659,13 +7659,13 @@ h3 {
 .game-cartridge-card-op {
   --game-card-image: url("../img/jogos/img-card-op-retro.png");
   --game-card-ratio: 616 / 405;
-  --game-text-left: 12%;
-  --game-text-top: 43%;
-  --game-text-width: 54%;
+  --game-text-left: 10%;
+  --game-text-top: 42%;
+  --game-text-width: 61%;
   --game-text-align: left;
-  --game-buttons-left: 10%;
-  --game-buttons-bottom: 9%;
-  --game-buttons-width: 60%;
+  --game-buttons-left: 11%;
+  --game-buttons-bottom: 8.5%;
+  --game-buttons-width: 62%;
   --game-button-bg: linear-gradient(180deg, #18b8c6, #0b7481);
   --game-button-border: rgba(154, 250, 255, .68);
   --game-secondary-bg: rgba(5, 15, 17, .9);
@@ -7675,13 +7675,13 @@ h3 {
 .game-cartridge-card-ygo {
   --game-card-image: url("../img/jogos/img-card-ygo-retro.png");
   --game-card-ratio: 604 / 413;
-  --game-text-left: 9%;
-  --game-text-top: 43%;
-  --game-text-width: 56%;
+  --game-text-left: 8%;
+  --game-text-top: 42.5%;
+  --game-text-width: 63%;
   --game-text-align: left;
-  --game-buttons-left: 9%;
-  --game-buttons-bottom: 8.5%;
-  --game-buttons-width: 61%;
+  --game-buttons-left: 10%;
+  --game-buttons-bottom: 8%;
+  --game-buttons-width: 62%;
   --game-button-bg: linear-gradient(180deg, #62d430, #237a0f);
   --game-button-border: rgba(155, 255, 85, .7);
   --game-secondary-bg: rgba(8, 25, 5, .9);
@@ -7692,12 +7692,12 @@ h3 {
   --game-card-image: url("../img/jogos/img-card-rpg-retro.png");
   --game-card-ratio: 609 / 409;
   --game-text-left: 10%;
-  --game-text-top: 43%;
-  --game-text-width: 56%;
+  --game-text-top: 42%;
+  --game-text-width: 66%;
   --game-text-align: center;
-  --game-buttons-left: 10%;
-  --game-buttons-bottom: 8.5%;
-  --game-buttons-width: 71%;
+  --game-buttons-left: 11%;
+  --game-buttons-bottom: 8%;
+  --game-buttons-width: 70%;
   --game-button-bg: linear-gradient(180deg, #8f4cc5, #562178);
   --game-button-border: rgba(220, 166, 255, .7);
   --game-secondary-bg: rgba(40, 16, 52, .92);
@@ -7715,11 +7715,11 @@ h3 {
   --game-card-ratio: 959 / 260;
   --game-text-left: 8%;
   --game-text-top: 45%;
-  --game-text-width: 56%;
+  --game-text-width: 63%;
   --game-text-align: left;
   --game-buttons-left: 8%;
   --game-buttons-bottom: 8%;
-  --game-buttons-width: 44%;
+  --game-buttons-width: 50%;
   --game-button-bg: linear-gradient(180deg, #4e4e4e, #232323);
   --game-button-border: rgba(255, 255, 255, .38);
   --game-secondary-bg: linear-gradient(180deg, #464646, #1f1f1f);
