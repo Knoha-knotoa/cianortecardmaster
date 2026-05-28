@@ -9076,17 +9076,28 @@ h3 {
 }
 
 .fab-result-card-image,
+.fab-result-card-overlay,
 .fab-result-card-frame,
 .fab-result-podium-caption {
   position: absolute;
 }
 
 .fab-result-card-image {
-  inset: 5.9% 6.4% 4.6%;
+  inset: 4.8% 6.4% 4.6%;
   overflow: hidden;
   border-radius: 6px;
   background: #090e0a;
   z-index: 1;
+}
+
+.fab-result-card-overlay {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 42%;
+  z-index: 2;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.20) 12%, rgba(0,0,0,.82) 52%, rgba(0,0,0,.96) 100%);
+  pointer-events: none;
 }
 
 .fab-result-card-frame {
@@ -9095,7 +9106,7 @@ h3 {
   height: 100%;
   object-fit: fill;
   pointer-events: none;
-  z-index: 3;
+  z-index: 4;
 }
 
 .fab-result-card-image .tcg-card-image {
@@ -9122,11 +9133,12 @@ h3 {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 4;
-  padding: 6.2rem 1.2rem 1rem;
+  z-index: 5;
+  padding: 6.4rem 1.2rem 1rem;
   text-align: center;
-  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.22) 12%, rgba(0,0,0,.82) 36%, rgba(0,0,0,.96) 100%);
+  background: none;
   text-shadow: 0 3px 8px rgba(0,0,0,.95);
+  pointer-events: none;
 }
 
 .fab-result-podium-caption strong {

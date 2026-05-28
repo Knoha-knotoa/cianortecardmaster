@@ -5,7 +5,7 @@
 {% if post_style == "armory" %}
   {% assign event_kind = "Armory" %}
   {% assign event_title = "Resultado do Armory" %}
-  {% assign event_format = page.format | default: "Classic Constructed" %}
+  {% assign event_format = page.format | default: "Blitz" %}
 {% endif %}
 
 {% assign total_players = page.results | size %}
@@ -47,6 +47,7 @@
       </div>
 
       <div class="fab-result-meta-bar" aria-label="Informações do evento">
+        <span><strong>✓</strong> Resultado cadastrado</span>
         <span><strong>♟</strong> {{ total_players }} jogadores</span>
         <span><strong>⚔</strong> Formato: {{ event_format }}</span>
         {% if page.event_date or page.date %}<span><strong>▣</strong> {{ page.event_date | default: page.date | date: "%d/%m/%Y" }}</span>{% endif %}
@@ -73,6 +74,7 @@
             </div>
             <div class="fab-result-card-art">
               <div class="fab-result-card-image">{% include tcg-card.html game="fab" name=podium_hero cover=true fallback=podium_hero_fallback alt=podium_hero fallback_alt=podium_hero %}</div>
+              <div class="fab-result-card-overlay" aria-hidden="true"></div>
               <img class="fab-result-card-frame" src="{{ podium_frame | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async">
               <div class="fab-result-podium-caption">
                 <strong>{{ podium_player }}</strong>
@@ -102,6 +104,7 @@
             </div>
             <div class="fab-result-card-art">
               <div class="fab-result-card-image">{% include tcg-card.html game="fab" name=podium_hero cover=true fallback=podium_hero_fallback alt=podium_hero fallback_alt=podium_hero %}</div>
+              <div class="fab-result-card-overlay" aria-hidden="true"></div>
               <img class="fab-result-card-frame" src="{{ podium_frame | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async">
               <div class="fab-result-podium-caption">
                 <strong>{{ podium_player }}</strong>
@@ -131,6 +134,7 @@
             </div>
             <div class="fab-result-card-art">
               <div class="fab-result-card-image">{% include tcg-card.html game="fab" name=podium_hero cover=true fallback=podium_hero_fallback alt=podium_hero fallback_alt=podium_hero %}</div>
+              <div class="fab-result-card-overlay" aria-hidden="true"></div>
               <img class="fab-result-card-frame" src="{{ podium_frame | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async">
               <div class="fab-result-podium-caption">
                 <strong>{{ podium_player }}</strong>
