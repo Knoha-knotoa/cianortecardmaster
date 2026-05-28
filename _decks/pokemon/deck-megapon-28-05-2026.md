@@ -43,7 +43,7 @@ A ideia central é simples de entender e difícil de ignorar na mesa: colocar v�
 <div class="tcg-card-grid" aria-label="Cartas principais do Deck Megapon">
   {% include tcg-card.html game="tcgdex" lang="pt-br" name="Mega Venusaur ex" set="MEG" number="3" %}
   {% include tcg-card.html game="tcgdex" lang="pt-br" name="Teal Mask Ogerpon ex" set="TWM" number="25" %}
-  {% include tcg-card.html game="tcgdex" lang="pt-br" name="Meganium" set="MEG" number="001" %}
+  {% include tcg-card.html game="tcgdex" lang="pt-br" name="Meganium" set="MEG" number="010" %}
   {% include tcg-card.html game="tcgdex" lang="pt-br" name="Fezandipiti ex" set="SFA" number="38" %}
 </div>
 
