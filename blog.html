@@ -112,18 +112,6 @@ permalink: /blog/
       </p>
     </div>
 
-    <div class="blog-category-guide" aria-label="Principais editorias do blog">
-      {% for section in site.data.content_sections.blog %}
-        {% assign section_slug = section.folder | slugify %}
-        <a class="category-guide-card post-style-{{ section_slug }}" href="#{{ section_slug }}" data-blog-filter="{{ section_slug }}">
-          <img src="{{ '/assets/img/category/' | append: section_slug | append: '.svg' | relative_url }}" alt="Ícone da editoria {{ section.label | escape }} no blog do Cianorte Card Masters" loading="lazy" decoding="async">
-          <div>
-            <strong>{{ section.label }}</strong>
-            <p>{{ section.description }}</p>
-          </div>
-        </a>
-      {% endfor %}
-    </div>
 
     <div class="feed-toolbar">
       <div>
