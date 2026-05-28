@@ -89,6 +89,14 @@ defaults:
       deck_format: "UPF"
       content_style: "upf"
   - scope:
+      path: "_decks/pokemon"
+      type: "decks"
+    values:
+      category_label: "Pokémon TCG"
+      deck_game: "Pokémon TCG"
+      deck_format: "Standard"
+      content_style: "pokemon"
+  - scope:
       path: ""
       type: "blog"
     values:

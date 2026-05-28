@@ -27,6 +27,7 @@ image: "goagain:Dash I/O"
 image: "mtg:Sol Ring"
 image: "scryfall:Counterspell"
 image: "pokemon:Charizard"
+image: "tcgdex:Mega Venusaur ex"
 image: "yugioh:Dark Magician"
 ```
 
@@ -53,7 +54,7 @@ image: "https://site.com/imagem.jpg"
 
 ## Dica prática
 
-Para posts futuros, o mais simples é usar sempre o campo `image:` com prefixo da API.
+Para posts futuros, o mais simples é usar sempre o campo `image:` com prefixo da API. Para Pokémon recente, prefira `tcgdex:` ou use `game="tcgdex"` nos includes dentro do texto.
 
 ### Exemplo de post de Magic
 ```yaml

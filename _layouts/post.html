@@ -88,6 +88,7 @@ layout: default
   {% if api_image_game == "goagain" %}{% assign api_image_game = "fab" %}{% endif %}
   {% if api_image_game == "scryfall" or api_image_game == "magic" %}{% assign api_image_game = "mtg" %}{% endif %}
   {% if api_image_game == "pkm" %}{% assign api_image_game = "pokemon" %}{% endif %}
+  {% if api_image_game == "tcgdex" or api_image_game == "pokemon-tcgdex" %}{% assign api_image_game = "tcgdex" %}{% endif %}
   {% if api_image_game == "ygo" %}{% assign api_image_game = "yugioh" %}{% endif %}
 {% elsif explicit_image != "" %}
   {% assign hero_image_parts = explicit_image | split: ":" %}
@@ -100,6 +101,7 @@ layout: default
     {% when "mtg" %}{% assign api_image_game = "mtg" %}{% assign api_image_name = hero_image_name %}
     {% when "magic" %}{% assign api_image_game = "mtg" %}{% assign api_image_name = hero_image_name %}
     {% when "pokemon" %}{% assign api_image_game = "pokemon" %}{% assign api_image_name = hero_image_name %}
+    {% when "tcgdex" %}{% assign api_image_game = "tcgdex" %}{% assign api_image_name = hero_image_name %}
     {% when "pkm" %}{% assign api_image_game = "pokemon" %}{% assign api_image_name = hero_image_name %}
     {% when "yugioh" %}{% assign api_image_game = "yugioh" %}{% assign api_image_name = hero_image_name %}
     {% when "ygo" %}{% assign api_image_game = "yugioh" %}{% assign api_image_name = hero_image_name %}

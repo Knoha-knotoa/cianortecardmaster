@@ -3,7 +3,8 @@
    Suporta:
    - fab      => GoAgain API
    - mtg      => Scryfall API
-   - pokemon  => Pokémon TCG API
+   - pokemon  => TCGdex + Pokémon TCG API
+   - tcgdex   => TCGdex API para Pokémon TCG
    - yugioh   => YGOPRODeck API
 
    Uso em qualquer página/post:
@@ -237,8 +238,9 @@
     const wantedSets = pokemonSetCandidates(set).map(normalizeText);
     const wantedNumbers = pokemonNumberCandidates(number, name).map(normalizeText);
     const cardName = normalizeText(card?.name);
-    const cardSet = normalizeText(card?.set?.name || card?.setName);
-    const cardNumber = normalizeText(card?.number);
+    const cardSet = normalizeText(card?.set?.name || card?.setName || card?.set?.id || card?.id?.split("-")?.[0]);
+    const cardNumber = normalizeText(card?.number || card?.localId);
+    const cardId = normalizeText(card?.id);
     let score = 0;
 
     if (wantedNames.includes(cardName)) score += 80;
@@ -249,8 +251,9 @@
     else if (wantedNumbers.length && cardNumber) score -= 10;
 
     if (wantedSets.includes(cardSet)) score += 35;
-    else if (wantedSets.some(value => value && (cardSet.includes(value) || value.includes(cardSet)))) score += 18;
+    else if (wantedSets.some(value => value && (cardSet.includes(value) || value.includes(cardSet) || cardId.includes(value)))) score += 18;
 
+    if (card?.image) score += 10;
     if (card?.images?.large || card?.images?.small) score += 8;
     return score;
   }
@@ -283,22 +286,64 @@
     return request;
   }
 
+  function tcgdexLanguages() {
+    return ["pt-br", "en"];
+  }
+
+  function tcgdexSetCandidates(set) {
+    const raw = String(set || "").trim();
+    const normalized = normalizeText(raw).replace(/\s+/g, "");
+    const candidates = [raw, normalized];
+
+    // Códigos comuns usados em listas exportadas. A TCGdex usa ids próprios por coleção.
+    if (normalized === "meg") candidates.push("me01", "meg1", "mega1");
+    if (normalized === "twm") candidates.push("sv6", "sv06", "twilightmasquerade");
+    if (normalized === "sfa") candidates.push("sv6pt5", "sv65", "shroudedfable");
+    if (normalized === "par") candidates.push("sv4", "sv04", "paradoxrift");
+    if (normalized === "pal") candidates.push("sv2", "sv02", "paldeaevolved");
+    if (normalized === "paf") candidates.push("sv4pt5", "sv45", "paldeanfates");
+    if (normalized === "svi") candidates.push("sv1", "sv01", "scarletviolet");
+
+    return Array.from(new Set(candidates.map(value => String(value || "").trim()).filter(Boolean)));
+  }
+
   async function fetchPokemonTcgdexCard(name, set = "", number = "") {
     const cacheKey = `${normalizeText(name)}|${normalizeText(set)}|${normalizeText(number)}`;
     if (caches.pokemonTcgdex.has(cacheKey)) return caches.pokemonTcgdex.get(cacheKey);
 
     const request = (async () => {
-      for (const cardName of pokemonNameCandidates(name).slice(0, 3)) {
-        try {
-          const payload = await jsonFetch(`https://api.tcgdex.net/v2/en/cards?name=${encodeURIComponent(cardName)}&pagination:itemsPerPage=24`);
-          const cards = Array.isArray(payload) ? payload : [];
-          if (!cards.length) continue;
+      const numbers = pokemonNumberCandidates(number, name);
 
-          return cards
-            .slice()
-            .sort((a, b) => scorePokemonCard(b, name, set, number) - scorePokemonCard(a, name, set, number))[0];
-        } catch (error) {
-          console.warn("TCGdex falhou para", cardName, error);
+      // Quando o Markdown informa coleção e número, tenta primeiro o endpoint direto set/localId.
+      if (set && numbers.length) {
+        for (const lang of tcgdexLanguages()) {
+          for (const setId of tcgdexSetCandidates(set).slice(0, 6)) {
+            for (const localId of numbers.slice(0, 2)) {
+              try {
+                const card = await jsonFetch(`https://api.tcgdex.net/v2/${lang}/sets/${encodeURIComponent(setId)}/${encodeURIComponent(localId)}`);
+                if (card?.image) return card;
+              } catch (error) {
+                // Continua para o próximo candidato; códigos de coleção variam entre bases.
+              }
+            }
+          }
+        }
+      }
+
+      // Fallback amplo por nome. A API retorna CardBrief com id, localId, name e image.
+      for (const lang of tcgdexLanguages()) {
+        for (const cardName of pokemonNameCandidates(name).slice(0, 3)) {
+          try {
+            const payload = await jsonFetch(`https://api.tcgdex.net/v2/${lang}/cards?name=${encodeURIComponent(cardName)}&pagination:itemsPerPage=36`);
+            const cards = Array.isArray(payload) ? payload : [];
+            if (!cards.length) continue;
+
+            return cards
+              .slice()
+              .sort((a, b) => scorePokemonCard(b, name, set, number) - scorePokemonCard(a, name, set, number))[0];
+          } catch (error) {
+            console.warn("TCGdex falhou para", cardName, error);
+          }
         }
       }
 
@@ -379,6 +424,9 @@
           card = await fetchPokemonTcgdexCard(name, set, number);
           imageUrl = pokemonImageUrl(card);
         }
+      } else if (game === "tcgdex" || game === "pokemon tcgdex") {
+        card = await fetchPokemonTcgdexCard(name, set, number);
+        imageUrl = pokemonImageUrl(card);
       } else if (game === "yugioh" || game === "ygo") {
         card = await fetchYugiohCard(name);
         imageUrl = yugiohImageUrl(card);
@@ -416,6 +464,11 @@
       let imageUrl = pokemonImageUrl(card);
       if (imageUrl) return imageUrl;
 
+      card = await fetchPokemonTcgdexCard(name, options.set || "", options.number || "");
+      return pokemonImageUrl(card);
+    }
+
+    if (normalizedGame === "tcgdex" || normalizedGame === "pokemon tcgdex") {
       card = await fetchPokemonTcgdexCard(name, options.set || "", options.number || "");
       return pokemonImageUrl(card);
     }
