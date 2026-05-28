@@ -7559,7 +7559,11 @@ h3 {
   line-height: var(--game-text-line-height, 1.31);
   letter-spacing: .01em;
   text-align: var(--game-text-align);
-  text-shadow: 0 2px 2px rgba(0, 0, 0, .88), 0 0 8px rgba(0, 0, 0, .65);
+  text-shadow:
+    0 2px 3px rgba(0, 0, 0, .98),
+    0 0 10px rgba(0, 0, 0, .9),
+    1px 1px 0 rgba(0, 0, 0, .92),
+    -1px 1px 0 rgba(0, 0, 0, .72);
 }
 
 .game-cartridge-card .btn-row {
@@ -7606,11 +7610,11 @@ h3 {
 .game-cartridge-card-fab {
   --game-card-image: url("../img/jogos/img-card-fab-retro.png");
   --game-card-ratio: 579 / 431;
-  --game-text-left: 16%;
-  --game-text-top: 39%;
-  --game-text-width: 66%;
+  --game-text-left: 18%;
+  --game-text-top: 39.5%;
+  --game-text-width: 63%;
   --game-text-align: left;
-  --game-text-font-size: clamp(.68rem, .84vw, .98rem);
+  --game-text-font-size: clamp(.7rem, .88vw, 1rem);
   --game-text-line-height: 1.28;
   --game-buttons-left: 13%;
   --game-buttons-bottom: 8%;
@@ -7663,9 +7667,9 @@ h3 {
 .game-cartridge-card-op {
   --game-card-image: url("../img/jogos/img-card-op-retro.png");
   --game-card-ratio: 616 / 405;
-  --game-text-left: 12%;
+  --game-text-left: 15%;
   --game-text-top: 42.5%;
-  --game-text-width: 66%;
+  --game-text-width: 62%;
   --game-text-align: left;
   --game-text-line-height: 1.3;
   --game-buttons-left: 11%;
