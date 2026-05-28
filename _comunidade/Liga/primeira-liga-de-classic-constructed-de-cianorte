@@ -3,6 +3,7 @@ published: true
 title: "Liga Classic Constructed - Finalizada em 03/05/2026"
 summary: "Resultado final da primeira liga de Classic Constructed organizada pela prefeitura de Cianorte"
 game: "Flesh and Blood"
+format: "Classic Constructed"
 rounds: 20
 date: 2026-05-03
 event_date: 2026-03-01
