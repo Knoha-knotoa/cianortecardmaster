@@ -17,6 +17,7 @@ permalink: /guias/
 ---
 
 {% assign posts_list = site.guias | where_exp: "post", "post.published != false" | sort: "date" | reverse %}
+{% assign latest_decks = site.decks | where_exp: "post", "post.published != false" | sort: "date" | reverse %}
 
 <section class="page-hero guias-page-hero" style="--page-hero-image: url('{{ '/assets/img/banners/banner-guias.webp' | relative_url }}'); --page-hero-image-mobile: url('{{ '/assets/img/banners/banner-guias-mobile.webp' | relative_url }}'); --page-hero-position: center; --page-hero-position-mobile: center;">
   <div class="container">
@@ -78,18 +79,29 @@ permalink: /guias/
 
 <section class="section section-alt guide-decktech-section" aria-labelledby="guide-decktech-title">
   <div class="container">
-    <article class="guide-decktech-card post-style-tcg">
-      <div>
-        <p class="eyebrow">Deck Techs dentro de Guias</p>
-        <h2 id="guide-decktech-title">Quer lista, plano de jogo e pilotagem?</h2>
-        <p>
-          A área de Decks agora fica dentro de Guias para separar melhor: guias explicam regras e fundamentos; Deck Techs mostram listas testadas, escolhas de cartas, plano de jogo e ajustes depois da pancadaria real.
-        </p>
+    <article class="guide-decktech-showcase post-style-tcg">
+      <div class="guide-decktech-header">
+        <div>
+          <p class="eyebrow">Deck Techs dentro de Guias</p>
+          <h2 id="guide-decktech-title">Quer lista, plano de jogo e pilotagem?</h2>
+          <p>
+            A área de Decks agora fica dentro de Guias para separar melhor: guias explicam regras e fundamentos; Deck Techs mostram listas testadas, escolhas de cartas, plano de jogo e ajustes depois da pancadaria real.
+          </p>
+        </div>
+        <div class="guide-decktech-actions">
+          <a class="btn btn-primary" href="{{ '/guias/decks/' | relative_url }}">Ver mais Deck Techs</a>
+        </div>
       </div>
-      <div class="guide-decktech-actions">
-        <a class="btn btn-primary" href="{{ '/guias/decks/' | relative_url }}">Ver Deck Techs</a>
-        <a class="btn btn-secondary" href="{{ '/guias/decks/' | relative_url }}#todos">Últimas listas</a>
-      </div>
+
+      {% if latest_decks.size > 0 %}
+        <div class="card-grid grid-3 guide-decktech-latest" aria-label="Últimas Deck Techs publicadas">
+          {% for post in latest_decks limit: 3 %}
+            {% include post-card.html post=post %}
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="empty-section">Nenhuma Deck Tech publicada ainda. Quando sair lista testada, ela aparece aqui primeiro.</p>
+      {% endif %}
     </article>
   </div>
 </section>
@@ -124,6 +136,16 @@ permalink: /guias/
     <p class="folder-hint guide-folder-hint">
     </p>
 
+    <div class="feed-pagination-controls guide-feed-controls" aria-label="Controle de paginação dos guias">
+      <label>
+        Mostrar
+        <select data-guide-page-size>
+          <option value="12" selected>12 por página</option>
+          <option value="24">24 por página</option>
+        </select>
+      </label>
+    </div>
+
     <div class="card-grid grid-3 guide-feed" id="todos">
       {% for post in posts_list %}
         {% assign post_path = post.path | downcase %}
@@ -148,6 +170,12 @@ permalink: /guias/
     </div>
 
     <p class="empty-section" data-guide-empty hidden>Nenhum guia encontrado com esses filtros. Talvez a dúvida ainda esteja no stack esperando alguém responder.</p>
+
+    <div class="pagination-bar content-pagination" id="guide-pagination" hidden>
+      <button class="btn btn-secondary" type="button" data-guide-prev>Ver posteriores</button>
+      <span data-guide-page-info>Página 1 de 1</span>
+      <button class="btn btn-secondary" type="button" data-guide-next>Ver anteriores</button>
+    </div>
   </div>
 </section>
 

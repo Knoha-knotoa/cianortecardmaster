@@ -138,6 +138,16 @@ permalink: /blog/
       </nav>
     </div>
 
+    <div class="feed-pagination-controls blog-feed-controls" aria-label="Controle de paginação do Blog">
+      <label>
+        Mostrar
+        <select data-blog-page-size>
+          <option value="12" selected>12 por página</option>
+          <option value="24">24 por página</option>
+        </select>
+      </label>
+    </div>
+
     <div class="card-grid grid-3 blog-feed" id="todos">
       {% for post in posts_list %}
         {% assign post_path = post.path | downcase %}
@@ -160,6 +170,14 @@ permalink: /blog/
     {% if posts_list.size == 0 %}
       <p class="empty-section">Nenhum post publicado no Blog ainda.</p>
     {% endif %}
+
+    <p class="empty-section" data-blog-empty hidden>Nenhuma postagem encontrada com esse filtro.</p>
+
+    <div class="pagination-bar content-pagination" id="blog-pagination" hidden>
+      <button class="btn btn-secondary" type="button" data-blog-prev>Ver posteriores</button>
+      <span data-blog-page-info>Página 1 de 1</span>
+      <button class="btn btn-secondary" type="button" data-blog-next>Ver anteriores</button>
+    </div>
 
     {% include internal-links-card.html %}
   </div>

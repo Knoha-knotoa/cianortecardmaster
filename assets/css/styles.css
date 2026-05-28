@@ -2138,6 +2138,8 @@ h3 {
 }
 
 .blog-feed > [hidden],
+.guide-feed > [hidden],
+.deck-feed > [hidden],
 .community-feed > [hidden] {
   display: none !important;
 }
@@ -2329,6 +2331,34 @@ h3 {
   font-family: "Fugaz One", system-ui, sans-serif;
 }
 
+.feed-pagination-controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: -.4rem 0 1.1rem;
+}
+
+.feed-pagination-controls label {
+  display: inline-grid;
+  gap: .3rem;
+  color: var(--muted);
+  font-size: .92rem;
+}
+
+.feed-pagination-controls select {
+  min-height: 42px;
+  border: 1px solid rgba(212, 175, 55, .28);
+  border-radius: 999px;
+  padding: 0 .8rem;
+  background: #101b13;
+  color: var(--white);
+  font-family: "Fugaz One", system-ui, sans-serif;
+}
+
+.content-pagination {
+  margin-bottom: 1.4rem;
+}
+
 .pagination-bar {
   display: flex;
   justify-content: center;
@@ -2342,6 +2372,18 @@ h3 {
   opacity: .45;
   cursor: not-allowed;
   transform: none;
+}
+
+@media (max-width: 560px) {
+  .pagination-bar {
+    flex-wrap: wrap;
+  }
+
+  .pagination-bar span {
+    width: 100%;
+    order: -1;
+    text-align: center;
+  }
 }
 
 .results-columns {
@@ -2635,6 +2677,10 @@ h3 {
   .feed-toolbar,
   .community-feed-toolbar {
     grid-template-columns: 1fr;
+  }
+
+  .feed-pagination-controls {
+    justify-content: flex-start;
   }
 }
 
@@ -3013,9 +3059,6 @@ h3 {
   white-space: nowrap;
 }
 
-.deck-feed > [hidden] {
-  display: none !important;
-}
 
 /* Home: Agenda da Semana */
 .home-agenda-section {
@@ -5439,6 +5482,44 @@ h3 {
 /* =========================================================
    Guias — página hub de regras, cartas e dúvidas
 ========================================================= */
+.guide-decktech-showcase {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--category-line, rgba(212, 175, 55, .2));
+  border-radius: 30px;
+  padding: clamp(1rem, 3vw, 1.35rem);
+  background:
+    radial-gradient(circle at top right, var(--category-soft, rgba(212, 175, 55, .14)), transparent 38%),
+    linear-gradient(145deg, rgba(16, 27, 19, .96), rgba(6, 10, 7, .98));
+  box-shadow: var(--shadow);
+}
+
+.guide-decktech-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: end;
+  margin-bottom: 1.15rem;
+}
+
+.guide-decktech-header p {
+  max-width: 850px;
+  color: rgba(246, 241, 223, .78);
+}
+
+.guide-decktech-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: .65rem;
+  flex-wrap: wrap;
+}
+
+.guide-decktech-latest {
+  position: relative;
+  z-index: 1;
+}
+
 .guide-page-intro,
 .guide-page-pillars {
   padding: clamp(2.2rem, 6vw, 4.25rem) 0;
@@ -5580,6 +5661,7 @@ h3 {
 }
 
 @media (max-width: 900px) {
+  .guide-decktech-header,
   .guide-page-intro-grid,
   .guide-pillar-grid,
   .guide-feed-toolbar {

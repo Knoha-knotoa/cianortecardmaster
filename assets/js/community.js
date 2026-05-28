@@ -970,21 +970,144 @@
     render();
   }
 
+  function initPagedFeedPagination(options) {
+    const {
+      items,
+      pagination,
+      pageSizeSelect,
+      info,
+      prev,
+      next,
+      getFilteredItems,
+      onRender
+    } = options;
+
+    if (!items.length || typeof getFilteredItems !== "function") return null;
+
+    let currentPage = 1;
+
+    function getPerPage() {
+      const selected = pageSizeSelect ? parseInt(pageSizeSelect.value, 10) : 12;
+      return Number.isFinite(selected) && selected > 0 ? selected : 12;
+    }
+
+    function render() {
+      const perPage = getPerPage();
+      const filtered = getFilteredItems();
+      const totalPages = Math.max(1, Math.ceil(filtered.length / perPage));
+
+      currentPage = Math.min(Math.max(1, currentPage), totalPages);
+
+      const start = (currentPage - 1) * perPage;
+      const end = start + perPage;
+
+      items.forEach(item => { item.hidden = true; });
+      filtered.slice(start, end).forEach(item => { item.hidden = false; });
+
+      if (pagination) pagination.hidden = filtered.length <= perPage;
+      if (info) info.textContent = `Página ${currentPage} de ${totalPages}`;
+      if (prev) prev.disabled = currentPage <= 1;
+      if (next) next.disabled = currentPage >= totalPages;
+      if (typeof onRender === "function") onRender(filtered.length, currentPage, totalPages);
+    }
+
+    if (pageSizeSelect) {
+      pageSizeSelect.addEventListener("change", () => {
+        currentPage = 1;
+        render();
+      });
+    }
+
+    if (prev) {
+      prev.addEventListener("click", () => {
+        currentPage = Math.max(1, currentPage - 1);
+        render();
+      });
+    }
+
+    if (next) {
+      next.addEventListener("click", () => {
+        currentPage += 1;
+        render();
+      });
+    }
+
+    return {
+      render,
+      reset() {
+        currentPage = 1;
+        render();
+      }
+    };
+  }
+
   function initBlogFilter() {
     const items = Array.from(document.querySelectorAll("[data-blog-feed-item]"));
     const filters = Array.from(document.querySelectorAll("[data-blog-filter]"));
+    const emptyState = document.querySelector("[data-blog-empty]");
     if (!items.length || !filters.length) return;
+
+    const pagination = document.querySelector("#blog-pagination");
+    const pageSizeSelect = document.querySelector("[data-blog-page-size]");
+    const info = document.querySelector("[data-blog-page-info]");
+    const prev = document.querySelector("[data-blog-prev]");
+    const next = document.querySelector("[data-blog-next]");
+    let currentFilter = "all";
+
+    function filteredItems() {
+      return items.filter(item => currentFilter === "all" || item.dataset.blogCategory === currentFilter);
+    }
+
+    function setActiveFilters() {
+      filters.forEach(filter => {
+        const isActive = (filter.dataset.blogFilter || "all") === currentFilter;
+        filter.classList.toggle("is-active", isActive);
+        if (isActive) {
+          filter.setAttribute("aria-current", "true");
+        } else {
+          filter.removeAttribute("aria-current");
+        }
+      });
+    }
+
+    const pager = initPagedFeedPagination({
+      items,
+      pagination,
+      pageSizeSelect,
+      info,
+      prev,
+      next,
+      getFilteredItems: filteredItems,
+      onRender(visibleCount) {
+        if (emptyState) emptyState.hidden = visibleCount !== 0;
+      }
+    });
+
+    function applyFilter(updateHash = true) {
+      setActiveFilters();
+      if (updateHash) {
+        history.replaceState(null, "", `#${currentFilter === "all" ? "todos" : currentFilter}`);
+      }
+      if (pager) pager.reset();
+    }
+
+    function activateFromHash() {
+      const hash = window.location.hash.replace("#", "").trim();
+      const hashFilter = filters.find(filter => (filter.dataset.blogFilter || "all") === hash);
+      currentFilter = hashFilter ? (hashFilter.dataset.blogFilter || "all") : "all";
+      applyFilter(false);
+    }
 
     filters.forEach(filter => {
       filter.addEventListener("click", event => {
         event.preventDefault();
-        const active = filter.dataset.blogFilter || "all";
-        filters.forEach(item => item.classList.toggle("is-active", item === filter));
-        items.forEach(item => {
-          item.hidden = active !== "all" && item.dataset.blogCategory !== active;
-        });
+        currentFilter = filter.dataset.blogFilter || "all";
+        applyFilter(true);
       });
     });
+
+    activateFromHash();
+    window.addEventListener("hashchange", activateFromHash);
   }
 
 
@@ -995,6 +1118,11 @@
     const emptyState = document.querySelector("[data-guide-empty]");
     if (!items.length || (!gameFilters.length && !topicFilters.length)) return;
 
+    const pagination = document.querySelector("#guide-pagination");
+    const pageSizeSelect = document.querySelector("[data-guide-page-size]");
+    const info = document.querySelector("[data-guide-page-info]");
+    const prev = document.querySelector("[data-guide-prev]");
+    const next = document.querySelector("[data-guide-next]");
     let activeGame = "all";
     let activeTopic = "all";
 
@@ -1011,19 +1139,28 @@
       });
     }
 
-    function applyFilters(updateHash = true) {
-      let visibleCount = 0;
-
-      items.forEach(item => {
+    function filteredItems() {
+      return items.filter(item => {
         const matchesGame = activeGame === "all" || item.dataset.guideGame === activeGame;
         const matchesTopic = activeTopic === "all" || item.dataset.guideTopic === activeTopic;
-        const isVisible = matchesGame && matchesTopic;
-        item.hidden = !isVisible;
-        if (isVisible) visibleCount += 1;
+        return matchesGame && matchesTopic;
       });
+    }
 
-      if (emptyState) emptyState.hidden = visibleCount !== 0;
+    const pager = initPagedFeedPagination({
+      items,
+      pagination,
+      pageSizeSelect,
+      info,
+      prev,
+      next,
+      getFilteredItems: filteredItems,
+      onRender(visibleCount) {
+        if (emptyState) emptyState.hidden = visibleCount !== 0;
+      }
+    });
 
+    function applyFilters(updateHash = true) {
       setActive(gameFilters, activeGame, "guideGameFilter");
       setActive(topicFilters, activeTopic, "guideTopicFilter");
 
@@ -1031,21 +1168,25 @@
         const hash = activeGame !== "all" ? activeGame : activeTopic !== "all" ? activeTopic : "todos";
         history.replaceState(null, "", `#${hash}`);
       }
+
+      if (pager) pager.reset();
     }
 
     function activateFromHash() {
       const hash = window.location.hash.replace("#", "").trim();
-      if (!hash) return applyFilters(false);
+      activeGame = "all";
+      activeTopic = "all";
+      if (hash) {
+        const gameMatch = gameFilters.find(filter => (filter.dataset.guideGameFilter || "") === hash);
+        const topicMatch = topicFilters.find(filter => (filter.dataset.guideTopicFilter || "") === hash);
 
-      const gameMatch = gameFilters.find(filter => (filter.dataset.guideGameFilter || "") === hash);
-      const topicMatch = topicFilters.find(filter => (filter.dataset.guideTopicFilter || "") === hash);
+        if (gameMatch) {
+          activeGame = gameMatch.dataset.guideGameFilter || "all";
+        }
 
-      if (gameMatch) {
-        activeGame = gameMatch.dataset.guideGameFilter || "all";
-      }
-
-      if (topicMatch) {
-        activeTopic = topicMatch.dataset.guideTopicFilter || "all";
+        if (topicMatch) {
+          activeTopic = topicMatch.dataset.guideTopicFilter || "all";
+        }
       }
 
       applyFilters(false);
@@ -1078,6 +1219,11 @@
     const emptyState = document.querySelector("[data-deck-empty]");
     if (!items.length || (!gameFilters.length && !formatFilters.length)) return;
 
+    const pagination = document.querySelector("#deck-pagination");
+    const pageSizeSelect = document.querySelector("[data-deck-page-size]");
+    const info = document.querySelector("[data-deck-page-info]");
+    const prev = document.querySelector("[data-deck-prev]");
+    const next = document.querySelector("[data-deck-next]");
     let activeGame = "all";
     let activeFormat = "all";
 
@@ -1094,19 +1240,28 @@
       });
     }
 
-    function applyFilters(updateHash = true) {
-      let visibleCount = 0;
-
-      items.forEach(item => {
+    function filteredItems() {
+      return items.filter(item => {
         const matchesGame = activeGame === "all" || item.dataset.deckGame === activeGame;
         const matchesFormat = activeFormat === "all" || item.dataset.deckFormat === activeFormat;
-        const isVisible = matchesGame && matchesFormat;
-        item.hidden = !isVisible;
-        if (isVisible) visibleCount += 1;
+        return matchesGame && matchesFormat;
       });
+    }
 
-      if (emptyState) emptyState.hidden = visibleCount !== 0;
+    const pager = initPagedFeedPagination({
+      items,
+      pagination,
+      pageSizeSelect,
+      info,
+      prev,
+      next,
+      getFilteredItems: filteredItems,
+      onRender(visibleCount) {
+        if (emptyState) emptyState.hidden = visibleCount !== 0;
+      }
+    });
 
+    function applyFilters(updateHash = true) {
       setActive(gameFilters, activeGame, "deckGameFilter");
       setActive(formatFilters, activeFormat, "deckFormatFilter");
 
@@ -1114,21 +1269,25 @@
         const hash = activeGame !== "all" ? activeGame : activeFormat !== "all" ? activeFormat : "todos";
         history.replaceState(null, "", `#${hash}`);
       }
+
+      if (pager) pager.reset();
     }
 
     function activateFromHash() {
       const hash = window.location.hash.replace("#", "").trim();
-      if (!hash) return applyFilters(false);
+      activeGame = "all";
+      activeFormat = "all";
+      if (hash) {
+        const gameMatch = gameFilters.find(filter => (filter.dataset.deckGameFilter || "") === hash);
+        const formatMatch = formatFilters.find(filter => ((filter.dataset.deckFormatFilter || filter.dataset.deckFilter || "") === hash));
 
-      const gameMatch = gameFilters.find(filter => (filter.dataset.deckGameFilter || "") === hash);
-      const formatMatch = formatFilters.find(filter => ((filter.dataset.deckFormatFilter || filter.dataset.deckFilter || "") === hash));
+        if (gameMatch) {
+          activeGame = gameMatch.dataset.deckGameFilter || "all";
+        }
 
-      if (gameMatch) {
-        activeGame = gameMatch.dataset.deckGameFilter || "all";
-      }
-
-      if (formatMatch) {
-        activeFormat = formatMatch.dataset.deckFormatFilter || formatMatch.dataset.deckFilter || "all";
+        if (formatMatch) {
+          activeFormat = formatMatch.dataset.deckFormatFilter || formatMatch.dataset.deckFilter || "all";
+        }
       }
 
       applyFilters(false);

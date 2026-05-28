@@ -109,6 +109,16 @@ permalink: /guias/decks/
     <p class="folder-hint deck-folder-hint">
     </p>
 
+    <div class="feed-pagination-controls deck-feed-controls" aria-label="Controle de paginação das Deck Techs">
+      <label>
+        Mostrar
+        <select data-deck-page-size>
+          <option value="12" selected>12 por página</option>
+          <option value="24">24 por página</option>
+        </select>
+      </label>
+    </div>
+
     <div class="card-grid grid-3 deck-feed" id="todos">
       {% for post in posts_list %}
         {% assign post_path = post.path | downcase %}
@@ -140,6 +150,12 @@ permalink: /guias/decks/
     </div>
 
     <p class="empty-section" data-deck-empty hidden>Nenhuma Deck Tech encontrada com esses filtros. A lista pode estar em testes, no sideboard da vida real ou esperando alguém escrever sem enrolar.</p>
+
+    <div class="pagination-bar content-pagination" id="deck-pagination" hidden>
+      <button class="btn btn-secondary" type="button" data-deck-prev>Ver posteriores</button>
+      <span data-deck-page-info>Página 1 de 1</span>
+      <button class="btn btn-secondary" type="button" data-deck-next>Ver anteriores</button>
+    </div>
   </div>
 </section>
 
