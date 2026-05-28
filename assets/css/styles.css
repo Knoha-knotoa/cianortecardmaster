@@ -8875,11 +8875,6 @@ h3 {
   }
 }
 
-
-/* ==========================================
-   Resultado completo FAB: Armory e Liga
-   Isolado das páginas de listagem em /resultados
-========================================== */
 .fab-result-page {
   --fab-gold: #f8d875;
   --fab-gold-strong: #ffd45e;
@@ -8979,6 +8974,35 @@ h3 {
   text-shadow: 0 3px 10px rgba(0,0,0,.86);
 }
 
+.fab-result-tag-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin: 0 0 1rem;
+}
+
+.fab-result-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: .38rem .8rem;
+  border: 1px solid rgba(248, 216, 117, .36);
+  border-radius: 999px;
+  background: rgba(3, 7, 4, .72);
+  color: #fff2c4;
+  font-family: "Fugaz One", system-ui, sans-serif;
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
+}
+
+.fab-result-tag-muted {
+  color: #d7c9a7;
+  border-color: rgba(156,255,61,.24);
+}
+
 .fab-result-meta-bar {
   display: flex;
   justify-content: center;
@@ -9058,10 +9082,11 @@ h3 {
 }
 
 .fab-result-card-image {
-  inset: 5.8% 6.1% 5.2%;
+  inset: 5.9% 6.7% 5.8%;
   overflow: hidden;
   border-radius: 6px;
   background: #090e0a;
+  z-index: 1;
 }
 
 .fab-result-card-frame {
@@ -9087,8 +9112,9 @@ h3 {
 .fab-result-card-image .tcg-card-image img {
   height: 100%;
   width: 100%;
-  object-fit: cover;
-  object-position: center 12%;
+  object-fit: contain;
+  object-position: center center;
+  background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.12));
   border-radius: 0;
 }
 
@@ -9182,11 +9208,13 @@ h3 {
 }
 
 .fab-result-player-photo {
-  inset: 18%;
-  width: 64%;
-  height: 64%;
+  inset: 22%;
+  width: 56%;
+  height: 56%;
   object-fit: cover;
+  object-position: center top;
   clip-path: polygon(25% 7%, 75% 7%, 100% 50%, 75% 93%, 25% 93%, 0 50%);
+  border-radius: 12px;
   z-index: 1;
 }
 

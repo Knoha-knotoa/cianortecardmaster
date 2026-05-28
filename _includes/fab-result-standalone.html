@@ -2,12 +2,10 @@
 {% assign event_kind = "Liga" %}
 {% assign event_title = "Resultado da Liga" %}
 {% assign event_format = page.format | default: "Classic Constructed" %}
-{% assign next_label = page.next_liga | default: page.next_league | default: "Aguardar próxima etapa" %}
 {% if post_style == "armory" %}
   {% assign event_kind = "Armory" %}
   {% assign event_title = "Resultado do Armory" %}
   {% assign event_format = page.format | default: "Blitz" %}
-  {% assign next_label = page.next_armory | default: "Quarta • 19:00" %}
 {% endif %}
 
 {% assign total_players = page.results | size %}
@@ -28,6 +26,7 @@
   {% assign row_wins = result.wins | default: result.vitorias | default: 0 | plus: 0 %}
   {% assign total_wins = total_wins | plus: row_wins %}
 {% endfor %}
+{% assign placeholder_photo = '/assets/img/resultados/fab/player-placeholder.svg' %}
 
 <article class="fab-result-page fab-result-page-{{ post_style }}">
   <section class="fab-result-top" aria-labelledby="fab-result-title">
@@ -35,6 +34,16 @@
       <p class="fab-result-kicker">{{ event_kind }} Flesh and Blood Cianorte</p>
       <h1 id="fab-result-title">{{ event_title }}</h1>
       <p class="fab-result-subtitle">Flesh and Blood em Cianorte</p>
+
+      <div class="fab-result-tag-list" aria-label="Tags do resultado">
+        <span class="fab-result-tag">{{ event_kind }}</span>
+        <span class="fab-result-tag">{{ event_format }}</span>
+        {% if page.tags %}
+          {% for tag in page.tags limit:4 %}
+            <span class="fab-result-tag fab-result-tag-muted">{{ tag }}</span>
+          {% endfor %}
+        {% endif %}
+      </div>
 
       <div class="fab-result-meta-bar" aria-label="Informações do evento">
         <span><strong>✓</strong> Resultado cadastrado</span>
@@ -47,7 +56,6 @@
       <div class="fab-result-podium" aria-label="Pódio do resultado">
         {% if runner_up %}
           {% assign podium_result = runner_up %}
-          {% assign podium_rank = 2 %}
           {% assign podium_tone = "silver" %}
           {% assign podium_frame = "/assets/img/resultados/fab/img-moldura-fab-card-win-plate.png" %}
           {% assign podium_hex = "/assets/img/resultados/fab/img-winner-plate.png" %}
@@ -55,13 +63,13 @@
           {% assign podium_hero = podium_result.hero | default: podium_result.heroi | default: podium_result.deck | default: "Herói" %}
           {% assign podium_record = podium_result.record | default: podium_result.campanha | default: podium_result.score | default: "-" %}
           {% assign podium_wins = podium_result.wins | default: podium_result.vitorias | default: "-" %}
+          {% assign podium_photo = podium_result.player_image | default: placeholder_photo %}
           {% assign podium_hero_slug = podium_hero | slugify %}
           {% assign podium_hero_fallback = "/assets/img/fab-heroes/" | append: podium_hero_slug | append: ".webp" %}
           <article class="fab-result-podium-card fab-result-podium-card-side is-rank-2 is-{{ podium_tone }}">
             <div class="fab-result-winner-hex">
-              {% if podium_result.player_image %}<img class="fab-result-player-photo" src="{{ podium_result.player_image | relative_url }}" alt="Foto de {{ podium_player | escape }}" loading="lazy" decoding="async">{% endif %}
+              <img class="fab-result-player-photo" src="{{ podium_photo | relative_url }}" alt="Foto de {{ podium_player | escape }}" loading="lazy" decoding="async">
               <img class="fab-result-winner-frame" src="{{ podium_hex | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async">
-              {% unless podium_result.player_image %}<strong>{{ podium_rank }}º</strong>{% endunless %}
             </div>
             <div class="fab-result-card-art">
               <div class="fab-result-card-image">{% include tcg-card.html game="fab" name=podium_hero cover=true fallback=podium_hero_fallback alt=podium_hero fallback_alt=podium_hero %}</div>
@@ -77,7 +85,6 @@
 
         {% if champion %}
           {% assign podium_result = champion %}
-          {% assign podium_rank = 1 %}
           {% assign podium_tone = "gold" %}
           {% assign podium_frame = "/assets/img/resultados/fab/img-moldura-fab-card-win-gold.png" %}
           {% assign podium_hex = "/assets/img/resultados/fab/img-winner-gold.png" %}
@@ -85,13 +92,13 @@
           {% assign podium_hero = podium_result.hero | default: podium_result.heroi | default: podium_result.deck | default: "Herói" %}
           {% assign podium_record = podium_result.record | default: podium_result.campanha | default: podium_result.score | default: "-" %}
           {% assign podium_wins = podium_result.wins | default: podium_result.vitorias | default: "-" %}
+          {% assign podium_photo = podium_result.player_image | default: placeholder_photo %}
           {% assign podium_hero_slug = podium_hero | slugify %}
           {% assign podium_hero_fallback = "/assets/img/fab-heroes/" | append: podium_hero_slug | append: ".webp" %}
           <article class="fab-result-podium-card fab-result-podium-card-champion is-rank-1 is-{{ podium_tone }}">
             <div class="fab-result-winner-hex">
-              {% if podium_result.player_image %}<img class="fab-result-player-photo" src="{{ podium_result.player_image | relative_url }}" alt="Foto de {{ podium_player | escape }}" loading="lazy" decoding="async">{% endif %}
+              <img class="fab-result-player-photo" src="{{ podium_photo | relative_url }}" alt="Foto de {{ podium_player | escape }}" loading="lazy" decoding="async">
               <img class="fab-result-winner-frame" src="{{ podium_hex | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async">
-              {% unless podium_result.player_image %}<strong>{{ podium_rank }}º</strong>{% endunless %}
             </div>
             <div class="fab-result-card-art">
               <div class="fab-result-card-image">{% include tcg-card.html game="fab" name=podium_hero cover=true fallback=podium_hero_fallback alt=podium_hero fallback_alt=podium_hero %}</div>
@@ -107,7 +114,6 @@
 
         {% if third_place %}
           {% assign podium_result = third_place %}
-          {% assign podium_rank = 3 %}
           {% assign podium_tone = "bronze" %}
           {% assign podium_frame = "/assets/img/resultados/fab/img-moldura-fab-card-win-bronze.png" %}
           {% assign podium_hex = "/assets/img/resultados/fab/img-winner-bronze.png" %}
@@ -115,13 +121,13 @@
           {% assign podium_hero = podium_result.hero | default: podium_result.heroi | default: podium_result.deck | default: "Herói" %}
           {% assign podium_record = podium_result.record | default: podium_result.campanha | default: podium_result.score | default: "-" %}
           {% assign podium_wins = podium_result.wins | default: podium_result.vitorias | default: "-" %}
+          {% assign podium_photo = podium_result.player_image | default: placeholder_photo %}
           {% assign podium_hero_slug = podium_hero | slugify %}
           {% assign podium_hero_fallback = "/assets/img/fab-heroes/" | append: podium_hero_slug | append: ".webp" %}
           <article class="fab-result-podium-card fab-result-podium-card-side is-rank-3 is-{{ podium_tone }}">
             <div class="fab-result-winner-hex">
-              {% if podium_result.player_image %}<img class="fab-result-player-photo" src="{{ podium_result.player_image | relative_url }}" alt="Foto de {{ podium_player | escape }}" loading="lazy" decoding="async">{% endif %}
+              <img class="fab-result-player-photo" src="{{ podium_photo | relative_url }}" alt="Foto de {{ podium_player | escape }}" loading="lazy" decoding="async">
               <img class="fab-result-winner-frame" src="{{ podium_hex | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async">
-              {% unless podium_result.player_image %}<strong>{{ podium_rank }}º</strong>{% endunless %}
             </div>
             <div class="fab-result-card-art">
               <div class="fab-result-card-image">{% include tcg-card.html game="fab" name=podium_hero cover=true fallback=podium_hero_fallback alt=podium_hero fallback_alt=podium_hero %}</div>
@@ -153,8 +159,8 @@
           <strong>{{ total_players }}</strong>
         </div>
         <div class="fab-result-stat-card">
-          <span>Rodadas</span>
-          <strong>{{ page.rounds | default: "-" }}</strong>
+          <span>Partidas</span>
+          <strong>{{ total_wins }}</strong>
         </div>
         <div class="fab-result-stat-card">
           <span>Melhor campanha</span>
