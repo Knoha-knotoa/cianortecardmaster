@@ -47,7 +47,7 @@ results:
     wins: 6
 
   - player: "Rayan"
-    hero: "gengar-mega"
+    hero: "gengar-mega / gengar-mega"
     record: "4 pts"
     wins: 4
 
