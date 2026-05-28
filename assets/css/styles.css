@@ -9094,10 +9094,15 @@ h3 {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 42%;
+  height: 46%;
   z-index: 2;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.20) 12%, rgba(0,0,0,.82) 52%, rgba(0,0,0,.96) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.28) 10%, rgba(0,0,0,.88) 48%, rgba(0,0,0,.985) 100%);
   pointer-events: none;
+}
+
+.fab-result-podium-card-champion .fab-result-card-overlay {
+  height: 50%;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.34) 10%, rgba(0,0,0,.9) 44%, rgba(0,0,0,.99) 100%);
 }
 
 .fab-result-card-frame {
@@ -9132,13 +9137,18 @@ h3 {
 .fab-result-podium-caption {
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 2%;
   z-index: 5;
-  padding: 6.4rem 1.2rem 1rem;
+  padding: 5.45rem 1.1rem 1.05rem;
   text-align: center;
   background: none;
   text-shadow: 0 3px 8px rgba(0,0,0,.95);
   pointer-events: none;
+}
+
+.fab-result-podium-card-champion .fab-result-podium-caption {
+  bottom: 3.2%;
+  padding: 5rem 1.2rem 1.15rem;
 }
 
 .fab-result-podium-caption strong {
