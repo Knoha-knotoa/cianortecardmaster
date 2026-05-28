@@ -7779,6 +7779,26 @@ h3 {
     min-height: 152px;
     aspect-ratio: auto;
   }
+
+  .game-cartridge-card-mais > small {
+    top: 36%;
+    left: 8%;
+    width: 62%;
+    max-width: 62%;
+  }
+
+  .game-cartridge-card-mais .btn-row {
+    left: 8%;
+    bottom: 10%;
+    width: 28%;
+    grid-template-columns: 1fr;
+    gap: .35rem;
+  }
+
+  .game-cartridge-card-mais .btn {
+    width: 100%;
+    min-height: 0;
+  }
 }
 
 /* =========================================================
