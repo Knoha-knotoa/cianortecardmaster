@@ -8729,6 +8729,7 @@ h3 {
 .home-magic-welcome-copy h2 {
   margin-bottom: 1.2rem;
   max-width: 11.5ch;
+  font-size: clamp(2.05rem, 3.45vw, 3.15rem);
   text-wrap: balance;
   text-shadow: 0 10px 30px rgba(0, 0, 0, .36);
 }
@@ -8831,6 +8832,7 @@ h3 {
 
   .home-magic-welcome-copy h2 {
     max-width: 13ch;
+    font-size: clamp(2rem, 5.2vw, 2.85rem);
   }
 }
 
@@ -8861,7 +8863,7 @@ h3 {
 
   .home-magic-welcome-copy h2 {
     max-width: none;
-    font-size: clamp(2.2rem, 9vw, 3.25rem);
+    font-size: clamp(1.85rem, 7.5vw, 2.55rem);
   }
 
   .home-magic-welcome-actions {
