@@ -8757,37 +8757,37 @@ h3 {
   }
 }
 
-/* Ajuste responsivo da Última Liga de Pokémon: sprites sem sobrepor nomes e fallback visual da PokéAPI. */
+/* Ajuste responsivo da Última Liga de Pokémon: sprites maiores, sem moldura circular e sem sobrepor nomes. */
 .league-board-pokemon .armory-result-row.is-pokemon-row .armory-player-cell {
   display: flex !important;
   align-items: center !important;
-  gap: .76rem !important;
+  gap: 1.05rem !important;
   min-width: 0 !important;
 }
 
 .league-board-pokemon .armory-result-row.is-pokemon-row .league-pokemon-sprites {
   display: inline-flex !important;
   align-items: center !important;
-  justify-content: center !important;
-  gap: .24rem !important;
+  justify-content: flex-start !important;
+  gap: .38rem !important;
   flex: 0 0 auto !important;
   white-space: nowrap !important;
 }
 
 .league-board-pokemon .armory-result-row.is-pokemon-row .league-pokemon-sprite,
 .league-board-pokemon .armory-result-row.is-pokemon-row .league-pokemon-sprites img {
-  width: 38px !important;
-  height: 38px !important;
+  width: 50px !important;
+  height: 50px !important;
   display: block !important;
   object-fit: contain !important;
-  padding: 3px !important;
-  border: 1px solid rgba(255, 217, 94, .62) !important;
-  border-radius: 999px !important;
-  background:
-    radial-gradient(circle at 35% 25%, rgba(255,255,255,.18), transparent 36%),
-    rgba(5, 8, 6, .66) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
   image-rendering: auto !important;
-  filter: drop-shadow(0 4px 9px rgba(0,0,0,.52)) !important;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,.58)) !important;
 }
 
 .league-board-pokemon .armory-result-row.is-pokemon-row .armory-player-name-line {
@@ -8801,7 +8801,16 @@ h3 {
 
 @media (min-width: 761px) {
   .league-board-pokemon .armory-result-row.is-pokemon-row {
-    min-height: 76px !important;
+    grid-template-columns: 60px minmax(280px, 1.08fr) minmax(205px, .92fr) 82px !important;
+    min-height: 82px !important;
+  }
+
+  .league-board-pokemon .armory-result-row.is-pokemon-row .league-pokemon-sprites {
+    min-width: 106px !important;
+  }
+
+  .league-board-pokemon .armory-result-row.is-pokemon-row .armory-player-name-line strong {
+    white-space: nowrap !important;
   }
 }
 
@@ -8809,20 +8818,20 @@ h3 {
   .league-board-pokemon .armory-result-row.is-pokemon-row {
     grid-template-columns: 48px minmax(0, 1fr) auto !important;
     gap: .48rem !important;
-    min-height: 74px !important;
+    min-height: 78px !important;
     padding: .54rem .56rem !important;
   }
 
   .league-board-pokemon .armory-result-row.is-pokemon-row .armory-player-cell {
     display: grid !important;
-    grid-template-columns: 42px minmax(0, 1fr) !important;
-    gap: .56rem !important;
+    grid-template-columns: 44px minmax(0, 1fr) !important;
+    gap: .64rem !important;
     align-items: center !important;
   }
 
   .league-board-pokemon .armory-result-row.is-pokemon-row .league-pokemon-sprites {
-    width: 42px !important;
-    min-height: 52px !important;
+    width: 44px !important;
+    min-height: 58px !important;
     flex-direction: column !important;
     gap: 0 !important;
     align-self: center !important;
@@ -8830,10 +8839,15 @@ h3 {
 
   .league-board-pokemon .armory-result-row.is-pokemon-row .league-pokemon-sprite,
   .league-board-pokemon .armory-result-row.is-pokemon-row .league-pokemon-sprites img {
-    width: 29px !important;
-    height: 29px !important;
-    padding: 2px !important;
+    width: 34px !important;
+    height: 34px !important;
+    padding: 0 !important;
     margin: -1px 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    filter: drop-shadow(0 3px 5px rgba(0,0,0,.56)) !important;
   }
 
   .league-board-pokemon .armory-result-row.is-pokemon-row .armory-player-cell small {
@@ -8860,3 +8874,4 @@ h3 {
     height: 17px !important;
   }
 }
+
