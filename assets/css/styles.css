@@ -7667,9 +7667,9 @@ h3 {
 .game-cartridge-card-op {
   --game-card-image: url("../img/jogos/img-card-op-retro.png");
   --game-card-ratio: 616 / 405;
-  --game-text-left: 15%;
+  --game-text-left: 18%;
   --game-text-top: 42.5%;
-  --game-text-width: 62%;
+  --game-text-width: 56%;
   --game-text-align: left;
   --game-text-line-height: 1.3;
   --game-buttons-left: 11%;
