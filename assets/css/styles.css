@@ -9792,3 +9792,141 @@ tr.is-champion .fab-result-rank::before {
     min-height: 74px;
   }
 }
+
+/* Ajuste 28/05/2026 — FAB resultado completo com ícones reutilizados do site */
+.fab-result-inline-icon,
+.fab-result-pill-icon,
+.fab-result-wins-icon {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex: 0 0 auto;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,.42));
+}
+
+.fab-result-pill-icon,
+.fab-result-wins-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.fab-result-inline-icon.is-green {
+  filter: brightness(0) saturate(100%) invert(66%) sepia(99%) saturate(1055%) hue-rotate(55deg) brightness(111%) contrast(116%) drop-shadow(0 4px 8px rgba(0,0,0,.42));
+}
+
+.fab-result-inline-icon.is-gold {
+  filter: brightness(0) saturate(100%) invert(83%) sepia(31%) saturate(704%) hue-rotate(355deg) brightness(103%) contrast(102%) drop-shadow(0 4px 8px rgba(0,0,0,.42));
+}
+
+.fab-result-meta-bar span {
+  gap: .52rem;
+}
+
+.fab-result-meta-bar strong {
+  display: none;
+}
+
+.fab-result-podium-caption em,
+.fab-result-podium-caption b,
+.fab-result-wins,
+.fab-result-record-pill,
+.fab-result-stat-label,
+.fab-result-action-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: .42rem;
+}
+
+.fab-result-podium-caption b::before,
+.fab-result-wins::before {
+  content: none !important;
+}
+
+.fab-result-stat-label {
+  color: #c9e4ae;
+  line-height: 1.15;
+}
+
+.fab-result-stat-card strong {
+  margin-top: .5rem;
+}
+
+.fab-result-action-icon {
+  width: 32px;
+  height: 32px;
+  justify-content: center;
+  border-radius: 999px;
+  background: radial-gradient(circle at 50% 42%, rgba(255,255,255,.08), rgba(255,255,255,0) 68%), rgba(6,10,7,.46);
+  box-shadow: inset 0 0 0 1px rgba(248,216,117,.14);
+}
+
+.fab-result-action-grid span {
+  font-size: 1rem;
+}
+
+.fab-result-table td:first-child {
+  width: 78px;
+}
+
+.fab-result-table td:last-child {
+  text-align: right;
+}
+
+.fab-result-table .armory-rank-badge {
+  margin-inline: auto;
+}
+
+.fab-result-table .armory-player-cell {
+  gap: .62rem;
+}
+
+.fab-result-table .armory-player-cell strong {
+  font-size: .95rem;
+  white-space: normal;
+}
+
+.fab-result-table .armory-hero-badge-normal {
+  width: 40px;
+  height: 40px;
+}
+
+.fab-result-table .fab-result-record-pill {
+  min-width: 78px;
+  justify-content: center;
+}
+
+.fab-result-table .fab-result-wins {
+  justify-content: flex-end;
+  min-width: 56px;
+}
+
+.fab-result-table .fab-result-table-hero > span:last-child {
+  max-width: 100%;
+}
+
+.fab-result-table .fab-result-table-hero strong {
+  color: #f2ead6;
+}
+
+@media (max-width: 760px) {
+  .fab-result-meta-bar span {
+    justify-content: flex-start;
+  }
+
+  .fab-result-table td:first-child {
+    width: 70px;
+  }
+
+  .fab-result-action-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .fab-result-inline-icon,
+  .fab-result-pill-icon,
+  .fab-result-wins-icon {
+    width: 15px;
+    height: 15px;
+  }
+}

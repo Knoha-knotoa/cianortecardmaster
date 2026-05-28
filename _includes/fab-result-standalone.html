@@ -29,6 +29,16 @@
 {% assign placeholder_photo = '/assets/img/resultados/fab/player-placeholder.svg' %}
 {% assign event_location = page.local | default: page.location | default: page.venue | default: page.local_evento | default: "Cianorte Card Masters" %}
 
+{% assign icon_flat_swords = '/assets/img/armory-icons/flat/icon-espadas.png' %}
+{% assign icon_flat_people = '/assets/img/armory-icons/flat/icon-pessoas.png' %}
+{% assign icon_flat_calendar = '/assets/img/armory-icons/flat/icon-calendario.png' %}
+{% assign icon_depth_trophy = '/assets/img/armory-icons/depth/icon-trofeu.png' %}
+{% assign icon_depth_swords = '/assets/img/armory-icons/depth/icon-espadas.png' %}
+{% assign icon_guide = '/assets/img/home/google/icone-estudos.png' %}
+{% assign icon_location = '/assets/img/home/project/icon-onde-jogar.png' %}
+{% assign rank_icon_champion = '/assets/img/armory-icons/depth/badge-campeao.png' %}
+{% assign rank_icon_placement = '/assets/img/armory-icons/depth/badge-colocacao.png' %}
+
 <article class="fab-result-page fab-result-page-{{ post_style }}">
   <section class="fab-result-top" aria-labelledby="fab-result-title">
     <div class="container fab-result-shell">
@@ -46,11 +56,25 @@
         {% endif %}
       </div>
 
-      <div class="fab-result-meta-bar" aria-label="Informações do evento">        
-        <span><strong>♟</strong> {{ total_players }} jogadores</span>
-        <span><strong>⚔</strong> Formato: {{ event_format }}</span>
-        {% if page.event_date or page.date %}<span><strong>▣</strong> {{ page.event_date | default: page.date | date: "%d/%m/%Y" }}</span>{% endif %}
-        <span><strong>⬟</strong> {{ event_location }}</span>
+      <div class="fab-result-meta-bar" aria-label="Informações do evento">
+        <span>
+          <img class="fab-result-inline-icon is-green" src="{{ icon_flat_people | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async">
+          {{ total_players }} jogadores
+        </span>
+        <span>
+          <img class="fab-result-inline-icon is-green" src="{{ icon_flat_swords | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async">
+          Formato: {{ event_format }}
+        </span>
+        {% if page.event_date or page.date %}
+          <span>
+            <img class="fab-result-inline-icon is-green" src="{{ icon_flat_calendar | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            {{ page.event_date | default: page.date | date: "%d/%m/%Y" }}
+          </span>
+        {% endif %}
+        <span>
+          <img class="fab-result-inline-icon is-green" src="{{ icon_location | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async">
+          {{ event_location }}
+        </span>
       </div>
 
       <div class="fab-result-podium" aria-label="Pódio do resultado">
@@ -78,7 +102,10 @@
               <div class="fab-result-podium-caption">
                 <strong>{{ podium_player }}</strong>
                 <span>{{ podium_hero }}</span>
-                <div><em>{{ podium_record }}</em><b>{{ podium_wins }} vitórias</b></div>
+                <div>
+                  <em><img class="fab-result-pill-icon" src="{{ icon_depth_swords | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async">{{ podium_record }}</em>
+                  <b><img class="fab-result-pill-icon" src="{{ icon_depth_trophy | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async">{{ podium_wins }} vitórias</b>
+                </div>
               </div>
             </div>
           </article>
@@ -108,7 +135,10 @@
               <div class="fab-result-podium-caption">
                 <strong>{{ podium_player }}</strong>
                 <span>{{ podium_hero }}</span>
-                <div><em>{{ podium_record }}</em><b>{{ podium_wins }} vitórias</b></div>
+                <div>
+                  <em><img class="fab-result-pill-icon" src="{{ icon_depth_swords | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async">{{ podium_record }}</em>
+                  <b><img class="fab-result-pill-icon" src="{{ icon_depth_trophy | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async">{{ podium_wins }} vitórias</b>
+                </div>
               </div>
             </div>
           </article>
@@ -138,7 +168,10 @@
               <div class="fab-result-podium-caption">
                 <strong>{{ podium_player }}</strong>
                 <span>{{ podium_hero }}</span>
-                <div><em>{{ podium_record }}</em><b>{{ podium_wins }} vitórias</b></div>
+                <div>
+                  <em><img class="fab-result-pill-icon" src="{{ icon_depth_swords | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async">{{ podium_record }}</em>
+                  <b><img class="fab-result-pill-icon" src="{{ icon_depth_trophy | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async">{{ podium_wins }} vitórias</b>
+                </div>
               </div>
             </div>
           </article>
@@ -158,20 +191,20 @@
           </p>
         </div>
         <div class="fab-result-stat-card">
-          <span>Jogadores</span>
+          <span class="fab-result-stat-label"><img class="fab-result-inline-icon is-green" src="{{ icon_flat_people | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async">Jogadores</span>
           <strong>{{ total_players }}</strong>
         </div>
         <div class="fab-result-stat-card">
-          <span>Partidas</span>
+          <span class="fab-result-stat-label"><img class="fab-result-inline-icon is-green" src="{{ icon_flat_swords | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async">Partidas</span>
           <strong>{{ total_wins }}</strong>
         </div>
         <div class="fab-result-stat-card">
-          <span>Melhor campanha</span>
+          <span class="fab-result-stat-label"><img class="fab-result-inline-icon" src="{{ icon_depth_trophy | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async">Melhor campanha</span>
           <strong>{{ champion_record }}</strong>
           <small>{{ champion_player }}</small>
         </div>
         <div class="fab-result-stat-card">
-          <span>Herói campeão</span>
+          <span class="fab-result-stat-label"><img class="fab-result-inline-icon" src="{{ icon_depth_trophy | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async">Herói campeão</span>
           <strong>{{ champion_hero }}</strong>
         </div>
       </div>
@@ -227,20 +260,29 @@
                 {% assign result_wins = result.wins | default: result.vitorias | default: "-" %}
                 {% assign result_hero_slug = result_hero | slugify %}
                 {% assign result_hero_local = "/assets/img/fab-heroes/" | append: result_hero_slug | append: ".webp" %}
+                {% assign row_rank_icon = rank_icon_placement %}
+                {% if forloop.index == 1 %}{% assign row_rank_icon = rank_icon_champion %}{% endif %}
                 <tr class="{% if forloop.index == 1 %}is-champion{% elsif forloop.index == 2 %}is-runner-up{% elsif forloop.index == 3 %}is-third-place{% endif %}">
-                  <td><span class="fab-result-rank">{{ forloop.index }}º</span></td>
+                  <td>
+                    <span class="armory-rank-badge armory-rank-{{ forloop.index }}" aria-label="{{ forloop.index }}º colocado">
+                      <img class="armory-rank-icon" src="{{ row_rank_icon | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                      <strong>{{ forloop.index }}º</strong>
+                    </span>
+                  </td>
                   <td><strong>{{ result_player }}</strong></td>
                   <td>
-                    <div class="fab-result-table-hero">
-                      <span class="fab-result-hero-avatar fab-result-hero-avatar-sm">
-                        <img src="{{ result_hero_local | relative_url }}" alt="{{ result_hero | escape }}" loading="lazy" decoding="async" onerror="this.closest('.fab-result-hero-avatar').classList.add('is-missing');this.remove();">
-                        <span>{{ result_hero | slice: 0, 1 }}</span>
+                    <div class="fab-result-table-hero armory-player-cell">
+                      <span class="armory-hero-badge armory-hero-badge-normal has-image" title="{{ result_hero | escape }}">
+                        <img src="{{ result_hero_local | relative_url }}" alt="{{ result_hero | escape }}" loading="lazy" decoding="async" onerror="this.closest('.armory-hero-badge').classList.remove('has-image');this.remove();">
+                        <span class="armory-hero-initials">{{ result_hero | slice: 0, 1 }}</span>
                       </span>
-                      <span>{{ result_hero }}</span>
+                      <div>
+                        <strong>{{ result_hero }}</strong>
+                      </div>
                     </div>
                   </td>
                   <td><span class="fab-result-record-pill">{{ result_record }}</span></td>
-                  <td><span class="fab-result-wins">{{ result_wins }}</span></td>
+                  <td><span class="fab-result-wins"><img class="fab-result-wins-icon" src="{{ icon_depth_trophy | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async">{{ result_wins }}</span></td>
                 </tr>
               {% endfor %}
             </tbody>
@@ -259,10 +301,10 @@
   <section class="fab-result-bottom" aria-label="Atalhos da comunidade">
     <div class="container fab-result-shell">
       <nav class="fab-result-action-grid" aria-label="Links úteis">
-        <a href="{{ '/resultados/' | relative_url }}"><span>▣</span><strong>Ver outros<br>resultados</strong></a>
-        <a href="{{ '/comunidade/' | relative_url }}"><span>♟</span><strong>Conheça a<br>comunidade</strong></a>
-        <a href="{{ '/agenda/' | relative_url }}"><span>⚔</span><strong>Ver agenda<br>de eventos</strong></a>
-        <a href="{{ '/guias/guia-fab-para-lerdos/' | relative_url }}"><span>▤</span><strong>Guia de<br>Flesh and Blood</strong></a>
+        <a href="{{ '/resultados/' | relative_url }}"><span class="fab-result-action-icon"><img class="fab-result-inline-icon is-gold" src="{{ icon_flat_swords | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async"></span><strong>Ver outros<br>resultados</strong></a>
+        <a href="{{ '/comunidade/' | relative_url }}"><span class="fab-result-action-icon"><img class="fab-result-inline-icon is-gold" src="{{ icon_flat_people | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async"></span><strong>Conheça a<br>comunidade</strong></a>
+        <a href="{{ '/agenda/' | relative_url }}"><span class="fab-result-action-icon"><img class="fab-result-inline-icon is-gold" src="{{ icon_flat_calendar | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async"></span><strong>Ver agenda<br>de eventos</strong></a>
+        <a href="{{ '/guias/guia-fab-para-lerdos/' | relative_url }}"><span class="fab-result-action-icon"><img class="fab-result-inline-icon is-gold" src="{{ icon_guide | relative_url }}" alt="" aria-hidden="true" loading="lazy" decoding="async"></span><strong>Guia de<br>Flesh and Blood</strong></a>
       </nav>
       <img class="fab-result-game-logo" src="{{ '/assets/img/resultados/fab/img-logo-flesh-and-blood.png' | relative_url }}" alt="Flesh and Blood" loading="lazy" decoding="async">
     </div>
