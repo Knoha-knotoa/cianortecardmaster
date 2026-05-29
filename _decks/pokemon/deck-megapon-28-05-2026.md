@@ -215,6 +215,37 @@ Energia: 10
 
 Total de cartas: 60
 ```
+<section class="ccm-decklist-card ccm-rotation-note" aria-labelledby="megapon-rotation-title">
+  <header class="ccm-decklist-header">
+    <p class="ccm-decklist-kicker">Observação de formato</p>
+    <h2 class="ccm-decklist-title" id="megapon-rotation-title">Rotação durante a liga</h2>
+    <p class="ccm-decklist-description">
+      Durante esta liga aconteceu a rotação do formato Standard de Pokémon TCG. Algumas versões de cartas usadas nesta lista deixaram de fazer parte do Standard atual, mas para a liga foi mantido o critério da inscrição: se a carta era válida no dia em que o jogador se inscreveu, ela continuou válida até o fim da competição.
+    </p>
+
+    <div class="ccm-decklist-meta" aria-label="Cartas impactadas pela rotação">
+      <span class="ccm-decklist-chip"><strong>8</strong> versões impactadas</span>
+      <span class="ccm-decklist-chip"><strong>G</strong> saiu do Standard</span>
+      <span class="ccm-decklist-chip"><strong>Liga</strong> manteve a lista inscrita</span>
+    </div>
+  </header>
+
+  <div class="tcg-card-grid" aria-label="Cartas do Deck Megapon impactadas pela rotação">
+    {% include tcg-card.html game="tcgdex" lang="pt-br" name="Toedscool" set="SVI" number="25" %}
+    {% include tcg-card.html game="tcgdex" lang="pt-br" name="Toedscruel" set="PAR" number="17" %}
+    {% include tcg-card.html game="tcgdex" lang="pt-br" name="Counter Catcher" set="PAR" number="160" %}
+    {% include tcg-card.html game="tcgdex" lang="pt-br" name="Iono" set="PAL" number="185" %}
+    {% include tcg-card.html game="tcgdex" lang="pt-br" name="Professor Turo's Scenario" set="PAR" number="171" %}
+    {% include tcg-card.html game="tcgdex" lang="pt-br" name="Superior Energy Retrieval" set="PAL" number="189" %}
+    {% include tcg-card.html game="tcgdex" lang="pt-br" name="Super Rod" set="PAL" number="188" %}
+    {% include tcg-card.html game="tcgdex" lang="pt-br" name="Nest Ball" set="PAF" number="84" %}
+  </div>
+
+  <p class="ccm-decklist-note">
+    Cartas da lista impactadas pela rotação nas versões informadas: Toedscool SVI 25, Toedscruel PAR 17, Counter Catcher PAR 160, Iono PAL 185, Professor Turo's Scenario PAR 171, Superior Energy Retrieval PAL 189, Super Rod PAL 188 e Nest Ball PAF 84.
+  </p>
+</section>
+```
 
 <section class="ccm-internal-links-card" aria-labelledby="megapon-links-title">
   <header class="ccm-internal-links-header">
